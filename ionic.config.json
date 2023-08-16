@@ -1,0 +1,7 @@
+{
+  "name": "ABYGA",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
