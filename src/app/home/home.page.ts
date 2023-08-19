@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
+import { ActivatedRoute,Router } from '@angular/router';
 
 
 @Component({
@@ -9,6 +10,14 @@ import {MatTabsModule} from '@angular/material/tabs';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private router:Router) {}
+
+
+  AgregarTransaccion(){
+
+    this.router.navigate(['agregar-transaccion'])
+
+  }
+
 
 }
