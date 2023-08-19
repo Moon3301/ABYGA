@@ -8,32 +8,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <ion-list>
     <ion-item>
-      <ion-icon slot="start" name="clipboard-outline"></ion-icon>
+      <ion-icon name="document-text-outline" slot="start"></ion-icon>
       <ion-input label="Nombre" labelPlacement="floating" placeholder="Transaccion" [clearInput]="true"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon slot="start" name="{{IconTransaccion}}"></ion-icon>      
-      <ion-input type="number" placeholder="000" ></ion-input>
-
-    </ion-item>
-
-    <ion-item>
       
     </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="{{IconTransaccion}}"></ion-icon>
+      <ion-input type="number" placeholder="total de gastos o ingresos" ></ion-input>
 
-
+    </ion-item>
 
   </ion-list>
-
-
-
-
-
-
-
-
 </ion-content>

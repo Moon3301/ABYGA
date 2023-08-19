@@ -7,9 +7,7 @@ import { ActivatedRoute,Router } from '@angular/router';
   styleUrls: ['./agregar-transaccion.page.scss'],
 })
 export class AgregarTransaccionPage implements OnInit {
-
   IconTransaccion:string = "remove-circle-outline"
-  
 
   constructor(private router:Router) { }
 
