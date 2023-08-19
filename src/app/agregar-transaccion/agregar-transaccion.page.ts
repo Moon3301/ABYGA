@@ -8,6 +8,9 @@ import { ActivatedRoute,Router } from '@angular/router';
 })
 export class AgregarTransaccionPage implements OnInit {
 
+  IconTransaccion:string = "remove-circle-outline"
+  
+
   constructor(private router:Router) { }
 
   ngOnInit() {
@@ -16,6 +19,13 @@ export class AgregarTransaccionPage implements OnInit {
   GoHome(){
     
     this.router.navigate(['home'])
+
+  }
+
+  ChangeIconTransaccion(){
+
+    //"add-circle-outline"
+
 
   }
 }
