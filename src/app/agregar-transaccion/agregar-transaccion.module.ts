@@ -11,6 +11,7 @@ import { AgregarTransaccionPage } from './agregar-transaccion.page';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
