@@ -1,0 +1,28 @@
+#circle {
+    background: lightblue;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.circular-button {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  ion-button.shape-round {
+    width: 48px; /* Ajusta el tamaño del botón circular */
+    height: 48px;
+    padding: 0; /* Elimina el espacio interno del botón */
+  
+    /* Ajusta otros estilos según tus preferencias */
+  }
+  
+  ion-icon {
+    font-size: 24px; /* Ajusta el tamaño del icono */
+    color: white; /* Cambia el color del icono según tu diseño */
+  }
+  
+  
+  
+  
