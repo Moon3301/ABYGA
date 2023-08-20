@@ -7,6 +7,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   imports: [
@@ -14,7 +16,8 @@ import { HomePageRoutingModule } from './home-routing.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    MatTabsModule
+    MatTabsModule,
+    FontAwesomeModule
 
   ],
   declarations: [HomePage]

@@ -8,12 +8,17 @@ import { AgregarTransaccionPageRoutingModule } from './agregar-transaccion-routi
 
 import { AgregarTransaccionPage } from './agregar-transaccion.page';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AgregarTransaccionPageRoutingModule
+    AgregarTransaccionPageRoutingModule,
+    FontAwesomeModule
+    
   ],
   declarations: [AgregarTransaccionPage]
 })
