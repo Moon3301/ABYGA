@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
-import { faGasPump, faCarOn, faSchool, faBuildingColumns } from '@fortawesome/free-solid-svg-icons';
+import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
+  faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-agregar-transaccion',
@@ -16,6 +17,21 @@ export class AgregarTransaccionPage implements OnInit {
   faCarOn = faCarOn;
   faSchool= faSchool;
   faBuildingColumns = faBuildingColumns;
+  faCapsules = faCapsules;
+  faShirt = faShirt;
+  faStore = faStore;
+  faFilm = faFilm;
+  faGamepad = faGamepad;
+  faUtensils = faUtensils;
+  faCartShopping = faCartShopping;
+  faBicycle = faBicycle;
+  faPlaneDeparture = faPlaneDeparture;
+  faBookOpen = faBookOpen;
+  faDroplet = faDroplet;
+  faLightbulb = faLightbulb;
+  faWifi = faWifi;
+  faFireFlameSimple = faFireFlameSimple;
+
 
 
   IconTransaccion:string = "remove-circle-outline"
@@ -25,6 +41,16 @@ export class AgregarTransaccionPage implements OnInit {
   
 
   constructor(private router:Router) { }
+
+  NombreCat:any = "Categoria"
+
+  NombreSubCat:any = "caca"
+
+  IconCat: any = "apps-outline"
+
+
+  
+
 
   ngOnInit() {
 
@@ -46,4 +72,19 @@ export class AgregarTransaccionPage implements OnInit {
 
 
   }
+
+  ChangeCategoria(dataCat:string, dataSubCat:string, changeIcon: string){ 
+
+    this.isModalOpen = false;
+
+    this.NombreCat = dataCat
+
+    this.NombreSubCat = dataSubCat
+
+    this.IconCat = changeIcon
+
+  }
+
+
+
 }

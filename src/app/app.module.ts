@@ -9,11 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 60893032d1e469f59f0fcf744fcd67c8b8c25449
 
 @NgModule({
   declarations: [AppComponent],
