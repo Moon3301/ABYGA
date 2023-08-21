@@ -3,25 +3,31 @@
     <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title>agregar-transaccion</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-list>
 
+    <!-- Nombre Transaccion -->
     <ion-item>
-      <ion-icon name="document-text-outline" slot="start"></ion-icon>
+
+      <fa-icon [icon]=faFileSignature class="fa-xl" slot="start" ></fa-icon>
       <ion-input label="Nombre" labelPlacement="floating" placeholder="Transaccion" [clearInput]="true"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-icon slot="start" name="{{IconTransaccion}}"></ion-icon>
-      <ion-input type="number" placeholder="total de gastos o ingresos" ></ion-input>
+    <!-- Monto Transaccion -->
+    <ion-item >
+
+      <fa-icon id="IconMontoTrans"  [icon]=IconTransaccion class="fa-xl" slot="start" ></fa-icon>
+      <ion-input type="number" placeholder="total de gastos o ingresos" color="success" ></ion-input>
     </ion-item>
 
+    <!-- Calendario -->
     <ion-item>
-      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      
+      <fa-icon [icon]=faCalendarDays class="fa-xl" slot="start" ></fa-icon>
       <ion-datetime-button datetime="datetime"></ion-datetime-button>
 
       <ion-modal [keepContentsMounted]="true">
@@ -32,40 +38,41 @@
 
     </ion-item>
 
-    <ion-item expand="block" (click)="setOpen(true)">
-      <div class="circular-button">
-        <ion-button shape="round" color="danger" >
-          <fa-icon  [icon]="IconCat" class="fa-2xl"></fa-icon>
-        </ion-button>
-        
-        
-      </div>
+
+    <!-- Categorias -->
+    <ion-item expand="block" (click)="setOpenCategoria(true)">
+      
+      
+      <fa-icon  [icon]=IconCat class="fa-xl" slot="start"></fa-icon>
+      
       <ion-list>
-        <ion-label style="font-size: 12px;">{{NombreCat}}</ion-label>
-        <ion-label>{{NombreSubCat}}</ion-label>
+          <ion-label style="font-size: 12px;">{{NombreCat}}</ion-label>
+          <ion-label>{{NombreSubCat}}</ion-label>
       </ion-list>
       
+      
+      
 
-      <ion-modal [isOpen]="isModalOpen">
+      <ion-modal [isOpen]="isModalOpenCategoria">
         <ng-template>
           <ion-header>
             <ion-toolbar>
         
               <ion-buttons slot="start">
-                <ion-button (click)="setOpen(false)">Close</ion-button>
+                <ion-button (click)="setOpenCategoria(false)">Close</ion-button>
               </ion-buttons>
 
               <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
 
               <ion-buttons slot="end">
-                <ion-button (click)="setOpen(false)">Save</ion-button>
+                <ion-button (click)="setOpenCategoria(false)">Save</ion-button>
               </ion-buttons>
 
             </ion-toolbar>
           </ion-header>
           <ion-content class="ion-padding">
   
-
+            <!--
             <ion-list>
 
               <ion-item>
@@ -75,7 +82,7 @@
               <ion-item>
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Transporte','Combustible','faGasPump')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Transporte','Combustible',faGasPump)">
                       <fa-icon  [icon]="faGasPump" class="fa-2xl"></fa-icon>
                       
                     </ion-button>
@@ -85,7 +92,7 @@
                 
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Transporte','Mantenimiento','faCarOn')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Transporte','Mantenimiento',faCarOn)">
                       <fa-icon  [icon]="faCarOn" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Mantenimiento</ion-label>
@@ -105,7 +112,7 @@
 
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Hogar','Colegio','faSchool')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Hogar','Colegio',faSchool)">
                       <fa-icon  [icon]="faSchool" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Colegio</ion-label>
@@ -116,7 +123,7 @@
                   <ion-item>
                
                     <div class="circular-button">
-                      <ion-button shape="round" color="danger" (click)="ChangeCategoria('Hogar','Medicamentos','faCapsules')">
+                      <ion-button shape="round" color="danger" (click)="ChangeCategoria('Hogar','Medicamentos',faCapsules)">
                         <fa-icon  [icon]="faCapsules" class="fa-2xl"></fa-icon>
                       </ion-button>
                       <ion-label style="font-size: 10px;">Medicamentos</ion-label>
@@ -126,7 +133,7 @@
                 <ion-item>
               
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Hogar','Ropa','faShirt')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Hogar','Ropa',faShirt)">
                       <fa-icon  [icon]="faShirt" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Ropa</ion-label>
@@ -137,7 +144,7 @@
                 
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Hogar','Supermercado','faStore')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Hogar','Supermercado',faStore)">
                       <fa-icon  [icon]="faStore" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Supermercado</ion-label>
@@ -155,7 +162,7 @@
               <ion-item>
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Cine','faFilm')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Cine',faFilm)">
                       <fa-icon  [icon]="faFilm" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Cine</ion-label>
@@ -165,7 +172,7 @@
                 
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Juegos','faGamepad')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Juegos',faGamepad)">
                       <fa-icon  [icon]="faGamepad" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Juegos</ion-label>
@@ -175,7 +182,7 @@
                 
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Restaurante','faUtensils')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Restaurante',faUtensils)">
                       <fa-icon  [icon]="faUtensils" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;"> Restaurante </ion-label>
@@ -185,7 +192,7 @@
                 
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Compras','faCartShopping')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Compras',faCartShopping)">
                       <fa-icon  [icon]="faCartShopping" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Compras</ion-label>
@@ -199,7 +206,7 @@
 
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Deporte', 'faBicycle')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Deporte',faBicycle)">
                       <fa-icon  [icon]="faBicycle " class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Deporte</ion-label>
@@ -210,7 +217,7 @@
 
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger"(click)="ChangeCategoria('Entretenimiento','Vacaciones','faPlaneDeparture')">
+                    <ion-button shape="round" color="danger"(click)="ChangeCategoria('Entretenimiento','Vacaciones',faPlaneDeparture)">
                       <fa-icon  [icon]="faPlaneDeparture" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Vacaciones</ion-label>
@@ -221,7 +228,7 @@
 
                 <ion-item>
                   <div class="circular-button">
-                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Libros', 'faBookOpen')">
+                    <ion-button shape="round" color="danger" (click)="ChangeCategoria('Entretenimiento','Libros', faBookOpen)">
                       <fa-icon  [icon]="faBookOpen" class="fa-2xl"></fa-icon>
                     </ion-button>
                     <ion-label style="font-size: 10px;">Libros </ion-label>
@@ -233,26 +240,110 @@
 
 
             </ion-list>
+            -->
 
+<!-- Categorias -->
+            <ion-grid *ngIf="TipoTrans == 'Gastos'">
+              <ion-list *ngFor="let item of ArrayCategoriasGastos">
+
+                <ion-item>
+                  <ion-label>{{item.name}}</ion-label>
+                </ion-item>
+
+                <ion-row>
+                  <ion-col size="2" *ngFor="let sub of item.sub">
+
+                    <ion-item>
+                      <div class="circular-button">
+                        <ion-button shape="round" color="danger" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon)">
+                          <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
+                        </ion-button>
+                        <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
+                      </div>
+                    </ion-item>
+                      
+                  </ion-col>
+                </ion-row>
+      
+              </ion-list>
+            </ion-grid>
+
+            <ion-grid *ngIf="TipoTrans == 'Ingresos'">
+              <ion-list *ngFor="let item of ArrayCategoriasIngresos">
+
+                <ion-item>
+                  <ion-label>{{item.name}}</ion-label>
+                </ion-item>
+
+                <ion-row>
+                  <ion-col size="2" *ngFor="let sub of item.sub">
+
+                    <ion-item>
+                      <div class="circular-button">
+                        <ion-button shape="round" color="success" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon)">
+                          <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
+                        </ion-button>
+                        <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
+                      </div>
+                    </ion-item>
+                      
+                  </ion-col>
+                </ion-row>
+      
+              </ion-list>
+            </ion-grid>
             
-
           </ion-content>
         </ng-template>
       </ion-modal>
 
     </ion-item>
 
-    <ion-item>
+    <!-- Tipo Transaccion -->
+    <ion-item expand="block" (click)="setOpenTipoTransaccion(true)">
       <fa-icon  [icon]="faBuildingColumns" class="fa-xl" slot="start"></fa-icon>
       <ion-list>
         <ion-label style="font-size: 12px;">Efectivo</ion-label>
         <ion-label>Billetera</ion-label>
       </ion-list>
 
+      <ion-modal [isOpen]="isModalOpenTipoTrans">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+        
+              <ion-buttons slot="start">
+                <ion-button (click)="setOpenTipoTransaccion(false)">Close</ion-button>
+              </ion-buttons>
+
+              <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
+
+              <ion-buttons slot="end">
+                <ion-button (click)="setOpenTipoTransaccion(false)">Save</ion-button>
+              </ion-buttons>
+
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+  
+          
+
+            
+            
+          </ion-content>
+        </ng-template>
+      </ion-modal>
 
     </ion-item>
 
 
+
+    <!-- Frecuencia -->
+    <ion-item>
+
+
+
+    </ion-item>
 
 
 
@@ -276,13 +367,13 @@
 
       <ion-item>
         <ion-buttons>
-          <ion-button>GASTOS</ion-button>
+          <ion-button color={{colorGastos}} (click)="ChangeOptionTransaccion(1)">GASTOS </ion-button>
         </ion-buttons>
       </ion-item>
 
       <ion-item>
         <ion-buttons>
-          <ion-button>INGRESOS</ion-button>
+          <ion-button color={{colorIngresos}} (click)="ChangeOptionTransaccion(2)">INGRESOS</ion-button>
         </ion-buttons>
       </ion-item>
         
