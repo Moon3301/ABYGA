@@ -4,8 +4,9 @@ import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
-  faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill,
-  faEllipsis} from '@fortawesome/free-solid-svg-icons';
+  faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
+  faEllipsis, faClock} from '@fortawesome/free-solid-svg-icons';
+  
 
 @Component({
   selector: 'app-agregar-transaccion',
@@ -35,11 +36,13 @@ export class AgregarTransaccionPage implements OnInit {
   faFireFlameSimple = faFireFlameSimple;
   faCircleMinus = faCircleMinus;
   faCirclePlus = faCirclePlus;
-  faCalendarDays = faCalendarDays
-  faFileSignature = faFileSignature
-  faMoneyBillTrendUp = faMoneyBillTrendUp
-  faMoneyBill = faMoneyBill
-  faEllipsis = faEllipsis
+  faCalendarDays = faCalendarDays;
+  faFileSignature = faFileSignature;
+  faMoneyBillTrendUp = faMoneyBillTrendUp;
+  faMoneyBill = faMoneyBill;
+  faEllipsis = faEllipsis;
+  faClock = faClock;
+
 
 
   // Icon Ionic
@@ -48,6 +51,8 @@ export class AgregarTransaccionPage implements OnInit {
   // Abrir, Cerrar Modal
   isModalOpenCategoria = false;
   isModalOpenTipoTrans = false;
+  isModalOpenFrecuencia = false;
+
 
   // Cambiar Color Gastos e ingresos
 
@@ -101,6 +106,10 @@ export class AgregarTransaccionPage implements OnInit {
     this.isModalOpenTipoTrans = isOpen;
   }
 
+  setOpenFrecuencia(isOpen: boolean){
+    this.isModalOpenFrecuencia = isOpen;
+  }
+
 
 
   GoHome(){
@@ -151,6 +160,48 @@ export class AgregarTransaccionPage implements OnInit {
       this.TipoTrans = "Ingresos"
     }
 
+
+  }
+
+  ChangeCheckBox(item:any){
+
+    
+      var CheckValue1 = (<HTMLInputElement>document.getElementById(item)).checked
+      var CheckValue2 = (<HTMLInputElement>document.getElementById(item)).checked
+      var CheckValue3 = (<HTMLInputElement>document.getElementById(item)).checked
+      var CheckValue4 = (<HTMLInputElement>document.getElementById(item)).checked
+  
+      if(CheckValue1 == false){
+  
+        document.getElementById("2")?.setAttribute('checked', 'false')
+        document.getElementById("3")?.setAttribute('checked', 'false')
+        document.getElementById("4")?.setAttribute('checked', 'false')
+  
+      }
+
+      if(CheckValue2 == false){
+  
+        document.getElementById("1")?.setAttribute('checked', 'false')
+        document.getElementById("3")?.setAttribute('checked', 'false')
+        document.getElementById("4")?.setAttribute('checked', 'false')
+  
+      }
+
+      if(CheckValue3 == false){
+  
+        document.getElementById("1")?.setAttribute('checked', 'false')
+        document.getElementById("2")?.setAttribute('checked', 'false')
+        document.getElementById("4")?.setAttribute('checked', 'false')
+  
+      }
+
+      if(CheckValue4 == false){
+  
+        document.getElementById("1")?.setAttribute('checked', 'false')
+        document.getElementById("2")?.setAttribute('checked', 'false')
+        document.getElementById("3")?.setAttribute('checked', 'false')
+  
+      }
 
   }
 
