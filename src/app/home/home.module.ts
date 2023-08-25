@@ -9,6 +9,9 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { NgChartsModule } from 'ng2-charts';
+
+
 
 @NgModule({
   imports: [
@@ -17,7 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     IonicModule,
     HomePageRoutingModule,
     MatTabsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgChartsModule
 
   ],
   declarations: [HomePage]

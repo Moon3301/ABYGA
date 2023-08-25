@@ -10,7 +10,11 @@ import { AgregarTransaccionPage } from './agregar-transaccion.page';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import {MatTabsModule} from '@angular/material/tabs';
 
+import {MatSelectModule} from '@angular/material/select';
+
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -18,7 +22,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     IonicModule,
     AgregarTransaccionPageRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatInputModule
     
   ],
   declarations: [AgregarTransaccionPage]

@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+
+
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
-  faEllipsis, faClock} from '@fortawesome/free-solid-svg-icons';
+  faEllipsis, faClock, faList} from '@fortawesome/free-solid-svg-icons';
   
 
 @Component({
@@ -42,6 +44,7 @@ export class AgregarTransaccionPage implements OnInit {
   faMoneyBill = faMoneyBill;
   faEllipsis = faEllipsis;
   faClock = faClock;
+  faList = faList;
 
 
 
@@ -73,7 +76,7 @@ export class AgregarTransaccionPage implements OnInit {
   //SubCategoria
   NombreSubCat:any = "Subcategoria"
   // Icono Categoria
-  IconCat: any = faWifi
+  IconCat: any = faList
   // Tipo transaccion
 
   TipoTrans: any
@@ -92,9 +95,38 @@ export class AgregarTransaccionPage implements OnInit {
 
   ]
 
+  ArrayCheckBox:any = [] = [
+    {id:1,name:'checkDiario',check:false,color:'primary'},
+    {id:2,name:'checkSemanal',check:false,color:'success'},
+    {id:3,name:'checkMensual',check:false,color:'danger'},
+    {id:4,name:'checkAnual',check:false,color:'warning'},
+
+  ]
+
+  ArrayFrecuencia:any = [] = [
+
+    {value: 'steak-0', viewValue: 'Diario'},
+    {value: 'pizza-1', viewValue: 'Semanal'},
+    {value: 'tacos-2', viewValue: 'Mensual'},
+    {value: 'tacos-2', viewValue: 'Anual'},
+
+  ]
+
+  ArrayTipoTrans:any = [] = [
+
+    {value: 'steak-0', viewValue: 'Efectivo'},
+    {value: 'pizza-1', viewValue: 'Tarjeta'},
+   
+
+  ]
+
 
   
   ngOnInit() {
+
+    this.TipoTrans = "Gastos";
+    document.getElementById("IconMontoTrans")?.setAttribute("style","color:red");
+    this.colorGastos = 'danger';
 
   }
 
@@ -102,13 +134,8 @@ export class AgregarTransaccionPage implements OnInit {
     this.isModalOpenCategoria = isOpen;
   }
 
-  setOpenTipoTransaccion(isOpen: boolean){
-    this.isModalOpenTipoTrans = isOpen;
-  }
 
-  setOpenFrecuencia(isOpen: boolean){
-    this.isModalOpenFrecuencia = isOpen;
-  }
+
 
 
 
@@ -163,45 +190,14 @@ export class AgregarTransaccionPage implements OnInit {
 
   }
 
-  ChangeCheckBox(item:any){
+  ChangeOption(ev:any){
 
-    
-      var CheckValue1 = (<HTMLInputElement>document.getElementById(item)).checked
-      var CheckValue2 = (<HTMLInputElement>document.getElementById(item)).checked
-      var CheckValue3 = (<HTMLInputElement>document.getElementById(item)).checked
-      var CheckValue4 = (<HTMLInputElement>document.getElementById(item)).checked
-  
-      if(CheckValue1 == false){
-  
-        document.getElementById("2")?.setAttribute('checked', 'false')
-        document.getElementById("3")?.setAttribute('checked', 'false')
-        document.getElementById("4")?.setAttribute('checked', 'false')
-  
+    for(let item of this.ArrayCheckBox){
+      if(item.name != ev.detail.value){
+        item.check = false
       }
-
-      if(CheckValue2 == false){
-  
-        document.getElementById("1")?.setAttribute('checked', 'false')
-        document.getElementById("3")?.setAttribute('checked', 'false')
-        document.getElementById("4")?.setAttribute('checked', 'false')
-  
-      }
-
-      if(CheckValue3 == false){
-  
-        document.getElementById("1")?.setAttribute('checked', 'false')
-        document.getElementById("2")?.setAttribute('checked', 'false')
-        document.getElementById("4")?.setAttribute('checked', 'false')
-  
-      }
-
-      if(CheckValue4 == false){
-  
-        document.getElementById("1")?.setAttribute('checked', 'false')
-        document.getElementById("2")?.setAttribute('checked', 'false')
-        document.getElementById("3")?.setAttribute('checked', 'false')
-  
-      }
+      
+    }
 
   }
 

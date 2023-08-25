@@ -21,7 +21,25 @@
     <mat-tab-group>
       <mat-tab label="PRINCIPAL">  
 
+        <ion-card>
+          <canvas baseChart style="margin: 0 auto;"
+            [labels]="doughnutChartLabels"
+            [datasets]="doughnutChartDatasets"
+            [options]="doughnutChartOptions"
+            [legend]="true"
+            [type]="'doughnut'">
+          </canvas>
+        </ion-card>
 
+        <ion-card>
+          <canvas baseChart style="margin: 0 auto;"
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [type]="'bar'">
+          </canvas>
+        </ion-card>
 
 
       </mat-tab>
