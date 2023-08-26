@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
-
+import { CrudTransaccionesService } from '../crud-transacciones.service';
 
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
@@ -46,6 +46,31 @@ export class AgregarTransaccionPage implements OnInit {
   faClock = faClock;
   faList = faList;
 
+  // Nombre Transaccion
+  NameTransaccion:any
+
+  // Monto Transaccion
+  MontoTransaccion:any
+
+  //
+  selectedDate:any
+
+  // tab
+  tab1Selected: boolean = true;
+  tab2Selected: boolean = true;
+
+  // SelectOption Tipo transaccion
+
+  selectedOptionTipoTran: any;
+
+  // SelectOption Frecuencia
+
+  selectedOptionFrecuencia: any;
+
+  // Descripcion
+
+  descripcion:any
+
 
 
   // Icon Ionic
@@ -53,8 +78,7 @@ export class AgregarTransaccionPage implements OnInit {
   
   // Abrir, Cerrar Modal
   isModalOpenCategoria = false;
-  isModalOpenTipoTrans = false;
-  isModalOpenFrecuencia = false;
+ 
 
 
   // Cambiar Color Gastos e ingresos
@@ -62,23 +86,30 @@ export class AgregarTransaccionPage implements OnInit {
   colorGastos:any
   colorIngresos:any
 
-
+  selected:any
 
   
+  
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private crud:CrudTransaccionesService) { }
 
 
   // Variables dinamicas para categoria
 
+  // Id Categoria
+  IdCat:any
   // Categoria
   NombreCat:any = "Categoria"
+
+  // Id Subcategoria
+  IdSubCat:any
+
   //SubCategoria
   NombreSubCat:any = "Subcategoria"
   // Icono Categoria
   IconCat: any = faList
-  // Tipo transaccion
 
+  // Indica el tipo de transaccion ej: Ingresos o Gastos
   TipoTrans: any
 
   ArrayCategoriasGastos:any = [] = [
@@ -105,17 +136,17 @@ export class AgregarTransaccionPage implements OnInit {
 
   ArrayFrecuencia:any = [] = [
 
-    {value: 'steak-0', viewValue: 'Diario'},
-    {value: 'pizza-1', viewValue: 'Semanal'},
-    {value: 'tacos-2', viewValue: 'Mensual'},
-    {value: 'tacos-2', viewValue: 'Anual'},
+    {value: 'Diaria', viewValue: 'Diario'},
+    {value: 'Semanal', viewValue: 'Semanal'},
+    {value: 'Mensual', viewValue: 'Mensual'},
+    {value: 'Anual', viewValue: 'Anual'},
 
   ]
 
   ArrayTipoTrans:any = [] = [
 
-    {value: 'steak-0', viewValue: 'Efectivo'},
-    {value: 'pizza-1', viewValue: 'Tarjeta'},
+    {value: 'Efectivo', viewValue: 'Efectivo'},
+    {value: 'Tarjeta', viewValue: 'Tarjeta'},
    
 
   ]
@@ -130,13 +161,60 @@ export class AgregarTransaccionPage implements OnInit {
 
   }
 
+  //AgregarDatosAlCrud
+
+  AddTransaccion(){
+    
+    this.crud.AgregarTransaccion(this.crud.transaccion.length+1,this.NameTransaccion,this.MontoTransaccion,
+    'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}])
+
+    this.GoHome();
+
+  }
+
+  ConvertirFecha(date:any): string{
+
+    const fecha = new Date(date);
+    return fecha.toLocaleDateString('es',{ weekday:'short',day:'2-digit', month:'long', year:'numeric'})
+    
+  }
+
+  // Cambios en el Tab
+  onTabChange(ev:any){
+
+    console.log(ev.tab.textLabel);
+
+  }
+
+  ResetData(){
+
+    //Clear Name
+    this.NameTransaccion = ''
+
+    //Clear Monto
+    this.MontoTransaccion = 0
+
+    //Clear Date
+    this.selectedDate = null;
+
+    //Clear Categoria
+    
+    this.NombreCat = 'Categoria'
+    this.NombreSubCat = 'Subcategoria'
+    this.IconCat = faList
+
+    // Clear Tipo Transaccion
+    this.selectedOptionTipoTran = null
+
+    // Clear Frecuencia
+    this.selectedOptionFrecuencia = null
+
+  }
+
+  // Open Modal
   setOpenCategoria(isOpen: boolean) {
     this.isModalOpenCategoria = isOpen;
   }
-
-
-
-
 
 
   GoHome(){
@@ -146,14 +224,13 @@ export class AgregarTransaccionPage implements OnInit {
 
   }
 
-  ChangeIconTransaccion(){
+  ChangeTransaccion(ev:any){
 
-    //"add-circle-outline"
-
-
+    console.log(ev.detail)
+    
   }
 
-  ChangeCategoria(dataCat:string, dataSubCat:string, changeIcon: any){ 
+  ChangeCategoria(dataCat:string, dataSubCat:string, changeIcon: any, id:any, idSub:any){ 
 
     // Cerrar Modal
     this.isModalOpenCategoria = false;
@@ -167,6 +244,13 @@ export class AgregarTransaccionPage implements OnInit {
     // Asignar icono de categoria
     this.IconCat = changeIcon
 
+    // Asignar id a la categoria
+    this.IdCat = id
+
+    // Asginar id a la subcategoria
+
+    this.IdSubCat = idSub
+
   }
 
   ChangeOptionTransaccion(data:any){
@@ -177,6 +261,9 @@ export class AgregarTransaccionPage implements OnInit {
       this.IconTransaccion = faCircleMinus;
       document.getElementById("IconMontoTrans")?.setAttribute("style","color:red")
       this.TipoTrans = "Gastos"
+
+      //Reset
+      this.ResetData();
     }
 
     if(data == 2){
@@ -185,11 +272,15 @@ export class AgregarTransaccionPage implements OnInit {
       this.IconTransaccion = faCirclePlus;
       document.getElementById("IconMontoTrans")?.setAttribute("style","color:green")
       this.TipoTrans = "Ingresos"
+
+      //Reset
+      this.ResetData();
     }
 
 
   }
 
+  //CheckBox
   ChangeOption(ev:any){
 
     for(let item of this.ArrayCheckBox){

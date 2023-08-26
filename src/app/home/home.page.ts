@@ -1,17 +1,68 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Transaccion } from '../transaccion';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ActivatedRoute,Router } from '@angular/router';
 import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+import { CrudTransaccionesService } from '../crud-transacciones.service';
+import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
+  faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
+  faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
+  faEllipsis, faClock, faList} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor(private router:Router) {}
+  //Icons font-awesome
+  faGasPump = faGasPump;
+  faCarOn = faCarOn;
+  faSchool= faSchool;
+  faBuildingColumns = faBuildingColumns;
+  faCapsules = faCapsules;
+  faShirt = faShirt;
+  faStore = faStore;
+  faFilm = faFilm;
+  faGamepad = faGamepad;
+  faUtensils = faUtensils;
+  faCartShopping = faCartShopping;
+  faBicycle = faBicycle;
+  faPlaneDeparture = faPlaneDeparture;
+  faBookOpen = faBookOpen;
+  faDroplet = faDroplet;
+  faLightbulb = faLightbulb;
+  faWifi = faWifi;
+  faFireFlameSimple = faFireFlameSimple;
+  faCircleMinus = faCircleMinus;
+  faCirclePlus = faCirclePlus;
+  faCalendarDays = faCalendarDays;
+  faFileSignature = faFileSignature;
+  faMoneyBillTrendUp = faMoneyBillTrendUp;
+  faMoneyBill = faMoneyBill;
+  faEllipsis = faEllipsis;
+  faClock = faClock;
+  faList = faList;
 
+  constructor(private router:Router, public crud:CrudTransaccionesService) {}
+
+  ngOnInit(){
+    
+    console.log(this.crud.transaccion)
+    
+  }
+
+  ionViewWillEnter(){
+    console.log(this.crud.transaccion)
+    console.log(this.crud.transaccionesAgrupadas)
+  }
+
+  
+
+  getFechasAgrupadas(): string[] {
+    return Object.keys(this.crud.transaccionesAgrupadas);
+  }
   // Chart Donnut
 
   title = 'ng2-charts-demo';
@@ -51,6 +102,19 @@ export class HomePage {
     this.router.navigate(['agregar-transaccion'])
 
   }
+
+  List(){
+
+    for(let item of this.crud.transaccion){
+
+      
+    }
+
+
+
+  }
+
+
 
 
 }

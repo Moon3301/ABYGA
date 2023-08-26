@@ -10,8 +10,8 @@ export interface Transaccion {
     estado: string
     notas: string
     fecha: any
-    tipo_transaccion: TipoTransaccion
+    tipo_transaccion: string
     tipo_pago: TipoPago
-    categoria: CategoriasTransacciones
+    categoria: CategoriasTransacciones[]
     
 }

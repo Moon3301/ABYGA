@@ -9,33 +9,33 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
-  <mat-tab-group>
-    <mat-tab label="{{TipoTrans}} Fijos">
+  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="{{TipoTrans}} Fijos" >
       <ion-list>
 
         <!-- Nombre Transaccion -->
         <ion-item>
     
           <fa-icon [icon]=faFileSignature class="fa-xl" slot="start" ></fa-icon>
-          <ion-input label="Nombre" labelPlacement="floating" placeholder="Transaccion" [clearInput]="true"></ion-input>
+          <ion-input [(ngModel)]="NameTransaccion" label="Nombre" labelPlacement="floating" placeholder="Transaccion" [clearInput]="true"></ion-input>
         </ion-item>
     
         <!-- Monto Transaccion -->
         <ion-item >
     
           <fa-icon id="IconMontoTrans"  [icon]=IconTransaccion class="fa-xl" slot="start" ></fa-icon>
-          <ion-input type="number" placeholder="total de gastos o ingresos" color="success" ></ion-input>
+          <ion-input [(ngModel)]="MontoTransaccion" type="number" placeholder="total de gastos o ingresos" color="success" ></ion-input>
         </ion-item>
     
         <!-- Calendario -->
         <ion-item>
           
           <fa-icon [icon]=faCalendarDays class="fa-xl" slot="start" ></fa-icon>
-          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+          <ion-datetime-button  datetime="datetime"></ion-datetime-button>
     
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime id="datetime"></ion-datetime>
+              <ion-datetime [(ngModel)]="selectedDate" id="datetime"></ion-datetime>
             </ng-template>
           </ion-modal>
     
@@ -53,9 +53,6 @@
               <ion-label>{{NombreSubCat}}</ion-label>
           </ion-list>
           
-          
-          
-    
           <ion-modal [isOpen]="isModalOpenCategoria">
             <ng-template>
               <ion-header>
@@ -87,7 +84,7 @@
     
                         <ion-item >
                           <div class="circular-button" style="margin: 0 auto;">
-                            <ion-button shape="round" color="danger" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon)">
+                            <ion-button shape="round" color="danger" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
                               <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
                             </ion-button>
                             <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
@@ -112,7 +109,7 @@
     
                         <ion-item>
                           <div class="circular-button" style="margin: 0 auto;">
-                            <ion-button shape="round" color="success" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon)">
+                            <ion-button shape="round" color="success" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
                               <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
                             </ion-button>
                             <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
@@ -136,13 +133,14 @@
         <ion-card>
           <p></p>
         </ion-card>
+
         <!-- Tipo Transaccion -->
         <ion-item expand="block">
           <fa-icon  [icon]="faBuildingColumns" class="fa-xl" slot="start"></fa-icon>
           
           <mat-form-field style="width: 100%;">
             <mat-label>Tipo Transaccion</mat-label>
-            <mat-select>
+            <mat-select [(ngModel)]="selectedOptionTipoTran">
               <mat-option *ngFor="let food of ArrayTipoTrans" [value]="food.value">
                 {{food.viewValue}}
               </mat-option>
@@ -158,7 +156,7 @@
           
           <mat-form-field style="width: 100%;">
             <mat-label>Frecuencia</mat-label>
-            <mat-select>
+            <mat-select [(ngModel)]="selectedOptionFrecuencia">
               <mat-option *ngFor="let food of ArrayFrecuencia" [value]="food.value">
                 {{food.viewValue}}
               </mat-option>
@@ -167,17 +165,24 @@
   
         </ion-item>
 
-        <ion-card></ion-card>
+        <ion-card>
+          <p></p>
+        </ion-card>
         
-        <ion-item>
-          <form class="example-form">
+        <!-- Comentarios -->
+          <ion-card>
+            <form class="example-form">
           
-            <mat-form-field class="example-full-width">
-              <mat-label >Leave a comment</mat-label>
-              <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
-          </form>
-        </ion-item>
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label  >Leave a comment</mat-label>
+                <textarea name="MatGastos" [(ngModel)]="descripcion" matInput placeholder="Ex. It makes me feel..."></textarea>
+              </mat-form-field>
+            </form>
+          </ion-card>
+          
+          
+          
+        
         
         <!--
         <ion-item *ngFor="let item of ArrayCheckBox">
@@ -197,25 +202,25 @@
         <ion-item>
     
           <fa-icon [icon]=faFileSignature class="fa-xl" slot="start" ></fa-icon>
-          <ion-input label="Nombre" labelPlacement="floating" placeholder="Transaccion" [clearInput]="true"></ion-input>
+          <ion-input [(ngModel)]="NameTransaccion" label="Nombre" labelPlacement="floating" placeholder="Transaccion" [clearInput]="true"></ion-input>
         </ion-item>
     
         <!-- Monto Transaccion -->
         <ion-item >
     
           <fa-icon id="IconMontoTrans"  [icon]=IconTransaccion class="fa-xl" slot="start" ></fa-icon>
-          <ion-input type="number" placeholder="total de gastos o ingresos" color="success" ></ion-input>
+          <ion-input [(ngModel)]="MontoTransaccion" type="number" placeholder="total de gastos o ingresos" color="success" ></ion-input>
         </ion-item>
     
         <!-- Calendario -->
         <ion-item>
           
           <fa-icon [icon]=faCalendarDays class="fa-xl" slot="start" ></fa-icon>
-          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+          <ion-datetime-button  datetime="datetime"></ion-datetime-button>
     
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime id="datetime"></ion-datetime>
+              <ion-datetime [(ngModel)]="selectedDate" id="datetime"></ion-datetime>
             </ng-template>
           </ion-modal>
     
@@ -267,7 +272,7 @@
     
                         <ion-item >
                           <div class="circular-button" style="margin: 0 auto;">
-                            <ion-button shape="round" color="danger" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon)">
+                            <ion-button shape="round" color="danger" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
                               <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
                             </ion-button>
                             <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
@@ -292,7 +297,7 @@
     
                         <ion-item>
                           <div class="circular-button" style="margin: 0 auto;">
-                            <ion-button shape="round" color="success" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon)">
+                            <ion-button shape="round" color="success" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
                               <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
                             </ion-button>
                             <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
@@ -310,6 +315,18 @@
           </ion-modal>
     
         </ion-item>
+
+        <!-- Descripcion -->
+        <ion-card>
+          <form class="example-form">
+        
+            <mat-form-field class="example-full-width" style="width: 100%;">
+              <mat-label  >Leave a comment</mat-label>
+              <textarea name="MatAbonos" [(ngModel)]="descripcion" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+          </form>
+        </ion-card>
+
       </ion-list>
 
     </mat-tab>
@@ -324,7 +341,7 @@
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button color="success" >
+  <ion-fab-button color="success" (click)=AddTransaccion()>
     <ion-icon name="checkmark-done-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>

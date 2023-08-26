@@ -11,19 +11,43 @@ export class CrudTransaccionesService {
 
   public transaccion: Transaccion[] = [];
 
+  transaccionesAgrupadas: { [fecha: string]: Transaccion[] } = {};
+
   public listaIngresos = []
   public listaGastos = []
 
 
   constructor() { }
 
+  agruparTransacciones(id:any) {
+   
+    this.transaccion.forEach(transaccion => {
+      
+      if (!this.transaccionesAgrupadas[transaccion.fecha]) {
+        this.transaccionesAgrupadas[transaccion.fecha] = [];
+      }
+      console.log(this.transaccionesAgrupadas)
+      console.log(transaccion)
+
+      if(!this.transaccionesAgrupadas[transaccion.fecha].some( element => element.id === id)){
+
+        this.transaccionesAgrupadas[transaccion.fecha].push(transaccion);
+        this.transaccionesAgrupadas[transaccion.fecha] = [... new Set(this.transaccionesAgrupadas[transaccion.fecha])]
+
+      }
+
+    });
+
+  }
+
   
   async AgregarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any){
 
-    if (this.transaccion.find(x => x.id == id)) return;
+    if (this.transaccion.find(x => x.id === id)) {return};
 
     this.transaccion.push({id,nombre,monto,estado,notas,fecha,tipo_transaccion,tipo_pago,categoria})
 
+    this.agruparTransacciones(id);
     
   }
 
