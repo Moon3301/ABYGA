@@ -50,6 +50,7 @@ export class HomePage implements OnInit {
   ngOnInit(){
     
     console.log(this.crud.transaccion)
+
     
   }
 
@@ -58,11 +59,23 @@ export class HomePage implements OnInit {
     console.log(this.crud.transaccionesAgrupadas)
   }
 
-  
 
-  getFechasAgrupadas(): string[] {
-    return Object.keys(this.crud.transaccionesAgrupadas);
+  GetTotalTransaccionesPorFecha(): number{
+
+    let totalGeneral = 0;
+    let totalIngresos = 0;
+    let totalGastos = 0;
+
+    for(let fecha of this.crud.getFechasAgrupadas()){
+      totalIngresos = this.crud.calcularMontoTotal(this.crud.transaccionesAgrupadas[fecha], 'Ingresos')
+      totalGastos = this.crud.calcularMontoTotal(this.crud.transaccionesAgrupadas[fecha], 'Gastos')
+    }
+
+    totalGeneral = totalIngresos - totalGastos;
+
+    return totalGeneral;
   }
+
   // Chart Donnut
 
   title = 'ng2-charts-demo';

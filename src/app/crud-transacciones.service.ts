@@ -13,14 +13,20 @@ export class CrudTransaccionesService {
 
   transaccionesAgrupadas: { [fecha: string]: Transaccion[] } = {};
 
+  totalIngresosPorFecha: { [fecha: string]: number } = {};
+  totalGastosPorFecha: { [fecha: string]: number } = {};
+
+  totalNetoPorFecha: { [fecha: string]: number } = {};
+
   public listaIngresos = []
   public listaGastos = []
+
 
 
   constructor() { }
 
   agruparTransacciones(id:any) {
-   
+
     this.transaccion.forEach(transaccion => {
       
       if (!this.transaccionesAgrupadas[transaccion.fecha]) {
@@ -38,7 +44,28 @@ export class CrudTransaccionesService {
 
     });
 
+    for(let fecha of this.getFechasAgrupadas()){
+      this.totalIngresosPorFecha[fecha] = this.calcularMontoTotal(this.transaccionesAgrupadas[fecha], 'Ingresos')
+      this.totalGastosPorFecha[fecha] = this.calcularMontoTotal(this.transaccionesAgrupadas[fecha], 'Gastos')
+    }
+
+    Object.keys(this.totalIngresosPorFecha).forEach(fecha => {
+      this.totalNetoPorFecha[fecha] = (this.totalIngresosPorFecha[fecha] || 0) - (this.totalGastosPorFecha[fecha] || 0);
+    });
+
   }
+
+  getFechasAgrupadas(): string[] {
+    return Object.keys(this.transaccionesAgrupadas);
+  }
+
+  calcularMontoTotal(transacciones: Transaccion[], tipo: 'Ingresos' | 'Gastos'): number {
+    return transacciones
+      .filter(transaccion => transaccion.tipo_transaccion === tipo)
+      .reduce((total, transaccion) => total + transaccion.monto, 0);
+  }
+
+
 
   
   async AgregarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any){

@@ -19,10 +19,10 @@
           <fa-icon [icon]=faFileSignature class="fa-xl" slot="start" ></fa-icon>
           <ion-input [(ngModel)]="NameTransaccion" label="Nombre" labelPlacement="floating" placeholder="Transaccion" [clearInput]="true"></ion-input>
         </ion-item>
-    
+      
         <!-- Monto Transaccion -->
         <ion-item >
-    
+      
           <fa-icon id="IconMontoTrans"  [icon]=IconTransaccion class="fa-xl" slot="start" ></fa-icon>
           <ion-input [(ngModel)]="MontoTransaccion" type="number" placeholder="total de gastos o ingresos" color="success" ></ion-input>
         </ion-item>
@@ -35,16 +35,15 @@
     
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime [(ngModel)]="selectedDate" id="datetime"></ion-datetime>
+              <ion-datetime [(ngModel)]="selectedDate" id="datetime" [showDefaultButtons]="true" doneText="Aceptar" cancelText="Cancelar" display-format="DD/MM/YYYY"
+              display-timezone="false"></ion-datetime>
             </ng-template>
           </ion-modal>
     
         </ion-item>
     
-    
         <!-- Categorias -->
         <ion-item expand="block" (click)="setOpenCategoria(true)">
-          
           
           <fa-icon  [icon]=IconCat class="fa-xl" slot="start"></fa-icon>
           
