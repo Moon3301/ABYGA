@@ -51,9 +51,12 @@ export class AgregarTransaccionPage implements OnInit {
 
   // Monto Transaccion
   MontoTransaccion:any
+  
 
   //
-  selectedDate:any
+  selectedDate:any;
+
+  currentDate:any = new Date();
 
   // tab
   tab1Selected: boolean = true;
@@ -79,8 +82,6 @@ export class AgregarTransaccionPage implements OnInit {
   // Abrir, Cerrar Modal
   isModalOpenCategoria = false;
  
-
-
   // Cambiar Color Gastos e ingresos
 
   colorGastos:any
@@ -88,11 +89,7 @@ export class AgregarTransaccionPage implements OnInit {
 
   selected:any
 
-  
-  
-
   constructor(private router:Router, private crud:CrudTransaccionesService) { }
-
 
   // Variables dinamicas para categoria
 
@@ -151,18 +148,29 @@ export class AgregarTransaccionPage implements OnInit {
 
   ]
 
-
-  
   ngOnInit() {
-
+    
+    // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
     this.TipoTrans = "Gastos";
     document.getElementById("IconMontoTrans")?.setAttribute("style","color:red");
     this.colorGastos = 'danger';
+    
+    // Obtén la fecha actual en la zona horaria local
+    const currentDate = new Date();
+    const offset = currentDate.getTimezoneOffset();
+    currentDate.setMinutes(currentDate.getMinutes() - offset);
+    
+    // Formatea y asigna la fecha en el formato ISO 8601
+    this.selectedDate = currentDate.toISOString().slice(0, 19);
+
+  }
+
+  ionViewWillEnter(){
+    
 
   }
 
   //AgregarDatosAlCrud
-
   AddTransaccion(){
     
     this.crud.AgregarTransaccion(this.crud.transaccion.length+1,this.NameTransaccion,this.MontoTransaccion,
@@ -194,11 +202,7 @@ export class AgregarTransaccionPage implements OnInit {
     //Clear Monto
     this.MontoTransaccion = 0
 
-    //Clear Date
-    this.selectedDate = null;
-
     //Clear Categoria
-    
     this.NombreCat = 'Categoria'
     this.NombreSubCat = 'Subcategoria'
     this.IconCat = faList
@@ -215,7 +219,6 @@ export class AgregarTransaccionPage implements OnInit {
   setOpenCategoria(isOpen: boolean) {
     this.isModalOpenCategoria = isOpen;
   }
-
 
   GoHome(){
     
@@ -291,7 +294,5 @@ export class AgregarTransaccionPage implements OnInit {
     }
 
   }
-
-
 
 }
