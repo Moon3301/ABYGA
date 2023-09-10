@@ -7,7 +7,8 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
-  faEllipsis, faClock, faList} from '@fortawesome/free-solid-svg-icons';
+  faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine } from '@fortawesome/free-solid-svg-icons';
+  import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  public alertButtons = ['OK'];
 
   //Icons font-awesome
   faGasPump = faGasPump;
@@ -44,12 +46,27 @@ export class HomePage implements OnInit {
   faEllipsis = faEllipsis;
   faClock = faClock;
   faList = faList;
+  faDollar = faDollar;
+  faScaleBalanced = faScaleBalanced;
+  faChartLine = faChartLine;
 
-  constructor(private router:Router, public crud:CrudTransaccionesService) {}
+  //Variables indicadores
+  dataLoaded = false;
+  dolar: number=0;
+  unidadDeFomento: number=0;
+  ipc: number=0;
+
+  constructor(private router:Router, public crud:CrudTransaccionesService, public http: HttpClient) {}
 
   ngOnInit(){
     
     console.log(this.crud.transaccion)
+    this.http.get('https://mindicador.cl/api').subscribe((data: any) => {
+      this.dolar = data.dolar.valor;
+      this.unidadDeFomento = data.uf.valor;
+      this.ipc = data.ipc.valor;
+      this.dataLoaded = true;
+    });
 
     
   }
