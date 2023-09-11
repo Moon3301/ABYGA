@@ -7,7 +7,7 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
-  faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine } from '@fortawesome/free-solid-svg-icons';
+  faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine, faMagnifyingGlassChart } from '@fortawesome/free-solid-svg-icons';
   import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -49,6 +49,7 @@ export class HomePage implements OnInit {
   faDollar = faDollar;
   faScaleBalanced = faScaleBalanced;
   faChartLine = faChartLine;
+  faMagnifyingGlassChart = faMagnifyingGlassChart;
 
   //Variables indicadores
   dataLoaded = false;
@@ -68,14 +69,12 @@ export class HomePage implements OnInit {
       this.dataLoaded = true;
     });
 
-    
   }
 
   ionViewWillEnter(){
     console.log(this.crud.transaccion)
     console.log(this.crud.transaccionesAgrupadas)
   }
-
 
   GetTotalTransaccionesPorFecha(): number{
 
@@ -126,25 +125,10 @@ export class HomePage implements OnInit {
     responsive: false,
   };
 
-
   AgregarTransaccion(){
 
     this.router.navigate(['agregar-transaccion'])
 
   }
-
-  List(){
-
-    for(let item of this.crud.transaccion){
-
-      
-    }
-
-
-
-  }
-
-
-
 
 }

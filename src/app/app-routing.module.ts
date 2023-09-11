@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'agregar-transaccion',
     loadChildren: () => import('./agregar-transaccion/agregar-transaccion.module').then( m => m.AgregarTransaccionPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+
   
 
 ];

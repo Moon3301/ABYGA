@@ -151,11 +151,9 @@ export class AgregarTransaccionPage implements OnInit {
   ngOnInit() {
     
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
-    this.TipoTrans = "Gastos";
-    document.getElementById("IconMontoTrans")?.setAttribute("style","color:red");
-    this.colorGastos = 'danger';
+    this.OptionGasto();
     
-    // Obtén la fecha actual en la zona horaria local
+    // Se Obtiene la fecha actual en la zona horaria local
     const currentDate = new Date();
     const offset = currentDate.getTimezoneOffset();
     currentDate.setMinutes(currentDate.getMinutes() - offset);
@@ -170,7 +168,7 @@ export class AgregarTransaccionPage implements OnInit {
 
   }
 
-  //AgregarDatosAlCrud
+  //Agregar Registro al CRUD
   AddTransaccion(){
     
     this.crud.AgregarTransaccion(this.crud.transaccion.length+1,this.NameTransaccion,this.MontoTransaccion,
@@ -180,6 +178,7 @@ export class AgregarTransaccionPage implements OnInit {
 
   }
 
+  // Convierte la fecha a formato : 
   ConvertirFecha(date:any): string{
 
     const fecha = new Date(date);
@@ -191,27 +190,6 @@ export class AgregarTransaccionPage implements OnInit {
   onTabChange(ev:any){
 
     console.log(ev.tab.textLabel);
-
-  }
-
-  ResetData(){
-
-    //Clear Name
-    this.NameTransaccion = ''
-
-    //Clear Monto
-    this.MontoTransaccion = 0
-
-    //Clear Categoria
-    this.NombreCat = 'Categoria'
-    this.NombreSubCat = 'Subcategoria'
-    this.IconCat = faList
-
-    // Clear Tipo Transaccion
-    this.selectedOptionTipoTran = null
-
-    // Clear Frecuencia
-    this.selectedOptionFrecuencia = null
 
   }
 
@@ -256,26 +234,59 @@ export class AgregarTransaccionPage implements OnInit {
 
   }
 
+  OptionGasto(){
+
+    this.colorGastos = 'danger'
+    this.colorIngresos = ''
+
+    this.IconTransaccion = faCircleMinus;
+    document.getElementById("IconMontoTrans")?.setAttribute("style","color:red")
+    this.TipoTrans = "Gastos"
+
+  }
+
+  OptionIngreso(){
+
+    this.colorGastos = ''
+    this.colorIngresos = 'success'
+
+    this.IconTransaccion = faCirclePlus;
+    document.getElementById("IconMontoTrans")?.setAttribute("style","color:green")
+    this.TipoTrans = "Ingresos"
+
+  }
+
+  ResetData(){
+
+    //Clear Name
+    this.NameTransaccion = ''
+    //Clear Monto
+    this.MontoTransaccion = 0
+    //Clear Categoria
+    this.NombreCat = 'Categoria'
+    this.NombreSubCat = 'Subcategoria'
+    this.IconCat = faList
+    // Clear Tipo Transaccion
+    this.selectedOptionTipoTran = null
+    // Clear Frecuencia
+    this.selectedOptionFrecuencia = null
+
+  }
+
   ChangeOptionTransaccion(data:any){
 
     if(data == 1){
-      this.colorGastos = 'danger'
-      this.colorIngresos = ''
-      this.IconTransaccion = faCircleMinus;
-      document.getElementById("IconMontoTrans")?.setAttribute("style","color:red")
-      this.TipoTrans = "Gastos"
-
+      
+      // Se asignan los datos iniciales del gasto
+      this.OptionGasto();
       //Reset
       this.ResetData();
     }
 
     if(data == 2){
-      this.colorGastos = ''
-      this.colorIngresos = 'success'
-      this.IconTransaccion = faCirclePlus;
-      document.getElementById("IconMontoTrans")?.setAttribute("style","color:green")
-      this.TipoTrans = "Ingresos"
-
+      
+      // Se asignan los datos iniciales del ingreso
+      this.OptionIngreso();
       //Reset
       this.ResetData();
     }
