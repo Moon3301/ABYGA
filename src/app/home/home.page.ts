@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Transaccion } from '../transaccion';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ActivatedRoute,Router } from '@angular/router';
@@ -8,7 +8,11 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine, faMagnifyingGlassChart } from '@fortawesome/free-solid-svg-icons';
-  import { HttpClient } from '@angular/common/http';
+
+import { HttpClient } from '@angular/common/http';
+
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +21,9 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
 })
 export class HomePage implements OnInit {
   public alertButtons = ['OK'];
+
+  @ViewChild(IonModal)
+  modal!: IonModal;
 
   //Icons font-awesome
   faGasPump = faGasPump;
@@ -52,6 +59,7 @@ export class HomePage implements OnInit {
   faMagnifyingGlassChart = faMagnifyingGlassChart;
 
   //Variables indicadores
+  id:any = 12;
   dataLoaded = false;
   dolar: number=0;
   unidadDeFomento: number=0;
@@ -74,22 +82,6 @@ export class HomePage implements OnInit {
   ionViewWillEnter(){
     console.log(this.crud.transaccion)
     console.log(this.crud.transaccionesAgrupadas)
-  }
-
-  GetTotalTransaccionesPorFecha(): number{
-
-    let totalGeneral = 0;
-    let totalIngresos = 0;
-    let totalGastos = 0;
-
-    for(let fecha of this.crud.getFechasAgrupadas()){
-      totalIngresos = this.crud.calcularMontoTotal(this.crud.transaccionesAgrupadas[fecha], 'Ingresos')
-      totalGastos = this.crud.calcularMontoTotal(this.crud.transaccionesAgrupadas[fecha], 'Gastos')
-    }
-
-    totalGeneral = totalIngresos - totalGastos;
-
-    return totalGeneral;
   }
 
   // Chart Donnut
@@ -127,8 +119,29 @@ export class HomePage implements OnInit {
 
   AgregarTransaccion(){
 
+    this.confirm();
     this.router.navigate(['agregar-transaccion'])
 
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(null, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      
+    }
+  }
+
+  GetTransaccion(id:any){
+    this.crud.GetModificarTransaccion(id);
+    this.crud.ActiveModificarTransaccion = true;
   }
 
 }

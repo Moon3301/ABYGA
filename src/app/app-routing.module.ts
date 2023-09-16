@@ -12,9 +12,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'agregar-transaccion',
+    path: ':id',
     loadChildren: () => import('./agregar-transaccion/agregar-transaccion.module').then( m => m.AgregarTransaccionPageModule)
-  },  {
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },

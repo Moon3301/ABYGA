@@ -7,8 +7,9 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
-  faEllipsis, faClock, faList} from '@fortawesome/free-solid-svg-icons';
+  faEllipsis, faClock, faList,faBarcode, faImage} from '@fortawesome/free-solid-svg-icons';
   
+  import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
 @Component({
   selector: 'app-agregar-transaccion',
@@ -45,6 +46,19 @@ export class AgregarTransaccionPage implements OnInit {
   faEllipsis = faEllipsis;
   faClock = faClock;
   faList = faList;
+  faBarcode = faBarcode;
+  faImage = faImage;
+
+  // Camera
+
+  photos: string[] = [];
+
+  // Modificar
+  GetData:any
+
+  // Toolbar
+
+  colorToolbar:any
 
   // Nombre Transaccion
   NameTransaccion:any
@@ -89,7 +103,7 @@ export class AgregarTransaccionPage implements OnInit {
 
   selected:any
 
-  constructor(private router:Router, private crud:CrudTransaccionesService) { }
+  constructor(private router:Router, private crud:CrudTransaccionesService,private activatedRouter: ActivatedRoute) { }
 
   // Variables dinamicas para categoria
 
@@ -151,6 +165,17 @@ export class AgregarTransaccionPage implements OnInit {
   ngOnInit() {
     
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
+    if(this.crud.ActiveModificarTransaccion == true){
+      this.GetData = this.crud.GetDataModificar();
+
+      // PENDIENTE COMPLETAR TODOS LOS DATOS (name,monto,categoria,etc)
+      this.MontoTransaccion = this.GetData.monto
+
+
+      console.log(this.GetData)
+    }
+    
+    // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
     this.OptionGasto();
     
     // Se Obtiene la fecha actual en la zona horaria local
@@ -160,6 +185,38 @@ export class AgregarTransaccionPage implements OnInit {
     
     // Formatea y asigna la fecha en el formato ISO 8601
     this.selectedDate = currentDate.toISOString().slice(0, 19);
+
+    this.activatedRouter.paramMap.subscribe(paramMap =>{
+      const id = paramMap.get('id');
+      this.TipoTrans = id;
+    })
+
+    console.log(this.TipoTrans);
+
+    if(this.TipoTrans == 'Ingresos'){
+      this.OptionIngreso();
+    }
+    if(this.TipoTrans == 'Egresos'){
+      this.OptionGasto();
+    }
+    if(this.TipoTrans == 'Insumos'){
+      this.OptionInsumos();
+    }
+
+  }
+
+  public async NewPhoto(){
+
+    const fotoCapturada = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      quality: 100
+      
+    })
+
+    if (fotoCapturada.webPath) {
+      this.photos.push(fotoCapturada.webPath);
+    }
 
   }
 
@@ -171,9 +228,17 @@ export class AgregarTransaccionPage implements OnInit {
   //Agregar Registro al CRUD
   AddTransaccion(){
     
-    this.crud.AgregarTransaccion(this.crud.transaccion.length+1,this.NameTransaccion,this.MontoTransaccion,
-    'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}])
+    if(this.crud.ActiveModificarTransaccion == false){
 
+      this.crud.AgregarTransaccion(this.crud.transaccion.length+1,this.NameTransaccion,this.MontoTransaccion,
+      'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}])
+    
+    }else{
+      console.log('Modificar Transaccion activado ! ')
+      this.crud.ModificarTransaccion(this.GetData.id,this.GetData.nombre,this.MontoTransaccion,'',this.GetData.fecha,'',this.GetData.tipo_transaccion,'',this.GetData.categoria)
+    }
+
+   
     this.GoHome();
 
   }
@@ -202,6 +267,8 @@ export class AgregarTransaccionPage implements OnInit {
     
     // Retroceder a page 'Home'
     this.router.navigate(['home'])
+    this.ResetData();
+    this.crud.ActiveModificarTransaccion = false;
 
   }
 
@@ -236,24 +303,18 @@ export class AgregarTransaccionPage implements OnInit {
 
   OptionGasto(){
 
-    this.colorGastos = 'danger'
-    this.colorIngresos = ''
-
     this.IconTransaccion = faCircleMinus;
-    document.getElementById("IconMontoTrans")?.setAttribute("style","color:red")
-    this.TipoTrans = "Gastos"
-
+    this.colorToolbar = 'danger'
   }
 
   OptionIngreso(){
 
-    this.colorGastos = ''
-    this.colorIngresos = 'success'
-
     this.IconTransaccion = faCirclePlus;
-    document.getElementById("IconMontoTrans")?.setAttribute("style","color:green")
-    this.TipoTrans = "Ingresos"
+    this.colorToolbar = 'success'
+  }
 
+  OptionInsumos(){
+    this.colorToolbar = 'secondary'
   }
 
   ResetData(){
