@@ -8,7 +8,7 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine, faMagnifyingGlassChart, faCalculator, faMoneyBill1Wave,
-  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCashRegister } from '@fortawesome/free-solid-svg-icons';
+  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCashRegister,  } from '@fortawesome/free-solid-svg-icons';
 
 import { HttpClient } from '@angular/common/http';
 
