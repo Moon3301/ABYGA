@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AgregarTransaccionPageRoutingModule } from './agregar-transaccion-routing.module';
+import { AgregarProductoPageRoutingModule } from './agregar-producto-routing.module';
 
-import { AgregarTransaccionPage } from './agregar-transaccion.page';
+import { AgregarProductoPage } from './agregar-producto.page';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -18,29 +18,19 @@ import {MatInputModule} from '@angular/material/input';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
-import { CalendarModule } from 'primeng/calendar';
-
-import { ButtonModule } from 'primeng/button';
-
-import {MatButtonModule} from '@angular/material/button';
-
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AgregarTransaccionPageRoutingModule,
+    AgregarProductoPageRoutingModule,
     FontAwesomeModule,
     MatTabsModule,
     MatSelectModule,
     MatInputModule,
     NzButtonModule,
-    CalendarModule,
-    ButtonModule,
-    MatButtonModule
-    
+
   ],
-  declarations: [AgregarTransaccionPage]
+  declarations: [AgregarProductoPage]
 })
-export class AgregarTransaccionPageModule {}
+export class AgregarProductoPageModule {}

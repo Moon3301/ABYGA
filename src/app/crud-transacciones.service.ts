@@ -18,9 +18,6 @@ export class CrudTransaccionesService {
 
   totalNetoPorFecha: { [fecha: string]: number } = {};
 
-  public listaIngresos = []
-  public listaGastos = []
-
   ActiveModificarTransaccion:any = false;
   DataTransaccion:any
 

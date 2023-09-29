@@ -1,0 +1,20 @@
+.photos-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto; /* Para permitir el desplazamiento horizontal si hay muchas fotos */
+  }
+  
+  .photo {
+    max-width: 100px; /* Ajusta el ancho máximo de cada foto según tus necesidades */
+    height: auto;
+    margin-right: 10px; /* Espacio entre las fotos */
+  }
+
+ 
+  
+  
+  
+  
+  
+  
+  

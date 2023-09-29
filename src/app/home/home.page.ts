@@ -7,12 +7,15 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
-  faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine, faMagnifyingGlassChart } from '@fortawesome/free-solid-svg-icons';
+  faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine, faMagnifyingGlassChart, faCalculator, faMoneyBill1Wave,
+  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCashRegister } from '@fortawesome/free-solid-svg-icons';
 
 import { HttpClient } from '@angular/common/http';
 
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+
+import { CrudProductosService } from '../crud-productos.service';
 
 @Component({
   selector: 'app-home',
@@ -57,6 +60,15 @@ export class HomePage implements OnInit {
   faScaleBalanced = faScaleBalanced;
   faChartLine = faChartLine;
   faMagnifyingGlassChart = faMagnifyingGlassChart;
+  faCalculator = faCalculator;
+  faMoneyBill1Wave = faMoneyBill1Wave
+  faWandMagic = faWandMagic
+  faCamera = faCamera
+  faCubesStacked = faCubesStacked
+  faBroom = faBroom
+  faBreadSlice = faBreadSlice
+  faPumpSoap = faPumpSoap
+  faCashRegister = faCashRegister
 
   //Variables indicadores
   id:any = 12;
@@ -65,23 +77,16 @@ export class HomePage implements OnInit {
   unidadDeFomento: number=0;
   ipc: number=0;
 
-  constructor(private router:Router, public crud:CrudTransaccionesService, public http: HttpClient) {}
+  constructor(private router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService) {}
 
   ngOnInit(){
-    
-    console.log(this.crud.transaccion)
-    this.http.get('https://mindicador.cl/api').subscribe((data: any) => {
-      this.dolar = data.dolar.valor;
-      this.unidadDeFomento = data.uf.valor;
-      this.ipc = data.ipc.valor;
-      this.dataLoaded = true;
-    });
 
+    console.log(this.crudP.productos)
+ 
   }
 
   ionViewWillEnter(){
-    console.log(this.crud.transaccion)
-    console.log(this.crud.transaccionesAgrupadas)
+    console.log(this.crudP.productos)
   }
 
   // Chart Donnut
@@ -143,5 +148,24 @@ export class HomePage implements OnInit {
     this.crud.GetModificarTransaccion(id);
     this.crud.ActiveModificarTransaccion = true;
   }
+
+  GetProducto(id:any){
+
+    this.crudP.GetModificarProducto(id);
+    this.crudP.ActiveModificarProducto = true;
+
+  }
+
+  GoPageProducto(){
+    this.router.navigate(['agregar-producto']);
+    this.confirm();
+  }
+
+  GoPageVentas(){
+    this.router.navigate(['venta-producto']);
+    
+  }
+
+  
 
 }

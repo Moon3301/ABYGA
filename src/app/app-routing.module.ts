@@ -12,13 +12,22 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: ':id',
-    loadChildren: () => import('./agregar-transaccion/agregar-transaccion.module').then( m => m.AgregarTransaccionPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+  {
+    path: 'agregar-producto',
+    loadChildren: () => import('./agregar-producto/agregar-producto.module').then( m => m.AgregarProductoPageModule)
+  },
+  {
+    path: 'venta-producto',
+    loadChildren: () => import('./venta-producto/venta-producto.module').then( m => m.VentaProductoPageModule)
+  },
+  {
+    path: ':id',
+    loadChildren: () => import('./agregar-transaccion/agregar-transaccion.module').then( m => m.AgregarTransaccionPageModule)
+  },
+  
 
   
 

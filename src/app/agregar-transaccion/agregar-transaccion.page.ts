@@ -7,9 +7,10 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
-  faEllipsis, faClock, faList,faBarcode, faImage} from '@fortawesome/free-solid-svg-icons';
+  faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave, faWandMagic} from '@fortawesome/free-solid-svg-icons';
   
-  import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+
 
 @Component({
   selector: 'app-agregar-transaccion',
@@ -48,6 +49,10 @@ export class AgregarTransaccionPage implements OnInit {
   faList = faList;
   faBarcode = faBarcode;
   faImage = faImage;
+  faMagnifyingGlass = faMagnifyingGlass;
+  faCalculator = faCalculator;
+  faMoneyBill1Wave = faMoneyBill1Wave
+  faWandMagic = faWandMagic
 
   // Camera
 
@@ -103,7 +108,9 @@ export class AgregarTransaccionPage implements OnInit {
 
   selected:any
 
-  constructor(private router:Router, private crud:CrudTransaccionesService,private activatedRouter: ActivatedRoute) { }
+  CodeData:any
+
+  constructor(private router:Router, private crud:CrudTransaccionesService,private activatedRouter: ActivatedRoute,  ) { }
 
   // Variables dinamicas para categoria
 
@@ -171,7 +178,6 @@ export class AgregarTransaccionPage implements OnInit {
       // PENDIENTE COMPLETAR TODOS LOS DATOS (name,monto,categoria,etc)
       this.MontoTransaccion = this.GetData.monto
 
-
       console.log(this.GetData)
     }
     
@@ -199,24 +205,6 @@ export class AgregarTransaccionPage implements OnInit {
     if(this.TipoTrans == 'Egresos'){
       this.OptionGasto();
     }
-    if(this.TipoTrans == 'Insumos'){
-      this.OptionInsumos();
-    }
-
-  }
-
-  public async NewPhoto(){
-
-    const fotoCapturada = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-      quality: 100
-      
-    })
-
-    if (fotoCapturada.webPath) {
-      this.photos.push(fotoCapturada.webPath);
-    }
 
   }
 
@@ -238,7 +226,6 @@ export class AgregarTransaccionPage implements OnInit {
       this.crud.ModificarTransaccion(this.GetData.id,this.GetData.nombre,this.MontoTransaccion,'',this.GetData.fecha,'',this.GetData.tipo_transaccion,'',this.GetData.categoria)
     }
 
-   
     this.GoHome();
 
   }
@@ -296,7 +283,6 @@ export class AgregarTransaccionPage implements OnInit {
     this.IdCat = id
 
     // Asginar id a la subcategoria
-
     this.IdSubCat = idSub
 
   }
@@ -311,10 +297,6 @@ export class AgregarTransaccionPage implements OnInit {
 
     this.IconTransaccion = faCirclePlus;
     this.colorToolbar = 'success'
-  }
-
-  OptionInsumos(){
-    this.colorToolbar = 'secondary'
   }
 
   ResetData(){

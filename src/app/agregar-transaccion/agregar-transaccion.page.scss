@@ -34,4 +34,12 @@
   #datetime .datetime-text {
     display: none;
   }
+
+  body {
+    font-family: var(--highlight-bg);
+  }
+
+  .expanded-calendar {
+     width: 100% !important;
+  }
   

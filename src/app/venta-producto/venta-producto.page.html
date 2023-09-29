@@ -1,0 +1,177 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="scan()"><fa-icon slot="start" [icon]=faBarcode class="fa-xl"></fa-icon></ion-button>
+      <ion-button (click)="scan()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+
+      
+      <button nz-button (click)="showModal()"><span>Show Modal</span></button>
+    
+    </ion-buttons>
+
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <ng-container *nzModalContent>
+        <p>Content one</p>
+        <p>Content two</p>
+        <p>Content three</p>
+      </ng-container>
+    </nz-modal>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+
+        <ion-col size="6" *ngFor="let producto of crudP.productos">
+          <div *ngFor="let categoria of producto.categoria">
+            <ion-card (click)="AgregarAlCarro(producto)">
+              <div *ngIf="productosAgrupados[producto.id]">
+                <nz-badge [nzCount]="productosAgrupados[producto.id].cantidad"></nz-badge>
+              </div>
+              
+              <div style="display: flex; flex-direction: column; align-items: center; text-align: center; ">
+
+                <ion-img [src]="producto.imagen" style="width: 180px; height: 180px;"></ion-img>
+
+              </div>
+              
+              <ion-card-header>
+                
+                <ion-row>
+                  <ion-col size="9">
+                    <ion-row>
+                      <ion-card-title  style="font-size: 15px;" >{{producto.nombre}}</ion-card-title>
+                    </ion-row>
+                    
+                    <ion-row>
+                      <ion-card-subtitle style="font-size: 12px;">Stock: {{producto.stock}}</ion-card-subtitle>
+                    </ion-row>
+                    
+                  </ion-col>
+
+                  <ion-col size="3" style="display: flex; justify-content: center; align-items: center;">
+                    
+                  </ion-col>
+
+                </ion-row>
+                
+              </ion-card-header>
+            
+              <ion-card-content>
+
+                <ion-row>
+                  <ion-label style="font-size: 10px;">Precio: {{producto.precio}}</ion-label>
+                </ion-row>
+
+                <ion-row>
+                  <ion-label style="font-size: 10px;">{{categoria.nombre}}</ion-label> 
+                </ion-row>
+
+                <ion-row>
+                  <ion-label style="font-size: 10px;" >Estado:{{producto.estado}}</ion-label>
+                </ion-row>
+
+              </ion-card-content>
+            </ion-card>
+          </div>
+         
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block" fill="outline" color="warning" (click)="setOpenCategoria(true)">
+    
+    <ion-label style="margin-right: 20px;" >Insumos:{{CarroCompras.length}}</ion-label>
+     
+    <ion-label style="margin-left: 20px;" >Total: {{totalVenta}} </ion-label>
+     
+  </ion-button>
+
+  <ion-modal [isOpen]="isModalOpenCategoria">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+    
+          <ion-buttons slot="start">
+            <ion-button (click)="setOpenCategoria(false)">Close</ion-button>
+          </ion-buttons>
+
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpenCategoria(false)">Save</ion-button>
+          </ion-buttons>
+
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-grid *ngFor="let productoId of productosAgrupados | keys">
+          <ion-row style="border: 0.5px solid grey; border-radius: 15px;" >
+
+            <ion-col size="2" style="display:flex; justify-content: center; align-items: center;">
+              <b style="font-size: 20px;">X{{ productosAgrupados[productoId].cantidad }}</b>
+            </ion-col>
+
+            <ion-col size="5">
+
+              <ion-row >
+                <p>{{ productosAgrupados[productoId].nombre }}</p>
+              </ion-row>
+
+              <ion-row >
+                <p style="color: grey;">${{ productosAgrupados[productoId].valorUnitario }}</p>
+              </ion-row>
+
+            </ion-col>
+
+            <ion-col size="3" style="display:flex; justify-content: center; align-items: center;">
+              <b style="font-size: 20px;">${{ productosAgrupados[productoId].total }}</b>
+            </ion-col>
+            
+            <ion-col size="2" style="display:flex; justify-content: center; align-items: center;">
+              <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
+                <ion-icon name="settings-outline"></ion-icon>
+              </button>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+
+      </ion-content>
+
+      <ion-footer>
+
+        <ion-row>
+
+          <ion-col size="4">
+            <ion-button expand="block" fill="outline" color="primary">Opciones</ion-button>
+          </ion-col>
+
+          <ion-col size="8">
+            <ion-button expand="block" fill="outline" color="warning" (click)="setOpenCategoria(false)">
+    
+              <ion-label style="margin-right: 20px;" >Insumos:{{CarroCompras.length}}</ion-label>
+               
+              <ion-label style="margin-left: 20px;" >Total: {{totalVenta}} </ion-label>
+               
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+
+
+</ion-footer>

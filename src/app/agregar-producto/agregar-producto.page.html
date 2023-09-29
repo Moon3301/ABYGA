@@ -1,0 +1,138 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-card>
+    <ion-list>
+      <!-- Codigo   -->
+      <ion-row>
+        <ion-col size="9">
+          <ion-input [(ngModel)]="code" label="Codigo" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
+        </ion-col>
+
+        <ion-col size="3" style="display:flex; justify-content: center; align-items: center;">
+          <button  style="margin-right: 5px;" (click)="MakeCode()" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon [icon]=faWandMagic class="fa-xl"  ></fa-icon></button>
+              
+            <button  style="margin-left: 5px;" [disabled]="!isSupported" (click)="scanCode()" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon  [icon]=faBarcode class="fa-xl"></fa-icon></button>
+        </ion-col>
+      </ion-row>
+        
+      <!-- Nombre   -->
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-input [(ngModel)]="nombreProducto"  label="Nombre" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
+          </ion-col>
+        </ion-row>
+      
+      <!-- Precio y Costo  -->
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-input [(ngModel)]="precioProducto" type="number"  label="Precio" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
+          </ion-col >
+
+          <ion-col size="6">
+            <ion-input [(ngModel)]="costoProducto" type="number" label="Costo" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
+          </ion-col>
+        </ion-row>
+
+      <!-- Stock y Unidad de medida  -->
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-input [(ngModel)]="cantidadProducto" label="Stock" type="number" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-select label="Vender por" label-placement="floating" fill="outline" [value]="UnidadMedida">
+              <ion-select-option value="Unidad">Unidad</ion-select-option>
+              <ion-select-option value="Litro">Litro</ion-select-option>
+              <ion-select-option value="Kilo">Kilo</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+      <!-- Categoria  -->
+      <ion-card >
+        <ion-item expand="block" (click)="setOpenCategoria(true)" >
+
+          <ion-label slot="start" >{{nombreCategoria}}</ion-label>
+  
+          <button slot="end" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon   [icon]=iconCategoria class="fa-xl"  ></fa-icon></button>
+          
+          <ion-modal [isOpen]="isModalOpenCategoria">
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+            
+                  <ion-buttons slot="start">
+                    <ion-button (click)="setOpenCategoria(false)">Close</ion-button>
+                  </ion-buttons>
+    
+                  <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
+    
+                  <ion-buttons slot="end">
+                    <ion-button (click)="setOpenCategoria(false)">Save</ion-button>
+                  </ion-buttons>
+    
+                </ion-toolbar>
+              </ion-header>
+              <ion-content class="ion-padding">
+      
+                <ion-grid>
+                  <ion-list *ngFor="let item of ArrayCategoriaProducto">
+  
+                    <ion-item (click)="ChangeCategoria(item.id,item.nombre,item.icon)">
+                      
+                      <ion-label style="margin-left: 20px;">{{item.nombre}}</ion-label>
+  
+                      <button slot="start" style="margin-right: 20px;" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon 
+                      slot="start" [icon]=item.icon class="fa-xl"></fa-icon></button>
+                      
+                    </ion-item>
+    
+                  </ion-list>
+                </ion-grid>
+  
+              </ion-content>
+            </ng-template>
+          </ion-modal>
+          
+        </ion-item>
+      </ion-card>
+      
+
+      <br>
+
+      <ion-card style="height: 80px; border: 1px dashed white; display: flex; justify-content: center; align-items: center;">
+        <button (click)="GetPhoto()" style="margin-right: 10px;" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon slot="start" [icon]=faImage class="fa-xl"></fa-icon></button>
+        <button (click)="NewPhoto()" style="margin-left: 10px;" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon slot="start" [icon]=faCamera class="fa-xl"></fa-icon></button>
+      </ion-card>
+
+      <br>
+
+      <ion-card style="height: 150px; border: 1px dashed white;">
+        <ion-card-content>
+          <div class="photos-container">
+            <img *ngFor="let photo of photos" [src]="photo" alt="Foto" class="photo">
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-list>
+  </ion-card>
+
+</ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button color="success" (click)=AddProducto()>
+    <ion-icon name="checkmark-done-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

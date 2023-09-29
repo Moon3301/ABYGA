@@ -11,7 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NgChartsModule } from 'ng2-charts';
 
-
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   imports: [
@@ -21,7 +21,8 @@ import { NgChartsModule } from 'ng2-charts';
     HomePageRoutingModule,
     MatTabsModule,
     FontAwesomeModule,
-    NgChartsModule
+    NgChartsModule,
+    NzButtonModule
 
   ],
   declarations: [HomePage]

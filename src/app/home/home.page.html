@@ -15,36 +15,7 @@
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title></ion-title>
-      <ion-button id="click-trigger" slot="end" fill="outline"><fa-icon [icon]="faMagnifyingGlassChart" class="fa-l"></fa-icon></ion-button>
-        <ion-popover trigger="click-trigger" triggerAction="click">
-          <ng-template>
-            <ion-content class="ion-padding"> 
-              <ion-item>
-                <fa-icon [icon]="faDollar" class="fa-xl" slot="start"></fa-icon>
-                <ion-label slot="end"> 
-                      USD: {{dolar}}
-                </ion-label>
-      
-              </ion-item>
-      
-              <ion-item>
-                <fa-icon [icon]="faScaleBalanced" class="fa-l" slot="start"></fa-icon>
-                <ion-label slot="end" >
-                  UF:{{unidadDeFomento}}
-                </ion-label>
-      
-              </ion-item>
-              <ion-item>
-                <fa-icon [icon]="faChartLine" class="fa-l" slot="start"></fa-icon>
-                <ion-label slot="end">
-                  IPC:{{ipc}}
-                </ion-label>
-      
-              </ion-item>   
-            
-            </ion-content>
-          </ng-template>
-        </ion-popover>
+        
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
@@ -119,16 +90,79 @@
         
       </mat-tab>
 
-      <mat-tab label="INVENTARIO">  
+      <mat-tab label="INVENTARIO"> 
+
+        <ion-card>
+          <ion-grid>
+            <ion-row>
+
+              <ion-col size="6" *ngFor="let producto of crudP.productos">
+                <div *ngFor="let categoria of producto.categoria">
+                  <ion-card style="border-radius: 15px;" #button [routerLink]="['/agregar-producto']" (click)="GetProducto(producto.id)">
+                    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; ">
+
+                      <ion-img [src]="producto.imagen" style="width: 180px; height: 180px;"></ion-img>
+
+                    </div>
+                    
+                    <ion-card-header>
+                      
+                      <ion-row>
+                        <ion-col size="9">
+                          <ion-row>
+                            <ion-card-title  style="font-size: 15px;" >{{producto.nombre}}</ion-card-title>
+                          </ion-row>
+                          
+                          <ion-row>
+                            <ion-card-subtitle style="font-size: 12px;">Stock: {{producto.stock}}</ion-card-subtitle>
+                          </ion-row>
+                          
+                        </ion-col>
+
+                        <ion-col size="3" style="display: flex; justify-content: center; align-items: center;">
+                          <button  nz-button nzType="primary" nzSize="small" nzShape="circle"><fa-icon slot="start" [icon]=categoria.icon class="fa-l"  ></fa-icon></button>
+                        </ion-col>
+
+                      </ion-row>
+                      
+                    </ion-card-header>
+                  
+                    <ion-card-content>
+
+                      <ion-row>
+                        <ion-label style="font-size: 10px;">Precio: {{producto.precio}}</ion-label>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-label style="font-size: 10px;">{{categoria.nombre}}</ion-label> 
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-label style="font-size: 10px;" >Estado:{{producto.estado}}</ion-label>
+                      </ion-row>
+
+                    </ion-card-content>
+                  </ion-card>
+                </div>
+               
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+
+
+
         
       </mat-tab>
     </mat-tab-group>
     
+
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
       <ion-fab-button color="danger" id="open-modal">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
+
 
     <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
       <ng-template>
@@ -138,14 +172,12 @@
               <ion-button (click)="cancel()">Cancel</ion-button>
             </ion-buttons>
             <ion-title style="text-align: center;">Transacciones</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-            </ion-buttons>
+            
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
           
-          <ion-card color="medium" #button [routerLink]="['/','Ingresos']" (click)="confirm()">
+          <ion-card color="success" #button [routerLink]="['/','Ingresos']" (click)="confirm()">
             <ion-card-header>
               <ion-card-title>Ingresos</ion-card-title>
               <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
@@ -154,7 +186,7 @@
             <ion-card-content> Card Content </ion-card-content>
           </ion-card>
           <p></p>
-          <ion-card color="light" #button [routerLink]="['/','Egresos']" (click)="confirm()">
+          <ion-card color="danger" #button [routerLink]="['/','Egresos']" (click)="confirm()">
             <ion-card-header>
               <ion-card-title>Egresos</ion-card-title>
               <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
@@ -163,13 +195,40 @@
             <ion-card-content> Card Content </ion-card-content>
           </ion-card>
           <p></p>
-          <ion-card color="medium" #button [routerLink]="['/','Insumos']" (click)="confirm()">
+          <ion-card color="secondary" [routerLink]="['/agregar-producto']" (click)="confirm()">
             <ion-card-header>
               <ion-card-title>Insumos</ion-card-title>
               <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
             </ion-card-header>
           
             <ion-card-content> Card Content </ion-card-content>
+          </ion-card>
+          <p></p>
+          <ion-card color="warning" [routerLink]="['/venta-producto']" (click)="confirm()">
+
+            <ion-row>
+
+              <ion-col size="8">
+
+                <ion-card-title>Ventas</ion-card-title>
+
+                <ion-card-header>
+                  <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+
+
+
+                </ion-card-header>
+            
+              <ion-card-content> Card Content </ion-card-content>
+
+              </ion-col>
+
+              <ion-col size="4">
+                
+              </ion-col>
+
+            </ion-row>
+            
           </ion-card>
 
         </ion-content>
