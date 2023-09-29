@@ -8,7 +8,8 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine, faMagnifyingGlassChart, faCalculator, faMoneyBill1Wave,
-  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCashRegister,  } from '@fortawesome/free-solid-svg-icons';
+  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCashRegister, faBoxes, faArrowRightArrowLeft, faFileCircleCheck,
+  faChartColumn, faGear} from '@fortawesome/free-solid-svg-icons';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -24,6 +25,7 @@ import { CrudProductosService } from '../crud-productos.service';
 })
 export class HomePage implements OnInit {
   public alertButtons = ['OK'];
+  nombreUsuario:any="Gabriela";
 
   @ViewChild(IonModal)
   modal!: IonModal;
@@ -69,6 +71,12 @@ export class HomePage implements OnInit {
   faBreadSlice = faBreadSlice
   faPumpSoap = faPumpSoap
   faCashRegister = faCashRegister
+  faBoxes = faBoxes
+  faArrowRightArrowLeft = faArrowRightArrowLeft
+  faFileCircleCheck = faFileCircleCheck
+  faChartColumn = faChartColumn
+  faGear = faGear
+
 
   //Variables indicadores
   id:any = 12;
