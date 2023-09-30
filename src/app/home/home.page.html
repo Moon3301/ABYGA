@@ -24,7 +24,7 @@
       <br>
       
   
-      <ion-item>
+      <ion-item #button [routerLink]="['/historial-transacciones']">
         <fa-icon [icon]="faArrowRightArrowLeft" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Transacciones
@@ -64,23 +64,6 @@
     </ion-list>
 
     
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </ion-content>
 </ion-menu>
 <div class="ion-page" id="main-content">
@@ -124,12 +107,12 @@
 
         <div *ngFor="let fecha of crud.getFechasAgrupadas()">
           
-          <ion-item style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
+          <ion-card style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
             <ion-label slot="start" style="margin-top: 4px;">{{ fecha }}</ion-label>
            <!-- <ion-label slot="end" style="margin-top: 4px;">MONTO ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Ingresos') | currency:'USD':'symbol':'1.2-2' }}
               / ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Gastos') | currency:'USD':'symbol':'1.2-2' }}</ion-label> -->
               <ion-label slot="end" style="margin-top: 4px;">MONTO: {{crud.totalNetoPorFecha[fecha] | currency:'USD':'symbol':'1.2-2'}}</ion-label>
-          </ion-item>
+          </ion-card>
 
           <div *ngFor="let transaccion of crud.transaccionesAgrupadas[fecha]">
             <div *ngFor="let categoria of transaccion.categoria">

@@ -1,0 +1,9 @@
+.centered-container{
+
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 100vh; /* Asegura que el div ocupe toda la altura de la pantalla */
+  
+}

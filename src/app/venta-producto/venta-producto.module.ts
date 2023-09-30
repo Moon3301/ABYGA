@@ -20,6 +20,9 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
+import {MatIconModule} from '@angular/material/icon';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     MatButtonModule,
     MatBadgeModule,
     NzBadgeModule,
-    NzModalModule
+    NzModalModule,
+    MatIconModule
   ],
   declarations: [VentaProductoPage, KeysPipe]
 })

@@ -5,7 +5,7 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave,
-  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap} from '@fortawesome/free-solid-svg-icons';
+  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCreditCard, faMoneyCheck, faMoneyCheckDollar, faCheck} from '@fortawesome/free-solid-svg-icons';
 
 import { Producto } from '../producto';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -63,12 +63,19 @@ export class VentaProductoPage implements OnInit {
    faBroom = faBroom
    faBreadSlice = faBreadSlice
    faPumpSoap = faPumpSoap
+   faCreditCard = faCreditCard
+   faMoneyCheck = faMoneyCheck
+   faMoneyCheckDollar = faMoneyCheckDollar
+   faCheck = faCheck
 
 
   CarroCompras: Producto[] = []
   totalVenta:any = 0
+  CantidadTotal:any = 0;
 
   isModalOpenCategoria = false;
+  isModalVentaRealizada = false;
+  isModalTicket = false;
 
   productosAgrupados: { [id: string]: { nombre: string; cantidad: number; valorUnitario: number; total: number } } = {};
 
@@ -121,6 +128,9 @@ export class VentaProductoPage implements OnInit {
   if (this.productosAgrupados[idProducto]) {
     // Si el producto ya está en el carro, actualiza la cantidad, el total y el valor unitario.
     this.productosAgrupados[idProducto].cantidad++;
+
+    this.CantidadTotal++;
+
     this.productosAgrupados[idProducto].total += producto.precio;
   } else {
     // Si el producto no está en el carro, agrégalo al registro.
@@ -130,6 +140,8 @@ export class VentaProductoPage implements OnInit {
       valorUnitario: producto.precio,
       total: producto.precio,
     };
+
+    this.CantidadTotal++;
   }
 
   // Agrega el producto al carro de compras.
@@ -137,6 +149,9 @@ export class VentaProductoPage implements OnInit {
 
   // Actualiza el total de la venta.
   this.totalVenta += producto.precio;
+
+  // Actualiza la cantidad de productos.s
+  
 
   console.log(producto);
 
@@ -146,11 +161,75 @@ export class VentaProductoPage implements OnInit {
     this.isModalOpenCategoria = isOpen;
   }
 
-  GroupProductos(){
+  setOpenVentaRealizada(isOpen:boolean){
+    this.isModalVentaRealizada = isOpen;
+    this.handleOk();
+  }
 
+  setOpenTicket(isOpen:boolean){
 
+    this.isModalTicket = isOpen;
 
+  }
+
+  ModificarCantidad(tipo:any, producto:any){
+
+    if(tipo == 'aumentar'){
+
+      producto.cantidad ++;
+      this.CantidadTotal ++;
+
+      producto.total += producto.valorUnitario;
+      this.totalVenta += producto.valorUnitario;
+
+    }
+
+    if(tipo == 'disminuir'){
+
+      producto.cantidad --;
+      this.CantidadTotal --;
+
+      producto.total -= producto.valorUnitario;
+      this.totalVenta -= producto.valorUnitario;
+    }
     
   }
+
+  // LUEGO DE REALIZAR LA LOGICA PASAR FUNCION AL CRUD PRODUCTOS
+  realizarVenta(){
+
+    for (const key in this.productosAgrupados) {
+      if (this.productosAgrupados.hasOwnProperty(key)) {
+        const producto = this.productosAgrupados[key];
+
+        const productoInventario = this.crudP.MostrarProducto(Number(key))
+
+        productoInventario.stock -= producto.cantidad
+
+        console.log(`Key: ${key}, Nombre: ${producto.nombre}, Cantidad: ${producto.cantidad}, Valor Unitario: ${producto.valorUnitario}, Total: ${producto.total}`);
+      }
+    }
+
+    
+
+    this.setOpenVentaRealizada(true);
+
+    console.log(this.crudP.productos)
+
+  }
+
+  nuevaVenta(){
+
+    this.setOpenVentaRealizada(false);
+    this.setOpenCategoria(false);
+
+    this.productosAgrupados = {};
+    this.CantidadTotal = 0
+    this.totalVenta = 0
+    this.CarroCompras = []
+
+  }
+
+
 
 }

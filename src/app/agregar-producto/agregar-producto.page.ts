@@ -178,6 +178,7 @@ export class AgregarProductoPage implements OnInit {
 
   async scanCode() {
     // Check camera permission
+
     await BarcodeScanner.requestPermissions();
 
     // Check if the Google ML Kit barcode scanner is available
@@ -267,7 +268,7 @@ export class AgregarProductoPage implements OnInit {
 
       const fechActual = new Date();
 
-      this.crudP.agregarProducto(this.code,this.nombreProducto,this.precioProducto,this.costoProducto,
+      this.crudP.agregarProducto(Number(this.code),this.nombreProducto,this.precioProducto,this.costoProducto,
       this.cantidadProducto,this.UnidadMedida,this.fechActual,fechActual,this.photos,
       'Disponible','',[{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
 

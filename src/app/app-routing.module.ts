@@ -23,16 +23,20 @@ const routes: Routes = [
     path: 'venta-producto',
     loadChildren: () => import('./venta-producto/venta-producto.module').then( m => m.VentaProductoPageModule)
   },
-
   {
     path: 'menuopciones',
     loadChildren: () => import('./menuopciones/menuopciones.module').then( m => m.MenuopcionesPageModule)
   },
-  
+  {
+    path: 'historial-transacciones',
+    loadChildren: () => import('./historial-transacciones/historial-transacciones.module').then( m => m.HistorialTransaccionesPageModule)
+  },
   {
     path: ':id',
     loadChildren: () => import('./agregar-transaccion/agregar-transaccion.module').then( m => m.AgregarTransaccionPageModule)
   },
+  
+
   
 
   

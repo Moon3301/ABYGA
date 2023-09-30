@@ -81,6 +81,8 @@ export class HomePage implements OnInit {
   //Variables indicadores
   id:any = 12;
   dataLoaded = false;
+
+  
   dolar: number=0;
   unidadDeFomento: number=0;
   ipc: number=0;
