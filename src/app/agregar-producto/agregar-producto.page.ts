@@ -141,9 +141,18 @@ export class AgregarProductoPage implements OnInit {
       console.log(this.GetData)
     }
 
-    BarcodeScanner.isSupported().then((result) => {
-      this.isSupported = result.supported;
-    });
+
+    // Verifica que la plataforma es compatible con el Scanner
+    
+    try{
+      BarcodeScanner.isSupported().then((result) => {
+        this.isSupported = result.supported;
+      });
+    }catch(error){
+
+      console.log('Plataforma no compatible con scanner. Codigo: '+error);
+    }
+    
 
   }
 

@@ -7,3 +7,26 @@
   height: 100vh; /* Asegura que el div ocupe toda la altura de la pantalla */
   
 }
+
+.selected {
+  border: 0.5px solid transparent;
+  border-color: blue;
+  background-color: rgba(0, 0, 255, 0.2);
+}
+
+.boton-container {
+  position: fixed;
+  bottom: 0;
+  left: 0; 
+  /* Opcional: ajusta la posición desde la izquierda si es necesario /
+  right: 0; / Opcional: ajusta la posición desde la derecha si es necesario /
+  background-color: white; / Opcional: agrega un fondo para los botones /
+  z-index: 1000; / Opcional: controla la superposición si es necesario /
+  padding: 10px; / Opcional: agrega relleno al contenedor */
+}
+
+.boton-enviar,
+.boton-compartir {
+  display: block;
+  margin-bottom: 10px; 
+}

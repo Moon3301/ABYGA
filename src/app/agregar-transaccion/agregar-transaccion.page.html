@@ -99,26 +99,28 @@
       
                   </ion-toolbar>
                 </ion-header>
+
                 <ion-content class="ion-padding">
         
-                  <ion-grid *ngIf="TipoTrans == 'Gastos'">
+                  <ion-grid *ngIf="TipoTrans == 'Egresos'">
                     <ion-list *ngFor="let item of ArrayCategoriasGastos">
       
-                      <ion-item>
+                      <ion-item style="text-align: center;">
                         <ion-label>{{item.name}}</ion-label>
                       </ion-item>
       
                       <ion-row>
                         <ion-col sizeSm="3" sizeMd="3" sizeLg="2" size="4" *ngFor="let sub of item.sub">
-      
-                          <ion-item >
-                            <div class="circular-button" style="margin: 0 auto;">
-                              <ion-button shape="round" color="danger" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
-                                <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
-                              </ion-button>
-                              <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
-                            </div>
-                          </ion-item>
+                          
+                          <ion-row style="display:flex; justify-content: center; align-items: center; ">
+                            <button style="color: rgba(244, 75, 75, 0.906);" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
+                              <fa-icon [icon]="sub.icon" class="fa-xl"></fa-icon>
+                            </button>
+                          </ion-row>
+
+                          <ion-row style="display:flex; justify-content: center; align-items: center;">
+                            <ion-label style="font-size: 10px; text-align: center;">{{sub.nameSub}}</ion-label>
+                          </ion-row>
                             
                         </ion-col>
                       </ion-row>
@@ -129,21 +131,22 @@
                   <ion-grid *ngIf="TipoTrans == 'Ingresos'">
                     <ion-list *ngFor="let item of ArrayCategoriasIngresos">
       
-                      <ion-item>
+                      <ion-item style="text-align: center;">
                         <ion-label>{{item.name}}</ion-label>
                       </ion-item>
       
                       <ion-row>
                         <ion-col sizeSm="3" sizeMd="3" sizeLg="2" size="4" *ngFor="let sub of item.sub">
       
-                          <ion-item>
-                            <div class="circular-button" style="margin: 0 auto;">
-                              <ion-button shape="round" color="success" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
-                                <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
-                              </ion-button>
-                              <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
-                            </div>
-                          </ion-item>
+                          <ion-row style="display:flex; justify-content: center; align-items: center;">
+                            <button style="color: rgb(56, 184, 64);" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
+                              <fa-icon [icon]="sub.icon" class="fa-xl"></fa-icon>
+                            </button>
+                          </ion-row>
+
+                          <ion-row style="display:flex; justify-content: center; align-items: center;">
+                            <ion-label style="font-size: 10px; text-align: center;">{{sub.nameSub}}</ion-label>
+                          </ion-row>
                             
                         </ion-col>
                       </ion-row>
@@ -218,7 +221,7 @@
             </ion-col>
 
             <ion-col size="11">
-              <ion-label>{{NombreCat}}</ion-label>
+              <ion-label >{{NombreCat}}</ion-label>
             </ion-col>
 
           </ion-row>
@@ -262,21 +265,22 @@
                   <ion-grid *ngIf="TipoTrans == 'Egresos'">
                     <ion-list *ngFor="let item of ArrayCategoriasGastos">
       
-                      <ion-item>
+                      <ion-item style="text-align: center;">
                         <ion-label>{{item.name}}</ion-label>
                       </ion-item>
       
                       <ion-row>
                         <ion-col sizeSm="3" sizeMd="3" sizeLg="2" size="4" *ngFor="let sub of item.sub">
       
-                          <ion-item >
-                            <div class="circular-button" style="margin: 0 auto;">
-                              <ion-button shape="round" color="danger" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
-                                <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
-                              </ion-button>
-                              <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
-                            </div>
-                          </ion-item>
+                          <ion-row style="display:flex; justify-content: center; align-items: center;">
+                            <button style="color: rgba(244, 75, 75, 0.906);" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
+                              <fa-icon [icon]="sub.icon" class="fa-xl"></fa-icon>
+                            </button>
+                          </ion-row>
+
+                          <ion-row style="display:flex; justify-content: center; align-items: center;">
+                            <ion-label style="font-size: 10px; text-align: center;">{{sub.nameSub}}</ion-label>
+                          </ion-row>
                             
                         </ion-col>
                       </ion-row>
@@ -287,22 +291,23 @@
                   <ion-grid *ngIf="TipoTrans == 'Ingresos'">
                     <ion-list *ngFor="let item of ArrayCategoriasIngresos">
       
-                      <ion-item>
-                        <ion-label>{{item.name}}</ion-label>
+                      <ion-item style="text-align: center;">
+                        <ion-label >{{item.name}}</ion-label>
                       </ion-item>
       
                       <ion-row>
                         <ion-col sizeSm="3" sizeMd="3" sizeLg="2" size="4" *ngFor="let sub of item.sub">
-      
-                          <ion-item>
-                            <div class="circular-button" style="margin: 0 auto;">
-                              <ion-button shape="round" color="success" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
-                                <fa-icon [icon]="sub.icon" class="fa-2xl"></fa-icon>
-                              </ion-button>
-                              <ion-label style="font-size: 10px;">{{sub.nameSub}}</ion-label>
-                            </div>
-                          </ion-item>
-                            
+                          
+                          <ion-row style="display:flex; justify-content: center; align-items: center;">
+                            <button style="color: rgb(56, 184, 64);" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
+                              <fa-icon [icon]="sub.icon" class="fa-xl"></fa-icon>
+                            </button>
+                          </ion-row>
+
+                          <ion-row style="display:flex; justify-content: center; align-items: center;">
+                            <ion-label style="font-size: 10px; text-align: center;">{{sub.nameSub}}</ion-label>
+                          </ion-row>
+
                         </ion-col>
                       </ion-row>
             
