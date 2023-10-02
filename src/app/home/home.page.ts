@@ -9,7 +9,7 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine, faMagnifyingGlassChart, faCalculator, faMoneyBill1Wave,
   faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCashRegister, faBoxes, faArrowRightArrowLeft, faFileCircleCheck,
-  faChartColumn, faGear} from '@fortawesome/free-solid-svg-icons';
+  faChartColumn, faGear,faStoreAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -76,13 +76,12 @@ export class HomePage implements OnInit {
   faFileCircleCheck = faFileCircleCheck
   faChartColumn = faChartColumn
   faGear = faGear
+  faStoreAlt = faStoreAlt
 
 
   //Variables indicadores
   id:any = 12;
   dataLoaded = false;
-
-  
   dolar: number=0;
   unidadDeFomento: number=0;
   ipc: number=0;
