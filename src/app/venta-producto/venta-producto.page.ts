@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { CrudProductosService } from '../crud-productos.service';
+import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave,
-  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCreditCard, faMoneyCheck, faMoneyCheckDollar, faCheck} from '@fortawesome/free-solid-svg-icons';
+  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCreditCard, faMoneyCheck, faMoneyCheckDollar, faCheck, faCashRegister} from '@fortawesome/free-solid-svg-icons';
 
 import { Producto } from '../producto';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -67,15 +68,29 @@ export class VentaProductoPage implements OnInit {
    faMoneyCheck = faMoneyCheck
    faMoneyCheckDollar = faMoneyCheckDollar
    faCheck = faCheck
+   faCashRegister = faCashRegister
 
 
   CarroCompras: Producto[] = []
   totalVenta:any = 0
   CantidadTotal:any = 0;
+  fechaActual:any
 
   isModalOpenCategoria = false;
   isModalVentaRealizada = false;
   isModalTicket = false;
+
+  // seleccionar boton metodo de pago
+
+  isSelectedEfectivo = false;
+  isSelectedDebito = false;
+  isSelectedCredito = false;
+  isSelectedCheque = false;
+  isSelectedOtros = false;
+  metodoPago:any
+  //
+
+  isOkButtonEnabled = true
 
   productosAgrupados: { [id: string]: { nombre: string; cantidad: number; valorUnitario: number; total: number } } = {};
 
@@ -87,9 +102,14 @@ export class VentaProductoPage implements OnInit {
   //Badge
   hidden = false;
 
-  constructor(private router:Router, public crudP:CrudProductosService) { }
+  constructor(private router:Router, public crudP:CrudProductosService, public crudT:CrudTransaccionesService) { }
 
   ngOnInit() {
+
+    // agregar transaccion 
+    this.fechaActual = new Date();
+    this.fechaActual = this.ConvertirFecha(this.fechaActual);
+    
   }
 
   showModal(): void {
@@ -119,6 +139,31 @@ export class VentaProductoPage implements OnInit {
 
   scan(){
 
+  }
+
+  seleccionarMetodoDePago(data:any){
+
+    this.isSelectedEfectivo = false;
+    this.isSelectedDebito = false;
+    this.isSelectedCredito = false;
+    this.isSelectedCheque = false;
+    this.isSelectedOtros = false;
+
+    if (data === 'Efectivo') {
+      this.isSelectedEfectivo = true;
+    } else if (data === 'Debito') {
+      this.isSelectedDebito = true;
+    } else if (data === 'Credito') {
+      this.isSelectedCredito = true;
+    } else if (data === 'Cheque') {
+      this.isSelectedCheque = true;
+    } else if (data === 'Otros') {
+      this.isSelectedOtros = true;
+    }
+
+
+    this.isOkButtonEnabled = false;
+    this.metodoPago = data;
   }
 
   AgregarAlCarro(producto:any){
@@ -198,19 +243,24 @@ export class VentaProductoPage implements OnInit {
   // LUEGO DE REALIZAR LA LOGICA PASAR FUNCION AL CRUD PRODUCTOS
   realizarVenta(){
 
+    this.isOkButtonEnabled = false;
+
     for (const key in this.productosAgrupados) {
       if (this.productosAgrupados.hasOwnProperty(key)) {
+
         const producto = this.productosAgrupados[key];
 
+        // Descontar stock de producto vendido
         const productoInventario = this.crudP.MostrarProducto(Number(key))
 
         productoInventario.stock -= producto.cantidad
-
         console.log(`Key: ${key}, Nombre: ${producto.nombre}, Cantidad: ${producto.cantidad}, Valor Unitario: ${producto.valorUnitario}, Total: ${producto.total}`);
+
       }
+      
     }
 
-    
+    this.crudT.AgregarTransaccion(this.crudT.transaccion.length+1,'',this.totalVenta,'',this.fechaActual,'','Ingresos','',[{id:2,nombre:'Ventas',subCategoria:[{id:1,nombre:'Productos', icon:faCashRegister}]}])
 
     this.setOpenVentaRealizada(true);
 
@@ -228,6 +278,13 @@ export class VentaProductoPage implements OnInit {
     this.totalVenta = 0
     this.CarroCompras = []
 
+  }
+
+  ConvertirFecha(date:any): string{
+
+    const fecha = new Date(date);
+    return fecha.toLocaleDateString('es',{ weekday:'short',day:'2-digit', month:'long', year:'numeric'})
+    
   }
 
 

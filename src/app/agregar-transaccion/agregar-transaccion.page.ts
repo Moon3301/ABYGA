@@ -7,7 +7,7 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
-  faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave, faWandMagic} from '@fortawesome/free-solid-svg-icons';
+  faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave, faWandMagic, faCashRegister} from '@fortawesome/free-solid-svg-icons';
   
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
@@ -53,6 +53,7 @@ export class AgregarTransaccionPage implements OnInit {
   faCalculator = faCalculator;
   faMoneyBill1Wave = faMoneyBill1Wave
   faWandMagic = faWandMagic
+  faCashRegister = faCashRegister
 
   // Camera
 
@@ -140,7 +141,8 @@ export class AgregarTransaccionPage implements OnInit {
 
   ArrayCategoriasIngresos:any = [] = [
     {id:1,name:"Empleador", sub:[{id:1,nameSub:"Bono", icon:faMoneyBill},{id:2,nameSub:"Salario",icon:faMoneyBillTrendUp}]},
-    {id:2,name:"Otros", sub:[{id:1,nameSub:"Otros",icon:faEllipsis}]}
+    {id:2,name:"Ventas", sub:[{id:1,nameSub:"Productos",icon:faCashRegister}]},
+    {id:3,name:"Otros", sub:[{id:1,nameSub:"Otros",icon:faEllipsis}]}
 
   ]
 
@@ -166,7 +168,6 @@ export class AgregarTransaccionPage implements OnInit {
     {value: 'Efectivo', viewValue: 'Efectivo'},
     {value: 'Tarjeta', viewValue: 'Tarjeta'},
    
-
   ]
 
   ngOnInit() {
