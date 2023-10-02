@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   
   <div *ngFor="let fecha of crud.getFechasAgrupadas()">
-          
+  
     <ion-item style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
       <ion-label slot="start" style="margin-top: 4px;">{{ fecha }}</ion-label>
      <!-- <ion-label slot="end" style="margin-top: 4px;">MONTO ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Ingresos') | currency:'USD':'symbol':'1.2-2' }}
