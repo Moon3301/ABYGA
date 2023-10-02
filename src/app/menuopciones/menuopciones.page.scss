@@ -1,0 +1,40 @@
+/* Estilo para los botones */
+ion-button {
+    --border-radius: 20px; /* Bordes redondeados */
+    --background: linear-gradient(135deg, #3498db, #2980b9); /* Fondo con degradado */
+    --color: #fff; /* Color del texto */
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    --highlight-color-focused: transparent; /* Resaltar color al enfocar */
+    --highlight-color-activated: transparent; /* Resaltar color al activar */
+  }
+  
+  /* Hover effect para los botones */
+  ion-button:hover {
+    --background: linear-gradient(135deg, #2980b9, #3498db);
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilo para los subtítulos */
+  .subtitulo {
+    font-size: 14px; /* Tamaño del texto del subtítulo */
+    color: #555; /* Color del subtítulo */
+    margin-top: 10px; /* Margen superior para separar del botón */
+  }
+
+/* Estilo para el ion-list */
+ion-list {
+    background-color: #f0f0f0; /* Cambiar el color de fondo */
+    padding: 10px; /* Añadir un espacio de relleno */
+    border-radius: 8px; /* Agregar bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agregar sombra */
+    display: flex; /* Mostrar como flexbox */
+    flex-direction: column; /* Alinear verticalmente los elementos */
+    justify-content: center; /* Centrar verticalmente los elementos */
+  }
+  
+
+  
+  /* Estilo para el último ion-item (quitar la línea divisoria) */
+  ion-item:last-child {
+    border-bottom: none;
+  }
