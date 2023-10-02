@@ -161,7 +161,6 @@ export class VentaProductoPage implements OnInit {
       this.isSelectedOtros = true;
     }
 
-
     this.isOkButtonEnabled = false;
     this.metodoPago = data;
   }
