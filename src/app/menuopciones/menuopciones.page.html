@@ -8,57 +8,98 @@
 
 
 <ion-content class="ion-padding">
-
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Mi Negocio</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-list>
+    <ion-item #button (click) = "showModal()">
 
-    <ion-item>
-      <ion-button expand="full" color="primary"> <ion-icon slot="start" name="star"></ion-icon>
-        mi negocio</ion-button>
+      <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
+      <ion-label style="margin-left: 5px;" >Mi Negocio</ion-label>
 
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <p>modificarxdxd  </p>
+          <p>Content two</p>
+          <p>Content three</p>
+        </ng-container>
+      </nz-modal>
+        
+
+    </ion-item>
+    
+
+    <ion-item #button (click) = "ModalNotificaciones()" >
+      
+      <mat-icon style="margin-right: 5px ;">notifications</mat-icon>
+      <ion-label style="margin-left: 5px;" >Notificaciones</ion-label>
+
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancelNotificacion()" (nzOnOk)="handleOkNotificacion()">
+        
+        <ng-container *nzModalContent>
+          <p>modificarxdxd  </p>
+          <p>Content two</p>
+          <p>Content three</p>
+        </ng-container>
+      </nz-modal>
+      
     </ion-item>
 
     <ion-item>
-      <ion-button expand="full" color="primary">NOTIFICACIONES</ion-button>
+      <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
+      <ion-label style="margin-left: 5px;" >Mi Negocio</ion-label>
+
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <p>modificarxdxd  </p>
+          <p>Content two</p>
+          <p>Content three</p>
+        </ng-container>
+      </nz-modal>
+      
     </ion-item>
 
     <ion-item>
-      <ion-button expand="full" color="primary">PERSONALIZACIÓN Y APARIENCIA</ion-button>
+      <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
+      <ion-label style="margin-left: 5px;" >Mi Negocio</ion-label>
+
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <p>modificarxdxd  </p>
+          <p>Content two</p>
+          <p>Content three</p>
+        </ng-container>
+      </nz-modal>
+      
     </ion-item>
 
     <ion-item>
-      <ion-label class="subtitulo">BASES DE DATOS</ion-label>
+      <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
+      <ion-label style="margin-left: 5px;" >Mi Negocio</ion-label>
+
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <p>modificarxdxd  </p>
+          <p>Content two</p>
+          <p>Content three</p>
+        </ng-container>
+      </nz-modal>
+      
     </ion-item>
 
     <ion-item>
-      <ion-button expand="full" color="primary">RESPALDO Y RESTAURACIÓN</ion-button>
-    </ion-item>
+      <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
+      <ion-label style="margin-left: 5px;" >Mi Negocio</ion-label>
 
-    <ion-item>
-      <ion-label class="subtitulo">DATOS</ion-label>
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <p>modificarxdxd  </p>
+          <p>Content two</p>
+          <p>Content three</p>
+        </ng-container>
+      </nz-modal>
+      
     </ion-item>
-
-    <ion-item>
-      <ion-button expand="full" color="primary">ELIMINAR TODOS LOS DOCUMENTOS</ion-button>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="subtitulo">ACERCA DE</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-button expand="full" color="primary">VERSIÓN DE LA APLICACIÓN</ion-button>
-    </ion-item>
-
-    <!-- Los otros elementos que tenías antes -->
 
   </ion-list>
 
 
-
+  
 </ion-content>
