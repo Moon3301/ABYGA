@@ -9,144 +9,116 @@ import { Component, OnInit } from '@angular/core';
 
 export class MenuopcionesPage implements OnInit {
 
-  isVisibleNegocio = false;
-  isVisibleNotificacion = false;
-  isVisibleMiticket = false;
-  isVisiblePersonalizacion = false;
-  isVisibleRespaldo = false;
-  isVisibleVersionApp = false;
-  isVisibleInfo = false;
-  
-  
-
+  isVisible = false;
 
   currentModal: string = ''; // Declarar la propiedad currentModal
 
    //Icons font-awesome
    
    
-
-
   constructor() { }
 
   ngOnInit() {
   }
 
   showModalNegocio(): void {
-    this.isVisibleNegocio= true;
+    this.isVisible = true;
   }
-  
-  
-  // showModal(): void {
-  
-  // this.isVisible = true;
-  // }
 
   handleOkNegocio(): void {
     console.log('Button ok clicked!');
-    this.isVisibleNegocio = false;
+    this.isVisible = false;
   }
 
   handleCancelNegocio(): void {
     console.log('Button cancel clicked!');
-    this.isVisibleNegocio = false;
+    this.isVisible = false;
   }
 
   //Modal notificaciones
 
   ModalNotificaciones(): void {
-    this.isVisibleNotificacion = true;
+    this.isVisible = true;
   }
 
   handleOkNotificacion(): void {
     console.log('Button ok clicked!');
-    this.isVisibleNotificacion = false;
+    this.isVisible = false;
   }
 
   handleCancelNotificacion(): void {
     console.log('Button cancel clicked!');
-    this.isVisibleNotificacion = false;
+    this.isVisible = false;
   }
 
-//Modal Miticket
   ModalMiticket(): void {
-    this.isVisibleMiticket = true;
+    this.isVisible = true;
   }
 
   handleOkMiticket(): void {
     console.log('Button ok clicked!');
-    this.isVisibleMiticket = false;
+    this.isVisible = false;
   }
 
   handleCancelMiticket(): void {
     console.log('Button cancel clicked!');
-    this.isVisibleMiticket = false;
+    this.isVisible = false;
   }
 
-  //ModalPersonalizacion
-
   ModalPersonalizacion(): void {
-    this.isVisiblePersonalizacion = true;
+    this.isVisible = true;
   }
 
   handleOkPersonalizacion(): void {
     console.log('Button ok clicked!');
-    this.isVisiblePersonalizacion = false;
+    this.isVisible = false;
   }
 
   handleCancelPersonalizacion(): void {
     console.log('Button cancel clicked!');
-    this.isVisiblePersonalizacion = false;
+    this.isVisible = false;
   }
 
-  //ModalRespaldo
-
-
   ModalRespaldo(): void {
-    this.isVisibleRespaldo = true;
+    this.isVisible = true;
   }
 
   handleOkRespaldo(): void {
     console.log('Button ok clicked!');
-    this.isVisibleRespaldo = false;
+    this.isVisible = false;
   }
 
   handleCancelRespaldo(): void {
     console.log('Button cancel clicked!');
-    this.isVisibleRespaldo = false;
+    this.isVisible = false;
   }
 
-  //ModalVersionApp
-
   ModalVersionApp(): void {
-    this.isVisibleVersionApp = true;
+    this.isVisible = true;
   }
 
   handleOkVersionApp(): void {
     console.log('Button ok clicked!');
-    this.isVisibleVersionApp = false;
+    this.isVisible = false;
   }
 
   handleCancelVersionApp(): void {
     console.log('Button cancel clicked!');
-    this.isVisibleVersionApp = false;
+    this.isVisible = false;
   } 
 
-  //ModalInfo
-
   ModalInfo(): void {
-    this.isVisibleInfo = true;
+    this.isVisible = true;
   }
 
   handleOkInfo(): void {
     console.log('Button ok clicked!');
-    this.isVisibleInfo = false;
+    this.isVisible = false;
   }
 
   handleCancelInfo(): void {
     console.log('Button cancel clicked!');
-    this.isVisibleInfo = false;
+    this.isVisible = false;
   }
-
 
 }
