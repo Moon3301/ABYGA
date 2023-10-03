@@ -7,13 +7,20 @@ import { IonicModule } from '@ionic/angular';
 import { MenuopcionesPageRoutingModule } from './menuopciones-routing.module';
 
 import { MenuopcionesPage } from './menuopciones.page';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MenuopcionesPageRoutingModule
+    MenuopcionesPageRoutingModule,
+    MatButtonModule,
+    MatIconModule,
+    NzModalModule
+
   ],
   declarations: [MenuopcionesPage]
 })
