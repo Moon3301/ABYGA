@@ -1,11 +1,10 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>opciones</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-
-
 
 <ion-content class="ion-padding">
   <ion-list>
@@ -23,10 +22,7 @@
         </ng-container>
       </nz-modal>
         
-
     </ion-item>
-
-
 
     <ion-item #button (click) = "ModalNotificaciones()" >
       
@@ -43,8 +39,6 @@
       </nz-modal>
       
     </ion-item>
-
-    
 
     <ion-item #button (click)="ModalMiticket()" >
       
@@ -75,7 +69,6 @@
       
     </ion-item>
 
-    
     <ion-item #button (click)="ModalRespaldo()">
       <mat-icon style="margin-right: 5px ;">cloud_upload</mat-icon>
       <ion-label style="margin-left: 5px;" >Respaldo y Restauracion</ion-label>
@@ -105,7 +98,6 @@
       
     </ion-item>
 
-
     <ion-item #button (click)="ModalInfo()">
       <mat-icon style="margin-right: 5px ;">info</mat-icon>
       <ion-label style="margin-left: 5px;" >Acerca de Nosotros</ion-label>
@@ -120,9 +112,6 @@
       
     </ion-item>
 
-
   </ion-list>
 
-
-  
 </ion-content>
