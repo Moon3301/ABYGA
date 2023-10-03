@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class MenuopcionesPage implements OnInit {
 
   isVisible = false;
-  currentModal: string = ''; // Declarar la propiedad currentModal
+  
 
    //Icons font-awesome
    
@@ -26,16 +26,13 @@ export class MenuopcionesPage implements OnInit {
   ngOnInit() {
   }
 
-  showModal(modalName: string): void {
-    this.currentModal = modalName;
+
+  
+  
+  showModal(): void {
+  
     this.isVisible = true;
   }
-  
-  
-  // showModal(): void {
-  
-  // this.isVisible = true;
-  // }
 
   handleOk(): void {
     console.log('Button ok clicked!');

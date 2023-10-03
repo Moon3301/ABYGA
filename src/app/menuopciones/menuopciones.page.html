@@ -7,22 +7,16 @@
 
 
 
-<ion-content class="|ion-padding">
+<ion-content class="ion-padding">
   <ion-list>
-
-    
-      
-
-
-    
-    <ion-item #button (click) = "showModal('inicio')">
+    <ion-item #button (click) = "showModal()">
 
       <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
       <ion-label style="margin-left: 5px;" >Informacion del Negocio</ion-label>
 
       <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
         <ng-container *nzModalContent>
-          <p>21</p>
+          <p>store</p>
           <p>Content two</p>
           <p>Content three</p>
         </ng-container>
@@ -30,27 +24,6 @@
         
 
     </ion-item>
-
-
-
-    <ion-item #button (click)="showModal('test')">
-      <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
-      <ion-label style="margin-left: 5px;"> prueba</ion-label>
-      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-        <ng-container *nzModalContent>
-          <p *ngIf="currentModal === 'test'">bien</p>
-          <p *ngIf="currentModal === 'notifications'">Contenido para Notificaciones</p>
-          <!-- Agrega más bloques *ngIf para otros modales -->
-          <p>Content two</p>
-          <p>Content three</p>
-        </ng-container>
-      </nz-modal>
-    </ion-item>
-
-
-
-    
-
     
 
     <ion-item #button (click) = "ModalNotificaciones()" >

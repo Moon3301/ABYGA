@@ -19,7 +19,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     MenuopcionesPageRoutingModule,
     MatButtonModule,
     MatIconModule,
-    NzModalModule
+    NzModalModule 
 
   ],
   declarations: [MenuopcionesPage]
