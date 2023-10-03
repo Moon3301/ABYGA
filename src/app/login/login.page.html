@@ -1,13 +1,241 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <ion-grid style="margin: 0 auto;">
+
+    <div style="border: 1px solid black; text-align: center;">
+
+      <div>
+        <ion-label>Abyga financial</ion-label>
+        <br>
+        <img  src="assets/icon/icon-abyga.png" >
+        <br>
+        <ion-label>cccccsasgrsdfsdvds</ion-label>
+      </div>
+      
+      <div>
+
+      </div>
+      <br>
+      <ion-row>
+        <button (click)="setOpenRegistro(true)" color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Crear cuenta</ion-label></button>
+      </ion-row>
+      <br>
+      <ion-row>
+        <button (click)="setOpenLogin(true)" color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Iniciar sesion</ion-label></button>
+      </ion-row>
+      <br>
+      <ion-row>
+        <button [routerLink]="['/home']" color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Omitir</ion-label></button>
+      </ion-row>
+      <br>
+    </div>
+
+    <ion-modal [isOpen]="isModalOpenLogin">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+      
+            <ion-buttons slot="start">
+              <ion-button (click)="setOpenLogin(false)">Close</ion-button>
+            </ion-buttons>
+  
+            <ion-buttons slot="end">
+              <ion-button (click)="setOpenLogin(false)">Save</ion-button>
+            </ion-buttons>
+  
+          </ion-toolbar>
+        </ion-header>
+        <ion-content >
+          <br>
+          <h2 style="text-align: center;">Inicio de sesion</h2>
+
+          <ion-grid>
+
+            <div style="border-radius: 15px; border: 0.5px solid grey;">
+              <br>
+              <ion-row >
+                <mat-form-field style="margin: 0 auto; width: 60%;" appearance="outline">
+          
+                  <mat-label>Correo</mat-label>
+                  <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                  <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          
+                </mat-form-field>
+              </ion-row>
+          
+              <p></p>
+          
+              <ion-row>
+          
+                <mat-form-field style="margin: 0 auto; width: 60%;" appearance="outline"> 
+          
+                  <mat-label>Contrasena</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+          
+                  <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon  >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+          
+                </mat-form-field>
+          
+              </ion-row>
+              
+              <ion-row>
+                <button style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Login</ion-label></button>
+              </ion-row>
+
+              <ion-row>
+                <ion-label style="font-size: 12px; margin: 0 auto; width: 60%; " >Olvido su clave?</ion-label>
+              </ion-row>
+
+              <br>
+            </div>
+            <br>
+
+            <div style="border-radius: 15px; border: 0.5px solid grey;">
+              
+              <br>
+              <ion-row>
+                <button color="warn" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Login con Gmail</ion-label></button>
+              </ion-row>
+              <br>
+              <ion-row>
+                <button color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Login con Facebook</ion-label></button>
+              </ion-row>
+
+              <br>
+            </div>
+
+          </ion-grid>
+          
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <ion-modal [isOpen]="isModalOpenRegistro">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+      
+            <ion-buttons slot="start">
+              <ion-button (click)="setOpenRegistro(false)">Close</ion-button>
+            </ion-buttons>
+  
+            <ion-buttons slot="end">
+              <ion-button (click)="setOpenRegistro(false)">Save</ion-button>
+            </ion-buttons>
+  
+          </ion-toolbar>
+        </ion-header>
+        <ion-content >
+          <br>
+          <h2 style="text-align: center;">Registro de usuario</h2>
+
+          <ion-grid>
+
+            <ion-row>
+
+              <ion-col size="6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Nombre</mat-label>
+                  <input [(ngModel)]="nombreUsuario" matInput placeholder="Placeholder">
+          
+                </mat-form-field>
+
+              </ion-col>
+
+              <ion-col size="6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Apellido</mat-label>
+                  <input [(ngModel)]="apellidoUsuario" matInput placeholder="Placeholder">
+          
+                </mat-form-field>
+
+              </ion-col>
+              
+            </ion-row>
+
+            <ion-row>
+
+              <ion-col size="12" >
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Correo</mat-label>
+                  <input [(ngModel)]="correo" matInput placeholder="Placeholder">
+          
+                </mat-form-field>
+              </ion-col>
+
+
+            </ion-row>
+
+            <ion-row>
+
+              <ion-col size="12" >
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Contrasena</mat-label>
+                  <input [(ngModel)]="contrasena" matInput placeholder="Placeholder">
+          
+                </mat-form-field>
+              </ion-col>
+
+
+            </ion-row>
+
+            <ion-row>
+
+              <ion-col size="6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Foto usuario</mat-label>
+                  <input [(ngModel)]="fotoUsuario" matInput placeholder="Placeholder">
+          
+                </mat-form-field>
+
+              </ion-col>
+
+              <ion-col size="6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Telefono</mat-label>
+                  <input [(ngModel)]="telefono" matInput placeholder="Placeholder">
+          
+                </mat-form-field>
+
+              </ion-col>
+              
+            </ion-row>
+
+            <ion-row>
+
+              <ion-col size="12" >
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Nombre del negocio</mat-label>
+                  <input [(ngModel)]="nombreNegocio" matInput placeholder="Placeholder">
+          
+                </mat-form-field>
+              </ion-col>
+
+
+            </ion-row>
+
+            <ion-row>
+
+              <ion-col size="12" >
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>/</mat-label>
+                  <input [(ngModel)]="fotoNegocio" matInput placeholder="Placeholder">
+          
+                </mat-form-field>
+              </ion-col>
+
+
+            </ion-row>
+
+          </ion-grid>
+          
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+
+  </ion-grid>
+
 </ion-content>

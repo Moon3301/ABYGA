@@ -9,12 +9,13 @@
 
 <ion-content class="ion-padding">
   <ion-list>
-    <ion-item #button (click) = "showModal()">
+
+    <ion-item #button (click)="showModalNegocio()">
 
       <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
       <ion-label style="margin-left: 5px;" >Informacion del Negocio</ion-label>
 
-      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleOkNegocio()" (nzOnOk)="handleCancelNegocio()">
         <ng-container *nzModalContent>
           <p>store</p>
           <p>Content two</p>
@@ -24,6 +25,27 @@
         
 
     </ion-item>
+
+
+
+    <ion-item #button (click)="showModal('test')">
+      <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
+      <ion-label style="margin-left: 5px;"> prueba</ion-label>
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <p *ngIf="currentModal === 'test'">bien</p>
+          <p *ngIf="currentModal === 'notifications'">Contenido para Notificaciones</p>
+          <!-- Agrega más bloques *ngIf para otros modales -->
+          <p>Content two</p>
+          <p>Content three</p>
+        </ng-container>
+      </nz-modal>
+    </ion-item>
+
+
+
+    
+
     
 
     <ion-item #button (click) = "ModalNotificaciones()" >
@@ -44,12 +66,12 @@
 
     
 
-    <ion-item #button (click) = "ModalMiticket()" >
+    <ion-item #button (click)="ModalMiticket()" >
       
       <mat-icon style="margin-right: 5px ;">receipt_long</mat-icon>
       <ion-label style="margin-left: 5px;" >Mi Ticket</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancelMiticket()" (nzOnOk)=" handleOkMiticket()">
         <ng-container *nzModalContent>
           <p>ticket  </p>
           <p>Content two</p>
@@ -59,11 +81,11 @@
       
     </ion-item>
 
-    <ion-item #button (click) = "ModalPersonalizacion()">
+    <ion-item #button (click)="ModalPersonalizacion()">
       <mat-icon style="margin-right: 5px ;">brush</mat-icon>
       <ion-label style="margin-left: 5px;" >Personalizacion</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancelPersonalizacion()" (nzOnOk)="handleOkPersonalizacion()">
         <ng-container *nzModalContent>
           <p>Personalizacion </p>
           <p>Content two</p>
@@ -74,11 +96,11 @@
     </ion-item>
 
     
-    <ion-item #button (click) = "ModalRespaldo()">
+    <ion-item #button (click)="ModalRespaldo()">
       <mat-icon style="margin-right: 5px ;">cloud_upload</mat-icon>
       <ion-label style="margin-left: 5px;" >Respaldo y Restauracion</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancelRespaldo()" (nzOnOk)="handleOkRespaldo()">
         <ng-container *nzModalContent>
           <p>Respaldo </p>
           <p>Eliminar Todos los Documentos</p>
@@ -89,11 +111,11 @@
       
     </ion-item>
 
-    <ion-item #button (click) = "ModalVersionApp()">
+    <ion-item #button (click)="ModalVersionApp()">
       <mat-icon style="margin-right: 5px ;">update</mat-icon>
       <ion-label style="margin-left: 5px;" >Version de la Aplicación</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancelVersionApp()" (nzOnOk)="handleOkVersionApp()">
         <ng-container *nzModalContent>
           <p>Version </p>
           <p>Content two</p>
@@ -104,11 +126,11 @@
     </ion-item>
 
 
-    <ion-item #button (click) = "ModalInfo()">
+    <ion-item #button (click)="ModalInfo()">
       <mat-icon style="margin-right: 5px ;">info</mat-icon>
       <ion-label style="margin-left: 5px;" >Acerca de Nosotros</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancelInfo()" (nzOnOk)="handleOkInfo()">
         <ng-container *nzModalContent>
           <p>info  </p>
           <p>Content two</p>
