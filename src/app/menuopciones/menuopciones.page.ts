@@ -5,47 +5,40 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './menuopciones.page.html',
   styleUrls: ['./menuopciones.page.scss'],
 
- 
-
 })
-
 
 export class MenuopcionesPage implements OnInit {
 
   isVisible = false;
+
+
   currentModal: string = ''; // Declarar la propiedad currentModal
 
    //Icons font-awesome
    
    
- 
-  
+
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  showModal(modalName: string): void {
-    this.currentModal = modalName;
+  showModalNegocio(): void {
     this.isVisible = true;
   }
-  
-  
-  // showModal(): void {
-  
-  // this.isVisible = true;
-  // }
 
-  handleOk(): void {
+  handleOkNegocio(): void {
     console.log('Button ok clicked!');
     this.isVisible = false;
   }
 
-  handleCancel(): void {
+  handleCancelNegocio(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
+
+  //Modal notificaciones
 
   ModalNotificaciones(): void {
     this.isVisible = true;
