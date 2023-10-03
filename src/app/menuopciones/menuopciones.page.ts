@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
-
+import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
+  faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
+  faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
+  faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave,
+  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-menuopciones',
   templateUrl: './menuopciones.page.html',
   styleUrls: ['./menuopciones.page.scss'],
+  
 
 })
 
 export class MenuopcionesPage implements OnInit {
+  faImage = faImage;
 
   isVisibleNegocio = false;
   isVisibleNotificacion = false;

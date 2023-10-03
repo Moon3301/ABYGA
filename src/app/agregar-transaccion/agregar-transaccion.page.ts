@@ -118,13 +118,13 @@ export class AgregarTransaccionPage implements OnInit {
   // Id Categoria
   IdCat:any
   // Categoria
-  NombreCat:any = "Categoria"
+  NombreCat:any = ""
 
   // Id Subcategoria
   IdSubCat:any
 
   //SubCategoria
-  NombreSubCat:any = "Subcategoria"
+  NombreSubCat:any = "categoria"
   // Icono Categoria
   IconCat: any = faList
 
