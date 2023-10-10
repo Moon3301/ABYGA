@@ -18,6 +18,8 @@ import { OverlayEventDetail } from '@ionic/core/components';
 
 import { CrudProductosService } from '../crud-productos.service';
 
+import { ApirestService } from '../apirest.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -86,16 +88,29 @@ export class HomePage implements OnInit {
   unidadDeFomento: number=0;
   ipc: number=0;
 
-  constructor(private router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService) {}
+  constructor(private router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService) {}
 
   ngOnInit(){
 
-    console.log(this.crudP.productos)
+    
+    this.api.getUsers().subscribe(
+      (data) => {
+        console.log(data)
+      },
+      (error) => {
+        console.log('Error al obtener los datos del usuario.', error)
+      }
+
+    )
+
+    
+
+    
  
   }
 
   ionViewWillEnter(){
-    console.log(this.crudP.productos)
+    
   }
 
   // Chart Donnut

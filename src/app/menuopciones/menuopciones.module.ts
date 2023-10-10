@@ -20,19 +20,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
+
     CommonModule,
     FormsModule,
     IonicModule,
     MenuopcionesPageRoutingModule,
     MatButtonModule,
     MatIconModule,
-    NzModalModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    NzButtonModule,
-    FontAwesomeModule
-    
+    NzModalModule 
 
   ],
   declarations: [MenuopcionesPage]

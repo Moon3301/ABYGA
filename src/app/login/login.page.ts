@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { Usuario } from '../usuario';
+import { ApirestService } from '../apirest.service';
+
 
 @Component({
   selector: 'app-login',
@@ -29,18 +32,14 @@ export class LoginPage implements OnInit {
   telefono:any
   nombreNegocio:any
   fotoNegocio:any
-
+  idUsuario:any
 
   //
 
-
-
-  constructor() { }
+  constructor(public api:ApirestService) { }
 
   ngOnInit() {
   }
-
-  
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -58,8 +57,40 @@ export class LoginPage implements OnInit {
     this.isModalOpenRegistro = isOpen;
   }
 
+  agregarUsuario(){
 
+    const id = 31;
+    const nombre = this.nombreUsuario;
+    const apellido = this.apellidoUsuario;
+    const correo =  this.correo;
+    const clave = this.contrasena;
+    const foto = this.fotoUsuario;
+    const telefono = this.telefono;
+ ``
+    const dataJ = {
+      id,
+      nombre,
+      apellido,
+      correo,
+      clave,
+      foto,
+      telefono
+    }
 
+    this.api.agregarUsuario(dataJ).subscribe(
 
+      (data) => {
+        console.log('Usuario agregado con éxito:', data);
+
+        this.setOpenRegistro(false);
+        // Puedes realizar acciones adicionales después de agregar el usuario, como mostrar un mensaje de éxito o redirigir a otra página.
+      },
+      (error) => {
+        console.error('Error al agregar usuario:', error);
+      }
+
+    )
+
+  }
 
 }
