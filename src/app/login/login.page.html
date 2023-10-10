@@ -28,6 +28,9 @@
         <button [routerLink]="['/home']" color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Omitir</ion-label></button>
       </ion-row>
       <br>
+      <ion-row>
+        <button (click)="listarUsuarios()" color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Usuarios Registrados</ion-label></button>
+      </ion-row>
     </div>
 
     <ion-modal [isOpen]="isModalOpenLogin">
@@ -234,7 +237,56 @@
       </ng-template>
     </ion-modal>
 
+    <ion-modal [isOpen]="isModalOpenUsuarios">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+      
+            <ion-buttons slot="start">
+              <ion-button (click)="setOpenUsuarios(false)">Close</ion-button>
+            </ion-buttons>
+  
+            <ion-buttons slot="end">
+              <ion-button (click)="setOpenUsuarios(false)">Save</ion-button>
+            </ion-buttons>
+  
+          </ion-toolbar>
+        </ion-header>
+        <ion-content >
+          <br>
+          <h2 style="text-align: center;">Usuarios Registrados</h2>
+
+          <ion-grid>
+
+            <ion-list *ngFor="let data of users">
+              <ion-card style="border: 0.5px solid grey; ">
+                <ion-item>
+                  <ion-label slot="start">Nombre: {{data.nombre_usuario}}</ion-label>
+  
+                  <ion-label slot="end">Apellido: {{data.apellido_usuario}}</ion-label>
+                </ion-item>
+  
+                <ion-item>
+                  <ion-label >Correo: {{data.correo_usuario}}</ion-label>
+                </ion-item>
+  
+                <ion-item>
+                  <ion-label >Telefono: {{data.telefono_usuario}}</ion-label>
+                </ion-item>
+              </ion-card>
+              
+              
+            </ion-list>
+
+          </ion-grid>
+          
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
 
   </ion-grid>
+
+
 
 </ion-content>

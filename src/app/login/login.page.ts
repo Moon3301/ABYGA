@@ -16,6 +16,8 @@ export class LoginPage implements OnInit {
 
   isModalOpenRegistro = false;
 
+  isModalOpenUsuarios = false;
+
   // clave oculta
   hide = true;
 
@@ -36,9 +38,14 @@ export class LoginPage implements OnInit {
 
   //
 
+  users:any
+
   constructor(public api:ApirestService) { }
 
   ngOnInit() {
+
+    
+
   }
 
   getErrorMessage() {
@@ -57,18 +64,37 @@ export class LoginPage implements OnInit {
     this.isModalOpenRegistro = isOpen;
   }
 
+  setOpenUsuarios(isOpen: boolean) {
+    this.isModalOpenUsuarios = isOpen;
+  }
+
+  listarUsuarios(){
+
+    this.setOpenUsuarios(true);
+
+    this.api.getUsers().subscribe(
+      (data) => {
+        this.users = data // Asigna los datos de la respuesta a la variable 'users'
+        console.log(this.users); // Muestra los datos en la consola (puedes eliminar esta línea en producción)
+      },
+      (error) => {
+        console.error('Error al obtener los datos:', error);
+      }
+    );
+
+  }
+
   agregarUsuario(){
 
-    const id = 31;
     const nombre = this.nombreUsuario;
     const apellido = this.apellidoUsuario;
     const correo =  this.correo;
     const clave = this.contrasena;
     const foto = this.fotoUsuario;
     const telefono = this.telefono;
- ``
+
     const dataJ = {
-      id,
+      
       nombre,
       apellido,
       correo,
