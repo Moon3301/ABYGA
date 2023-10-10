@@ -17,7 +17,13 @@
       <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleNegocio" nzTitle="The first Modal" (nzOnCancel)="handleOkNegocio()" (nzOnOk)="handleCancelNegocio()">
         <ng-container *nzModalContent>
           <p>store</p>
-          <p>Content two</p>
+          <ion-row>
+            <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>Nombre</mat-label>
+              <input  matInput placeholder="Placeholder">
+      
+            </mat-form-field>
+          </ion-row>>
           <p>Content three</p>
         </ng-container>
       </nz-modal>

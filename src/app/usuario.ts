@@ -1,4 +1,4 @@
-import { Negocio } from "./negocio"
+
 
 export interface Usuario {
 
@@ -8,7 +8,6 @@ export interface Usuario {
     correo:string
     clave:string
     foto:string
-    Telefono:number
-    negocio:Negocio[]
-
+    telefono:number
+    
 }
