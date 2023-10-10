@@ -17,7 +17,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
-
 @NgModule({
   imports: [
 
@@ -27,7 +26,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MenuopcionesPageRoutingModule,
     MatButtonModule,
     MatIconModule,
-    NzModalModule 
+    NzModalModule,
+    MatFormFieldModule,
+    FontAwesomeModule
 
   ],
   declarations: [MenuopcionesPage]
