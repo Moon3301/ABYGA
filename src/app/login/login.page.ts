@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
 
   agregarUsuario(){
 
-    const id = 31;
+    const id = 32;
     const nombre = this.nombreUsuario;
     const apellido = this.apellidoUsuario;
     const correo =  this.correo;
