@@ -16,15 +16,29 @@
 
       <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleNegocio" nzTitle="The first Modal" (nzOnCancel)="handleOkNegocio()" (nzOnOk)="handleCancelNegocio()">
         <ng-container *nzModalContent>
-          <p>store</p>
+          <p>Ingresa Información de tu negocio </p>
           <ion-row>
             <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label>Nombre</mat-label>
+              <mat-label> Nombre de Negocio</mat-label>
               <input  matInput placeholder="Placeholder">
-      
+
             </mat-form-field>
-          </ion-row>>
-          <p>Content three</p>
+          </ion-row>
+
+          <ion-row>
+            <div style="height: 100px; border: 0.5px solid gray ; width: 100%; display: flex; justify-content: center; align-items: center;">
+              <button nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon [icon]=faImage class="fa-xl"></fa-icon></button>
+              
+            </div>
+
+          </ion-row>
+          <br>
+          <ion-row>
+            <div style="height: 80px; border: 0.5px solid gray ; width: 100%; display: flex; justify-content: center; align-items: center;">
+              
+            </div>
+
+          </ion-row>
         </ng-container>
       </nz-modal>
         
