@@ -12,7 +12,10 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   
 
 })
-//
+
+
+
+///
 export class MenuopcionesPage implements OnInit {
   faImage = faImage;
 
