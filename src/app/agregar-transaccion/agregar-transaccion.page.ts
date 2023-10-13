@@ -291,13 +291,13 @@ export class AgregarTransaccionPage implements OnInit {
   OptionGasto(){
 
     this.IconTransaccion = faCircleMinus;
-    this.colorToolbar = 'danger'
+    this.colorToolbar = '#292E49'
   }
 
   OptionIngreso(){
 
     this.IconTransaccion = faCirclePlus;
-    this.colorToolbar = 'success'
+    this.colorToolbar = '#1C2833'
   }
 
   ResetData(){
