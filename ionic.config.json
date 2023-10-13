@@ -3,16 +3,6 @@
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular",
-  "proxies": [
-    {
-      "path": "/GetDataUsuario",
-      "proxyUrl": "https://172.174.162.231:3000/"
-    },
-    {
-      "path": "/AddDataUsuario",
-      "proxyUrl": "https://172.174.162.231:3000/"
-    }
-    
-  ]
+  "type": "angular"
+ 
 }

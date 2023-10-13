@@ -8,20 +8,18 @@ import { Observable } from 'rxjs';
 export class ApirestService {
 
   dataType:any = ''
-  private apiURL = 'http://172.174.162.231:3000/';
+  private apiURL = 'https://172.174.162.231:443/';
   listado = []
   
-
   constructor(private http: HttpClient) { }
 
-
   getUsers(): Observable<any[]> {
-    this.apiURL = 'http://172.174.162.231:3000/GetDataUsuario'
+    this.apiURL = 'https://172.174.162.231:443/GetDataUsuarios'
     return this.http.get<any[]>(this.apiURL);
   }
 
   agregarUsuario(usuario: any) {
-    this.apiURL = 'http://172.174.162.231:3000/AddDataUsuario'
+    this.apiURL = 'https://172.174.162.231:443/AddDataUsuario'
     return this.http.post(this.apiURL, usuario);
   }
 
