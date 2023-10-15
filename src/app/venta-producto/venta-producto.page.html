@@ -1,12 +1,16 @@
 <ion-header [translucent]="true">
-  <ion-toolbar  >
+  <ion-toolbar color="tertiary"  >
+    <ion-label style="font-size: 18px; ">
+      <b style="color:white"> Agregar Venta</b>
+      
+    </ion-label>
     <ion-buttons slot="start">
-      <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      <ion-button (click)="GoHome()"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
 
     <ion-buttons slot="end">
       <ion-button (click)="scan()"><fa-icon slot="start" [icon]=faBarcode class="fa-xl"></fa-icon></ion-button>
-      <ion-button (click)="scan()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      
     
     </ion-buttons>
 
@@ -80,11 +84,11 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="block" fill="outline" color="warning" (click)="setOpenCategoria(true)">
+  <ion-button style="background-color: #295E91;" expand="block" fill="outline" color="tertiary " (click)="setOpenCategoria(true)">
     
-    <ion-label style="margin-right: 20px;" >Insumos:{{CantidadTotal}}</ion-label>
+    <ion-label style="margin-right: 20px; color: white;  "  >Insumos:{{CantidadTotal}}</ion-label>
      
-    <ion-label style="margin-left: 20px;" >Total: {{totalVenta | currency:'USD':'symbol':'1.2-2'}} </ion-label>
+    <ion-label style="margin-left: 20px; color:white"  >Total: {{totalVenta | currency:'USD':'symbol':'1.2-2'}} </ion-label>
      
   </ion-button>
 
@@ -150,15 +154,15 @@
         <ion-row>
 
           <ion-col size="4">
-            <ion-button expand="block" fill="outline" color="primary">Opciones</ion-button>
+            <ion-button style="background-color: #295E91; " expand="block" fill="outline" color="tertiary"> <ion-label style="color: white;"> Opciones </ion-label> </ion-button>
           </ion-col>
 
           <ion-col size="8">
-            <ion-button expand="block" fill="outline" color="warning" (click)="showModal()">
+            <ion-button  style="background-color: #295E91;" expand="block" fill="outline" color="tertiary" (click)="showModal()">
     
-              <ion-label style="margin-right: 20px;" >Insumos:{{CantidadTotal}}</ion-label>
+              <ion-label style="margin-right: 20px; color: white;" >Insumos:{{CantidadTotal}}</ion-label>
                
-              <ion-label style="margin-left: 20px;" >Total: {{totalVenta | currency:'USD':'symbol':'1.2-2'}} </ion-label>
+              <ion-label style="margin-left: 20px; color: white; " >Total: {{totalVenta | currency:'USD':'symbol':'1.2-2'}} </ion-label>
                
             </ion-button>
           </ion-col>

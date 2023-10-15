@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
@@ -11,15 +11,15 @@
 
     <ion-item #button (click)="showModalNegocio()">
 
-      <mat-icon style="margin-right: 5px ;">storefront</mat-icon>
-      <ion-label style="margin-left: 5px;" >Informacion del Negocio</ion-label>
+      <mat-icon style="margin-right: 5px ; color: #295E91 ;">storefront</mat-icon>
+      <ion-label style="margin-left: 5px; ;" >Informacion del Negocio</ion-label>
 
       <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleNegocio" nzTitle="The first Modal" (nzOnCancel)="handleOkNegocio()" (nzOnOk)="handleCancelNegocio()">
         <ng-container *nzModalContent>
           <p>Ingresa Información de tu negocio </p>
           <ion-row>
             <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label> Nombre de Negocio</mat-label>
+              <mat-label  > Nombre de Negocio</mat-label>
               <input  matInput placeholder="Placeholder">
 
             </mat-form-field>
@@ -46,7 +46,7 @@
 
     <ion-item #button (click) = "ModalNotificaciones()" >
       
-      <mat-icon style="margin-right: 5px ;">notifications</mat-icon>
+      <mat-icon  style="margin-right: 5px ;color: #295E91 ; ">notifications</mat-icon>
       <ion-label style="margin-left: 5px;" >Notificaciones</ion-label>
 
       <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleNotificacion" nzTitle="The first Modal" (nzOnCancel)="handleCancelNotificacion()" (nzOnOk)="handleOkNotificacion()">
@@ -62,7 +62,7 @@
 
     <ion-item #button (click)="ModalMiticket()" >
       
-      <mat-icon style="margin-right: 5px ;">receipt_long</mat-icon>
+      <mat-icon style="margin-right: 5px ; color: #295E91 ; ">receipt_long</mat-icon>
       <ion-label style="margin-left: 5px;" >Mi Ticket</ion-label>
 
       <nz-modal [(nzVisible)]="isVisibleMiticket" nzTitle="The first Modal" (nzOnCancel)="handleCancelMiticket()" (nzOnOk)=" handleOkMiticket()">
@@ -76,7 +76,7 @@
     </ion-item>
 
     <ion-item #button (click)="ModalPersonalizacion()">
-      <mat-icon style="margin-right: 5px ;">brush</mat-icon>
+      <mat-icon style="margin-right: 5px ; color: #295E91 ; ">brush</mat-icon>
       <ion-label style="margin-left: 5px;" >Personalizacion</ion-label>
 
       <nz-modal [(nzVisible)]="isVisiblePersonalizacion" nzTitle="The first Modal" (nzOnCancel)="handleCancelPersonalizacion()" (nzOnOk)="handleOkPersonalizacion()">
@@ -90,7 +90,7 @@
     </ion-item>
 
     <ion-item #button (click)="ModalRespaldo()">
-      <mat-icon style="margin-right: 5px ;">cloud_upload</mat-icon>
+      <mat-icon style="margin-right: 5px ; color: #295E91 ;">cloud_upload</mat-icon>
       <ion-label style="margin-left: 5px;" >Respaldo y Restauracion</ion-label>
 
       <nz-modal [(nzVisible)]="isVisibleRespaldo" nzTitle="The first Modal" (nzOnCancel)="handleCancelRespaldo()" (nzOnOk)="handleOkRespaldo()">
@@ -105,7 +105,7 @@
     </ion-item>
 
     <ion-item #button (click)="ModalVersionApp()">
-      <mat-icon style="margin-right: 5px ;">update</mat-icon>
+      <mat-icon style="margin-right: 5px ; color: #295E91 ; ">update</mat-icon>
       <ion-label style="margin-left: 5px;" >Version de la Aplicación</ion-label>
 
       <nz-modal [(nzVisible)]="isVisibleVersionApp" nzTitle="The first Modal" (nzOnCancel)="handleCancelVersionApp()" (nzOnOk)="handleOkVersionApp()">
@@ -119,7 +119,7 @@
     </ion-item>
 
     <ion-item #button (click)="ModalInfo()">
-      <mat-icon style="margin-right: 5px ;">info</mat-icon>
+      <mat-icon style="margin-right: 5px ; color: #295E91 ;">info</mat-icon>
       <ion-label style="margin-left: 5px;" >Acerca de Nosotros</ion-label>
 
       <nz-modal [(nzVisible)]="isVisibleInfo" nzTitle="The first Modal" (nzOnCancel)="handleCancelInfo()" (nzOnOk)="handleOkInfo()">

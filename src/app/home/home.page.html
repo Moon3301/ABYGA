@@ -2,11 +2,11 @@
   
   <ion-header>
     <ion-toolbar>
-      <ion-item color="dark">
+      <ion-item color="tertiary">
         <ion-avatar aria-hidden="true" slot="start">
           <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
         </ion-avatar>
-        <ion-label> {{ nombreUsuario}}</ion-label>
+        <ion-label style="color: white;" > {{ nombreUsuario}}</ion-label>
       </ion-item>
       
     </ion-toolbar>
@@ -16,7 +16,7 @@
     <ion-list>
 
       <ion-item #button [routerLink]="['/venta-producto']">
-        <fa-icon [icon]="faBoxes" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color: #295E91 ;" [icon]="faBoxes" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Inventario
         </ion-label>
@@ -25,7 +25,7 @@
       
   
       <ion-item #button [routerLink]="['/historial-transacciones']">
-        <fa-icon [icon]="faArrowRightArrowLeft" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color: #295E91;" [icon]="faArrowRightArrowLeft" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Transacciones
         </ion-label>
@@ -34,7 +34,7 @@
       <br>
   
       <ion-item>
-        <fa-icon [icon]="faFileCircleCheck" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color: #295E91 ;" [icon]="faFileCircleCheck" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Documentos
         </ion-label>
@@ -43,7 +43,7 @@
       <br>
   
       <ion-item>
-        <fa-icon [icon]="faChartColumn" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color: #295E91 ;" [icon]="faChartColumn" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Reportes
         </ion-label>
@@ -52,7 +52,7 @@
       <br>
   
       <ion-item  #button [routerLink]="['/menuopciones']">
-        <fa-icon [icon]="faGear" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color: #295E91 ;" [icon]="faGear" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Opciones
         </ion-label>
@@ -226,8 +226,8 @@
     </mat-tab-group>
     
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button color="danger" id="open-modal">
-        <ion-icon name="add"></ion-icon>
+      <ion-fab-button color="tertiary" id="open-modal">
+        <ion-icon style="color: white;" name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
 
@@ -236,9 +236,10 @@
         <ion-header>
           <ion-toolbar>
             <ion-buttons slot="start">
-              <ion-button (click)="cancel()">Cancel</ion-button>
+              <ion-button (click)="cancel()"><ion-icon name="close-outline"></ion-icon>
+              </ion-button>
             </ion-buttons>
-            <ion-title style="text-align: center;">Transacciones</ion-title>
+            <ion-title style="text-align: center; margin: 0 auto; ">Transacciones</ion-title>
             
           </ion-toolbar>
         </ion-header>
@@ -250,7 +251,7 @@
               
             </ion-card-header>
           
-            <ion-card-content> Ingresa monto de transacciones detalladas </ion-card-content>
+            <ion-card-content style="color:white"> Registra transacciones de Ingresos  </ion-card-content>
           </ion-card>
           <p></p>
           <ion-card id="cardIngresos" [routerLink]="['/','Egresos']" (click)="confirm()">
@@ -259,7 +260,8 @@
              
             </ion-card-header>
           
-            <ion-card-content> </ion-card-content>
+            
+            <ion-card-content style="color:white"> Registra transacciones de Egresos   </ion-card-content>
           </ion-card>
           <p></p>
           <ion-card id="cardInsumos" [routerLink]="['/agregar-producto']" (click)="confirm()">
@@ -267,8 +269,10 @@
               <ion-card-title style="color: aliceblue;">Insumos</ion-card-title>
               
             </ion-card-header>
+
+            <ion-card-content style="color:white"> Registra tus Productos  </ion-card-content>
           
-            <ion-card-content>  </ion-card-content>
+            
           </ion-card>
           <p></p>
           <ion-card id="cardVentas" [routerLink]="['/venta-producto']" (click)="confirm()">
@@ -276,7 +280,8 @@
               <ion-card-title style="color: aliceblue;">Ventas</ion-card-title>
               
             </ion-card-header>
-            <ion-card-content>  </ion-card-content>
+            <ion-card-content style="color:white"> Registra tus Ventas  </ion-card-content>
+            
             
 
             
