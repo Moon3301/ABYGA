@@ -13,6 +13,8 @@ import { NgChartsModule } from 'ng2-charts';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     MatTabsModule,
     FontAwesomeModule,
     NgChartsModule,
-    NzButtonModule
+    NzButtonModule,
+    MatButtonModule
 
   ],
   declarations: [HomePage]

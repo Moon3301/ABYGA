@@ -11,6 +11,8 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCashRegister, faBoxes, faArrowRightArrowLeft, faFileCircleCheck,
   faChartColumn, faGear,faStoreAlt } from '@fortawesome/free-solid-svg-icons';
 
+import { MatTabChangeEvent } from '@angular/material/tabs';
+
 import { HttpClient } from '@angular/common/http';
 
 import { IonModal } from '@ionic/angular';
@@ -80,6 +82,7 @@ export class HomePage implements OnInit {
   faGear = faGear
   faStoreAlt = faStoreAlt
 
+  matTab:any
 
   //Variables indicadores
   id:any = 12;
@@ -198,6 +201,17 @@ export class HomePage implements OnInit {
     
   }
 
-  
+  onTabChange(event: MatTabChangeEvent): void {
+    const tabLabel = event.tab.textLabel; // Obtén el texto de la etiqueta de la pestaña seleccionada
+    this.matTab = event.tab.textLabel;
+    console.log(`Pestaña seleccionada: ${tabLabel}`);
+    
+    // Aquí puedes realizar acciones específicas basadas en la pestaña seleccionada
+    if (tabLabel === 'PRINCIPAL') {
+      // Acciones para la pestaña PRINCIPAL
+    } else if (tabLabel === 'TRANSACCIONES') {
+      // Acciones para la pestaña TRANSACCIONES
+    }
+  }
 
 }
