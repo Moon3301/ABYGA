@@ -134,11 +134,11 @@
             
             <ion-col size="3" style="display:flex; justify-content: center; align-items: center;">
 
-              <button style="margin-right: 5px;" (click)="ModificarCantidad('aumentar',productosAgrupados[productoId])" mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
+              <button style="margin-right: 5px;" (click)="ModificarCantidad('aumentar',productosAgrupados[productoId])" color="disabled"  mat-mini-fab aria-label="Example icon button with a menu icon">
                 <ion-icon name="add-circle-outline"></ion-icon>
               </button>
 
-              <button style="margin-left: 5px;" (click)="ModificarCantidad('disminuir',productosAgrupados[productoId])" mat-mini-fab color="accent" aria-label="Example icon button with a menu icon">
+              <button style="margin-left: 5px;" (click)="ModificarCantidad('disminuir',productosAgrupados[productoId])" color="disabled" mat-mini-fab aria-label="Example icon button with a menu icon">
                 <ion-icon name="remove-circle-outline"></ion-icon>
               </button>
 
@@ -182,11 +182,11 @@
                 <ion-col  size="4" [class.selected]="isSelectedEfectivo" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Efectivo')" >
                   
                   <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <fa-icon [icon]="faMoneyBill" class="fa-2xl"></fa-icon>
+                    <fa-icon  [icon]="faMoneyBill" class="fa-2xl"></fa-icon>
                   </ion-row>
 
                   <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <ion-label>Efectivo</ion-label>
+                    <ion-label  >Efectivo</ion-label>
                   </ion-row>
               
                 </ion-col>
@@ -198,7 +198,7 @@
                   </ion-row>
 
                   <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <ion-label>Debito</ion-label>
+                    <ion-label >Debito</ion-label>
                   </ion-row>
 
                 </ion-col>
@@ -268,11 +268,11 @@
 
       <ion-footer>
         <ion-row>
-          <button mat-stroked-button color="accent" style="width: 100%;" (click)="setOpenTicket(true)">Ver ticket</button>
+          <button mat-stroked-button style="width: 100%; background-color: #295E91; color: white; "  (click)="setOpenTicket(true)">Ver ticket</button>
         </ion-row>
         <br>
         <ion-row>
-          <button mat-flat-button color="accent" style="width: 100%;" (click)="nuevaVenta()">Nueva venta</button>
+          <button mat-flat-button style="width: 100%; background-color: #295E91; color:white" (click)="nuevaVenta()">Nueva venta</button>
         </ion-row>
         <br>
       </ion-footer>

@@ -24,9 +24,9 @@
         </ion-col>
 
         <ion-col size="3" style="display:flex; justify-content: center; align-items: center;">
-          <button  style="margin-right: 5px;" (click)="MakeCode()" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon [icon]=faWandMagic class="fa-xl"  ></fa-icon></button>
+          <button  style="margin-right: 5px;" (click)="MakeCode()" nz-button nzType="default" nzSize="large" nzShape="circle"><fa-icon [icon]=faWandMagic class="fa-xl"  ></fa-icon></button>
               
-            <button style="margin-left: 5px;" [disabled]="!isSupported" (click)="scanCode()" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon  [icon]=faBarcode class="fa-xl"></fa-icon></button>
+            <button style="margin-left: 5px;" [disabled]="!isSupported" (click)="scanCode()" nz-button nzType="default" nzSize="large" nzShape="circle"><fa-icon    [icon]=faBarcode class="fa-xl"></fa-icon></button>
         </ion-col>
       </ion-row>
         
@@ -72,7 +72,7 @@
 
           <ion-label slot="start" >{{nombreCategoria}}</ion-label>
   
-          <button slot="end" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon   [icon]=iconCategoria class="fa-xl"  ></fa-icon></button>
+          <button slot="end" nz-button nzType="default" nzSize="large" nzShape="circle"><fa-icon [icon]=iconCategoria class="fa-xl"  ></fa-icon></button>
           
           <ion-modal [isOpen]="isModalOpenCategoria">
             <ng-template>
@@ -100,7 +100,7 @@
                       
                       <ion-label style="margin-left: 20px;">{{item.nombre}}</ion-label>
   
-                      <button slot="start" style="margin-right: 20px;" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon 
+                      <button slot="start" style="margin-right: 20px;" nz-button nzType="default" nzSize="large" nzShape="circle"><fa-icon 
                       slot="start" [icon]=item.icon class="fa-xl"></fa-icon></button>
                       
                     </ion-item>
@@ -118,8 +118,8 @@
       <br>
 
       <ion-card style="height: 80px; border: 1px dashed white; display: flex; justify-content: center; align-items: center;">
-        <button (click)="GetPhoto()" style="margin-right: 10px;" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon slot="start" [icon]=faImage class="fa-xl"></fa-icon></button>
-        <button (click)="NewPhoto()" style="margin-left: 10px;" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon slot="start" [icon]=faCamera class="fa-xl"></fa-icon></button>
+        <button (click)="GetPhoto()" style="margin-right: 10px;" nz-button nzType="default" nzSize="large" nzShape="circle"><fa-icon slot="start" [icon]=faImage class="fa-xl"></fa-icon></button>
+        <button (click)="NewPhoto()" style="margin-left: 10px;" nz-button nzType="default" nzSize="large" nzShape="circle"><fa-icon slot="start" [icon]=faCamera class="fa-xl"></fa-icon></button>
       </ion-card>
 
       <br>
