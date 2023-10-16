@@ -1,7 +1,12 @@
 <ion-header [translucent]="true">
-  <ion-toolbar >
-    <ion-label>{{TipoTrans}}</ion-label>
-    <ion-buttons slot="start">
+  <ion-toolbar color="primary"  >  
+    <ion-label style="font-size: 18px; ">
+      <b style="color:white">{{TipoTrans}} </b>
+      
+    </ion-label>
+    <ion-buttons 
+    
+     slot="start">
       <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title></ion-title>
@@ -12,7 +17,10 @@
 
     <mat-tab-group (selectedTabChange)="onTabChange($event)">
 
-      <mat-tab label="{{TipoTrans}} Variable">  
+      <mat-tab label="{{TipoTrans}} Variable"> 
+        <ion-card style="">
+
+        </ion-card> 
   
         <ion-list>
          
@@ -111,7 +119,7 @@
                         <ion-col sizeSm="3" sizeMd="3" sizeLg="2" size="4" *ngFor="let sub of item.sub">
                           
                           <ion-row style="display:flex; justify-content: center; align-items: center; ">
-                            <button style="color: rgba(244, 75, 75, 0.906);" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
+                            <button style="color: #1C2833;" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
                               <fa-icon [icon]="sub.icon" class="fa-xl"></fa-icon>
                             </button>
                           </ion-row>
@@ -137,7 +145,7 @@
                         <ion-col sizeSm="3" sizeMd="3" sizeLg="2" size="4" *ngFor="let sub of item.sub">
       
                           <ion-row style="display:flex; justify-content: center; align-items: center;">
-                            <button style="color: rgb(56, 184, 64);" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
+                            <button style="color: #1C2833;" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
                               <fa-icon [icon]="sub.icon" class="fa-xl"></fa-icon>
                             </button>
                           </ion-row>
@@ -267,7 +275,7 @@
                         <ion-col sizeSm="3" sizeMd="3" sizeLg="2" size="4" *ngFor="let sub of item.sub">
       
                           <ion-row style="display:flex; justify-content: center; align-items: center;">
-                            <button style="color: rgba(244, 75, 75, 0.906);" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
+                            <button style="color: #292E49 ;" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
                               <fa-icon [icon]="sub.icon" class="fa-xl"></fa-icon>
                             </button>
                           </ion-row>
@@ -293,7 +301,7 @@
                         <ion-col sizeSm="3" sizeMd="3" sizeLg="2" size="4" *ngFor="let sub of item.sub">
                           
                           <ion-row style="display:flex; justify-content: center; align-items: center;">
-                            <button style="color: rgb(56, 184, 64);" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
+                            <button style="color:#1C2833;" nzSize="large" nz-button nzType="default" nzShape="circle" (click)="ChangeCategoria(item.name,sub.nameSub, sub.icon,item.id,sub.id)">
                               <fa-icon [icon]="sub.icon" class="fa-xl"></fa-icon>
                             </button>
                           </ion-row>

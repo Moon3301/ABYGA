@@ -1,8 +1,15 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="secondary">
-    <ion-buttons slot="start">
-      <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+  <ion-toolbar color="primary"  >  
+    <ion-label style="font-size: 18px; ">
+      <b style="color:white"> Agregar Producto</b>
+      
+    </ion-label>
+    <ion-buttons 
+    
+     slot="start">
+      <ion-button (click)="GoHome()"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +26,7 @@
         <ion-col size="3" style="display:flex; justify-content: center; align-items: center;">
           <button  style="margin-right: 5px;" (click)="MakeCode()" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon [icon]=faWandMagic class="fa-xl"  ></fa-icon></button>
               
-            <button  style="margin-left: 5px;" [disabled]="!isSupported" (click)="scanCode()" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon  [icon]=faBarcode class="fa-xl"></fa-icon></button>
+            <button style="margin-left: 5px;" [disabled]="!isSupported" (click)="scanCode()" nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon  [icon]=faBarcode class="fa-xl"></fa-icon></button>
         </ion-col>
       </ion-row>
         
@@ -53,8 +60,8 @@
           <ion-col size="6">
             <ion-select label="Vender por" label-placement="floating" fill="outline" [value]="UnidadMedida">
               <ion-select-option value="Unidad">Unidad</ion-select-option>
-              <ion-select-option value="Litro">Litro</ion-select-option>
-              <ion-select-option value="Kilo">Kilo</ion-select-option>
+              <ion-select-option value="Litro">Kilo</ion-select-option>
+              <ion-select-option value="Kilo">Litro</ion-select-option>
             </ion-select>
           </ion-col>
         </ion-row>
