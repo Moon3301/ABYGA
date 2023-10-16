@@ -1,13 +1,16 @@
 .photos-container {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto; /* Para permitir el desplazamiento horizontal si hay muchas fotos */
+    
+    margin: 0 auto;
+ 
+    
   }
   
   .photo {
-    max-width: 100px; /* Ajusta el ancho máximo de cada foto según tus necesidades */
-    height: auto;
-    margin-right: 10px; /* Espacio entre las fotos */
+    display: block; /* Muestra la imagen como bloque para centrarla horizontalmente */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    max-width: 150px; /* Ajusta el ancho máximo de cada foto según tus necesidades */
+    height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+    max-height: 100px;
   }
 
  

@@ -64,7 +64,7 @@ export class AgregarProductoPage implements OnInit {
 
   // Almacenamiento Camera
 
-  photos: string[] = [];
+  currentPhoto: string = '';
 
   // 
   codigoBarras:any
@@ -136,7 +136,7 @@ export class AgregarProductoPage implements OnInit {
 
       this.ChangeCategoria(this.GetData.categoria[0].id,this.GetData.categoria[0].nombre,this.GetData.categoria[0].icon)
       
-      this.photos = this.GetData.imagen;
+      this.currentPhoto = this.GetData.imagen;
 
       console.log(this.GetData)
     }
@@ -251,7 +251,8 @@ export class AgregarProductoPage implements OnInit {
     })
 
     if (fotoCapturada.webPath) {
-      this.photos.push(fotoCapturada.webPath);
+      
+      this.currentPhoto = fotoCapturada.webPath
     }
 
   }
@@ -266,7 +267,7 @@ export class AgregarProductoPage implements OnInit {
     })
 
     if (fotoCapturada.webPath) {
-      this.photos.push(fotoCapturada.webPath);
+      this.currentPhoto = fotoCapturada.webPath
     }
 
   }
@@ -278,7 +279,7 @@ export class AgregarProductoPage implements OnInit {
       const fechActual = new Date();
 
       this.crudP.agregarProducto(Number(this.code),this.nombreProducto,this.precioProducto,this.costoProducto,
-      this.cantidadProducto,this.UnidadMedida,this.fechActual,fechActual,this.photos,
+      this.cantidadProducto,this.UnidadMedida,this.fechActual,fechActual,this.currentPhoto,
       'Disponible','',[{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
 
     }else{
@@ -288,9 +289,7 @@ export class AgregarProductoPage implements OnInit {
       const registro  = this.crudP.GetDataModificar();
       const registroFecha = registro.fechaCreacion
 
-      this.crudP.modificarProducto(this.code,this.nombreProducto,this.precioProducto,this.costoProducto,this.cantidadProducto,this.UnidadMedida,registroFecha,fechaActual,this.photos,'Disponible','',[{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
-
-
+      this.crudP.modificarProducto(this.code,this.nombreProducto,this.precioProducto,this.costoProducto,this.cantidadProducto,this.UnidadMedida,registroFecha,fechaActual,this.currentPhoto,'Disponible','',[{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
 
     }
 
@@ -330,7 +329,7 @@ export class AgregarProductoPage implements OnInit {
     this.idCategoria = null;
 
 
-    this.photos = []
+    this.currentPhoto = ''
     this.code = ''
     this.codigoBarras = ''
     this.nombreProducto = ''

@@ -170,51 +170,30 @@
 
               <ion-col size="6" *ngFor="let producto of crudP.productos">
                 <div *ngFor="let categoria of producto.categoria">
-                  <ion-card style="border-radius: 15px;" #button [routerLink]="['/agregar-producto']" (click)="GetProducto(producto.id)">
-                    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; ">
 
-                      <ion-img [src]="producto.imagen" style="width: 180px; height: 180px;"></ion-img>
+                  <ion-card color="primary" style="height: 150px; width: 80%; margin: 0 auto; position: relative;" #button [routerLink]="['/agregar-producto']" (click)="GetProducto(producto.id)">
 
-                    </div>
+                    <ion-row>
+                      <ion-label style="font-size: 10px; margin-left: 3px; color: white;">SKU: {{producto.id}}</ion-label>
+                    </ion-row>
                     
-                    <ion-card-header>
-                      
-                      <ion-row>
-                        <ion-col size="9">
-                          <ion-row>
-                            <ion-card-title  style="font-size: 15px;" >{{producto.nombre}}</ion-card-title>
-                          </ion-row>
-                          
-                          <ion-row>
-                            <ion-card-subtitle style="font-size: 12px;">Stock: {{producto.stock}}</ion-card-subtitle>
-                          </ion-row>
-                          
-                        </ion-col>
-
-                        <ion-col size="3" style="display: flex; justify-content: center; align-items: center;">
-                          <button  nz-button nzType="primary" nzSize="small" nzShape="circle"><fa-icon slot="start" [icon]=categoria.icon class="fa-l"  ></fa-icon></button>
-                        </ion-col>
-
-                      </ion-row>
-                      
-                    </ion-card-header>
-                  
                     <ion-card-content>
-
-                      <ion-row>
-                        <ion-label style="font-size: 10px;">Precio: {{producto.precio}}</ion-label>
-                      </ion-row>
-
-                      <ion-row>
-                        <ion-label style="font-size: 10px;">{{categoria.nombre}}</ion-label> 
-                      </ion-row>
-
-                      <ion-row>
-                        <ion-label style="font-size: 10px;" >Estado:{{producto.estado}}</ion-label>
-                      </ion-row>
-
+                      <div lass="photos-container">
+                        <img [src]="producto.imagen" class="photo">
+                      </div>
                     </ion-card-content>
+                    <ion-row>
+                      <ion-label  style=" margin-left: 3px;font-size: 10px; color: white; position: absolute; bottom: 5px;">Precio: {{producto.precio}}</ion-label>
+                    </ion-row>
+                    <ion-row>
+                      <ion-label style="margin-left: 3px; font-size: 10px; color: white; position: absolute; bottom: 20px;">Stock: {{producto.stock}}</ion-label>
+                    </ion-row>
+                    <ion-row>
+                      <ion-label style="color: white; position: absolute; top: 5px; right: 5px;"><fa-icon [icon]=categoria.icon class="fa-xl" ></fa-icon></ion-label>
+                    </ion-row>
+                    
                   </ion-card>
+                  
                 </div>
                
               </ion-col>

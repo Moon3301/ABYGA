@@ -26,10 +26,46 @@
   text-decoration: none;
 }
 
+#cardIngresos {
+  background: #141E30;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
 #cardEgresos{
 
   background: #70e1f5;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #ffd194, #70e1f5);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #ffd194, #70e1f5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
+
+#cardInsumos{background: #536976;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #292E49, #536976);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  }
+
+
+#cardVentas{
+  background: #525252;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #3d72b4, #525252);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #3d72b4, #525252); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.photos-container {
+    
+  margin: 0 auto;
+
+  
+}
+
+.photo {
+  display: block; /* Muestra la imagen como bloque para centrarla horizontalmente */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+  max-width: 110px; /* Ajusta el ancho máximo de cada foto según tus necesidades */
+  height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+  max-height: 110px;
 }
