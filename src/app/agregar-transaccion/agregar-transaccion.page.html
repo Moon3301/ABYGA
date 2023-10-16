@@ -1,5 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar [color]="colorToolbar">
+  <ion-toolbar >
+    <ion-label>{{TipoTrans}}</ion-label>
     <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
@@ -41,7 +42,6 @@
               
             </ion-col>
 
-            
           </ion-row>
         
           <ion-modal [keepContentsMounted]="true">
@@ -50,7 +50,6 @@
               display-timezone="false"></ion-datetime>
             </ng-template>
           </ion-modal>
-      
       
           <!-- Categorias -->
 
@@ -78,7 +77,6 @@
                 
                 </button>
             </ion-col>
-              
             
           </ion-row>
           
@@ -167,8 +165,7 @@
                 <textarea name="MatAbonos" [(ngModel)]="descripcion" matInput placeholder="Ex. It makes me feel..."></textarea>
               </mat-form-field>
             </form>
-          
-  
+        
         </ion-list>
   
       </mat-tab>
@@ -203,7 +200,6 @@
               
             </ion-col>
 
-            
           </ion-row>
         
           <ion-modal [keepContentsMounted]="true">
@@ -212,7 +208,6 @@
               display-timezone="false"></ion-datetime>
             </ng-template>
           </ion-modal>
-          
          
           <!-- Categorias -->
           <ion-row >
@@ -240,7 +235,6 @@
                 </button>
             </ion-col>
               
-            
           </ion-row>
           
             <ion-modal [isOpen]="isModalOpenCategoria">

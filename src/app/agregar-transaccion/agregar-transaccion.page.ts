@@ -65,7 +65,7 @@ export class AgregarTransaccionPage implements OnInit {
   // Toolbar
 
   colorToolbar:any
-
+  
   // Nombre Transaccion
   NameTransaccion:any
 
@@ -291,13 +291,13 @@ export class AgregarTransaccionPage implements OnInit {
   OptionGasto(){
 
     this.IconTransaccion = faCircleMinus;
-    this.colorToolbar = 'danger'
+    this.colorToolbar = '#292E49'
   }
 
   OptionIngreso(){
 
     this.IconTransaccion = faCirclePlus;
-    this.colorToolbar = 'success'
+    this.colorToolbar = '#1C2833'
   }
 
   ResetData(){
@@ -323,6 +323,7 @@ export class AgregarTransaccionPage implements OnInit {
       
       // Se asignan los datos iniciales del gasto
       this.OptionGasto();
+      
       //Reset
       this.ResetData();
     }
@@ -331,6 +332,7 @@ export class AgregarTransaccionPage implements OnInit {
       
       // Se asignan los datos iniciales del ingreso
       this.OptionIngreso();
+      
       //Reset
       this.ResetData();
     }
