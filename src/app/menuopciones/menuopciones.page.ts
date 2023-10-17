@@ -10,13 +10,10 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   templateUrl: './menuopciones.page.html',
   styleUrls: ['./menuopciones.page.scss'],
   
-
 })
 
-
-
-//
 export class MenuopcionesPage implements OnInit {
+  
   faImage = faImage;
 
   isVisibleNegocio = false;

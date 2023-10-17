@@ -33,9 +33,15 @@ const routes: Routes = [
     loadChildren: () => import('./historial-transacciones/historial-transacciones.module').then( m => m.HistorialTransaccionesPageModule)
   },
   {
+    path: 'cuenta-usuario',
+    loadChildren: () => import('./cuenta-usuario/cuenta-usuario.module').then( m => m.CuentaUsuarioPageModule)
+  },
+  {
     path: ':id',
     loadChildren: () => import('./agregar-transaccion/agregar-transaccion.module').then( m => m.AgregarTransaccionPageModule)
   },
+  
+
 
 ];
 

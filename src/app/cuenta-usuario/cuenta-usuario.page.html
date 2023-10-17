@@ -1,0 +1,181 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>cuentaUsuario</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-grid>
+
+    <div style="text-align: center;">
+      <p></p>
+      <ion-avatar style="margin: 0 auto;"><img src="assets/icon/favicon.png"></ion-avatar>
+      <p></p>
+      <ion-label>Nombre Usuario</ion-label>
+      <br>
+      <ion-label>Correo usuario</ion-label>
+    </div>
+
+    <br>
+
+      <ion-card class="centered-card" >
+        <br>
+        <button style="margin: 0 auto; width: 100%; background-color: #1C2833; color: white;" mat-stroked-button>
+          <ion-label>Informacion del negocio</ion-label>
+        </button>
+        <br>
+        <button (click)="setOpenSuscripciones(true)" style="margin: 0 auto; width: 100%;  background-color: #1C2833; color: white;" mat-stroked-button>
+          <ion-label>Plan actual: </ion-label>
+        </button>
+        <br>
+        <button style="margin: 0 auto; width: 100%; background-color: #1C2833; color: white;" mat-stroked-button>
+          <ion-label>Version Abyga: </ion-label>
+        </button>
+        <br>
+        <button style="margin: 0 auto; width: 100%;  background-color: #1C2833; color: white;" mat-stroked-button>
+          <ion-label>Cerrar sesion: </ion-label>
+        </button>
+        <br>
+
+      </ion-card>
+
+      <ion-modal [isOpen]="isModalOpenSuscripciones">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+        
+              <ion-buttons slot="start">
+                <ion-button (click)="setOpenSuscripciones(false)">Close</ion-button>
+              </ion-buttons>
+    
+              <ion-buttons slot="end">
+                <ion-button (click)="setOpenSuscripciones(false)">Save</ion-button>
+              </ion-buttons>
+    
+            </ion-toolbar>
+          </ion-header>
+          <ion-content >
+            <br>
+            <h2 style="text-align: center;">Suscripciones</h2>
+  
+            <ion-grid>
+
+              <swiper-container  [slidesPerView]="1.2" (slidechange)="onSlideChange($event)" >
+
+                <swiper-slide>
+                  <ion-card  style="border-radius: 20px;">
+                
+                    <div style="text-align: center;">
+    
+                      <ion-label style="font-size: 20px;"><b>Plus </b></ion-label>
+                      <p></p>
+                      <ion-label style="font-size: 10px;"> Para negocios en crecimiento </ion-label>
+                      <p></p>
+                      <ion-label  style="font-size: 30px; color: #1C2833; "><b>$15.900 </b></ion-label>
+                      <ion-label style="font-size: 15px;"> al ano</ion-label>
+                      <p></p>
+                      <ion-label>Funciones adicionales:</ion-label>
+                      <p></p>
+                      <ion-label>* cjnkcsjnkjknsc </ion-label>
+                      <br>
+                      <ion-label>* cjnkcsjnkjknsc </ion-label>
+                      <br>
+                      <ion-label>* cjnkcsjnkjknsc </ion-label>
+    
+                    </div>
+                    
+                  </ion-card>
+                  
+                </swiper-slide>
+
+                <swiper-slide>
+                  <ion-card  style="border-radius: 20px;" >
+                
+                    <div style="text-align: center;">
+    
+                      <ion-label style="font-size: 20px;"><b>Premium </b></ion-label>
+                      <p></p>
+                      <ion-label style="font-size: 10px;"> Para negocios en crecimiento </ion-label>
+                      <p></p>
+                      <ion-label style="font-size: 30px; color: #1C2833;"><b>$22.900 </b></ion-label>
+                      <ion-label style="font-size: 15px;"> al ano</ion-label>
+                      <p></p>
+                      <ion-label>Funciones adicionales:</ion-label>
+                      <p></p>
+                      <ion-label>* cjnkcsjnkjknsc </ion-label>
+                      <br>
+                      <ion-label>* cjnkcsjnkjknsc </ion-label>
+                      <br>
+                      <ion-label>* cjnkcsjnkjknsc </ion-label>
+    
+                    </div>
+                    
+                  </ion-card>
+
+                </swiper-slide>
+                
+              </swiper-container>
+
+
+            </ion-grid>
+            
+          </ion-content>
+
+          <ion-footer>
+            <ion-row>
+
+              <ion-col size="6">
+                <ion-card style="text-align: center;" #button [class.selected]="SusPlus" (click)="SeleccionSuscripcion('plus')">
+                  <ion-label> ${{precioMensualSuscripcion}}/mes</ion-label>
+                  <br>
+                  <ion-label>Mas popular</ion-label>
+                </ion-card>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-card style="text-align: center;" #button [class.selected]="SusPremium" (click)="SeleccionSuscripcion('premium')">
+                  <ion-label>${{precioAnualSuscripcion}}/ano</ion-label>
+                  <br>
+                  <ion-label>Ahorra 2 meses</ion-label>
+                </ion-card>
+              </ion-col>
+
+              <ion-col size="12">
+
+                <button style="margin: 0 auto; width: 100%; background-color: #1C2833; color: white;" mat-stroked-button>
+                  <ion-label>Suscribirme al plan {{CambiarSuscripcion}}</ion-label>
+                </button>
+
+              </ion-col>
+
+            </ion-row>
+
+          </ion-footer>
+        </ng-template>
+      </ion-modal>
+
+
+
+
+
+
+    
+
+
+
+
+  </ion-grid>
+
+
+
+
+
+
+
+</ion-content>
