@@ -1,28 +1,21 @@
 <ion-content [fullscreen]="true">
 
-  <ion-grid style="margin: 0 auto;">
+  <ion-grid style="height: 100%;" id="Containerlogin">
 
-    <ion-card id="Containerlogin" style="border: 1px solid grey; text-align: center; margin: 0 auto;">
+    <ion-card id="Containerlogin"  style="border: 1px solid grey; text-align: center; margin: 0 auto; width: 100%;">
 
       <div>
         
         <br>
-        <p>
-          
-        </p>
+
+        <p></p>
         
-          <img  style="border-radius: 50% ; overflow: hidden;  "  width="150px" height="150px" src="assets/icon/logoabyga.png" >
+        <img  style="border-radius: 50% ; overflow: hidden;  "  width="150px" height="150px" src="assets/icon/logoabyga.png" >
           
-
-
-       
-
         <br>
 
-        
       </div>
       
-
       <br>
       <ion-row>
         <button  (click)="setOpenRegistro(true)"  style="margin: 0 auto; width: 60%; border-radius: 20px; color: #1C2833; " mat-stroked-button><ion-label> Crear cuenta</ion-label></button>
@@ -39,6 +32,8 @@
       <ion-row>
         <button (click)="listarUsuarios()" color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px; color: #1C2833;" mat-stroked-button><ion-label>Usuarios Registrados</ion-label></button>
       </ion-row>
+      <br>
+      <p></p>
     </ion-card>
 
     <ion-modal [isOpen]="isModalOpenLogin">

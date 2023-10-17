@@ -122,7 +122,6 @@
                 
               </swiper-container>
 
-
             </ion-grid>
             
           </ion-content>
@@ -148,9 +147,54 @@
 
               <ion-col size="12">
 
-                <button style="margin: 0 auto; width: 100%; background-color: #1C2833; color: white;" mat-stroked-button>
-                  <ion-label>Suscribirme al plan {{CambiarSuscripcion}}</ion-label>
+                <button (click)="setOpenPago(true)" style="margin: 0 auto; width: 100%; background-color: #1C2833; color: white;" mat-stroked-button>
+                  <ion-label >Suscribirme al plan {{CambiarSuscripcion}}</ion-label>
                 </button>
+
+                <ion-modal [isOpen]="isModalOpenPago">
+                  <ng-template>
+                    <ion-header>
+                      <ion-toolbar>
+                  
+                        <ion-buttons slot="start">
+                          <ion-button (click)="setOpenPago(false)">Close</ion-button>
+                        </ion-buttons>
+              
+                        <ion-buttons slot="end">
+                          <ion-button (click)="setOpenPago(false)">Save</ion-button>
+                        </ion-buttons>
+              
+                      </ion-toolbar>
+                    </ion-header>
+                    <ion-content >
+
+                      <ion-card class="centered-card">
+                        <H1> Continua la transaccion con: </H1>
+                        <p></p>
+                        <ion-row>
+                          <button (click)="setOpenPago(false)"  style="margin: 0 auto; width: 100%; background-color: #1C2833; color: white;" mat-stroked-button>
+                            Google Pay
+                          </button>
+                        </ion-row>
+                        
+                        <p></p>
+                          <form action="{{url}}" method="POST">
+                        
+                            <input type="hidden" name="token_ws" value="{{token}}"/>
+                            <button (click)="redirigirUsuario()" style="margin: 0 auto; width: 100%; background-color: #1C2833; color: white;" mat-stroked-button>
+                              Web Pay
+                            </button>
+                            
+                         </form>
+                        
+                         <p></p>
+                      </ion-card>
+                      
+
+                    </ion-content>
+                      
+                  </ng-template>
+                </ion-modal>
 
               </ion-col>
 

@@ -23,6 +23,10 @@ export class ApirestService {
     return this.http.post(this.apiURL, usuario);
   }
 
+  pagarWebpay(data:any) {
+    return this.http.post('http://localhost:3000/PagarWebPay', data);
+  }
+
 
 
 

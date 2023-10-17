@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../usuario';
 import { ActivatedRoute,Router } from '@angular/router';
+import { ApirestService } from '../apirest.service';
 
 @Component({
   selector: 'app-cuenta-usuario',
   templateUrl: './cuenta-usuario.page.html',
   styleUrls: ['./cuenta-usuario.page.scss'],
 })
+
 export class CuentaUsuarioPage implements OnInit {
 
   SuscripcionActual:any = 'Gratis'
@@ -35,12 +37,21 @@ export class CuentaUsuarioPage implements OnInit {
 
   //modal
   isModalOpenSuscripciones = false;
+  isModalOpenPago = false;
 
   previousSlideIndex: number = 0;
 
-  constructor(private router:Router) { }
+  // Datos WebPay
+
+  token: string = '';
+  url: string = '';
+
+
+
+  constructor(private router:Router, private api:ApirestService) { }
 
   ngOnInit() {
+    
 
     this.precioMensualSuscripcion = this.SuscripcionPlus.precioMensual;
     this.precioAnualSuscripcion = this.SuscripcionPlus.precioAnual;
@@ -50,6 +61,12 @@ export class CuentaUsuarioPage implements OnInit {
 
   setOpenSuscripciones(isOpen: boolean) {
     this.isModalOpenSuscripciones = isOpen;
+  }
+
+  setOpenPago(isOpen: boolean) {
+    this.isModalOpenPago = isOpen;
+    this.realizarPago();
+    
   }
 
   GoHome(){
@@ -79,7 +96,6 @@ export class CuentaUsuarioPage implements OnInit {
 
     }
 
-
   }
 
   SeleccionSuscripcion(data:any){
@@ -103,4 +119,33 @@ export class CuentaUsuarioPage implements OnInit {
 
   }
 
+  realizarPago() {
+    const data = {
+      buyOrder: 'O-12345W10398',
+      sessionId: 'S-6789045666778',
+      amount: 1500,
+      returnUrl: 'http://tbk-node-test.continuumhq.dev/webpay_plus/commit'
+    };
+  
+    this.api.pagarWebpay(data).subscribe((response: any) => {
+      this.token = response.token;
+      this.url = response.url;
+      
+      console.log('Token:' + this.token);
+      console.log('URL:' + this.url);
+  
+      // Ahora, puedes redirigir al usuario usando window.location.href
+    }, (error) => {
+      console.error('Error al procesar la transacción de Webpay:', error);
+      // Maneja el error apropiadamente
+    });
+  }
+
+  redirigirUsuario() {
+    // Redirige al usuario usando JavaScript
+    const urlCompleta = this.url + '?token_ws=' + this.token;
+    window.location.href = urlCompleta;
+  }
+
 }
+

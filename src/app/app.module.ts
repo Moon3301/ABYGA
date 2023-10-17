@@ -17,7 +17,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgChartsModule } from 'ng2-charts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-
 registerLocaleData(en);
 
 @NgModule({
