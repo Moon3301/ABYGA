@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Transaccion } from '../transaccion';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ActivatedRoute,Router } from '@angular/router';
@@ -22,6 +22,8 @@ import { CrudProductosService } from '../crud-productos.service';
 
 import { ApirestService } from '../apirest.service';
 
+import { Swiper } from 'swiper';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -33,6 +35,10 @@ export class HomePage implements OnInit {
 
   @ViewChild(IonModal)
   modal!: IonModal;
+
+  @ViewChild('swiper')
+  swiperRef: ElementRef | undefined;
+
 
   //Icons font-awesome
   faGasPump = faGasPump;
@@ -211,6 +217,56 @@ export class HomePage implements OnInit {
       // Acciones para la pestaña PRINCIPAL
     } else if (tabLabel === 'TRANSACCIONES') {
       // Acciones para la pestaña TRANSACCIONES
+    }
+  }
+
+  onSlideChange(event:any){
+
+    const indexSwiper = event.detail[0].activeIndex;
+
+    if(indexSwiper == 0){
+      console.log(event.detail)
+   
+
+    }
+
+    if(indexSwiper == 1){
+
+   
+
+    }
+
+    if(indexSwiper == 2){
+
+   
+
+    }
+
+  }
+
+  goToSlide(slideName: string) {
+
+    this.matTab = slideName;
+
+    if (this.swiperRef) {
+      const swiper = this.swiperRef?.nativeElement.swiper;
+
+      let slideIndex = 0;
+
+      switch (slideName) {
+        case 'principal':
+          slideIndex = 0;
+          break;
+        case 'transacciones':
+          slideIndex = 1;
+          break;
+        case 'inventario':
+          slideIndex = 2;
+          break;
+        // Añade más casos si tienes más diapositivas
+      }
+
+      swiper.slideTo(slideIndex);
     }
   }
 

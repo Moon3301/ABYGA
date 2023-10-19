@@ -81,7 +81,7 @@
         
         <ion-menu-button style="color: white;"></ion-menu-button>
       </ion-buttons>
-      <div *ngIf="matTab == 'INVENTARIO'">
+      <div *ngIf="matTab == 'inventario'">
       <ion-item color="primary"  slot="end">
         
           <ion-buttons slot="end" [routerLink]="['/venta-producto']">
@@ -97,12 +97,26 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding" id="Containerlogin">
-    
-    <mat-tab-group (selectedTabChange)="onTabChange($event)" id="Containerlogin">
-      
-      <mat-tab label="PRINCIPAL" id="Containerlogin">  
 
-        <ion-card>
+    <ion-card style="margin: 0 auto; text-align: center; align-items: center; ">
+      <p></p>
+
+      <ion-row>
+        <button color="warn" (click)="goToSlide('principal')" style="margin: 0 auto;  border-radius: 20px;" mat-stroked-button><ion-label>Principal</ion-label></button>
+        <button color="warn" (click)="goToSlide('transacciones')" style="margin: 0 auto;  border-radius: 20px;" mat-stroked-button><ion-label>Transacciones</ion-label></button>
+        <button color="warn" (click)="goToSlide('inventario')" style="margin: 0 auto;  border-radius: 20px;" mat-stroked-button><ion-label>Inventario</ion-label></button>
+      </ion-row> 
+
+      <p></p>
+    </ion-card>
+    
+ 
+    <swiper-container  #swiper (slidechange)="onSlideChange($event)" >
+
+      
+
+      <swiper-slide id="principal">
+        <ion-card  style="border-radius: 20px;">
           <ion-row>
              
             <canvas baseChart style="margin: 0 auto; "
@@ -115,9 +129,7 @@
             </canvas>
   
           </ion-row>
-        </ion-card>
         
-        <ion-card>
           <canvas baseChart style="margin: 0 auto; "
             [data]="barChartData"
             [options]="barChartOptions"
@@ -125,67 +137,69 @@
             [legend]="barChartLegend"
             [type]="'bar'">
           </canvas>
-        </ion-card>
-
-        <ion-card>
+        
           <canvas baseChart style="margin: 0 auto; "
             [datasets]="radarChartDatasets"
             [options]="radarChartOptions"
             [labels]="radarChartLabels"
             [type]="'radar'">
           </canvas>
+          
+        </ion-card>
+        
+      </swiper-slide>
+
+      <swiper-slide id="transacciones">
+
+        <ion-card  style="border-radius: 20px;" >
+          <div *ngFor="let fecha of crud.getFechasAgrupadas()">
+          
+            <ion-item style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
+              <ion-label slot="start" style="margin-top: 4px; color: green;">{{ fecha }}</ion-label>
+             <!-- <ion-label slot="end" style="margin-top: 4px;">MONTO ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Ingresos') | currency:'USD':'symbol':'1.2-2' }}
+                / ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Gastos') | currency:'USD':'symbol':'1.2-2' }}</ion-label> -->
+                <ion-label slot="end" style="margin-top: 4px; color: green;">MONTO: {{crud.totalNetoPorFecha[fecha] | currency:'USD':'symbol':'1.2-2'}}</ion-label>
+            </ion-item>
+  
+            <div *ngFor="let transaccion of crud.transaccionesAgrupadas[fecha]">
+              <div *ngFor="let categoria of transaccion.categoria">
+                <div *ngFor="let subCategoria of categoria.subCategoria">
+                  <p></p>
+                  <ion-card #button [routerLink]="['/',transaccion.tipo_transaccion]" (click)="GetTransaccion(transaccion.id)">
+                    <ion-item >
+                      <fa-icon [icon]="subCategoria.icon" class="fa-xl" slot="start" ></fa-icon>
+                      <ion-list>
+                        <ion-label style="font-size: 12px;">{{categoria.nombre}}</ion-label> 
+                        <ion-label style="font-size: 10px;">{{subCategoria.nombre}}</ion-label>
+                      </ion-list>
+        
+                      <ion-list slot="end">
+                        <div *ngIf="transaccion.tipo_transaccion == 'Egresos'">
+                          <ion-label style="font-size: 12px;" color="danger" >-{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</ion-label>
+                        </div>
+                        <div *ngIf="transaccion.tipo_transaccion == 'Ingresos'">
+                          <ion-label style="font-size: 12px;" color="success" >{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</ion-label>
+                        </div>
+                        
+                        <ion-label style="font-size: 10px;">Billetera | -5666666</ion-label>
+                      </ion-list>
+        
+                    </ion-item>
+                  </ion-card>
+  
+                </div>
+              </div>
+   
+            </div>
+          </div>
+          
         </ion-card>
 
-      </mat-tab>
+      </swiper-slide>
 
-      <mat-tab label="TRANSACCIONES">  
+      <swiper-slide id="inventario">
 
-        <div *ngFor="let fecha of crud.getFechasAgrupadas()">
-          
-          <ion-item style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
-            <ion-label slot="start" style="margin-top: 4px; color: green;">{{ fecha }}</ion-label>
-           <!-- <ion-label slot="end" style="margin-top: 4px;">MONTO ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Ingresos') | currency:'USD':'symbol':'1.2-2' }}
-              / ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Gastos') | currency:'USD':'symbol':'1.2-2' }}</ion-label> -->
-              <ion-label slot="end" style="margin-top: 4px; color: green;">MONTO: {{crud.totalNetoPorFecha[fecha] | currency:'USD':'symbol':'1.2-2'}}</ion-label>
-          </ion-item>
-
-          <div *ngFor="let transaccion of crud.transaccionesAgrupadas[fecha]">
-            <div *ngFor="let categoria of transaccion.categoria">
-              <div *ngFor="let subCategoria of categoria.subCategoria">
-                <p></p>
-                <ion-card #button [routerLink]="['/',transaccion.tipo_transaccion]" (click)="GetTransaccion(transaccion.id)">
-                  <ion-item >
-                    <fa-icon [icon]="subCategoria.icon" class="fa-xl" slot="start" ></fa-icon>
-                    <ion-list>
-                      <ion-label style="font-size: 12px;">{{categoria.nombre}}</ion-label>
-                      <ion-label style="font-size: 10px;">{{subCategoria.nombre}}</ion-label>
-                    </ion-list>
-      
-                    <ion-list slot="end">
-                      <div *ngIf="transaccion.tipo_transaccion == 'Egresos'">
-                        <ion-label style="font-size: 12px;" color="danger" >$-{{transaccion.monto}}</ion-label>
-                      </div>
-                      <div *ngIf="transaccion.tipo_transaccion == 'Ingresos'">
-                        <ion-label style="font-size: 12px;" color="success" >${{transaccion.monto}}</ion-label>
-                      </div>
-                      
-                      <ion-label style="font-size: 10px;">Billetera | -5666666</ion-label>
-                    </ion-list>
-      
-                  </ion-item>
-                </ion-card>
-
-              </div>
-            </div>
- 
-          </div>
-        </div>
-        
-      </mat-tab>
-
-      <mat-tab label="INVENTARIO"> 
-
-        <ion-card>
+        <ion-card  style="border-radius: 20px;">
           <ion-grid>
             <ion-row>
 
@@ -220,16 +234,22 @@
               </ion-col>
             </ion-row>
           </ion-grid>
+          
+          
         </ion-card>
         
-      </mat-tab>
-    </mat-tab-group>
-    
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      </swiper-slide>
+      
+    </swiper-container>
+
+
+    <ion-fab style="size: 80px;" slot="fixed" vertical="bottom" horizontal="end">
       <ion-fab-button color="tertiary" id="open-modal">
         <ion-icon style="color: white;" name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
+
+
 
     <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
       <ng-template>
@@ -239,57 +259,121 @@
               <ion-button (click)="cancel()"><ion-icon name="close-outline"></ion-icon>
               </ion-button>
             </ion-buttons>
-            <ion-title style="text-align: center; margin: 0 auto; ">Transacciones</ion-title>
+            <ion-title style="text-align: center; margin: 0 auto; "></ion-title>
             
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
           
           <ion-card style="background-color: #1C2833; background: #1C2833;" #button [routerLink]="['/','Ingresos']" (click)="confirm()">
-            <ion-card-header>
-              <ion-card-title style="color: aliceblue;">Ingresos</ion-card-title>
+            <ion-row>
+              <ion-col size="8" >
+                <ion-card-header>
+                  <ion-card-title style="color: aliceblue;">Ingresos</ion-card-title>
+                </ion-card-header>
               
-            </ion-card-header>
-          
-            <ion-card-content style="color:white"> Registra transacciones de Ingresos  </ion-card-content>
+                <ion-card-content style="color:white"> Registra transacciones de Ingresos  </ion-card-content>
+              </ion-col>
+
+              <ion-col size="1">
+
+              </ion-col>
+
+              <ion-col size="2" >
+                <img width="90px" height="70px" src="assets/icon/ingreso.png">
+              </ion-col>
+              
+
+            </ion-row>
+            
           </ion-card>
+
           <p></p>
-          <ion-card id="cardIngresos" [routerLink]="['/','Egresos']" (click)="confirm()">
-            <ion-card-header>
-              <ion-card-title style="color: aliceblue;">Egresos</ion-card-title>
+
+          <ion-card style="background-color: #1C2833;" [routerLink]="['/','Egresos']" (click)="confirm()">
+
+            <ion-row>
+              <ion-col size="8">
+                <ion-card-header>
+                  <ion-card-title style="color: aliceblue;">Egresos</ion-card-title>
+                 
+                </ion-card-header>
+              
+                <ion-card-content style="color:white"> Registra transacciones de Egresos </ion-card-content>
+              </ion-col>
+
+              <ion-col size="1">
+
+              </ion-col>
+
+              <ion-col size="2" >
+                <img width="90px" height="70px" src="assets/icon/egreso.png">
+              </ion-col>
+              
+              
+            </ion-row>
+            
+          </ion-card>
+
+          <p></p>
+
+          <ion-card style="background-color: #1C2833;" [routerLink]="['/agregar-producto']" (click)="confirm()">
+
+            <ion-row>
+
+              <ion-col size="8">
+                <ion-card-header>
+                  <ion-card-title style="color: aliceblue;">Insumos</ion-card-title>
+                  
+                </ion-card-header>
+    
+                <ion-card-content style="color:white"> Registra tus Productos  </ion-card-content>
+              </ion-col>
+
+              <ion-col size="1">
+
+              </ion-col>
+
+              <ion-col size="2" >
+                <img width="90px" height="70px" src="assets/icon/producto.png">
+              </ion-col>
              
-            </ion-card-header>
-          
+            </ion-row>
             
-            <ion-card-content style="color:white"> Registra transacciones de Egresos   </ion-card-content>
-          </ion-card>
-          <p></p>
-          <ion-card id="cardInsumos" [routerLink]="['/agregar-producto']" (click)="confirm()">
-            <ion-card-header>
-              <ion-card-title style="color: aliceblue;">Insumos</ion-card-title>
-              
-            </ion-card-header>
-
-            <ion-card-content style="color:white"> Registra tus Productos  </ion-card-content>
           
             
           </ion-card>
-          <p></p>
-          <ion-card id="cardVentas" [routerLink]="['/venta-producto']" (click)="confirm()">
-            <ion-card-header>
-              <ion-card-title style="color: aliceblue;">Ventas</ion-card-title>
-              
-            </ion-card-header>
-            <ion-card-content style="color:white"> Registra tus Ventas  </ion-card-content>
-            
-            
 
+          <p></p>
+
+          <ion-card style="background-color: #1C2833;" [routerLink]="['/venta-producto']" (click)="confirm()">
+
+            <ion-row>
+              <ion-col size="8">
+                <ion-card-header>
+                  <ion-card-title style="color: aliceblue;">Ventas</ion-card-title>
+                  
+                </ion-card-header>
+                <ion-card-content style="color:white"> Registra tus Ventas  </ion-card-content>
+              </ion-col>
+
+              <ion-col size="1">
+
+              </ion-col>
+
+              <ion-col size="2" >
+                <img width="90px" height="70px" src="assets/icon/venta.png">
+              </ion-col>
+              
+            </ion-row>
+
+            
             
           </ion-card>
 
         </ion-content>
       </ng-template>
     </ion-modal>
-    
+
   </ion-content>
 </div>

@@ -1,12 +1,16 @@
 <ion-content [fullscreen]="true">
 
-  <ion-grid style="height: 100%;" id="Containerlogin">
+  <app-video-background></app-video-background>
 
-    <ion-card id="Containerlogin"  style="border: 1px solid grey; text-align: center; margin: 0 auto; width: 100%;">
+  <ion-grid style="height: 100%;" id="ion-grid-login">
+
+    <ion-card  style="border: 1px solid grey; text-align: center; margin: 0 auto; width: 100%; background-color: rgba(128, 128, 128, 0.5);">
 
       <div>
         
         <br>
+
+        
 
         <p></p>
         
@@ -18,25 +22,26 @@
       
       <br>
       <ion-row>
-        <button  (click)="setOpenRegistro(true)"  style="margin: 0 auto; width: 60%; border-radius: 20px; color: #1C2833; " mat-stroked-button><ion-label> Crear cuenta</ion-label></button>
+        <button  color="warn" (click)="setOpenRegistro(true)" style="margin: 0 auto; width: 60%; border-radius: 20px; border: 2px solid #1C2833;  " mat-stroked-button><ion-label> Crear cuenta</ion-label></button>
       </ion-row>
       <br>
       <ion-row>
-        <button (click)="setOpenLogin(true)" color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px; color: #1C2833;" mat-stroked-button><ion-label>Iniciar sesion</ion-label></button>
+        <button color="warn" (click)="setOpenLogin(true)" style="margin: 0 auto; width: 60%; border-radius: 20px;  border: 2px solid #1C2833;" mat-stroked-button><ion-label>Iniciar sesion</ion-label></button>
       </ion-row>
       <br>
       <ion-row>
-        <button [routerLink]="['/home']" color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px; color: #1C2833;" mat-stroked-button><ion-label>Omitir</ion-label></button>
+        <button color="warn" [routerLink]="['/home']"  style="margin: 0 auto; width: 60%; border-radius: 20px;  border: 2px solid #1C2833; " mat-stroked-button><ion-label>Omitir</ion-label></button>
       </ion-row>
       <br>
       <ion-row>
-        <button (click)="listarUsuarios()" color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px; color: #1C2833;" mat-stroked-button><ion-label>Usuarios Registrados</ion-label></button>
+
+        <button color="warn" (click)="listarUsuarios()" style="margin: 0 auto; width: 60%; border-radius: 20px;  border: 2px solid #1C2833; " mat-stroked-button><ion-label>Usuarios Registrados</ion-label></button>
       </ion-row>
       <br>
       <p></p>
     </ion-card>
 
-    <ion-modal [isOpen]="isModalOpenLogin">
+    <ion-modal [isOpen]="isModalOpenLogin" >
       <ng-template>
         <ion-header>
           <ion-toolbar>

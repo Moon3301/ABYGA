@@ -3,7 +3,6 @@ import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angula
 import { Usuario } from '../usuario';
 import { ApirestService } from '../apirest.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',

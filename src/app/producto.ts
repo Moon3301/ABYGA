@@ -11,7 +11,7 @@ export interface Producto {
     fechaCreacion: string
     fechaModificacion:string
     imagen:string
-    estado: string
+    estado: Boolean
     descripcion:string
     categoria: CategoriasProductos[]
 

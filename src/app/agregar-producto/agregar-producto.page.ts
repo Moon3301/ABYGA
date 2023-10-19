@@ -74,6 +74,7 @@ export class AgregarProductoPage implements OnInit {
   cantidadProducto:any
   UnidadMedida:any = 'Unidad'
   fechActual:any
+  estado:any
 
   // Abrir, Cerrar Modal
   isModalOpenCategoria = false;
@@ -279,8 +280,8 @@ export class AgregarProductoPage implements OnInit {
       const fechActual = new Date();
 
       this.crudP.agregarProducto(Number(this.code),this.nombreProducto,this.precioProducto,this.costoProducto,
-      this.cantidadProducto,this.UnidadMedida,this.fechActual,fechActual,this.currentPhoto,
-      'Disponible','',[{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
+      this.cantidadProducto,this.UnidadMedida,this.fechActual,fechActual,this.currentPhoto,true,'',
+      [{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
 
     }else{
 
@@ -288,8 +289,16 @@ export class AgregarProductoPage implements OnInit {
 
       const registro  = this.crudP.GetDataModificar();
       const registroFecha = registro.fechaCreacion
+      
+      if(registro.cantidadProducto <= 0){
+        this.estado = false;
+      }else{
+        this.estado = true;
+      }
 
-      this.crudP.modificarProducto(this.code,this.nombreProducto,this.precioProducto,this.costoProducto,this.cantidadProducto,this.UnidadMedida,registroFecha,fechaActual,this.currentPhoto,'Disponible','',[{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
+      this.crudP.modificarProducto(this.code,this.nombreProducto,this.precioProducto,this.costoProducto,
+      this.cantidadProducto,this.UnidadMedida,registroFecha,fechaActual,this.currentPhoto,this.estado,'',
+      [{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
 
     }
 

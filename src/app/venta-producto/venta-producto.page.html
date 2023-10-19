@@ -22,9 +22,17 @@
     <ion-grid>
       <ion-row>
 
+        <ion-toast
+          [isOpen]="isToastOpen"
+          message="Sin stock disponible"
+          [duration]="1000"
+          (didDismiss)="setOpenToast(false)"
+        ></ion-toast>
+
         <ion-col size="6" *ngFor="let producto of crudP.productos">
           <div *ngFor="let categoria of producto.categoria">
-            <ion-card (click)="AgregarAlCarro(producto)">
+
+            <ion-card [class.validarStock]="producto.estado"   (click)="AgregarAlCarro(producto)">
               <div *ngIf="productosAgrupados[producto.id]">
                 <nz-badge [nzCount]="productosAgrupados[producto.id].cantidad"></nz-badge>
               </div>
@@ -131,6 +139,8 @@
             <ion-col size="4" style="display:flex; justify-content: center; align-items: center;">
               <b style="font-size: 20px;">{{ productosAgrupados[productoId].total | currency:'USD':'symbol':'1.2-2' }}</b>
             </ion-col>
+
+
             
             <ion-col size="3" style="display:flex; justify-content: center; align-items: center;">
 

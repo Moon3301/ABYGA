@@ -71,6 +71,11 @@ export class VentaProductoPage implements OnInit {
    faCashRegister = faCashRegister
 
 
+   // TOAST
+   isToastOpen = false;
+
+
+
   CarroCompras: Producto[] = []
   totalVenta:any = 0
   CantidadTotal:any = 0;
@@ -92,7 +97,7 @@ export class VentaProductoPage implements OnInit {
 
   isOkButtonEnabled = true
 
-  productosAgrupados: { [id: string]: { nombre: string; cantidad: number; valorUnitario: number; total: number } } = {};
+  productosAgrupados: { [id: string]: { nombre: string; cantidad: number; stock:number; valorUnitario: number; total: number } } = {};
 
   // modal ng-zorro
   isVisible = false;
@@ -110,6 +115,10 @@ export class VentaProductoPage implements OnInit {
     this.fechaActual = new Date();
     this.fechaActual = this.ConvertirFecha(this.fechaActual);
     
+  }
+
+  setOpenToast(isOpen: boolean) {
+    this.isToastOpen = isOpen;
   }
 
   showModal(): void {
@@ -167,35 +176,64 @@ export class VentaProductoPage implements OnInit {
 
   AgregarAlCarro(producto:any){
 
-    const idProducto = producto.id;
+  const idProducto = producto.id;
+  const stock = producto.stock;
 
-  if (this.productosAgrupados[idProducto]) {
-    // Si el producto ya está en el carro, actualiza la cantidad, el total y el valor unitario.
-    this.productosAgrupados[idProducto].cantidad++;
-
-    this.CantidadTotal++;
-
-    this.productosAgrupados[idProducto].total += producto.precio;
-  } else {
-    // Si el producto no está en el carro, agrégalo al registro.
-    this.productosAgrupados[idProducto] = {
-      nombre: producto.nombre,
-      cantidad: 1,
-      valorUnitario: producto.precio,
-      total: producto.precio,
-    };
-
-    this.CantidadTotal++;
-  }
-
-  // Agrega el producto al carro de compras.
-  this.CarroCompras.push(producto);
-
-  // Actualiza el total de la venta.
-  this.totalVenta += producto.precio;
-
-  // Actualiza la cantidad de productos.s
+  // valida si el producto se encuentra en stock
   
+
+    if (this.productosAgrupados[idProducto]) {
+
+      // Si el producto ya está en el carro, actualiza la cantidad, el total y el valor unitario.
+      if(this.productosAgrupados[idProducto].stock >=1){
+
+        // cantidad en el carro
+        this.productosAgrupados[idProducto].cantidad++;
+
+        // stock actualizado del producto
+        this.productosAgrupados[idProducto].stock--;
+        
+        this.CantidadTotal++;
+
+        // Actualiza el total de la venta.
+        this.totalVenta += producto.precio;
+  
+        this.productosAgrupados[idProducto].total += producto.precio;
+      }else{
+        this.setOpenToast(true);
+      }
+      
+    } else {
+      // Si el producto no está en el carro, agrégalo al registro.
+
+      if(producto.stock >= 1){
+
+        this.productosAgrupados[idProducto] = {
+          nombre: producto.nombre,
+          cantidad: 1,
+          stock: producto.stock,
+          valorUnitario: producto.precio,
+          total: producto.precio,
+        };
+
+        this.productosAgrupados[idProducto].stock--;
+    
+        this.CantidadTotal++;
+        this.totalVenta += producto.precio;
+
+      }else{
+
+        this.setOpenToast(true);
+      }
+      
+    }
+  
+    // Agrega el producto al carro de compras.
+    this.CarroCompras.push(producto);
+  
+    
+  
+    // Actualiza la cantidad de productos
 
   console.log(producto);
 
@@ -218,25 +256,48 @@ export class VentaProductoPage implements OnInit {
 
   ModificarCantidad(tipo:any, producto:any){
 
-    if(tipo == 'aumentar'){
+    switch(tipo){
 
-      producto.cantidad ++;
-      this.CantidadTotal ++;
+      case 'aumentar':
 
-      producto.total += producto.valorUnitario;
-      this.totalVenta += producto.valorUnitario;
+        if(producto.stock <= 1){
 
-    }
-
-    if(tipo == 'disminuir'){
-
-      producto.cantidad --;
-      this.CantidadTotal --;
-
-      producto.total -= producto.valorUnitario;
-      this.totalVenta -= producto.valorUnitario;
-    }
+          this.setOpenToast(true);
     
+        }else{
+    
+          producto.stock--;
+    
+          producto.cantidad ++;
+          this.CantidadTotal ++;
+      
+          producto.total += producto.valorUnitario;
+          this.totalVenta += producto.valorUnitario;
+    
+        }
+
+      break;
+
+      case 'disminuir':
+
+        if(producto.cantidad <= 1){
+
+          
+        }else{
+          producto.cantidad --;
+          this.CantidadTotal --;
+    
+          producto.stock++;
+      
+          producto.total -= producto.valorUnitario;
+          this.totalVenta -= producto.valorUnitario;
+
+        }
+
+      break;
+
+    }
+
   }
 
   // LUEGO DE REALIZAR LA LOGICA PASAR FUNCION AL CRUD PRODUCTOS
@@ -253,6 +314,14 @@ export class VentaProductoPage implements OnInit {
         const productoInventario = this.crudP.MostrarProducto(Number(key))
 
         productoInventario.stock -= producto.cantidad
+        
+        if(productoInventario.stock <= 0){
+
+          productoInventario.estado = false;
+
+        }
+
+
         console.log(`Key: ${key}, Nombre: ${producto.nombre}, Cantidad: ${producto.cantidad}, Valor Unitario: ${producto.valorUnitario}, Total: ${producto.total}`);
 
       }

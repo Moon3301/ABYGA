@@ -18,6 +18,8 @@ import {MatIconModule} from '@angular/material/icon';
 
 import {MatButtonModule} from '@angular/material/button';
 
+import { VideoBackgroundComponent } from '../video-background/video-background.component';
+
 
 
 @NgModule({
@@ -30,8 +32,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage, VideoBackgroundComponent]
 })
 export class LoginPageModule {}

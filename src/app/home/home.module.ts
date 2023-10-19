@@ -15,6 +15,14 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 
 import {MatButtonModule} from '@angular/material/button';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+import { register } from 'swiper/element/bundle';
+
+import {MatIconModule} from '@angular/material/icon';
+
+register();
+
 @NgModule({
   imports: [
     CommonModule,
@@ -25,9 +33,11 @@ import {MatButtonModule} from '@angular/material/button';
     FontAwesomeModule,
     NgChartsModule,
     NzButtonModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
 
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}
