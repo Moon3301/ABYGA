@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Usuario } from '../usuario';
 import { ApirestService } from '../apirest.service';
+import { VideoBackgroundComponent } from '../video-background/video-background.component';
+import { CrudUsuariosService } from '../crud-usuarios.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +12,9 @@ import { ApirestService } from '../apirest.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  @ViewChild(VideoBackgroundComponent)
+  videoComponent: VideoBackgroundComponent = new VideoBackgroundComponent;
 
   //modal
   isModalOpenLogin = false;
@@ -26,10 +32,10 @@ export class LoginPage implements OnInit {
   apellidoUsuario:any
 
   correo:any
-  email = new FormControl('', [Validators.required, Validators.email]);
   
   contrasena:any
-  fotoUsuario:any
+  Repcontrasena:any
+  fotoUsuario:any = ''
   telefono:any
   nombreNegocio:any
   fotoNegocio:any
@@ -39,20 +45,40 @@ export class LoginPage implements OnInit {
 
   users:any
 
-  constructor(public api:ApirestService) { }
+  //
+
+  UsuarioLogin:any
+  claveLogin:any
+
+
+  constructor(public api:ApirestService, public crudU:CrudUsuariosService, public router:Router) { }
 
   ngOnInit() {
-
     
+  }
+
+  GoHome(){
+    
+    // Retroceder a page 'Home'
+    this.router.navigate(['home'])
 
   }
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
+  ionViewDidEnter(){
+    this.reproducirVideo();
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  reproducirVideo() {
+    if (this.videoComponent) {
+      this.videoComponent.reproducirVideo();
+    }
+  }
+
+  pausarVideo() {
+    if (this.videoComponent) {
+      this.videoComponent.pausarVideo();
+    }
   }
 
   setOpenLogin(isOpen: boolean) {
@@ -85,13 +111,20 @@ export class LoginPage implements OnInit {
 
   agregarUsuario(){
 
-    const nombre = this.nombreUsuario;
-    const apellido = this.apellidoUsuario;
+    const id = this.crudU.usuarios.length+1;
+    const nombreUsuario = this.nombreUsuario;
     const correo =  this.correo;
     const clave = this.contrasena;
-    const foto = this.fotoUsuario;
     const telefono = this.telefono;
+    const foto = this.fotoUsuario;
+    
+    this.crudU.agregarUsuario(id,nombreUsuario,correo,clave,telefono,foto)
 
+
+    this.setOpenRegistro(false);
+    console.log('Usuario creado con exito')
+    console.log(this.crudU.listarUsuarios());
+    /*
     const dataJ = {
       
       nombre,
@@ -115,7 +148,22 @@ export class LoginPage implements OnInit {
       }
 
     )
+    */
 
+  }
+
+  async validarUsuario() {
+    try {
+      const validacion = await this.crudU.validarUsuario(this.UsuarioLogin, this.claveLogin);
+      if (validacion) {
+        this.GoHome();
+        console.log('Usuario correcto');
+      } else {
+        console.log('Usuario o contraseña incorrecta');
+      }
+    } catch (error) {
+      console.error('Error al validar el usuario:', error);
+    }
   }
 
 }

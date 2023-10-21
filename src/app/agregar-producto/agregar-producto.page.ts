@@ -7,7 +7,7 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave,
-  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap} from '@fortawesome/free-solid-svg-icons';
+  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faTrashCan} from '@fortawesome/free-solid-svg-icons';
   
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
@@ -61,6 +61,7 @@ export class AgregarProductoPage implements OnInit {
   faBroom = faBroom
   faBreadSlice = faBreadSlice
   faPumpSoap = faPumpSoap
+  faTrashCan = faTrashCan
 
   // Almacenamiento Camera
 
@@ -75,6 +76,7 @@ export class AgregarProductoPage implements OnInit {
   UnidadMedida:any = 'Unidad'
   fechActual:any
   estado:any
+
 
   // Abrir, Cerrar Modal
   isModalOpenCategoria = false;
@@ -120,7 +122,12 @@ export class AgregarProductoPage implements OnInit {
   //Modificar
   GetData:any
 
-  constructor(private router:Router, private crudP:CrudProductosService,private activatedRouter: ActivatedRoute,private alertController: AlertController  ) { }
+  // Toast Validar Input
+  isToastOpenValidarInput = false;
+  messageToast = ''
+
+
+  constructor(private router:Router, public crudP:CrudProductosService,private activatedRouter: ActivatedRoute,private alertController: AlertController  ) { }
 
   ngOnInit() {
 
@@ -275,35 +282,58 @@ export class AgregarProductoPage implements OnInit {
 
   AddProducto(){
 
-    if(this.crudP.ActiveModificarProducto == false){
+    if(this.code == null || this.code.length == 0){
 
-      const fechActual = new Date();
+      this.ChangeMessage('Falta agregar el codigo de producto');
+      this.ToastValidarInput(true);
 
-      this.crudP.agregarProducto(Number(this.code),this.nombreProducto,this.precioProducto,this.costoProducto,
-      this.cantidadProducto,this.UnidadMedida,this.fechActual,fechActual,this.currentPhoto,true,'',
-      [{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
+    }else if (this.precioProducto == null || this.precioProducto.length == 0){
 
+      this.ChangeMessage('Falta agregar el precio del producto');
+      this.ToastValidarInput(true);
+
+    }else if (this.costoProducto == null || this.costoProducto.length == 0){
+
+      this.ChangeMessage('Falta agregar el costo del producto');
+      this.ToastValidarInput(true);
+
+    }else if (this.cantidadProducto == null || this.cantidadProducto.length == 0){
+
+      this.ChangeMessage('Falta agregar el stock del producto');
+      this.ToastValidarInput(true);
+      
     }else{
 
-      const fechaActual = new Date();
+      if(this.crudP.ActiveModificarProducto == false){
 
-      const registro  = this.crudP.GetDataModificar();
-      const registroFecha = registro.fechaCreacion
-      
-      if(registro.cantidadProducto <= 0){
-        this.estado = false;
+        const fechActual = new Date();
+  
+        this.crudP.agregarProducto(Number(this.code),this.nombreProducto,this.precioProducto,this.costoProducto,
+        this.cantidadProducto,this.UnidadMedida,this.fechActual,fechActual,this.currentPhoto,true,'',
+        [{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
+  
       }else{
-        this.estado = true;
+  
+        const fechaActual = new Date();
+  
+        const registro  = this.crudP.GetDataModificar();
+        const registroFecha = registro.fechaCreacion
+        
+        if(registro.cantidadProducto <= 0){
+          this.estado = false;
+        }else{
+          this.estado = true;
+        }
+  
+        this.crudP.modificarProducto(this.code,this.nombreProducto,this.precioProducto,this.costoProducto,
+        this.cantidadProducto,this.UnidadMedida,registroFecha,fechaActual,this.currentPhoto,this.estado,'',
+        [{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
+  
       }
-
-      this.crudP.modificarProducto(this.code,this.nombreProducto,this.precioProducto,this.costoProducto,
-      this.cantidadProducto,this.UnidadMedida,registroFecha,fechaActual,this.currentPhoto,this.estado,'',
-      [{id:this.idCategoria,nombre:this.nombreCategoria,icon:this.iconCategoria}])
-
+  
+      this.GoHome();
     }
 
-    this.GoHome();
-    
   }
 
   GoHome(){
@@ -336,15 +366,55 @@ export class AgregarProductoPage implements OnInit {
     this.nombreCategoria = 'Categoria'
     this.iconCategoria = faList;
     this.idCategoria = null;
-
-
     this.currentPhoto = ''
     this.code = ''
     this.codigoBarras = ''
     this.nombreProducto = ''
-    this.precioProducto = 0
-    this.cantidadProducto = 0
+    this.precioProducto = null
+    this.precioProducto = null
+    this.cantidadProducto = null
 
+  }
+
+  eliminarProducto(){
+
+    this.crudP.eliminarProducto(this.GetData.id);
+
+    this.GoHome();
+
+  }
+
+  ToastValidarInput(isOpen:boolean ) {
+
+    this.isToastOpenValidarInput = isOpen;
+    
+  }
+
+  ChangeMessage(message:any){
+    this.messageToast = message;
+  }
+
+  public alertButtonsAlert = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Accion cancelada');
+      },
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        
+        console.log('Producto eliminado');
+        this.eliminarProducto();
+      },
+    },
+  ];
+
+  setResultAlert(ev:any) {
+    console.log(`Dismissed with role: ${ev.detail.role}`);
   }
 
 }

@@ -30,6 +30,7 @@ import { Swiper } from 'swiper';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+
   public alertButtons = ['OK'];
   nombreUsuario:any="Gabriela";
 
@@ -101,7 +102,9 @@ export class HomePage implements OnInit {
 
   ngOnInit(){
 
+    console.log(this.crud.totalNetoPorFecha)
     
+    /*
     this.api.getUsers().subscribe(
       (data) => {
         console.log(data)
@@ -111,12 +114,12 @@ export class HomePage implements OnInit {
       }
 
     )
-
+      */
   
   }
 
   ionViewWillEnter(){
-    
+    console.log(this.crud.totalNetoPorFecha)
   }
 
   // Chart Donnut

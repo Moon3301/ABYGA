@@ -1,15 +1,40 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary"  >  
+  <ion-toolbar color="primary">
+
     <ion-label style="font-size: 18px; ">
       <b style="color:white">{{TipoTrans}} </b>
-      
     </ion-label>
-    <ion-buttons 
-    
-     slot="start">
+
+    <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
+
+                                                                                                                                                                        
+      <ion-buttons slot="end">
+        <div *ngIf="crud.ActiveModificarTransaccion == true">
+          <ion-button id="present-alert" ><fa-icon style="color:white" [icon]=faTrashCan class="fa-2xl"></fa-icon></ion-button>
+        </div>
+        
+      </ion-buttons>
+
+      <ion-alert
+        trigger="present-alert"
+        header="Desea eliminar la transaccion?"
+        [buttons]="alertButtons"
+        (didDismiss)="setResult($event)"
+      ></ion-alert>
+
+      <ion-toast
+          [isOpen]="isToastOpenEliminar"
+          message="Transaccion eliminada"
+          [duration]="1000"
+          (didDismiss)="ToastEliminarTransaccion(false)"
+      ></ion-toast>
+    
+    
+
     <ion-title></ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -31,6 +56,13 @@
             <ion-col size="11">
               <ion-input [(ngModel)]="MontoTransaccion" label="Monto" type="number" labelPlacement="floating" placeholder="total de ingresos" fill="outline"></ion-input>
             </ion-col>
+
+            <ion-toast
+              [isOpen]="isToastOpenValidarInput"
+              message="Falta indicar monto!"
+              [duration]="500"
+              (didDismiss)="ToastValidarInput(false)"
+            ></ion-toast>
 
           </ion-row>
       

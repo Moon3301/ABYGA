@@ -77,21 +77,22 @@
 <div class="ion-page" id="main-content" >
   <ion-header>
     <ion-toolbar color="primary">
+
       <ion-buttons slot="start">
-        
         <ion-menu-button style="color: white;"></ion-menu-button>
       </ion-buttons>
+
       <div *ngIf="matTab == 'inventario'">
-      <ion-item color="primary"  slot="end">
-        
-          <ion-buttons slot="end" [routerLink]="['/venta-producto']">
-            
-            <button mat-raised-button>Agregar venta<fa-icon [icon]="faCashRegister" class="fa-xl"></fa-icon></button>
-          </ion-buttons>
-        
-      </ion-item>
+        <ion-item color="primary"  slot="end">
+          
+            <ion-buttons slot="end" [routerLink]="['/venta-producto']">
+              
+              <button mat-raised-button>Agregar venta<fa-icon [icon]="faCashRegister" class="fa-xl"></fa-icon></button>
+            </ion-buttons>
+          
+        </ion-item>
       </div>
-      
+
       <ion-title></ion-title>
         
     </ion-toolbar>
@@ -244,12 +245,10 @@
 
 
     <ion-fab style="size: 80px;" slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button color="tertiary" id="open-modal">
+      <ion-fab-button color="danger" id="open-modal">
         <ion-icon style="color: white;" name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-
-
 
     <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
       <ng-template>
@@ -265,11 +264,11 @@
         </ion-header>
         <ion-content class="ion-padding">
           
-          <ion-card style="background-color: #1C2833; background: #1C2833;" #button [routerLink]="['/','Ingresos']" (click)="confirm()">
+          <ion-card  style="border-radius: 15px; background-color: #141E30;" #button [routerLink]="['/','Ingresos']" (click)="confirm()"  mat-stroked-button>
             <ion-row>
               <ion-col size="8" >
                 <ion-card-header>
-                  <ion-card-title style="color: aliceblue;">Ingresos</ion-card-title>
+                  <ion-card-title style="color: white">Ingresos</ion-card-title>
                 </ion-card-header>
               
                 <ion-card-content style="color:white"> Registra transacciones de Ingresos  </ion-card-content>
@@ -279,9 +278,7 @@
 
               </ion-col>
 
-              <ion-col size="2" >
-                <img width="90px" height="70px" src="assets/icon/ingreso.png">
-              </ion-col>
+             
               
 
             </ion-row>
@@ -290,84 +287,67 @@
 
           <p></p>
 
-          <ion-card style="background-color: #1C2833;" [routerLink]="['/','Egresos']" (click)="confirm()">
+          <ion-card style="border-radius: 15px; background-color: #F64A4A;" [routerLink]="['/','Egresos']" (click)="confirm()">
 
             <ion-row>
               <ion-col size="8">
                 <ion-card-header>
-                  <ion-card-title style="color: aliceblue;">Egresos</ion-card-title>
+                  <ion-card-title style="color: white">Egresos</ion-card-title>
                  
                 </ion-card-header>
               
-                <ion-card-content style="color:white"> Registra transacciones de Egresos </ion-card-content>
+                <ion-card-content style="color: white"> Registra transacciones de Egresos </ion-card-content>
               </ion-col>
 
               <ion-col size="1">
 
               </ion-col>
 
-              <ion-col size="2" >
-                <img width="90px" height="70px" src="assets/icon/egreso.png">
-              </ion-col>
-              
-              
             </ion-row>
             
           </ion-card>
 
           <p></p>
 
-          <ion-card style="background-color: #1C2833;" [routerLink]="['/agregar-producto']" (click)="confirm()">
+          <ion-card style="border-radius: 15px; background-color: #141E30;" [routerLink]="['/agregar-producto']" (click)="confirm()">
 
             <ion-row>
 
               <ion-col size="8">
                 <ion-card-header>
-                  <ion-card-title style="color: aliceblue;">Insumos</ion-card-title>
+                  <ion-card-title style="color: white">Insumos</ion-card-title>
                   
                 </ion-card-header>
     
-                <ion-card-content style="color:white"> Registra tus Productos  </ion-card-content>
+                <ion-card-content style="color: white"> Registra tus Productos  </ion-card-content>
               </ion-col>
 
               <ion-col size="1">
 
               </ion-col>
 
-              <ion-col size="2" >
-                <img width="90px" height="70px" src="assets/icon/producto.png">
-              </ion-col>
-             
             </ion-row>
-            
-          
             
           </ion-card>
 
           <p></p>
 
-          <ion-card style="background-color: #1C2833;" [routerLink]="['/venta-producto']" (click)="confirm()">
+          <ion-card style="border-radius: 15px; background-color: #F64A4A;" [routerLink]="['/venta-producto']" (click)="confirm()">
 
             <ion-row>
               <ion-col size="8">
                 <ion-card-header>
-                  <ion-card-title style="color: aliceblue;">Ventas</ion-card-title>
+                  <ion-card-title style="color: white">Ventas</ion-card-title>
                   
                 </ion-card-header>
-                <ion-card-content style="color:white"> Registra tus Ventas  </ion-card-content>
+                <ion-card-content style="color: white"> Registra tus Ventas  </ion-card-content>
               </ion-col>
 
               <ion-col size="1">
 
               </ion-col>
 
-              <ion-col size="2" >
-                <img width="90px" height="70px" src="assets/icon/venta.png">
-              </ion-col>
-              
             </ion-row>
-
-            
             
           </ion-card>
 

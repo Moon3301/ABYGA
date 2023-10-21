@@ -24,6 +24,8 @@ import { ButtonModule } from 'primeng/button';
 
 import {MatButtonModule} from '@angular/material/button';
 
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   imports: [
@@ -38,7 +40,8 @@ import {MatButtonModule} from '@angular/material/button';
     NzButtonModule,
     CalendarModule,
     ButtonModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
     
   ],
   declarations: [AgregarTransaccionPage]

@@ -7,9 +7,11 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
-  faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave, faWandMagic, faCashRegister} from '@fortawesome/free-solid-svg-icons';
+  faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave, 
+  faWandMagic, faCashRegister, faTrashCan} from '@fortawesome/free-solid-svg-icons';
   
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+
 
 
 @Component({
@@ -54,6 +56,7 @@ export class AgregarTransaccionPage implements OnInit {
   faMoneyBill1Wave = faMoneyBill1Wave
   faWandMagic = faWandMagic
   faCashRegister = faCashRegister
+  faTrashCan = faTrashCan
 
   // Camera
 
@@ -72,7 +75,6 @@ export class AgregarTransaccionPage implements OnInit {
   // Monto Transaccion
   MontoTransaccion:any
   
-
   //
   selectedDate:any;
 
@@ -111,7 +113,7 @@ export class AgregarTransaccionPage implements OnInit {
 
   CodeData:any
 
-  constructor(private router:Router, private crud:CrudTransaccionesService,private activatedRouter: ActivatedRoute,  ) { }
+  constructor(private router:Router, public crud:CrudTransaccionesService,private activatedRouter: ActivatedRoute, ) { }
 
   // Variables dinamicas para categoria
 
@@ -130,6 +132,11 @@ export class AgregarTransaccionPage implements OnInit {
 
   // Indica el tipo de transaccion ej: Ingresos o Gastos
   TipoTrans: any
+
+  // Alert
+  isToastOpenEliminar = false;
+  isToastOpenValidarInput = false;
+
 
   ArrayCategoriasGastos:any = [] = [
 
@@ -177,10 +184,19 @@ export class AgregarTransaccionPage implements OnInit {
       this.GetData = this.crud.GetDataModificar();
 
       // PENDIENTE COMPLETAR TODOS LOS DATOS (name,monto,categoria,etc)
+      this.NameTransaccion = this.GetData.nombre
       this.MontoTransaccion = this.GetData.monto
+      this.selectedDate = this.GetData.fecha;
+      this.descripcion = this.GetData.notas;
+      this.TipoTrans = this.GetData.tipo_transaccion
+      this.NombreCat = this.GetData.categoria[0].nombre
+      this.NombreSubCat = this.GetData.categoria[0].subCategoria[0].nombre
+
 
       console.log(this.GetData)
     }
+
+    
     
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
     this.OptionGasto();
@@ -214,20 +230,30 @@ export class AgregarTransaccionPage implements OnInit {
 
   }
 
+
   //Agregar Registro al CRUD
   AddTransaccion(){
-    
-    if(this.crud.ActiveModificarTransaccion == false){
 
-      this.crud.AgregarTransaccion(this.crud.transaccion.length+1,this.NameTransaccion,this.MontoTransaccion,
-      'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}])
-    
+    if(this.MontoTransaccion == null || this.MontoTransaccion.length == 0){
+
+      console.log('Falta completar el monto')
+      this.ToastValidarInput(true);
     }else{
-      console.log('Modificar Transaccion activado ! ')
-      this.crud.ModificarTransaccion(this.GetData.id,this.GetData.nombre,this.MontoTransaccion,'',this.GetData.fecha,'',this.GetData.tipo_transaccion,'',this.GetData.categoria)
-    }
 
-    this.GoHome();
+      if(this.crud.ActiveModificarTransaccion == false){
+
+        this.crud.AgregarTransaccion(this.crud.transacciones.length+1,this.NameTransaccion,this.MontoTransaccion,
+        'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}])
+      
+      }else{
+        console.log('Modificar Transaccion activado ! ')
+        this.crud.ModificarTransaccion(this.GetData.id,this.NameTransaccion,this.MontoTransaccion,'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}])
+      }
+  
+      this.GoHome();
+    }
+    
+    
 
   }
 
@@ -305,7 +331,7 @@ export class AgregarTransaccionPage implements OnInit {
     //Clear Name
     this.NameTransaccion = ''
     //Clear Monto
-    this.MontoTransaccion = 0
+    this.MontoTransaccion = null
     //Clear Categoria
     this.NombreCat = 'Categoria'
     this.NombreSubCat = 'Subcategoria'
@@ -337,7 +363,6 @@ export class AgregarTransaccionPage implements OnInit {
       this.ResetData();
     }
 
-
   }
 
   //CheckBox
@@ -351,5 +376,47 @@ export class AgregarTransaccionPage implements OnInit {
     }
 
   }
+
+  EliminarTransaccion(){
+
+    this.crud.EliminarTransaccion(this.GetData.id);
+    this.ToastEliminarTransaccion(true);
+    this.GoHome();
+
+  }
+
+  ToastEliminarTransaccion(isOpen: boolean) {
+    this.isToastOpenEliminar = isOpen;
+  }
+
+  ToastValidarInput(isOpen:boolean) {
+    this.isToastOpenValidarInput = isOpen;
+  }
+
+
+
+  public alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Accion cancelada');
+      },
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        this.EliminarTransaccion();
+        console.log('Transaccion eliminada');
+      },
+    },
+  ];
+
+  setResult(ev:any) {
+    console.log(`Dismissed with role: ${ev.detail.role}`);
+  }
+
+
 
 }
