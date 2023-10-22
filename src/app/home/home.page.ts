@@ -24,6 +24,8 @@ import { ApirestService } from '../apirest.service';
 
 import { Swiper } from 'swiper';
 
+import { CrudUsuariosService } from '../crud-usuarios.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -98,11 +100,13 @@ export class HomePage implements OnInit {
   unidadDeFomento: number=0;
   ipc: number=0;
 
-  constructor(private router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService) {}
+  constructor(public router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService, public crudU:CrudUsuariosService) {}
 
   ngOnInit(){
 
     console.log(this.crud.totalNetoPorFecha)
+
+    this.nombreUsuario = this.crudU.nombreUsuario;
     
     /*
     this.api.getUsers().subscribe(
@@ -119,6 +123,9 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter(){
+
+    this.nombreUsuario = this.crudU.nombreUsuario;
+    
     console.log(this.crud.totalNetoPorFecha)
   }
 

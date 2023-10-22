@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from './usuario';
 import { Storage } from '@ionic/storage-angular';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,18 @@ export class CrudUsuariosService {
 
   public usuarios: Usuario[] = [];
 
-  constructor(private storage: Storage) {
+  public nombreUsuario:any
+
+  constructor(private storage: Storage, public router:Router) {
 
     this.initStorage();
     this.cargarListasDesdeStorage();
 
-   }
+  }
+
+  goHome(){
+    this.router.navigate(['home']);
+  }
 
   async initStorage(){
     await this.storage.create();
@@ -97,34 +104,62 @@ export class CrudUsuariosService {
 
   }
 
-  validarUsuario(user: any, pass: any): Promise<boolean> {
+  async validarUsuario(user: any, pass: any): Promise<boolean> {
     return new Promise(async (resolve, reject) => {
       try {
         // Validar usuario
-        const usuarioEncontrado = this.usuarios.find(x => x.nombreUsuario === user);
-  
+        const usuarioEncontrado = this.usuarios.find(x => x.nombreUsuario == user);
+        console.log('Usuario encontrado: '+usuarioEncontrado)
         if (!usuarioEncontrado) {
           throw new Error(`No se encontró un usuario con el nombre ${user}`);
         }
-  
+        
         // Validar clave
-        const claveCorrecta = this.usuarios.find(x => x.clave === pass);
-  
+        const claveCorrecta = this.usuarios.find(x => x.clave == pass);
+        
+        console.log('CLave correcta: '+claveCorrecta)
+
         if (!claveCorrecta) {
           throw new Error('Contraseña incorrecta');
         }
   
         // Si el usuario es correcto y la clave es correcta, resolvemos la promesa con true
+
+        
+
+
         if (usuarioEncontrado && claveCorrecta) {
-          resolve(true);
+          this.nombreUsuario = user;
+          resolve(true); // Usuario y clave correctos
         } else {
-          resolve(false);
+          resolve(false); // Usuario o clave incorrectos
         }
       } catch (error) {
         reject(error); // Rechaza la promesa en caso de error
       }
     });
   }
+
+  validarUsuarioV2(nombreUsuario: string, clave: string): boolean {
+    // Buscar un usuario con el nombre de usuario especificado y su clave correspondiente.
+    const usuarioIndex = this.usuarios.findIndex(user => user.nombreUsuario === nombreUsuario && user.clave === clave);
+
+    return usuarioIndex !== -1;
+  } 
+
+  validarUsuarioV3(nombreUsuario: string, clave: string){
+
+    const usuarioIndex = this.usuarios.findIndex(user => user.nombreUsuario === nombreUsuario && user.clave === clave);
+
+    if(usuarioIndex == -1){
+      console.log('Usuario o contrasena incorrecta');
+    }else{
+      this.goHome();
+      
+    }
+
+  }
+  
 
   
 

@@ -20,7 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { VideoBackgroundComponent } from '../video-background/video-background.component';
 
-
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @NgModule({
   imports: [
@@ -33,6 +33,7 @@ import { VideoBackgroundComponent } from '../video-background/video-background.c
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
+    NzSpinModule
     
   ],
   declarations: [LoginPage, VideoBackgroundComponent]

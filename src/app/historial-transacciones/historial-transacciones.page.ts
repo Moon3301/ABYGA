@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudTransaccionesService } from '../crud-transacciones.service';
-
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-historial-transacciones',
@@ -10,7 +9,7 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 })
 export class HistorialTransaccionesPage implements OnInit {
 
-  constructor( public crud:CrudTransaccionesService) { }
+  constructor( public crud:CrudTransaccionesService, public router:Router) { }
 
   ngOnInit() {
   }
@@ -18,6 +17,13 @@ export class HistorialTransaccionesPage implements OnInit {
   GetTransaccion(id:any){
     this.crud.GetModificarTransaccion(id);
     this.crud.ActiveModificarTransaccion = true;
+  }
+
+  GoHome(){
+    
+    // Retroceder a page 'Home'
+    this.router.navigate(['home'])
+
   }
 
 }

@@ -2,47 +2,98 @@
 
   <app-video-background></app-video-background>
 
-  <button (click)="reproducirVideo()">Reproducir</button>
-  <button (click)="pausarVideo()">Pausar</button>
+  <ion-grid style="height: 100%;" >
 
-  <ion-grid style="height: 100%;" id="ion-grid-login">
-
-    <ion-card  style="border: 1px solid grey; text-align: center; margin: 0 auto; width: 100%; background-color: rgba(128, 128, 128, 0.5);">
-
-      <div>
-        
-        <br>
-
-        
-
-        <p></p>
-        
-        <img  style="border-radius: 50% ; overflow: hidden;  "  width="150px" height="150px" src="assets/icon/logoabyga.png" >
-          
-        <br>
-
-      </div>
+    <div class="center-content">
       
-      <br>
-      <ion-row>
-        <button  color="warn" (click)="setOpenRegistro(true)" style="margin: 0 auto; width: 60%; border-radius: 20px; border: 2px solid #1C2833;  " mat-stroked-button><ion-label> Crear cuenta</ion-label></button>
-      </ion-row>
-      <br>
-      <ion-row>
-        <button color="warn" (click)="setOpenLogin(true)" style="margin: 0 auto; width: 60%; border-radius: 20px;  border: 2px solid #1C2833;" mat-stroked-button><ion-label>Iniciar sesion</ion-label></button>
-      </ion-row>
-      <br>
-      <ion-row>
-        <button color="warn" (click)="GoHome()"  style="margin: 0 auto; width: 60%; border-radius: 20px;  border: 2px solid #1C2833; " mat-stroked-button><ion-label>Omitir</ion-label></button>
-      </ion-row>
-      <br>
-      <ion-row>
+      <ion-card  style="border-radius: 15px; border: 1px solid grey; text-align: center; margin: 0 auto; width: 100%; background-color: rgba(255, 255, 255, 0.2);">
 
-        <button color="warn" (click)="listarUsuarios()" style="margin: 0 auto; width: 60%; border-radius: 20px;  border: 2px solid #1C2833; " mat-stroked-button><ion-label>Usuarios Registrados</ion-label></button>
-      </ion-row>
-      <br>
-      <p></p>
-    </ion-card>
+        <div>
+          
+          <img  style="border-radius: 50% ; overflow: hidden;"  width="150px" height="150px" src="assets/icon/logoabyga.png" >
+          <br>
+        </div>
+  
+        <ion-grid>
+  
+          <div style="border-radius: 15px; border: 0.5px solid grey;">
+            <br>
+  
+            <ion-row >
+              <mat-form-field style="margin: 0 auto; width: 60%;" appearance="outline">
+        
+                <mat-label>Nombre de usuario</mat-label>
+                <input [(ngModel)]="UsuarioLogin" matInput placeholder="ej: Diego1996">
+        
+              </mat-form-field>
+            </ion-row>
+        
+            <ion-row>
+        
+              <mat-form-field style="margin: 0 auto; width: 60%;" appearance="outline"> 
+        
+                <mat-label>Contrasena</mat-label>
+                <input matInput [(ngModel)]="claveLogin" [type]="hide ? 'password' : 'text'">
+        
+                <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon  >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+        
+              </mat-form-field>
+        
+            </ion-row>
+            
+            <ion-row>
+              <button (click)="validarUsuario()" style="margin: 0 auto; width: 60%; border-radius: 20px; border: 2px solid grey;" mat-stroked-button><ion-label>Login</ion-label></button>
+            </ion-row>
+  
+            <ion-row>
+              <ion-label style="font-size: 12px; margin: 0 auto; width: 60%; " >Olvido su clave?</ion-label>
+            </ion-row>
+  
+          </div>
+          <br>
+          <div style="border-radius: 15px; border: 0.5px solid grey;">
+            
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">
+                  <button color="warn" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label>Login con Gmail</ion-label></button>
+                </ion-col>
+  
+                <ion-col size="6">
+                  <button color="primary" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label>Login con Facebook</ion-label></button>
+                </ion-col>
+  
+              </ion-row>
+            </ion-grid>
+  
+          </div>
+          <br>
+          <div style="border-radius: 15px; border: 0.5px solid grey;">
+            
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">
+                  <button  color="warn" (click)="setOpenRegistro(true)" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label> Crear cuenta</ion-label></button>
+                </ion-col>
+        
+                <ion-col size="6">
+                  <button color="warn" (click)="GoHome()"  style="margin: 0 auto; width: 100%; border-radius: 20px;  " mat-stroked-button><ion-label>Omitir registro</ion-label></button>
+                </ion-col>
+  
+              </ion-row>
+            </ion-grid>
+  
+          </div>
+  
+        </ion-grid>
+        
+      </ion-card>
+
+    </div>
+
+    
 
     <ion-modal [isOpen]="isModalOpenLogin" >
       <ng-template>
@@ -94,7 +145,7 @@
               </ion-row>
               
               <ion-row>
-                <button (click)="validarUsuario()" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Login</ion-label></button>
+                <button (click)="validacionCorrecta()" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Login</ion-label></button>
               </ion-row>
 
               <ion-row>

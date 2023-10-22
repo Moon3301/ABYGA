@@ -9,12 +9,20 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    path: 'menuopciones',
+    loadChildren: () => import('./menuopciones/menuopciones.module').then( m => m.MenuopcionesPageModule)
+  },
+  {
+    path: 'cuenta-usuario',
+    loadChildren: () => import('./cuenta-usuario/cuenta-usuario.module').then( m => m.CuentaUsuarioPageModule)
   },
   {
     path: 'agregar-producto',
@@ -24,17 +32,10 @@ const routes: Routes = [
     path: 'venta-producto',
     loadChildren: () => import('./venta-producto/venta-producto.module').then( m => m.VentaProductoPageModule)
   },
-  {
-    path: 'menuopciones',
-    loadChildren: () => import('./menuopciones/menuopciones.module').then( m => m.MenuopcionesPageModule)
-  },
+  
   {
     path: 'historial-transacciones',
     loadChildren: () => import('./historial-transacciones/historial-transacciones.module').then( m => m.HistorialTransaccionesPageModule)
-  },
-  {
-    path: 'cuenta-usuario',
-    loadChildren: () => import('./cuenta-usuario/cuenta-usuario.module').then( m => m.CuentaUsuarioPageModule)
   },
   {
     path: ':id',

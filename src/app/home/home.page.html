@@ -264,89 +264,72 @@
         </ion-header>
         <ion-content class="ion-padding">
           
-          <ion-card  style="border-radius: 15px; background-color: #141E30;" #button [routerLink]="['/','Ingresos']" (click)="confirm()"  mat-stroked-button>
+          <ion-card  style="border-radius: 15px; border: 2px solid #141E30;" #button [routerLink]="['/','Ingresos']" (click)="confirm()"  mat-stroked-button>
+
             <ion-row>
-              <ion-col size="8" >
-                <ion-card-header>
-                  <ion-card-title style="color: white">Ingresos</ion-card-title>
+              <ion-col size="12" >
+                <ion-card-header style="border: 1px solid #141E30; border-radius: 15px;">
+                  <ion-card-title style="color: #141E30">Ingresos</ion-card-title>
+                  <p></p>
+                  <p style="color:#141E30">Registra transacciones de Ingresos</p>
                 </ion-card-header>
-              
-                <ion-card-content style="color:white"> Registra transacciones de Ingresos  </ion-card-content>
+                
               </ion-col>
+  
+            </ion-row>
+ 
+          </ion-card>
 
-              <ion-col size="1">
+          <p></p>
 
+          <ion-card style="border-radius: 15px; border: 2px solid #F64A4A;" [routerLink]="['/','Egresos']" (click)="confirm()">
+
+            <ion-row>
+              <ion-col size="12" >
+                <ion-card-header style="border: 1px solid #F64A4A; border-radius: 15px;">
+                  <ion-card-title style="color: #F64A4A">Egresos</ion-card-title>
+                  <p></p>
+                  <p style="color:#F64A4A">Registra transacciones de Egresos</p>
+                </ion-card-header>
+                
               </ion-col>
-
-             
-              
-
+  
             </ion-row>
             
           </ion-card>
 
           <p></p>
 
-          <ion-card style="border-radius: 15px; background-color: #F64A4A;" [routerLink]="['/','Egresos']" (click)="confirm()">
+          <ion-card style="border-radius: 15px; border: 2px solid #141E30;" [routerLink]="['/agregar-producto']" (click)="confirm()">
 
             <ion-row>
-              <ion-col size="8">
-                <ion-card-header>
-                  <ion-card-title style="color: white">Egresos</ion-card-title>
-                 
+              <ion-col size="12" >
+                <ion-card-header style="border: 1px solid #141E30; border-radius: 15px;">
+                  <ion-card-title style="color: #141E30">Insumos</ion-card-title>
+                  <p></p>
+                  <p style="color:#141E30">Registra tus Productos</p>
                 </ion-card-header>
-              
-                <ion-card-content style="color: white"> Registra transacciones de Egresos </ion-card-content>
+                
               </ion-col>
-
-              <ion-col size="1">
-
-              </ion-col>
-
+  
             </ion-row>
-            
+
           </ion-card>
 
           <p></p>
 
-          <ion-card style="border-radius: 15px; background-color: #141E30;" [routerLink]="['/agregar-producto']" (click)="confirm()">
+          <ion-card style="border-radius: 15px; border: 2px solid #F64A4A;" [routerLink]="['/venta-producto']" (click)="confirm()">
 
             <ion-row>
-
-              <ion-col size="8">
-                <ion-card-header>
-                  <ion-card-title style="color: white">Insumos</ion-card-title>
-                  
+              <ion-col size="12" >
+                <ion-card-header style="border: 1px solid #F64A4A; border-radius: 15px;">
+                  <ion-card-title style="color: #F64A4A">Ventas</ion-card-title>
+                  <p></p>
+                  <p style="color:#F64A4A">Registra tus Ventas</p>
                 </ion-card-header>
-    
-                <ion-card-content style="color: white"> Registra tus Productos  </ion-card-content>
+                
               </ion-col>
-
-              <ion-col size="1">
-
-              </ion-col>
-
-            </ion-row>
-            
-          </ion-card>
-
-          <p></p>
-
-          <ion-card style="border-radius: 15px; background-color: #F64A4A;" [routerLink]="['/venta-producto']" (click)="confirm()">
-
-            <ion-row>
-              <ion-col size="8">
-                <ion-card-header>
-                  <ion-card-title style="color: white">Ventas</ion-card-title>
-                  
-                </ion-card-header>
-                <ion-card-content style="color: white"> Registra tus Ventas  </ion-card-content>
-              </ion-col>
-
-              <ion-col size="1">
-
-              </ion-col>
-
+  
             </ion-row>
             
           </ion-card>

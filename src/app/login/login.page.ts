@@ -5,6 +5,7 @@ import { ApirestService } from '../apirest.service';
 import { VideoBackgroundComponent } from '../video-background/video-background.component';
 import { CrudUsuariosService } from '../crud-usuarios.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -47,11 +48,13 @@ export class LoginPage implements OnInit {
 
   //
 
-  UsuarioLogin:any
-  claveLogin:any
+  public UsuarioLogin: string = ''
+  claveLogin: string = ''
+
+  isSpinning = false;
 
 
-  constructor(public api:ApirestService, public crudU:CrudUsuariosService, public router:Router) { }
+  constructor(public api:ApirestService, public crudU:CrudUsuariosService, public router:Router, public navController: NavController) { }
 
   ngOnInit() {
     
@@ -60,13 +63,15 @@ export class LoginPage implements OnInit {
   GoHome(){
     
     // Retroceder a page 'Home'
-    this.router.navigate(['home'])
+
+    this.router.navigate(['/home'])
+    console.log('GoHome ejecutado...')
 
   }
 
   ionViewDidEnter(){
+    
     this.reproducirVideo();
-
   }
 
   reproducirVideo() {
@@ -93,10 +98,11 @@ export class LoginPage implements OnInit {
     this.isModalOpenUsuarios = isOpen;
   }
 
+  
   listarUsuarios(){
-
+    
     this.setOpenUsuarios(true);
-
+    /*
     this.api.getUsers().subscribe(
       (data) => {
         this.users = data // Asigna los datos de la respuesta a la variable 'users'
@@ -106,9 +112,9 @@ export class LoginPage implements OnInit {
         console.error('Error al obtener los datos:', error);
       }
     );
-
+      */
   }
-
+  
   agregarUsuario(){
 
     const id = this.crudU.usuarios.length+1;
@@ -123,7 +129,7 @@ export class LoginPage implements OnInit {
 
     this.setOpenRegistro(false);
     console.log('Usuario creado con exito')
-    console.log(this.crudU.listarUsuarios());
+    
     /*
     const dataJ = {
       
@@ -152,18 +158,63 @@ export class LoginPage implements OnInit {
 
   }
 
+  GoHomeNav(){
+    this.navController.navigateRoot('/home');
+  }
+
+  validacionCorrecta(){
+
+    // Cerrar el modal
+    console.log('Se abre funcion cerrar modal')
+    this.setOpenLogin(false);
+
+    this.GoHomeNav();
+
+    console.log('Se abre funcion GoHome')
+    
+  }
+
   async validarUsuario() {
     try {
-      const validacion = await this.crudU.validarUsuario(this.UsuarioLogin, this.claveLogin);
+
+      console.log('Usuario registrado: '+this.UsuarioLogin)
+      console.log('Clave ingresada: '+this.claveLogin)
+
+      const validacion = await this.crudU.validarUsuario(String(this.UsuarioLogin) , String(this.claveLogin));
+      
+      console.log(validacion)
+
       if (validacion) {
-        this.GoHome();
+
+        this.validacionCorrecta();
+       
         console.log('Usuario correcto');
+
       } else {
         console.log('Usuario o contraseña incorrecta');
       }
     } catch (error) {
       console.error('Error al validar el usuario:', error);
     }
+  }
+
+  validarUsuarioV2(): void {
+    const usuarioValido = this.crudU.validarUsuarioV2(this.UsuarioLogin, this.claveLogin);
+
+    console.log('usuarioValido: '+usuarioValido);
+    if (usuarioValido) {
+      // Usuario válido, aquí puedes realizar la navegación a la página de inicio, por ejemplo.
+      console.log('Usuario correcto');
+      this.validacionCorrecta();
+    } else {
+      // Usuario o contraseña incorrectos, puedes mostrar un mensaje de error.
+      console.log('Usuario o contraseña incorrecta');
+    }
+  }
+
+  validarUsuarioV3(){
+    this.crudU.validarUsuarioV3(this.UsuarioLogin, this.claveLogin);
+    this.validacionCorrecta();
   }
 
 }
