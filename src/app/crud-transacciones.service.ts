@@ -5,6 +5,8 @@ import { TipoPago } from './tipo-pago';
 import { CategoriasTransacciones } from './categorias-transacciones';
 
 import { Storage } from '@ionic/storage-angular';
+import { CrudProductosService } from './crud-productos.service';
+import { Producto } from './producto';
 
 
 @Injectable({
@@ -23,6 +25,11 @@ export class CrudTransaccionesService {
 
   ActiveModificarTransaccion:any = false;
   DataTransaccion:any
+
+  // Toast
+
+  isToastOpen:any = false;
+  message:any
 
   constructor(private storage: Storage) {
 
@@ -63,14 +70,19 @@ export class CrudTransaccionesService {
 
   //
 
-  async AgregarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any){
+  async AgregarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any, producto:any){
+
+    
 
     if (this.transacciones.find(x => x.id === id)) {return};
 
     // Local
-    this.transacciones.push({id,nombre,monto,estado,notas,fecha,tipo_transaccion,tipo_pago,categoria})
+    this.transacciones.push({id,nombre,monto,estado,notas,fecha,tipo_transaccion,tipo_pago,categoria,producto})
     
     this.guardarListasEnStorage();
+
+    this.message = 'Transaccion creada con exito!'
+    this.setOpenToast(true);
 
     this.agruparTransacciones(id);
     
@@ -167,6 +179,9 @@ export class CrudTransaccionesService {
 
     this.guardarListasEnStorage();
 
+    this.message = 'Transaccion modificada!'
+    this.setOpenToast(true);
+
     this.agruparTransacciones(id);
 
   }
@@ -242,6 +257,9 @@ export class CrudTransaccionesService {
     console.log('Transacción eliminada: ' + id);
 
     this.guardarListasEnStorage();
+
+    this.message = 'Transaccion eliminada!'
+    this.setOpenToast(true);
   }
 
   GetModificarTransaccion(id:any){
@@ -258,6 +276,11 @@ export class CrudTransaccionesService {
 
     const fecha = new Date(date);
     return fecha.toLocaleDateString('es',{ weekday:'short',day:'2-digit', month:'long', year:'numeric'})
+    
+  }
+
+  setOpenToast(isOpen: boolean) {
+    this.isToastOpen = isOpen;
     
   }
 

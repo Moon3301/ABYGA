@@ -8,7 +8,6 @@
     <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
-
                                                                                                                                                                         
       <ion-buttons slot="end">
         <div *ngIf="crud.ActiveModificarTransaccion == true">
@@ -31,8 +30,6 @@
           (didDismiss)="ToastEliminarTransaccion(false)"
       ></ion-toast>
     
-    
-
     <ion-title></ion-title>
 
   </ion-toolbar>
@@ -204,6 +201,16 @@
             </form>
         
         </ion-list>
+
+        <!-- Productos -->
+
+        <div *ngIf="this.ArrayCategoriasIngresos[1].id == 2">
+          
+          <button (click)="productosTransaccion()">Productos</button>
+
+          
+        </div>
+
   
       </mat-tab>
       
@@ -381,6 +388,10 @@
               </form>
             </ion-card>
 
+          <!-- Productos -->
+
+
+
         </ion-list>
       
       </mat-tab>
@@ -396,5 +407,7 @@
     <ion-icon name="checkmark-done-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
+
+
 
 

@@ -12,13 +12,24 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
+import { CrudProductosService } from '../crud-productos.service';
 
+// Importa el módulo 'Object'
+
+
+interface ProductoAgrupado {
+  id: number;
+  productos: any[];
+}
 
 @Component({
   selector: 'app-agregar-transaccion',
   templateUrl: './agregar-transaccion.page.html',
   styleUrls: ['./agregar-transaccion.page.scss'],
 })
+
+
+
 export class AgregarTransaccionPage implements OnInit {
 
   //Icons font-awesome
@@ -113,7 +124,9 @@ export class AgregarTransaccionPage implements OnInit {
 
   CodeData:any
 
-  constructor(private router:Router, public crud:CrudTransaccionesService,private activatedRouter: ActivatedRoute, ) { }
+  productosAgrupados: { [id: string]: any } = {}
+
+  constructor(private router:Router, public crud:CrudTransaccionesService,private activatedRouter: ActivatedRoute, public crudP:CrudProductosService ) { }
 
   // Variables dinamicas para categoria
 
@@ -136,7 +149,6 @@ export class AgregarTransaccionPage implements OnInit {
   // Alert
   isToastOpenEliminar = false;
   isToastOpenValidarInput = false;
-
 
   ArrayCategoriasGastos:any = [] = [
 
@@ -178,9 +190,14 @@ export class AgregarTransaccionPage implements OnInit {
   ]
 
   ngOnInit() {
+
+    console.log()
     
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
     if(this.crud.ActiveModificarTransaccion == true){
+
+      this.productosTransaccion();
+
       this.GetData = this.crud.GetDataModificar();
 
       // PENDIENTE COMPLETAR TODOS LOS DATOS (name,monto,categoria,etc)
@@ -196,8 +213,6 @@ export class AgregarTransaccionPage implements OnInit {
       console.log(this.GetData)
     }
 
-    
-    
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
     this.OptionGasto();
     
@@ -230,9 +245,10 @@ export class AgregarTransaccionPage implements OnInit {
 
   }
 
-
   //Agregar Registro al CRUD
   AddTransaccion(){
+
+    let producto:any
 
     if(this.MontoTransaccion == null || this.MontoTransaccion.length == 0){
 
@@ -243,8 +259,8 @@ export class AgregarTransaccionPage implements OnInit {
       if(this.crud.ActiveModificarTransaccion == false){
 
         this.crud.AgregarTransaccion(this.crud.transacciones.length+1,this.NameTransaccion,this.MontoTransaccion,
-        'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}])
-      
+        'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}],producto)
+          
       }else{
         console.log('Modificar Transaccion activado ! ')
         this.crud.ModificarTransaccion(this.GetData.id,this.NameTransaccion,this.MontoTransaccion,'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}])
@@ -271,6 +287,8 @@ export class AgregarTransaccionPage implements OnInit {
     console.log(ev.tab.textLabel);
 
   }
+
+
 
   // Open Modal
   setOpenCategoria(isOpen: boolean) {
@@ -340,6 +358,8 @@ export class AgregarTransaccionPage implements OnInit {
     this.selectedOptionTipoTran = null
     // Clear Frecuencia
     this.selectedOptionFrecuencia = null
+
+   
 
   }
 
@@ -417,6 +437,38 @@ export class AgregarTransaccionPage implements OnInit {
     console.log(`Dismissed with role: ${ev.detail.role}`);
   }
 
+
+  agruparProductos(id:any){
+
+
+  }
+
+  productosTransaccion(){
+
+    for(let transaccion of this.crud.transacciones){
+      for(const key in transaccion.producto){
+        if(transaccion.producto.hasOwnProperty(key)){
+
+          const idProducto = Number(key);
+
+          const productoInventario = this.crudP.MostrarProducto(Number(key));
+
+          if (!this.productosAgrupados[idProducto]) {
+            // Si aún no existe un arreglo para este ID, créalo
+            this.productosAgrupados[idProducto] = [];
+          }
+  
+          this.productosAgrupados[idProducto].push(productoInventario);
+
+          console.log(this.productosAgrupados)
+
+        }
+
+      }
+
+    }
+
+  }
 
 
 }

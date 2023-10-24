@@ -1,6 +1,7 @@
 import { CategoriasTransacciones } from "./categorias-transacciones"
 import { TipoPago } from "./tipo-pago"
 import { TipoTransaccion } from "./tipo-transaccion"
+import { Producto } from "./producto"
 
 export interface Transaccion {
 
@@ -13,5 +14,6 @@ export interface Transaccion {
     tipo_transaccion: string
     tipo_pago: TipoPago
     categoria: CategoriasTransacciones[]
+    producto: Producto[]
     
 }

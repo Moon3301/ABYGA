@@ -22,6 +22,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import {MatIconModule} from '@angular/material/icon';
 
+import {MatRippleModule} from '@angular/material/core';
+
 
 @NgModule({
   imports: [
@@ -34,7 +36,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatBadgeModule,
     NzBadgeModule,
     NzModalModule,
-    MatIconModule
+    MatIconModule,
+    MatRippleModule
   ],
   declarations: [VentaProductoPage, KeysPipe]
 })

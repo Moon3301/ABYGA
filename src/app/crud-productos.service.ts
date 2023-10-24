@@ -7,6 +7,9 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class CrudProductosService {
 
+  isToastOpen:any
+  message:any
+
   constructor(private storage: Storage) {
 
     this.initStorage();
@@ -59,6 +62,9 @@ export class CrudProductosService {
     this.productos.push({id,nombre,precio,costo,stock,unidadMedida,fechaCreacion:this.ConvertirFecha(fechaCreacion),fechaModificacion:this.ConvertirFecha(fechaModificacion),imagen,estado,descripcion,categoria})
 
     this.guardarListasEnStorage();
+
+    this.message = 'Producto creado con exito !'
+    this.setOpenToast(true);
   }
 
   modificarProducto(id:any,nombre:any,precio:any,costo:any,stock:any,unidadMedida:any,fechaCreacion:any,fechaModificacion:any,imagen:any,estado:any,descripcion:any,categoria:any){
@@ -83,6 +89,9 @@ export class CrudProductosService {
 
     this.guardarListasEnStorage();
 
+    this.message = 'Producto modificado !'
+    this.setOpenToast(true);
+
   }
 
   eliminarProducto(id:Number){
@@ -96,6 +105,9 @@ export class CrudProductosService {
     this.productos.splice(index, 1);
 
     this.guardarListasEnStorage();
+
+    this.message = 'Producto eliminado !'
+    this.setOpenToast(true);
 
   }
 
@@ -113,14 +125,17 @@ export class CrudProductosService {
 
   }
 
+  setOpenToast(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
+
+
   MostrarProducto(id:number) {
     const productoEncontrado = this.productos.find(x => x.id === id);
 
     if (!productoEncontrado) {
         throw new Error(`No se encontró una transacción con ID ${id}`);
     }
-
-    console.log(productoEncontrado);
 
     return productoEncontrado;
   }

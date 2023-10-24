@@ -24,6 +24,9 @@ export class KeysPipe implements PipeTransform {
   styleUrls: ['./venta-producto.page.scss'],
 })
 export class VentaProductoPage implements OnInit {
+  
+  myColor:any = "gray"
+  unbounded:any = false;
 
    //Icons font-awesome
    faGasPump = faGasPump;
@@ -328,7 +331,8 @@ export class VentaProductoPage implements OnInit {
       
     }
 
-    this.crudT.AgregarTransaccion(this.crudT.transacciones.length+1,'',this.totalVenta,'',this.fechaActual,'','Ingresos','',[{id:2,nombre:'Ventas',subCategoria:[{id:1,nombre:'Productos', icon:faCashRegister}]}])
+    this.crudT.AgregarTransaccion(this.crudT.transacciones.length+1,'',this.totalVenta,'',this.fechaActual,'','Ingresos','',[{id:2,nombre:'Ventas',subCategoria:[{id:1,nombre:'Productos', icon:faCashRegister}]}], this.productosAgrupados)
+
 
     this.setOpenVentaRealizada(true);
 
@@ -355,6 +359,7 @@ export class VentaProductoPage implements OnInit {
     
   }
 
+  
 
 
 }

@@ -111,6 +111,19 @@
       <p></p>
     </ion-card>
     
+  <ion-toast
+    [isOpen]="crud.isToastOpen"
+    [message]="crud.message"
+    [duration]="1000"
+    (didDismiss)="crud.setOpenToast(false)"
+  ></ion-toast>
+
+  <ion-toast
+    [isOpen]="crudP.isToastOpen"
+    [message]="crudP.message"
+    [duration]="1000"
+    (didDismiss)="crudP.setOpenToast(false)"
+  ></ion-toast>
  
     <swiper-container  #swiper (slidechange)="onSlideChange($event)" >
 
@@ -339,4 +352,7 @@
     </ion-modal>
 
   </ion-content>
+
+  
+
 </div>

@@ -31,55 +31,60 @@
 
         <ion-col size="6" *ngFor="let producto of crudP.productos">
           <div *ngFor="let categoria of producto.categoria">
-
-            <ion-card [class.validarStock]="producto.estado"   (click)="AgregarAlCarro(producto)">
-              <div *ngIf="productosAgrupados[producto.id]">
-                <nz-badge [nzCount]="productosAgrupados[producto.id].cantidad"></nz-badge>
-              </div>
-              
-              <div style="display: flex; flex-direction: column; align-items: center; text-align: center; ">
-
-                <ion-img [src]="producto.imagen" style="width: 180px; height: 180px;"></ion-img>
-
-              </div>
-              
-              <ion-card-header>
-                
-                <ion-row>
-                  <ion-col size="9">
-                    <ion-row>
-                      <ion-card-title  style="font-size: 15px;" >{{producto.nombre}}</ion-card-title>
-                    </ion-row>
-                    
-                    <ion-row>
-                      <ion-card-subtitle style="font-size: 12px;">Stock: {{producto.stock}}</ion-card-subtitle>
-                    </ion-row>
-                    
-                  </ion-col>
-
-                  <ion-col size="3" style="display: flex; justify-content: center; align-items: center;">
-                    
-                  </ion-col>
-
-                </ion-row>
-                
-              </ion-card-header>
             
-              <ion-card-content>
 
-                <ion-row>
-                  <ion-label style="font-size: 10px;">Precio: {{producto.precio | currency:'USD':'symbol':'1.2-2'}}</ion-label>
-                </ion-row>
+            <ion-card [class.validarStock]="producto.estado" (click)="AgregarAlCarro(producto)">
+              <div >
 
-                <ion-row>
-                  <ion-label style="font-size: 10px;">{{categoria.nombre}}</ion-label> 
-                </ion-row>
-
-                <ion-row>
-                  <ion-label style="font-size: 10px;" >Estado:{{producto.estado}}</ion-label>
-                </ion-row>
-
-              </ion-card-content>
+                <div *ngIf="productosAgrupados[producto.id]">
+                  <nz-badge [nzCount]="productosAgrupados[producto.id].cantidad"></nz-badge>
+                </div>
+                
+                <div  style="display: flex; flex-direction: column; align-items: center; text-align: center; ">
+  
+                  <ion-img [src]="producto.imagen" style="width: 180px; height: 180px;"></ion-img>
+  
+                </div>
+                
+                <ion-card-header>
+                  
+                  <ion-row>
+                    <ion-col size="9">
+                      <ion-row>
+                        <ion-card-title  style="font-size: 15px;" >{{producto.nombre}}</ion-card-title>
+                      </ion-row>
+                        
+                      <ion-row>
+                        <ion-card-subtitle style="font-size: 12px;">Stock: {{producto.stock}}</ion-card-subtitle>
+                      </ion-row>
+                        
+                    </ion-col>
+    
+                    <ion-col size="3" style="display: flex; justify-content: center; align-items: center;">
+                        
+                    </ion-col>
+    
+                  </ion-row>
+                  
+                </ion-card-header>
+              
+                <ion-card-content>
+    
+                  <ion-row>
+                    <ion-label style="font-size: 10px;">Precio: {{producto.precio | currency:'USD':'symbol':'1.2-2'}}</ion-label>
+                  </ion-row>
+    
+                  <ion-row>
+                    <ion-label style="font-size: 10px;">{{categoria.nombre}}</ion-label> 
+                  </ion-row>
+    
+                  <ion-row>
+                    <ion-label style="font-size: 10px;" >Estado:{{producto.estado}}</ion-label>
+                  </ion-row>
+    
+                </ion-card-content>
+              </div>
+                
             </ion-card>
           </div>
          
