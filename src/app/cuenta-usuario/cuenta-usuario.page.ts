@@ -182,6 +182,8 @@ export class CuentaUsuarioPage implements OnInit {
 
     }
 
+    console.log()
+
   }
 
   realizarPago() {
@@ -202,24 +204,28 @@ export class CuentaUsuarioPage implements OnInit {
 
       }
     
-    }else{
+    }
+
+    if(this.SuscripcionSeleccionada == 'Plus'){
 
       if(this.CambiarSuscripcion == 'Mes'){
 
         precio = 2290;
-
+  
       }else{
-
+  
         precio = 22990;
-
+  
       }
 
     }
+    
+
 
     const data = {
       buyOrder: 'O-12345W10398',
       sessionId: 'S-6789045666778',
-      amount: precio,
+      amount: 56000,
       returnUrl: 'http://localhost:8100/cuenta-usuario'
     };
   

@@ -196,28 +196,26 @@ export class AgregarTransaccionPage implements OnInit {
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
     if(this.crud.ActiveModificarTransaccion == true){
 
-      
-
       this.GetData = this.crud.GetDataModificar();
       
       // PENDIENTE COMPLETAR TODOS LOS DATOS (name,monto,categoria,etc)
-      this.NameTransaccion = this.GetData.nombre
-      this.MontoTransaccion = this.GetData.monto
+      this.NameTransaccion = this.GetData.nombre;
+      this.MontoTransaccion = this.GetData.monto;
       this.selectedDate = this.GetData.fecha;
       this.descripcion = this.GetData.notas;
-      this.TipoTrans = this.GetData.tipo_transaccion
-      this.NombreCat = this.GetData.categoria[0].nombre
-      this.NombreSubCat = this.GetData.categoria[0].subCategoria[0].nombre
+      this.TipoTrans = this.GetData.tipo_transaccion;
+      this.NombreCat = this.GetData.categoria[0].nombre;
+      this.NombreSubCat = this.GetData.categoria[0].subCategoria[0].nombre;
 
       this.productosTransaccion();
       console.log(this.GetData)
 
-      if(this.ArrayCategoriasIngresos[1].id == 2){
+      if(this.NombreCat == 'Ventas'){
         this.isDisabledInput = true;
       }else{
         this.isDisabledInput = false;
       }
-      
+
     }
 
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
