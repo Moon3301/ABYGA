@@ -27,6 +27,11 @@ export class ApirestService {
     return this.http.post('http://localhost:3000/PagarWebPay', data);
   }
 
+  confirmarWebPay(token_ws:any){
+
+    return this.http.post('http://localhost:3000/ConfirmarWebPay', token_ws);
+  }
+
 
 
 

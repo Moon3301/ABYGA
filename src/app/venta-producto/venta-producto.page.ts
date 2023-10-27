@@ -100,7 +100,7 @@ export class VentaProductoPage implements OnInit {
 
   isOkButtonEnabled = true
 
-  productosAgrupados: { [id: string]: { nombre: string; cantidad: number; stock:number; valorUnitario: number; total: number } } = {};
+  productosAgrupados: { [id: string]: { nombre: string; cantidad: number; stock:number; valorUnitario: number; total: number, img:any } } = {};
 
   // modal ng-zorro
   isVisible = false;
@@ -217,6 +217,7 @@ export class VentaProductoPage implements OnInit {
           stock: producto.stock,
           valorUnitario: producto.precio,
           total: producto.precio,
+          img: producto.imagen
         };
 
         this.productosAgrupados[idProducto].stock--;
@@ -310,7 +311,7 @@ export class VentaProductoPage implements OnInit {
 
     for (const key in this.productosAgrupados) {
       if (this.productosAgrupados.hasOwnProperty(key)) {
-
+        
         const producto = this.productosAgrupados[key];
 
         // Descontar stock de producto vendido

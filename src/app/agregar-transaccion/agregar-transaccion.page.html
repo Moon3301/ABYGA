@@ -51,7 +51,7 @@
             </ion-col>
 
             <ion-col size="11">
-              <ion-input [(ngModel)]="MontoTransaccion" label="Monto" type="number" labelPlacement="floating" placeholder="total de ingresos" fill="outline"></ion-input>
+              <ion-input [disabled]="isDisabledInput" [(ngModel)]="MontoTransaccion" label="Monto" type="number" labelPlacement="floating" placeholder="total de ingresos" fill="outline"></ion-input>
             </ion-col>
 
             <ion-toast
@@ -105,7 +105,7 @@
 
             <ion-col size="11">
               
-              <button mat-stroked-button style="width: 100%;" (click)="setOpenCategoria(true)">
+              <button [disabled]="isDisabledInput" mat-stroked-button style="width: 100%;" (click)="setOpenCategoria(true)">
                 
                 <ion-label>{{NombreSubCat}}</ion-label>
                 
@@ -206,12 +206,54 @@
 
         <div *ngIf="this.ArrayCategoriasIngresos[1].id == 2">
           
-          <button (click)="productosTransaccion()">Productos</button>
+          <div *ngFor="let transaccion of crud.transacciones">
+            <div *ngIf="GetData.id == transaccion.id">
+              <div *ngFor="let producto of transaccion.producto | keys">
 
-          
+                <div style="border: 0.5px solid grey; border-radius: 15px; font-size: 14px; color: grey;">
+                  
+                  <ion-row>
+                    
+                    <ion-col size="6">
+
+                      <ion-row>
+                        <ion-label > Código: <b>{{ producto.key }}</b></ion-label>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-label>Nombre: <b>{{ producto.value.nombre }}</b></ion-label>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-label>Cantidad: <b>{{ producto.value.cantidad }}</b></ion-label>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-label>Stock: <b>{{ producto.value.stock }}</b></ion-label>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-label>Total: <b>{{ producto.value.total | currency:'USD':'symbol':'1.2-2'}}</b></ion-label>
+                      </ion-row>
+                    </ion-col>
+                    
+                    <ion-col size="6">
+
+                      <img src="{{producto.value.img}}" alt="img producto" width="100px" height="80px">
+
+                    </ion-col>
+
+                  </ion-row>
+
+                </div>
+                <br>
+              </div>
+            
+            </div>
+          </div>
+
         </div>
 
-  
       </mat-tab>
       
       <mat-tab label="{{TipoTrans}} Fijos" >

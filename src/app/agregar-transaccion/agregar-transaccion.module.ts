@@ -26,6 +26,7 @@ import {MatButtonModule} from '@angular/material/button';
 
 import {MatDialogModule} from '@angular/material/dialog';
 
+import { KeysPipe } from './agregar-transaccion.page';
 
 @NgModule({
   imports: [
@@ -44,6 +45,6 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDialogModule
     
   ],
-  declarations: [AgregarTransaccionPage]
+  declarations: [AgregarTransaccionPage, KeysPipe]
 })
 export class AgregarTransaccionPageModule {}

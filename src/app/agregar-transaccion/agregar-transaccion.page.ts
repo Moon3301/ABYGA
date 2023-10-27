@@ -13,13 +13,15 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
 import { CrudProductosService } from '../crud-productos.service';
+import { KeyValuePipe } from '@angular/common';
 
-// Importa el módulo 'Object'
+import { Pipe, PipeTransform } from '@angular/core';
 
-
-interface ProductoAgrupado {
-  id: number;
-  productos: any[];
+@Pipe({ name: 'keys' })
+export class KeysPipe implements PipeTransform {
+  transform(value: any): { key: string, value: any }[] {
+    return Object.keys(value).map(key => ({ key, value: value[key] }));
+  }
 }
 
 @Component({
@@ -27,8 +29,6 @@ interface ProductoAgrupado {
   templateUrl: './agregar-transaccion.page.html',
   styleUrls: ['./agregar-transaccion.page.scss'],
 })
-
-
 
 export class AgregarTransaccionPage implements OnInit {
 
@@ -107,8 +107,6 @@ export class AgregarTransaccionPage implements OnInit {
 
   descripcion:any
 
-
-
   // Icon Ionic
   IconTransaccion:any = faCircleMinus;
   
@@ -150,6 +148,10 @@ export class AgregarTransaccionPage implements OnInit {
   isToastOpenEliminar = false;
   isToastOpenValidarInput = false;
 
+  // Disabled
+
+  isDisabledInput = false;
+
   ArrayCategoriasGastos:any = [] = [
 
     {id:1,name:"Transporte",sub:[{id:1,nameSub:"Combustible", icon:faGasPump},{id:2,nameSub:"Mantenimiento", icon:faCarOn}]},
@@ -190,16 +192,14 @@ export class AgregarTransaccionPage implements OnInit {
   ]
 
   ngOnInit() {
-
-    console.log()
     
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
     if(this.crud.ActiveModificarTransaccion == true){
 
-      this.productosTransaccion();
+      
 
       this.GetData = this.crud.GetDataModificar();
-
+      
       // PENDIENTE COMPLETAR TODOS LOS DATOS (name,monto,categoria,etc)
       this.NameTransaccion = this.GetData.nombre
       this.MontoTransaccion = this.GetData.monto
@@ -209,8 +209,15 @@ export class AgregarTransaccionPage implements OnInit {
       this.NombreCat = this.GetData.categoria[0].nombre
       this.NombreSubCat = this.GetData.categoria[0].subCategoria[0].nombre
 
-
+      this.productosTransaccion();
       console.log(this.GetData)
+
+      if(this.ArrayCategoriasIngresos[1].id == 2){
+        this.isDisabledInput = true;
+      }else{
+        this.isDisabledInput = false;
+      }
+      
     }
 
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
@@ -445,28 +452,22 @@ export class AgregarTransaccionPage implements OnInit {
 
   productosTransaccion(){
 
+    console.log(this.GetData)
     for(let transaccion of this.crud.transacciones){
-      for(const key in transaccion.producto){
-        if(transaccion.producto.hasOwnProperty(key)){
+      
+      if(this.GetData.id == transaccion.id){
+        console.log(transaccion.producto)
 
-          const idProducto = Number(key);
+       
 
-          const productoInventario = this.crudP.MostrarProducto(Number(key));
-
-          if (!this.productosAgrupados[idProducto]) {
-            // Si aún no existe un arreglo para este ID, créalo
-            this.productosAgrupados[idProducto] = [];
-          }
-  
-          this.productosAgrupados[idProducto].push(productoInventario);
-
-          console.log(this.productosAgrupados)
-
-        }
 
       }
 
     }
+
+
+
+    
 
   }
 
