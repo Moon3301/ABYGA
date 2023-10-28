@@ -77,8 +77,6 @@ export class VentaProductoPage implements OnInit {
    // TOAST
    isToastOpen = false;
 
-
-
   CarroCompras: Producto[] = []
   totalVenta:any = 0
   CantidadTotal:any = 0;
@@ -102,6 +100,7 @@ export class VentaProductoPage implements OnInit {
 
   productosAgrupados: { [id: string]: { nombre: string; cantidad: number; stock:number; valorUnitario: number; total: number, img:any } } = {};
 
+  public totalNetoCategorias: {[categoria: string]: { idProducto: string; precio:number; stock:number; fecha:string }} = {}
   // modal ng-zorro
   isVisible = false;
 
@@ -309,10 +308,14 @@ export class VentaProductoPage implements OnInit {
     for (const key in this.productosAgrupados) {
       if (this.productosAgrupados.hasOwnProperty(key)) {
         
+
+
         const producto = this.productosAgrupados[key];
 
         // Descontar stock de producto vendido
         const productoInventario = this.crudP.MostrarProducto(Number(key))
+
+        
 
         productoInventario.stock -= producto.cantidad
         
@@ -321,6 +324,23 @@ export class VentaProductoPage implements OnInit {
           productoInventario.estado = false;
 
         }
+
+      // Actualizar o agregar la información de la venta a totalNetoCategorias
+      const categoriaProducto = productoInventario.categoria[0].nombre; // Suponiendo que la categoría está en la posición 0 del array
+
+      if (!this.totalNetoCategorias[categoriaProducto]) {
+        this.totalNetoCategorias[categoriaProducto] = {
+          idProducto: key,
+          precio: producto.valorUnitario,
+          stock: productoInventario.stock,
+          fecha: this.fechaActual // Puedes usar la fecha actual o la fecha de la venta
+        };
+      } else {
+        // Actualizar la información si la categoría ya existe en totalNetoCategorias
+        this.totalNetoCategorias[categoriaProducto].precio += producto.valorUnitario;
+        this.totalNetoCategorias[categoriaProducto].stock = productoInventario.stock;
+        // Puedes agregar más información según tus necesidades
+      }
 
 
         console.log(`Key: ${key}, Nombre: ${producto.nombre}, Cantidad: ${producto.cantidad}, Valor Unitario: ${producto.valorUnitario}, Total: ${producto.total}`);
@@ -335,6 +355,8 @@ export class VentaProductoPage implements OnInit {
     this.setOpenVentaRealizada(true);
 
     console.log(this.crudP.productos)
+
+    console.log( 'Total neto por categoria: '+this.totalNetoCategorias)
 
   }
 

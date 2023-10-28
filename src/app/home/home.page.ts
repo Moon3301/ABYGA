@@ -174,6 +174,11 @@ export class HomePage implements OnInit {
 
   // 
 
+  formatearMonto(monto: number): string {
+    // Formatear el monto como desees (sin los dos últimos ceros y con punto en lugar de coma)
+    return monto.toFixed(2).replace(/\./, ',').replace(/,00$/, '').replace(/,/, '.');
+  }
+
 
   AgregarTransaccion(){
 

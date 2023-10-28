@@ -13,7 +13,7 @@ export class CrudProductosService {
 
   public productos: Producto[] = [];
 
-  public categoriasAgrupadas:  { [categoria: string]: { idProducto: string; precio:Number;  }} = {}
+  public totalNetoCategorias: {[categoria: string]: { idProducto: string; precio:Number; stock:Number; fecha:string }} = {}
 
   ActiveModificarProducto:any = false;
 

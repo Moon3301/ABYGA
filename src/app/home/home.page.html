@@ -190,7 +190,7 @@
         
                       <ion-list slot="end">
                         <div *ngIf="transaccion.tipo_transaccion == 'Egresos'">
-                          <ion-label style="font-size: 12px;" color="danger" >-{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</ion-label>
+                          <ion-label style="font-size: 12px;" color="danger" >-  {{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</ion-label>
                         </div>
                         <div *ngIf="transaccion.tipo_transaccion == 'Ingresos'">
                           <ion-label style="font-size: 12px;" color="success" >{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</ion-label>
