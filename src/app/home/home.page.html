@@ -127,13 +127,12 @@
  
     <swiper-container  #swiper (slidechange)="onSlideChange($event)" >
 
-      
-
       <swiper-slide id="principal">
         <ion-card  style="border-radius: 20px;">
+          <br>
           <ion-row>
              
-            <canvas baseChart style="margin: 0 auto; "
+            <canvas baseChart 
               [type]="'pie'"
               [datasets]="pieChartDatasets"
               [labels]="pieChartLabels"
@@ -143,21 +142,23 @@
             </canvas>
   
           </ion-row>
-        
-          <canvas baseChart style="margin: 0 auto; "
+          <br>
+
+          <ion-row>
+
+            <canvas baseChart
             [data]="barChartData"
             [options]="barChartOptions"
             [plugins]="barChartPlugins"
             [legend]="barChartLegend"
             [type]="'bar'">
-          </canvas>
-        
-          <canvas baseChart style="margin: 0 auto; "
-            [datasets]="radarChartDatasets"
-            [options]="radarChartOptions"
-            [labels]="radarChartLabels"
-            [type]="'radar'">
-          </canvas>
+            </canvas>
+
+          </ion-row>
+          <br>
+          <ion-row>
+            
+          </ion-row>
           
         </ion-card>
         

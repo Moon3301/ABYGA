@@ -8,21 +8,23 @@ import { Storage } from '@ionic/storage-angular';
 export class CrudProductosService {
 
   isToastOpen:any
+
   message:any
+
+  public productos: Producto[] = [];
+
+  public categoriasAgrupadas:  { [categoria: string]: { idProducto: string; precio:Number;  }} = {}
+
+  ActiveModificarProducto:any = false;
+
+  DataProducto:any
 
   constructor(private storage: Storage) {
 
     this.initStorage();
     this.cargarListasDesdeStorage();
 
-
-   }
-
-  public productos: Producto[] = [];
-
-  ActiveModificarProducto:any = false;
-
-  DataProducto:any
+  }
 
   async initStorage(){
     await this.storage.create();

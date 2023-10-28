@@ -34,6 +34,7 @@ import { CrudUsuariosService } from '../crud-usuarios.service';
 export class HomePage implements OnInit {
 
   public alertButtons = ['OK'];
+  
   nombreUsuario:any="Gabriela";
 
   @ViewChild(IonModal)
@@ -76,20 +77,20 @@ export class HomePage implements OnInit {
   faChartLine = faChartLine;
   faMagnifyingGlassChart = faMagnifyingGlassChart;
   faCalculator = faCalculator;
-  faMoneyBill1Wave = faMoneyBill1Wave
-  faWandMagic = faWandMagic
-  faCamera = faCamera
-  faCubesStacked = faCubesStacked
-  faBroom = faBroom
-  faBreadSlice = faBreadSlice
-  faPumpSoap = faPumpSoap
-  faCashRegister = faCashRegister
-  faBoxes = faBoxes
-  faArrowRightArrowLeft = faArrowRightArrowLeft
-  faFileCircleCheck = faFileCircleCheck
-  faChartColumn = faChartColumn
-  faGear = faGear
-  faStoreAlt = faStoreAlt
+  faMoneyBill1Wave = faMoneyBill1Wave;
+  faWandMagic = faWandMagic;
+  faCamera = faCamera;
+  faCubesStacked = faCubesStacked;
+  faBroom = faBroom;
+  faBreadSlice = faBreadSlice;
+  faPumpSoap = faPumpSoap;
+  faCashRegister = faCashRegister;
+  faBoxes = faBoxes;
+  faArrowRightArrowLeft = faArrowRightArrowLeft;
+  faFileCircleCheck = faFileCircleCheck;
+  faChartColumn = faChartColumn;
+  faGear = faGear;
+  faStoreAlt = faStoreAlt;
 
   matTab:any
 
@@ -129,8 +130,6 @@ export class HomePage implements OnInit {
     console.log(this.crud.totalNetoPorFecha)
   }
 
-  // Chart Donnut
-
   title = 'ng2-charts-demo';
 
   // Chart Line
@@ -147,31 +146,34 @@ export class HomePage implements OnInit {
   };
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
+    responsive: true,
+    maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
+    aspectRatio: 0.8, // Puedes ajustar este valor para cambiar el tamaño del gráfico
   };
 
   // Pie
   public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: false,
+    responsive: true,
+    maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
+    aspectRatio: 0.7, // Puedes ajustar este valor para cambiar el tamaño del gráfico
+    plugins:{
+      legend:{
+        position:'right'
+      }
+    }
   };
-  public pieChartLabels = [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ];
+
+  public pieChartLabels = [ [ 'Alimentos y bebidas' ], [ 'Limpieza' ], ['Panaderia'],['Higiene Personal'] ];
   public pieChartDatasets = [ {
-    data: [ 300, 500, 100 ]
+    data: [ 300, 500, 100, 70 ]
   } ];
+
   public pieChartLegend = true;
+
   public pieChartPlugins = [];
 
-  // Radar
+  // 
 
-  public radarChartOptions: ChartConfiguration<'radar'>['options'] = {
-    responsive: false,
-  };
-  public radarChartLabels: string[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
-
-  public radarChartDatasets: ChartConfiguration<'radar'>['data']['datasets'] = [
-    { data: [65, 59, 90, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B' }
-  ];
 
   AgregarTransaccion(){
 

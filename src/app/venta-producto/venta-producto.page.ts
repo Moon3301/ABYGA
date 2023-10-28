@@ -232,13 +232,10 @@ export class VentaProductoPage implements OnInit {
       
     }
   
-    // Agrega el producto al carro de compras.
-    this.CarroCompras.push(producto);
+  // Agrega el producto al carro de compras.
+  this.CarroCompras.push(producto);
   
-    
-  
-    // Actualiza la cantidad de productos
-
+  // Actualiza la cantidad de productos
   console.log(producto);
 
   }
@@ -359,8 +356,5 @@ export class VentaProductoPage implements OnInit {
     return fecha.toLocaleDateString('es',{ weekday:'short',day:'2-digit', month:'long', year:'numeric'})
     
   }
-
-  
-
 
 }
