@@ -44,6 +44,9 @@
         <ion-list>
          
           <!-- Monto Transaccion -->
+          <p></p>
+          
+          
           <ion-row>
 
             <ion-col size="1" style="display:flex; justify-content: center; align-items: center;">
@@ -51,7 +54,7 @@
             </ion-col>
 
             <ion-col size="11">
-              <ion-input [disabled]="isDisabledInput" [(ngModel)]="MontoTransaccion" label="Monto" type="number" labelPlacement="floating" placeholder="total de ingresos" fill="outline"></ion-input>
+              <ion-input style="height: 80px; font-size: 20px; " [disabled]="isDisabledInput" [(ngModel)]="MontoTransaccion" label="Monto" type="number" labelPlacement="floating" placeholder="total de ingresos" fill="outline"></ion-input>
             </ion-col>
 
             <ion-toast
@@ -62,6 +65,10 @@
             ></ion-toast>
 
           </ion-row>
+
+      
+        
+        <p></p>
       
           <!-- Calendario -->
           <ion-row>
@@ -276,7 +283,7 @@
             </ion-col>
 
             <ion-col size="11">
-              <ion-input [(ngModel)]="MontoTransaccion" label="Monto" type="number" labelPlacement="floating" placeholder="total de ingresos" fill="outline"></ion-input>
+              <ion-input style="height: 80px; font-size: 20px; "  [(ngModel)]="MontoTransaccion" label="Monto" type="number" labelPlacement="floating" placeholder="total de ingresos" fill="outline"></ion-input>
             </ion-col>
 
           </ion-row>
@@ -453,8 +460,8 @@
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button color="success" (click)=AddTransaccion()>
-    <ion-icon name="checkmark-done-outline"></ion-icon>
+  <ion-fab-button  color="white" (click)=AddTransaccion()>
+    <img width="40px" height="40px" src="assets/icon/cheque.png" alt="Cargar imagen Guardar  ">
   </ion-fab-button>
 </ion-fab>
 
