@@ -3,9 +3,9 @@
 
 <ion-menu contentId="main-content">
   
-  <ion-header>
+  <ion-header style="border: 2px solid  white;" >
     <ion-toolbar>
-      <ion-item color="tertiary">
+      <ion-item color="primary">
         <ion-avatar aria-hidden="true" slot="start">
           <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
         </ion-avatar>
@@ -21,7 +21,7 @@
     <ion-list>
 
       <ion-item #button [routerLink]="['/venta-producto']">
-        <fa-icon style="color: #295E91 ;" [icon]="faBoxes" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color:#1C2833;" [icon]="faBoxes" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Inventario
         </ion-label>
@@ -30,7 +30,7 @@
       
   
       <ion-item #button [routerLink]="['/historial-transacciones']">
-        <fa-icon style="color: #295E91;" [icon]="faArrowRightArrowLeft" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color: #1C2833;" [icon]="faArrowRightArrowLeft" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Transacciones
         </ion-label>
@@ -39,7 +39,7 @@
       <br>
   
       <ion-item>
-        <fa-icon style="color: #295E91 ;" [icon]="faFileCircleCheck" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color: #1C2833 ;" [icon]="faFileCircleCheck" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Documentos
         </ion-label>
@@ -48,7 +48,7 @@
       <br>
   
       <ion-item>
-        <fa-icon style="color: #295E91 ;" [icon]="faChartColumn" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color: #1C2833 ;" [icon]="faChartColumn" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Reportes
         </ion-label>
@@ -57,7 +57,7 @@
       <br>
   
       <ion-item  #button [routerLink]="['/menuopciones']">
-        <fa-icon style="color: #295E91 ;" [icon]="faGear" class="fa-xl" slot="start" ></fa-icon>
+        <fa-icon style="color: #1C2833;" [icon]="faGear" class="fa-xl" slot="start" ></fa-icon>
         <ion-label>
           Opciones
         </ion-label>
@@ -103,12 +103,12 @@
       <p></p>
 
       <ion-row>
-        <button color="warn" (click)="goToSlide('principal')" style="margin: 0 auto;  border-radius: 20px;" mat-stroked-button><ion-label>Principal</ion-label></button>
-        <button color="warn" (click)="goToSlide('transacciones')" style="margin: 0 auto;  border-radius: 20px;" mat-stroked-button><ion-label>Transacciones</ion-label></button>
-        <button color="warn" (click)="goToSlide('inventario')" style="margin: 0 auto;  border-radius: 20px;" mat-stroked-button><ion-label>Inventario</ion-label></button>
+        <button color="warn" (click)="goToSlide('principal')" style="margin: 0 auto; " mat-stroked-button > <img width="30px" height="30px" src="assets/icon/home.png" alt="No carga imagen de principal "> </button>
+        <button color="warn" (click)="goToSlide('transacciones')" style="margin: 0 auto; " mat-stroked-button> <img width="40px" height="40px" src="assets/icon/intercambiando.png" alt="No carga imagen de transacciones"> </button>
+        <button color="warn" (click)="goToSlide('inventario')" style="margin: 0 auto;  " mat-stroked-button> <img width="40px" height="40px" src="assets/icon/inventario.png" alt="No carga imagen de inventario"> </button>
       </ion-row> 
 
-      <p></p>
+      <p></p> 
     </ion-card>
     
   <ion-toast
@@ -166,15 +166,16 @@
 
       <swiper-slide id="transacciones">
 
-        <ion-card  style="border-radius: 20px;" >
+        <ion-card  style="border-radius: 20px;"  >
           <div *ngFor="let fecha of crud.getFechasAgrupadas()">
-          
-            <ion-item style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
-              <ion-label slot="start" style="margin-top: 4px; color: green;">{{ fecha }}</ion-label>
+          <ion-card color="primary" >
+            <ion-item  color="primary" style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
+              <ion-label slot="start" style="margin-top: 4px; color: white;">{{ fecha }}</ion-label>
              <!-- <ion-label slot="end" style="margin-top: 4px;">MONTO ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Ingresos') | currency:'USD':'symbol':'1.2-2' }}
                 / ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Gastos') | currency:'USD':'symbol':'1.2-2' }}</ion-label> -->
-                <ion-label slot="end" style="margin-top: 4px; color: green;">MONTO: {{crud.totalNetoPorFecha[fecha] | currency:'USD':'symbol':'1.2-2'}}</ion-label>
+                <ion-label slot="end" style="margin-top: 4px; color: white;">MONTO: {{crud.totalNetoPorFecha[fecha] | currency:'USD':'symbol':'1.2-2'}}</ion-label>
             </ion-item>
+          </ion-card>
   
             <div *ngFor="let transaccion of crud.transaccionesAgrupadas[fecha]">
               <div *ngFor="let categoria of transaccion.categoria">
@@ -190,13 +191,13 @@
         
                       <ion-list slot="end">
                         <div *ngIf="transaccion.tipo_transaccion == 'Egresos'">
-                          <ion-label style="font-size: 12px;" color="danger" >-  {{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</ion-label>
+                          <ion-label  style="font-size: 20px;" color="danger"  > <b> {{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b></ion-label>
                         </div>
                         <div *ngIf="transaccion.tipo_transaccion == 'Ingresos'">
-                          <ion-label style="font-size: 12px;" color="success" >{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</ion-label>
+                          <ion-label style="font-size: 20px;" color="success" > <b>{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b> </ion-label>
                         </div>
                         
-                        <ion-label style="font-size: 10px;">Billetera | -5666666</ion-label>
+                        
                       </ion-list>
         
                     </ion-item>
@@ -269,7 +270,7 @@
         <ion-header>
           <ion-toolbar>
             <ion-buttons slot="start">
-              <ion-button (click)="cancel()"><ion-icon name="close-outline"></ion-icon>
+              <ion-button (click)="cancel()"><ion-icon name="chevron-back-outline"></ion-icon>
               </ion-button>
             </ion-buttons>
             <ion-title style="text-align: center; margin: 0 auto; "></ion-title>
@@ -277,106 +278,129 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
+
+          <ion-row>
+            <ion-col size="6" >
+              <ion-card  style="border-radius: 15px; border: 2px solid #141E30;" #button [routerLink]="['/','Ingresos']" (click)="confirm()"  mat-stroked-button>
+
+                <ion-row>
+                  <ion-col size="8" >
+                    <ion-card-header >
+                      <ion-card-title style="color: #141E30">Ingresos</ion-card-title>
+                      <p></p>
+                      <p style="color:#141E30">Registra transacciones de Ingresos</p>
+                    </ion-card-header>
+                    
+                  </ion-col>
+                  <ion-col size="4" >
+              
+                  <div class="centered-container" ><img  width="100px" height="100x" src="assets/icon/lucro.png" alt="imagen ingreso no disponible"> </div>
+    
+                  </ion-col>
+                  
+      
+                </ion-row>
+     
+              </ion-card>
+              
+            </ion-col  >
+
+
+            <ion-col size="6" >
+              <ion-card style="border-radius: 15px; border: 2px solid #F64A4A;" [routerLink]="['/','Egresos']" (click)="confirm()">
+
+                <ion-row>
+                  <ion-col size="8" >
+                    <ion-card-header >
+                      <ion-card-title style="color: #F64A4A">Egresos</ion-card-title>
+                      <p></p>
+                      <p style="color:#F64A4A">Registra transacciones de Egresos</p>
+                    </ion-card-header>
+                  </ion-col>
+                  <ion-col size="4" >
+                    
+    
+                    
+                  <div class="centered-container" ><img  width="90px" height="90x" src="assets/icon/gastos.png" alt="imagen egreso no disponible"> </div>
+    
+                  </ion-col>
+                    
+                  
+      
+                </ion-row>
+                
+              </ion-card>
+              
+            </ion-col>
+
+
+            <ion-col size="6" >
+              <ion-card style="border-radius: 15px; border: 2px solid #141E30;" [routerLink]="['/agregar-producto']" (click)="confirm()">
+
+                <ion-row>
+                  <ion-col size="8" >
+                    <ion-card-header >
+                      <ion-card-title style="color: #141E30">Insumos</ion-card-title>
+                      <p></p>
+                      <p style="color:#141E30">Registra tus Productos</p>
+                    </ion-card-header>
+                    
+                  </ion-col>
+                  <ion-col size="4" >
+                    
+    
+                    
+                    <div class="centered-container" ><img  width="90px" height="90x" src="assets/icon/organico.png" alt="imagen insumos no disponible"> </div>
+      
+                    </ion-col>
+      
+                </ion-row>
+    
+              </ion-card>
+              
+            </ion-col>
+
+
+            <ion-col size="6" >
+              <ion-card style="border-radius: 15px; border: 2px solid #F64A4A;" [routerLink]="['/venta-producto']" (click)="confirm()">
+
+                <ion-row>
+                  <ion-col size="8" >
+                    <ion-card-header >
+                      <ion-card-title style="color: #F64A4A">Ventas</ion-card-title>
+                      <p></p>
+                      <p style="color:#F64A4A">Registra tus Ventas</p>
+                    </ion-card-header>
+                    
+                  </ion-col>
+                  <ion-col size="4" >
+                    
+    
+                    
+                    <div class="centered-container" ><img  width="90px" height="90x" src="assets/icon/ventas.png" alt="imagen ventas no disponible"> </div>
+      
+                    </ion-col>
+      
+                </ion-row>
+                
+              </ion-card>
+              
+            </ion-col>
+          </ion-row>
           
-          <ion-card  style="border-radius: 15px; border: 2px solid #141E30;" #button [routerLink]="['/','Ingresos']" (click)="confirm()"  mat-stroked-button>
-
-            <ion-row>
-              <ion-col size="8" >
-                <ion-card-header >
-                  <ion-card-title style="color: #141E30">Ingresos</ion-card-title>
-                  <p></p>
-                  <p style="color:#141E30">Registra transacciones de Ingresos</p>
-                </ion-card-header>
-                
-              </ion-col>
-              <ion-col size="4" >
-                
-
-                
-              <div class="centered-container" ><img  width="100px" height="100x" src="assets/icon/lucro.png" alt="imagen ingreso no disponible"> </div>
-
-              </ion-col>
-              
-  
-            </ion-row>
- 
-          </ion-card>
+          
 
           <p></p>
 
-          <ion-card style="border-radius: 15px; border: 2px solid #F64A4A;" [routerLink]="['/','Egresos']" (click)="confirm()">
-
-            <ion-row>
-              <ion-col size="8" >
-                <ion-card-header >
-                  <ion-card-title style="color: #F64A4A">Egresos</ion-card-title>
-                  <p></p>
-                  <p style="color:#F64A4A">Registra transacciones de Egresos</p>
-                </ion-card-header>
-              </ion-col>
-              <ion-col size="4" >
-                
-
-                
-              <div class="centered-container" ><img  width="90px" height="90x" src="assets/icon/gastos.png" alt="imagen egreso no disponible"> </div>
-
-              </ion-col>
-                
-              
-  
-            </ion-row>
-            
-          </ion-card>
+          
 
           <p></p>
 
-          <ion-card style="border-radius: 15px; border: 2px solid #141E30;" [routerLink]="['/agregar-producto']" (click)="confirm()">
-
-            <ion-row>
-              <ion-col size="8" >
-                <ion-card-header >
-                  <ion-card-title style="color: #141E30">Insumos</ion-card-title>
-                  <p></p>
-                  <p style="color:#141E30">Registra tus Productos</p>
-                </ion-card-header>
-                
-              </ion-col>
-              <ion-col size="4" >
-                
-
-                
-                <div class="centered-container" ><img  width="90px" height="90x" src="assets/icon/organico.png" alt="imagen insumos no disponible"> </div>
-  
-                </ion-col>
-  
-            </ion-row>
-
-          </ion-card>
+          
 
           <p></p>
 
-          <ion-card style="border-radius: 15px; border: 2px solid #F64A4A;" [routerLink]="['/venta-producto']" (click)="confirm()">
-
-            <ion-row>
-              <ion-col size="8" >
-                <ion-card-header >
-                  <ion-card-title style="color: #F64A4A">Ventas</ion-card-title>
-                  <p></p>
-                  <p style="color:#F64A4A">Registra tus Ventas</p>
-                </ion-card-header>
-                
-              </ion-col>
-              <ion-col size="4" >
-                
-
-                
-                <div class="centered-container" ><img  width="90px" height="90x" src="assets/icon/ventas.png" alt="imagen ventas no disponible"> </div>
-  
-                </ion-col>
-  
-            </ion-row>
-            
-          </ion-card>
+          
 
         </ion-content>
       </ng-template>
