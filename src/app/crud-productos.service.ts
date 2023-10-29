@@ -13,7 +13,14 @@ export class CrudProductosService {
 
   public productos: Producto[] = [];
 
-  public totalNetoCategorias: {[categoria: string]: { idProducto: string; precio:Number; stock:Number; fecha:string }} = {}
+  public totalNetoCategorias: { [categoria: string]: { valorTotal: number } } = {
+    'Alimentos y bebidas': { valorTotal: 1 },
+    'Productos limpieza': { valorTotal: 1 },
+    'Panaderia y pasteleria': { valorTotal: 1 },
+    'Higiene personal': { valorTotal: 1 }
+  };
+
+  
 
   ActiveModificarProducto:any = false;
 
@@ -35,7 +42,8 @@ export class CrudProductosService {
   async guardarListasEnStorage() {
 
     const listasParaGuardar = {
-      productos: this.productos
+      productos: this.productos,
+      totalNetoCategorias: this.totalNetoCategorias
     }
 
     await this.storage.set('listaProductos', listasParaGuardar);
@@ -48,7 +56,8 @@ export class CrudProductosService {
 
     if (listasGuardadas) {
 
-      this.productos = listasGuardadas.productos
+      this.productos = listasGuardadas.productos;
+      this.totalNetoCategorias = listasGuardadas.totalNetoCategorias;
 
     }
 

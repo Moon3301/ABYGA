@@ -38,9 +38,15 @@ const routes: Routes = [
     loadChildren: () => import('./historial-transacciones/historial-transacciones.module').then( m => m.HistorialTransaccionesPageModule)
   },
   {
+    path: 'reportes',
+    loadChildren: () => import('./reportes/reportes.module').then( m => m.ReportesPageModule)
+  },
+  {
     path: ':id',
     loadChildren: () => import('./agregar-transaccion/agregar-transaccion.module').then( m => m.AgregarTransaccionPageModule)
   },
+  
+
   
 
 

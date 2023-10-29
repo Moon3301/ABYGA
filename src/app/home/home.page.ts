@@ -101,9 +101,78 @@ export class HomePage implements OnInit {
   unidadDeFomento: number=0;
   ipc: number=0;
 
-  constructor(public router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService, public crudU:CrudUsuariosService) {}
+  // Data Grafico Pie
+
+  // Pie
+  public pieChartOptions: ChartOptions<'pie'> = {
+    responsive: true,
+    maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
+    aspectRatio: 1, // Puedes ajustar este valor para cambiar el tamaño del gráfico
+    plugins:{
+      legend:{
+        position:'right'
+      }
+    }
+  };
+
+  public pieChartLabels = [ [ 'Alimentos y bebidas' ], [ 'Limpieza' ], ['Panaderia'],['Higiene Personal'] ];
+  
+  public pieChartDatasets = [ {
+    data: [ 
+            this.crudP.totalNetoCategorias['Alimentos y bebidas'].valorTotal,
+            this.crudP.totalNetoCategorias['Productos limpieza'].valorTotal,
+            this.crudP.totalNetoCategorias['Panaderia y pasteleria'].valorTotal,
+            this.crudP.totalNetoCategorias['Higiene personal'].valorTotal
+          ]
+  } ];
+
+  public pieChartLegend = true;
+
+  public pieChartPlugins = [];
+
+  title = 'ng2-charts-demo';
+
+  // Chart Line
+
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
+  public barChartData: ChartConfiguration<'bar'>['data'] = {
+    labels: [ 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom' ],
+    datasets: [
+      { data: [ this.crud.totalNetoDia['lun'].totalEgresos,
+                this.crud.totalNetoDia['mar'].totalEgresos,
+                this.crud.totalNetoDia['mié'].totalEgresos,
+                this.crud.totalNetoDia['jue'].totalEgresos,
+                this.crud.totalNetoDia['vie'].totalEgresos,
+                this.crud.totalNetoDia['sáb'].totalEgresos,
+                this.crud.totalNetoDia['dom'].totalEgresos ], label: 'Egresos' },
+                
+      { data: [ this.crud.totalNetoDia['lun'].totalIngresos,
+                this.crud.totalNetoDia['mar'].totalIngresos,
+                this.crud.totalNetoDia['mié'].totalIngresos,
+                this.crud.totalNetoDia['jue'].totalIngresos,
+                this.crud.totalNetoDia['vie'].totalIngresos,
+                this.crud.totalNetoDia['sáb'].totalIngresos,
+                this.crud.totalNetoDia['dom'].totalIngresos ], label: 'Ingresos' }
+    ]
+  };
+
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: true,
+    maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
+    aspectRatio: 1, // Puedes ajustar este valor para cambiar el tamaño del gráfico
+  };
+
+  constructor(public router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService, public crudU:CrudUsuariosService) {
+    
+
+  }
 
   ngOnInit(){
+
+  
+    
 
     console.log(this.crud.totalNetoPorFecha)
 
@@ -125,52 +194,64 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter(){
 
+    this.updateDataPieChart();
+
+    this.updateDataLineChart();
+
+    console.log('Egresos Sabado: ' +this.crud.totalNetoDia['sáb'].totalEgresos)
+
     this.nombreUsuario = this.crudU.nombreUsuario;
     
-    console.log(this.crud.totalNetoPorFecha)
+
+
   }
 
-  title = 'ng2-charts-demo';
+  updateDataPieChart(){
+    // Actualizar valores del grafico
+    const categorias = Object.keys(this.crudP.totalNetoCategorias);
+    const valores = categorias.map(categoria => this.crudP.totalNetoCategorias[categoria].valorTotal);
 
-  // Chart Line
+    this.pieChartDatasets = [{
+      data: valores
+    }];
 
-  public barChartLegend = true;
-  public barChartPlugins = [];
+  }
 
-  public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: [ 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom' ],
-    datasets: [
-      { data: [ 37990, 34230, 10430, 81098, 56376, 5575, 4050 ], label: 'Egresos' },
-      { data: [ 28690, 5690, 4000, 35690, 75900, 90899, 98769 ], label: 'Ingresos' }
-    ]
-  };
+  updateDataLineChart(){
 
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: true,
-    maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
-    aspectRatio: 0.8, // Puedes ajustar este valor para cambiar el tamaño del gráfico
-  };
+    // Valores ingresos
+    const fechasIngresos = Object.keys(this.crud.totalNetoDia);
+    const valoresIngresos = fechasIngresos.map(fecha => this.crud.totalNetoDia[fecha].totalIngresos)
 
-  // Pie
-  public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: true,
-    maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
-    aspectRatio: 0.7, // Puedes ajustar este valor para cambiar el tamaño del gráfico
-    plugins:{
-      legend:{
-        position:'right'
-      }
+
+    // Valores Egresos
+    const fechasEgresos = Object.keys(this.crud.totalNetoDia);
+    const valoresEgresos = fechasEgresos.map(fecha => this.crud.totalNetoDia[fecha].totalEgresos)
+        
+    console.log(this.barChartData);
+
+    const labels = [ 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom' ];
+
+    this.barChartData = {
+      labels: labels,
+      datasets: [
+        {
+          data: valoresEgresos,
+          label: 'Egresos'
+        },
+        {
+          data: valoresIngresos,
+          label: 'Ingresos'
+        }
+        // Puedes añadir más datasets si es necesario
+      ]
     }
-  };
+    
+  }
 
-  public pieChartLabels = [ [ 'Alimentos y bebidas' ], [ 'Limpieza' ], ['Panaderia'],['Higiene Personal'] ];
-  public pieChartDatasets = [ {
-    data: [ 300, 500, 100, 70 ]
-  } ];
-
-  public pieChartLegend = true;
-
-  public pieChartPlugins = [];
+  
+  
+  
 
   // 
 
@@ -286,5 +367,6 @@ export class HomePage implements OnInit {
       swiper.slideTo(slideIndex);
     }
   }
+  
 
 }

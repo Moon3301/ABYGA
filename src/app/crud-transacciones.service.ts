@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Transaccion } from './transaccion';
-import { TipoTransaccion } from './tipo-transaccion';
-import { TipoPago } from './tipo-pago';
-import { CategoriasTransacciones } from './categorias-transacciones';
-
 import { Storage } from '@ionic/storage-angular';
-import { CrudProductosService } from './crud-productos.service';
-import { Producto } from './producto';
+
 
 
 @Injectable({
@@ -22,6 +17,19 @@ export class CrudTransaccionesService {
   totalGastosPorFecha: { [fecha: string]: number } = {};
 
   totalNetoPorFecha: { [fecha: string]: number } = {};
+
+  public totalNetoDia: { [fecha: string]: { totalIngresos: number, totalEgresos: number  } } = {
+
+    'lun': { totalIngresos: 0, totalEgresos:900 },
+    'mar': { totalIngresos: 0, totalEgresos:0 },
+    'mié': { totalIngresos: 0, totalEgresos:0 },
+    'jue': { totalIngresos: 0, totalEgresos:0 },
+    'vie': { totalIngresos: 0, totalEgresos:0 },
+    'sáb': { totalIngresos: 0, totalEgresos:0 },
+    'dom': { totalIngresos: 0, totalEgresos:0 },
+  };
+
+
 
   ActiveModificarTransaccion:any = false;
   DataTransaccion:any
@@ -51,6 +59,7 @@ export class CrudTransaccionesService {
       totalIngresosPorFecha: this.totalIngresosPorFecha,
       totalGastosPorFecha: this.totalGastosPorFecha,
       totalNetoPorFecha: this.totalNetoPorFecha,
+      totalNetoDia: this.totalNetoDia
     };
 
     await this.storage.set('listaTransacciones', listasParaGuardar);
@@ -65,14 +74,13 @@ export class CrudTransaccionesService {
       this.totalIngresosPorFecha = listasGuardadas.totalIngresosPorFecha;
       this.totalGastosPorFecha = listasGuardadas.totalGastosPorFecha;
       this.totalNetoPorFecha = listasGuardadas.totalNetoPorFecha;
+      this.totalNetoDia = listasGuardadas.totalNetoDia
     }
   }
 
   //
 
   async AgregarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any, producto:any){
-
-    
 
     if (this.transacciones.find(x => x.id === id)) {return};
 
@@ -85,8 +93,24 @@ export class CrudTransaccionesService {
     this.setOpenToast(true);
 
     this.agruparTransacciones(id);
-    
+
+
+    // Actualizar total por dia
+    const fechaTrans = fecha.slice(0, 3);
+
+    if(tipo_transaccion == 'Ingresos'){
+      this.totalNetoDia[fechaTrans].totalIngresos += monto
+    }
+
+    if(tipo_transaccion == 'Egresos'){
+      this.totalNetoDia[fechaTrans].totalEgresos += monto
+    }
+
+    console.log(this.totalNetoDia)
+
   }
+
+  
 
   // local
   agruparTransacciones(id:any) {
@@ -140,6 +164,9 @@ export class CrudTransaccionesService {
       const fechaFormateada = this.ConvertirFecha(fecha); // Utilizar tu función para formatear la fecha
       this.totalNetoPorFecha[fechaFormateada] = (this.totalIngresosPorFecha[fechaFormateada] || 0) - (this.totalGastosPorFecha[fechaFormateada] || 0);
     });
+
+
+
 
     this.guardarListasEnStorage();
 
@@ -282,6 +309,38 @@ export class CrudTransaccionesService {
   setOpenToast(isOpen: boolean) {
     this.isToastOpen = isOpen;
     
+  }
+
+  
+
+
+
+  // Suponiendo que tienes una función para organizar las transacciones por días de la semana
+  organizarTransaccionesPorDiaSemana() {
+    
+    const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+
+    // Inicializar un objeto para almacenar los totales por día de la semana
+    const totalesPorDiaSemana: { [dia: string]: number } = {};
+
+    // Iterar sobre las fechas de las transacciones y sumar los montos por día de la semana
+    for (const fecha in this.transaccionesAgrupadas) {
+      const transaccionesDelDia = this.transaccionesAgrupadas[fecha];
+      const fechaObj = new Date(fecha);
+
+      if (!isNaN(fechaObj.getTime())) {
+        const diaSemana = diasSemana[fechaObj.getDay()];
+        const totalDia = transaccionesDelDia.reduce((total, transaccion) => total + transaccion.monto, 0);
+
+        if (totalesPorDiaSemana[diaSemana]) {
+          totalesPorDiaSemana[diaSemana] += totalDia;
+        } else {
+          totalesPorDiaSemana[diaSemana] = totalDia;
+        }
+      }
+    }
+
+    console.log(totalesPorDiaSemana);
   }
 
 }

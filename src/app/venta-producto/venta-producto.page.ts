@@ -100,7 +100,7 @@ export class VentaProductoPage implements OnInit {
 
   productosAgrupados: { [id: string]: { nombre: string; cantidad: number; stock:number; valorUnitario: number; total: number, img:any } } = {};
 
-  public totalNetoCategorias: {[categoria: string]: { idProducto: string; precio:number; stock:number; fecha:string }} = {}
+  
   // modal ng-zorro
   isVisible = false;
 
@@ -325,23 +325,18 @@ export class VentaProductoPage implements OnInit {
 
         }
 
-      // Actualizar o agregar la información de la venta a totalNetoCategorias
-      const categoriaProducto = productoInventario.categoria[0].nombre; // Suponiendo que la categoría está en la posición 0 del array
+        const categoria = productoInventario.categoria[0].nombre;
 
-      if (!this.totalNetoCategorias[categoriaProducto]) {
-        this.totalNetoCategorias[categoriaProducto] = {
-          idProducto: key,
-          precio: producto.valorUnitario,
-          stock: productoInventario.stock,
-          fecha: this.fechaActual // Puedes usar la fecha actual o la fecha de la venta
-        };
-      } else {
-        // Actualizar la información si la categoría ya existe en totalNetoCategorias
-        this.totalNetoCategorias[categoriaProducto].precio += producto.valorUnitario;
-        this.totalNetoCategorias[categoriaProducto].stock = productoInventario.stock;
-        // Puedes agregar más información según tus necesidades
-      }
-
+        if (!this.crudP.totalNetoCategorias[categoria]) {
+          // Si la categoría no existe, crea una nueva categoría y establece el valorTotal en 0 antes de sumar el total
+          this.crudP.totalNetoCategorias[categoria] = {
+            valorTotal: 1
+          };
+        }
+        
+        // Luego suma el valor del producto al valor total de la categoría
+        const total = producto.cantidad * producto.valorUnitario;
+        this.crudP.totalNetoCategorias[categoria].valorTotal += total;
 
         console.log(`Key: ${key}, Nombre: ${producto.nombre}, Cantidad: ${producto.cantidad}, Valor Unitario: ${producto.valorUnitario}, Total: ${producto.total}`);
 
@@ -351,12 +346,21 @@ export class VentaProductoPage implements OnInit {
 
     this.crudT.AgregarTransaccion(this.crudT.transacciones.length+1,'',this.totalVenta,'',this.fechaActual,'','Ingresos','',[{id:2,nombre:'Ventas',subCategoria:[{id:1,nombre:'Productos', icon:faCashRegister}]}], this.productosAgrupados)
 
-
     this.setOpenVentaRealizada(true);
 
     console.log(this.crudP.productos)
 
-    console.log( 'Total neto por categoria: '+this.totalNetoCategorias)
+    for (const categoria in this.crudP.totalNetoCategorias) {
+      if (this.crudP.totalNetoCategorias.hasOwnProperty(categoria)) {
+        console.log(`Categoría: ${categoria}`);
+        console.log(this.crudP.totalNetoCategorias[categoria]);
+      }
+    }
+
+    
+    
+
+    this.crudP.guardarListasEnStorage();
 
   }
 
