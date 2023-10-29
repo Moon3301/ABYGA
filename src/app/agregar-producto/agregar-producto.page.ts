@@ -96,6 +96,16 @@ export class AgregarProductoPage implements OnInit {
     {id:3, nombre:'Panaderia y pasteleria',icon:faBreadSlice},
     {id:4, nombre:'Higiene personal',icon: faPumpSoap},
     {id:5, nombre:'Comida para mascotas',icon: faPumpSoap},
+    {id:6, nombre:'Tecnologia y accesorios',icon: faPumpSoap},
+    {id:7, nombre:'Articulos escolares',icon: faPumpSoap},
+    {id:8, nombre:'Ropa y moda',icon: faPumpSoap},
+    {id:9, nombre:'Jugueteria y entretenimiento',icon: faPumpSoap},
+    {id:10, nombre:'Frutas y verduras',icon: faPumpSoap},
+    {id:11, nombre:'Materiales de construccion',icon: faPumpSoap},
+    {id:12, nombre:'Deporte',icon: faPumpSoap},
+    {id:13, nombre:'Accesorios varios',icon: faPumpSoap},
+
+
     //COMPLETAR...
 
   ]

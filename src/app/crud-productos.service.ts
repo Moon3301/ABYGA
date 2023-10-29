@@ -19,7 +19,16 @@ export class CrudProductosService {
     'Panaderia y pasteleria': { valorTotal: 1 },
     'Higiene personal': { valorTotal: 1 },
     'Comida para mascotas' : {valorTotal:1},
-    
+    'Tecnologia y accesorios' : {valorTotal:1},
+    'Articulos escolares' : {valorTotal:1},
+    'Ropa y moda' : {valorTotal:1},
+    'Jugueteria y entretenimiento' : {valorTotal:1},
+    'Frutas y verduras' : {valorTotal:1},
+    'Materiales de construccion' : {valorTotal:1},
+    'Deporte' : {valorTotal:1},
+    'Accesorios varios' : {valorTotal:1},
+
+
 
   };
 
