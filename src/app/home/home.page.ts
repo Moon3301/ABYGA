@@ -101,6 +101,8 @@ export class HomePage implements OnInit {
   unidadDeFomento: number=0;
   ipc: number=0;
 
+  customColors: string[] = ['#FF5733', '#33FF57', '#3357FF', '#A033FF'];
+
   // Data Grafico Pie
 
   // Pie
@@ -108,11 +110,19 @@ export class HomePage implements OnInit {
     responsive: true,
     maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
     aspectRatio: 1, // Puedes ajustar este valor para cambiar el tamaño del gráfico
+    elements:{
+      arc: {
+        backgroundColor: this.customColors
+      }
+    },
     plugins:{
+      
       legend:{
         position:'right'
       }
-    }
+      
+    },
+  
   };
 
   public pieChartLabels = [ [ 'Alimentos y bebidas' ], [ 'Limpieza' ], ['Panaderia'],['Higiene Personal'] ];
@@ -124,7 +134,10 @@ export class HomePage implements OnInit {
             this.crudP.totalNetoCategorias['Panaderia y pasteleria'].valorTotal,
             this.crudP.totalNetoCategorias['Higiene personal'].valorTotal
           ]
-  } ];
+    
+  }
+  
+ ];
 
   public pieChartLegend = true;
 
