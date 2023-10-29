@@ -95,6 +95,7 @@ export class AgregarProductoPage implements OnInit {
     {id:2, nombre:'Productos limpieza',icon:faBroom},
     {id:3, nombre:'Panaderia y pasteleria',icon:faBreadSlice},
     {id:4, nombre:'Higiene personal',icon: faPumpSoap},
+    {id:5, nombre:'Comida para mascotas',icon: faPumpSoap},
     //COMPLETAR...
 
   ]
