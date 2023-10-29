@@ -102,7 +102,6 @@ export class HomePage implements OnInit {
   unidadDeFomento: number=0;
   ipc: number=0;
 
-  customColors: string[] = ['#FF5733', '#33FF57', '#3357FF', '#A033FF'];
 
   // Data Grafico Pie
 
