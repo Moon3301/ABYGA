@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Transaccion } from '../transaccion';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ActivatedRoute,Router } from '@angular/router';
-import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartOptions, ChartType, elements } from 'chart.js';
 import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
@@ -134,7 +134,7 @@ public pieChartOptions: ChartOptions<'pie'> = {
             this.crudP.totalNetoCategorias['Productos limpieza'].valorTotal,
             this.crudP.totalNetoCategorias['Panaderia y pasteleria'].valorTotal,
             this.crudP.totalNetoCategorias['Higiene personal'].valorTotal,
-            this.crudP.totalNetoCategorias['Comida para mascotas'].valorTotal,
+            this.crudP.totalNetoCategorias['Comida para mascotas'].valorTotal
 
           ]
     
@@ -151,11 +151,16 @@ public pieChartOptions: ChartOptions<'pie'> = {
   // Chart Line
 
   public barChartLegend = true;
-  public barChartPlugins = [];
+  public barChartPlugins = [
+    
+  ];
 
   public barChartData: ChartConfiguration<'bar'>['data'] = {
+    
     labels: [ 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom' ],
+    
     datasets: [
+      
       { data: [ this.crud.totalNetoDia['lun'].totalEgresos,
                 this.crud.totalNetoDia['mar'].totalEgresos,
                 this.crud.totalNetoDia['mié'].totalEgresos,
@@ -171,11 +176,21 @@ public pieChartOptions: ChartOptions<'pie'> = {
                 this.crud.totalNetoDia['vie'].totalIngresos,
                 this.crud.totalNetoDia['sáb'].totalIngresos,
                 this.crud.totalNetoDia['dom'].totalIngresos ], label: 'Ingresos' }
+
     ]
   };
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    
     responsive: true,
+  
+    elements:{
+      
+      arc: {
+        backgroundColor: this.customColors
+        
+      }
+    },
     maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
     aspectRatio: 1, // Puedes ajustar este valor para cambiar el tamaño del gráfico
   };
