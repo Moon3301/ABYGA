@@ -34,6 +34,7 @@ import { CrudUsuariosService } from '../crud-usuarios.service';
 export class HomePage implements OnInit {
 
   public alertButtons = ['OK'];
+  customColors: string[] = ['#FF0D0D', '#0DCFFF', '#B58958', '#FE8AEA', '#733E25' ];
   
   nombreUsuario:any="Gabriela";
 
@@ -105,34 +106,37 @@ export class HomePage implements OnInit {
 
   // Data Grafico Pie
 
-  // Pie
-  public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: true,
-    maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
-    aspectRatio: 1, // Puedes ajustar este valor para cambiar el tamaño del gráfico
-    elements:{
-      arc: {
-        backgroundColor: this.customColors
-      }
-    },
-    plugins:{
-      
-      legend:{
-        position:'right'
-      }
-      
-    },
-  
-  };
+// Pie
+public pieChartOptions: ChartOptions<'pie'> = {
+  responsive: true,
+  maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
+  aspectRatio: 1, // Puedes ajustar este valor para cambiar el tamaño del gráfico
+  elements:{
+    arc: {
+      backgroundColor: this.customColors
+    }
+  },
+  plugins:{
 
-  public pieChartLabels = [ [ 'Alimentos y bebidas' ], [ 'Limpieza' ], ['Panaderia'],['Higiene Personal'] ];
+    legend:{
+      position:'right'
+    }
+
+  },
+
+};
+
+
+  public pieChartLabels = [ [ 'Alimentos y bebidas' ], [ 'Limpieza' ], ['Panaderia'],['Higiene Personal'],['Comida para mascotas']  ];
   
   public pieChartDatasets = [ {
     data: [ 
             this.crudP.totalNetoCategorias['Alimentos y bebidas'].valorTotal,
             this.crudP.totalNetoCategorias['Productos limpieza'].valorTotal,
             this.crudP.totalNetoCategorias['Panaderia y pasteleria'].valorTotal,
-            this.crudP.totalNetoCategorias['Higiene personal'].valorTotal
+            this.crudP.totalNetoCategorias['Higiene personal'].valorTotal,
+            this.crudP.totalNetoCategorias['Comida para mascotas'].valorTotal,
+
           ]
     
   }

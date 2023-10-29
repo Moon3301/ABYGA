@@ -17,7 +17,10 @@ export class CrudProductosService {
     'Alimentos y bebidas': { valorTotal: 1 },
     'Productos limpieza': { valorTotal: 1 },
     'Panaderia y pasteleria': { valorTotal: 1 },
-    'Higiene personal': { valorTotal: 1 }
+    'Higiene personal': { valorTotal: 1 },
+    'Comida para mascotas' : {valorTotal:1},
+    
+
   };
 
   
