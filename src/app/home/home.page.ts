@@ -34,7 +34,8 @@ import { CrudUsuariosService } from '../crud-usuarios.service';
 export class HomePage implements OnInit {
 
   public alertButtons = ['OK'];
-  customColors: string[] = ['#FF0D0D', '#0DCFFF', '#B58958', '#FE8AEA', '#733E25' ];
+  customColors: string[] = ['#FF0D0D', '#0DCFFF', '#B58958', '#FE8AEA', '#733E25','#000000', '#FFE402','#AB1C9A','#003BFF','#3DB033','#89898C','#8ED1BA','#F6880D'];
+
   
   nombreUsuario:any="Gabriela";
 
@@ -126,7 +127,8 @@ public pieChartOptions: ChartOptions<'pie'> = {
 };
 
 
-  public pieChartLabels = [ [ 'Alimentos y bebidas' ], [ 'Limpieza' ], ['Panaderia'],['Higiene Personal'],['Comida para mascotas']  ];
+  public pieChartLabels = [ [ 'Alimentos y bebidas' ], [ 'Limpieza' ], ['Panaderia'],['Higiene Personal'],['Comida para mascotas'] ,[ 'Tecnologia y accesorios' ],
+  [ 'Articulos escolares' ],[ 'Ropa y moda' ],[ 'Jugueteria y entretenimiento' ],[ 'Frutas y verduras' ],[ 'Materiales de construccion' ],[ 'Deporte' ],[ 'Accesorios varios' ], ];
   
   public pieChartDatasets = [ {
     data: [ 
@@ -134,7 +136,17 @@ public pieChartOptions: ChartOptions<'pie'> = {
             this.crudP.totalNetoCategorias['Productos limpieza'].valorTotal,
             this.crudP.totalNetoCategorias['Panaderia y pasteleria'].valorTotal,
             this.crudP.totalNetoCategorias['Higiene personal'].valorTotal,
-            this.crudP.totalNetoCategorias['Comida para mascotas'].valorTotal
+            this.crudP.totalNetoCategorias['Comida para mascotas'].valorTotal,
+            this.crudP.totalNetoCategorias['Tecnologia y accesorios'].valorTotal,
+            this.crudP.totalNetoCategorias['Articulos escolares'].valorTotal,
+            this.crudP.totalNetoCategorias['Ropa y moda'].valorTotal,
+            this.crudP.totalNetoCategorias['Jugueteria y entretenimiento'].valorTotal,
+            this.crudP.totalNetoCategorias['Frutas y verduras'].valorTotal,
+            this.crudP.totalNetoCategorias['Materiales de construccion'].valorTotal,
+            this.crudP.totalNetoCategorias['Deporte'].valorTotal,
+            this.crudP.totalNetoCategorias['Accesorios varios'].valorTotal,
+
+
 
           ]
     
@@ -160,7 +172,6 @@ public pieChartOptions: ChartOptions<'pie'> = {
     labels: [ 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom' ],
     
     datasets: [
-      
       { data: [ this.crud.totalNetoDia['lun'].totalEgresos,
                 this.crud.totalNetoDia['mar'].totalEgresos,
                 this.crud.totalNetoDia['mié'].totalEgresos,
@@ -181,7 +192,6 @@ public pieChartOptions: ChartOptions<'pie'> = {
   };
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    
     responsive: true,
   
     elements:{
