@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      <ion-button (click)="GoHome()"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -44,7 +44,7 @@
         
     </ion-item>
 
-    <ion-item #button (click) = "ModalNotificaciones()" >
+    <ion-item #button (click)="ModalNotificaciones()" >
       
       <mat-icon  style="margin-right: 5px ;color: #1C2833; ">notifications</mat-icon>
       <ion-label style="margin-left: 5px;" >Notificaciones</ion-label>
@@ -65,7 +65,7 @@
       <mat-icon style="margin-right: 5px ; color: #1C2833; ">receipt_long</mat-icon>
       <ion-label style="margin-left: 5px;" >Mi Ticket</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisibleMiticket" nzTitle="The first Modal" (nzOnCancel)="handleCancelMiticket()" (nzOnOk)=" handleOkMiticket()">
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleMiticket" nzTitle="The first Modal" (nzOnCancel)="handleCancelMiticket()" (nzOnOk)=" handleOkMiticket()">
         <ng-container *nzModalContent>
           <p>ticket  </p>
           <p>Content two</p>
@@ -79,7 +79,7 @@
       <mat-icon style="margin-right: 5px ; color: #1C2833 ; ">brush</mat-icon>
       <ion-label style="margin-left: 5px;" >Personalizacion</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisiblePersonalizacion" nzTitle="The first Modal" (nzOnCancel)="handleCancelPersonalizacion()" (nzOnOk)="handleOkPersonalizacion()">
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisiblePersonalizacion" nzTitle="The first Modal" (nzOnCancel)="handleCancelPersonalizacion()" (nzOnOk)="handleOkPersonalizacion()">
         <ng-container *nzModalContent>
           <p>Personalizacion </p>
           <p>Content two</p>
@@ -93,12 +93,40 @@
       <mat-icon style="margin-right: 5px ; color: #1C2833 ;">cloud_upload</mat-icon>
       <ion-label style="margin-left: 5px;" >Respaldo y Restauracion</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisibleRespaldo" nzTitle="The first Modal" (nzOnCancel)="handleCancelRespaldo()" (nzOnOk)="handleOkRespaldo()">
+      <nz-modal [nzOkLoading]="isOkButtonEnabled" nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleRespaldo" nzTitle="Respaldo y restauracion" (nzOnCancel)="handleCancelRespaldo()" (nzOnOk)="borrarRegistros()">
         <ng-container *nzModalContent>
-          <p>Respaldo </p>
-          <p>Eliminar Todos los Documentos</p>
-          <p>Eliminar Todos los Datos de Cuenta</p>
           
+          <div style="border: 0.5px solid grey; border-radius: 15px;">
+            <ion-row >
+
+              <ion-col size="10">
+                <ion-label > Eliminar todos los productos</ion-label>
+              </ion-col>
+  
+              <ion-col size="2">
+                <mat-slide-toggle (click)="validarSeleccionEliminacion()" [(ngModel)]="isChekedDeleteProductos"></mat-slide-toggle>
+              </ion-col>
+  
+            </ion-row>
+  
+            <br>
+            <ion-row >
+  
+              <ion-col size="10">
+                <ion-label > Eliminar todos las transacciones</ion-label>
+              </ion-col>
+  
+              <ion-col size="2">
+                <mat-slide-toggle (click)="validarSeleccionEliminacion()" [(ngModel)]="isChekedDeleteTransacciones"></mat-slide-toggle>
+              </ion-col>
+  
+            </ion-row>
+
+          </div>
+
+          
+          
+
         </ng-container>
       </nz-modal>
       
@@ -108,7 +136,7 @@
       <mat-icon style="margin-right: 5px ; color: #1C2833 ; ">update</mat-icon>
       <ion-label style="margin-left: 5px;" >Version de la Aplicación</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisibleVersionApp" nzTitle="The first Modal" (nzOnCancel)="handleCancelVersionApp()" (nzOnOk)="handleOkVersionApp()">
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleVersionApp" nzTitle="The first Modal" (nzOnCancel)="handleCancelVersionApp()" (nzOnOk)="handleOkVersionApp()">
         <ng-container *nzModalContent>
           <p>Version </p>
           <p>Content two</p>
@@ -122,7 +150,7 @@
       <mat-icon style="margin-right: 5px ; color: #1C2833 ;">info</mat-icon>
       <ion-label style="margin-left: 5px;" >Acerca de Nosotros</ion-label>
 
-      <nz-modal [(nzVisible)]="isVisibleInfo" nzTitle="The first Modal" (nzOnCancel)="handleCancelInfo()" (nzOnOk)="handleOkInfo()">
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleInfo" nzTitle="The first Modal" (nzOnCancel)="handleCancelInfo()" (nzOnOk)="handleOkInfo()">
         <ng-container *nzModalContent>
           <p>info  </p>
           <p>Content two</p>

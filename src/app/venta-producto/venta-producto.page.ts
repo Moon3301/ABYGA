@@ -73,9 +73,8 @@ export class VentaProductoPage implements OnInit {
    faCheck = faCheck
    faCashRegister = faCashRegister
 
-
-   // TOAST
-   isToastOpen = false;
+  // TOAST
+  isToastOpen = false;
 
   CarroCompras: Producto[] = []
   totalVenta:any = 0
@@ -100,7 +99,6 @@ export class VentaProductoPage implements OnInit {
 
   productosAgrupados: { [id: string]: { nombre: string; cantidad: number; stock:number; valorUnitario: number; total: number, img:any } } = {};
 
-  
   // modal ng-zorro
   isVisible = false;
 
@@ -179,10 +177,8 @@ export class VentaProductoPage implements OnInit {
   AgregarAlCarro(producto:any){
 
   const idProducto = producto.id;
-  const stock = producto.stock;
 
   // valida si el producto se encuentra en stock
-  
 
     if (this.productosAgrupados[idProducto]) {
 
@@ -233,9 +229,6 @@ export class VentaProductoPage implements OnInit {
   
   // Agrega el producto al carro de compras.
   this.CarroCompras.push(producto);
-  
-  // Actualiza la cantidad de productos
-  console.log(producto);
 
   }
 
@@ -282,7 +275,6 @@ export class VentaProductoPage implements OnInit {
 
         if(producto.cantidad <= 1){
 
-          
         }else{
           producto.cantidad --;
           this.CantidadTotal --;
@@ -303,19 +295,16 @@ export class VentaProductoPage implements OnInit {
   // LUEGO DE REALIZAR LA LOGICA PASAR FUNCION AL CRUD PRODUCTOS
   realizarVenta(){
 
-    this.isOkButtonEnabled = false;
+    this.setOpenCategoria(false);
+    this.handleOk();
 
     for (const key in this.productosAgrupados) {
       if (this.productosAgrupados.hasOwnProperty(key)) {
         
-
-
         const producto = this.productosAgrupados[key];
 
         // Descontar stock de producto vendido
         const productoInventario = this.crudP.MostrarProducto(Number(key))
-
-        
 
         productoInventario.stock -= producto.cantidad
         
@@ -338,8 +327,6 @@ export class VentaProductoPage implements OnInit {
         const total = producto.cantidad * producto.valorUnitario;
         this.crudP.totalNetoCategorias[categoria].valorTotal += total;
 
-        console.log(`Key: ${key}, Nombre: ${producto.nombre}, Cantidad: ${producto.cantidad}, Valor Unitario: ${producto.valorUnitario}, Total: ${producto.total}`);
-
       }
       
     }
@@ -348,18 +335,6 @@ export class VentaProductoPage implements OnInit {
 
     this.setOpenVentaRealizada(true);
 
-    console.log(this.crudP.productos)
-
-    for (const categoria in this.crudP.totalNetoCategorias) {
-      if (this.crudP.totalNetoCategorias.hasOwnProperty(categoria)) {
-        console.log(`Categoría: ${categoria}`);
-        console.log(this.crudP.totalNetoCategorias[categoria]);
-      }
-    }
-
-    
-    
-
     this.crudP.guardarListasEnStorage();
 
   }
@@ -367,8 +342,7 @@ export class VentaProductoPage implements OnInit {
   nuevaVenta(){
 
     this.setOpenVentaRealizada(false);
-    this.setOpenCategoria(false);
-
+    
     this.productosAgrupados = {};
     this.CantidadTotal = 0
     this.totalVenta = 0

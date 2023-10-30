@@ -109,8 +109,8 @@ export class HomePage implements OnInit {
 // Pie
 public pieChartOptions: ChartOptions<'pie'> = {
   responsive: true,
-  maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
-  aspectRatio: 1, // Puedes ajustar este valor para cambiar el tamaño del gráfico
+  maintainAspectRatio: true, // Esto permite controlar el aspecto del gráfico
+  aspectRatio: 1.2, // Puedes ajustar este valor para cambiar el tamaño del gráfico
   elements:{
     arc: {
       backgroundColor: this.customColors
@@ -119,7 +119,7 @@ public pieChartOptions: ChartOptions<'pie'> = {
   plugins:{
 
     legend:{
-      position:'right'
+      position:'left'
     }
 
   },
@@ -201,8 +201,8 @@ public pieChartOptions: ChartOptions<'pie'> = {
         
       }
     },
-    maintainAspectRatio: false, // Esto permite controlar el aspecto del gráfico
-    aspectRatio: 1, // Puedes ajustar este valor para cambiar el tamaño del gráfico
+    maintainAspectRatio: true, // Esto permite controlar el aspecto del gráfico
+    aspectRatio: 1.2, // Puedes ajustar este valor para cambiar el tamaño del gráfico
   };
 
   constructor(public router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService, public crudU:CrudUsuariosService) {

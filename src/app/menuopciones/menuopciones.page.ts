@@ -5,12 +5,19 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave,
   faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, } from '@fortawesome/free-solid-svg-icons';
+
+import { CrudProductosService } from '../crud-productos.service';
+import { CrudTransaccionesService } from '../crud-transacciones.service';
+
+
 @Component({
   selector: 'app-menuopciones',
   templateUrl: './menuopciones.page.html',
   styleUrls: ['./menuopciones.page.scss'],
   
 })
+
+
 
 export class MenuopcionesPage implements OnInit {
   
@@ -28,21 +35,55 @@ export class MenuopcionesPage implements OnInit {
 
   //Icons font-awesome
    
+  // Respaldo y restauracion
 
-  constructor(public router:Router) { }
+  isOkButtonEnabled = true;
+
+  isChekedDeleteProductos = false;
+  isChekedDeleteTransacciones = false;
+
+  
+
+
+  constructor(public router:Router, public crudP: CrudProductosService, public crudT:CrudTransaccionesService) { }
 
   ngOnInit() {
+  }
+
+  borrarRegistros(){
+
+    if(this.isChekedDeleteProductos){
+
+      this.crudP.eliminarListasEnStorage();
+      console.log('Registros de productos eliminados')
+    }
+
+    if(this.isChekedDeleteTransacciones){
+
+      this.crudT.eliminarListasEnStorage();
+      console.log('Registros de transacciones eliminadas')
+    }
+
+    this.isChekedDeleteProductos = false;
+    this.isChekedDeleteTransacciones = false;
+
+    this.handleOkRespaldo();
+
+  }
+
+  validarSeleccionEliminacion(){
+
+    if(this.isChekedDeleteProductos == true || this.isChekedDeleteTransacciones == true){
+      this.isOkButtonEnabled = false;
+    }else{
+      this.isOkButtonEnabled = true;
+    }
+
   }
 
   showModalNegocio(): void {
     this.isVisibleNegocio= true;
   }
-  
-  
-  // showModal(): void {
-  
-  // this.isVisible = true;
-  // }
 
   handleOkNegocio(): void {
     console.log('Button ok clicked!');

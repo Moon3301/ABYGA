@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Producto } from './producto';
 import { Storage } from '@ionic/storage-angular';
+import { Transaccion } from './transaccion';
+import { CrudTransaccionesService } from './crud-transacciones.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +40,7 @@ export class CrudProductosService {
 
   DataProducto:any
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, public crudT:CrudTransaccionesService) {
 
     this.initStorage();
     this.cargarListasDesdeStorage();
@@ -71,6 +73,29 @@ export class CrudProductosService {
       this.productos = listasGuardadas.productos;
       this.totalNetoCategorias = listasGuardadas.totalNetoCategorias;
 
+    }
+
+  }
+
+  async eliminarListasEnStorage() {
+    await this.storage.remove('listaProductos');
+    
+    // Puedes restablecer tus variables a su estado inicial si es necesario
+    this.productos = [];
+    this.totalNetoCategorias = {
+      'Alimentos y bebidas': { valorTotal: 1 },
+      'Productos limpieza': { valorTotal: 1 },
+      'Panaderia y pasteleria': { valorTotal: 1 },
+      'Higiene personal': { valorTotal: 1 },
+      'Comida para mascotas' : {valorTotal:1},
+      'Tecnologia y accesorios' : {valorTotal:1},
+      'Articulos escolares' : {valorTotal:1},
+      'Ropa y moda' : {valorTotal:1},
+      'Jugueteria y entretenimiento' : {valorTotal:1},
+      'Frutas y verduras' : {valorTotal:1},
+      'Materiales de construccion' : {valorTotal:1},
+      'Deporte' : {valorTotal:1},
+      'Accesorios varios' : {valorTotal:1},
     }
 
   }
@@ -179,5 +204,13 @@ export class CrudProductosService {
     return fecha.toLocaleDateString('es',{ weekday:'short',day:'2-digit', month:'long', year:'numeric'})
     
   }
+
+  
+
+
+
+
+
+
 
 }

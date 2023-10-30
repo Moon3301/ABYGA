@@ -20,7 +20,7 @@ export class CrudTransaccionesService {
 
   public totalNetoDia: { [fecha: string]: { totalIngresos: number, totalEgresos: number  } } = {
 
-    'lun': { totalIngresos: 0, totalEgresos:900 },
+    'lun': { totalIngresos: 0, totalEgresos:0 },
     'mar': { totalIngresos: 0, totalEgresos:0 },
     'mié': { totalIngresos: 0, totalEgresos:0 },
     'jue': { totalIngresos: 0, totalEgresos:0 },
@@ -76,6 +76,28 @@ export class CrudTransaccionesService {
       this.totalNetoPorFecha = listasGuardadas.totalNetoPorFecha;
       this.totalNetoDia = listasGuardadas.totalNetoDia
     }
+  }
+
+  async eliminarListasEnStorage() {
+
+    await this.storage.remove('listaTransacciones');
+
+    this.transacciones = []
+    this.transaccionesAgrupadas = {}
+    this.totalIngresosPorFecha = {}
+    this.totalGastosPorFecha = {}
+    this.totalNetoPorFecha = {}
+
+    this.totalNetoDia = {
+      'lun': { totalIngresos: 0, totalEgresos:0 },
+      'mar': { totalIngresos: 0, totalEgresos:0 },
+      'mié': { totalIngresos: 0, totalEgresos:0 },
+      'jue': { totalIngresos: 0, totalEgresos:0 },
+      'vie': { totalIngresos: 0, totalEgresos:0 },
+      'sáb': { totalIngresos: 0, totalEgresos:0 },
+      'dom': { totalIngresos: 0, totalEgresos:0 },
+    }
+
   }
 
   //
@@ -311,10 +333,6 @@ export class CrudTransaccionesService {
     
   }
 
-  
-
-
-
   // Suponiendo que tienes una función para organizar las transacciones por días de la semana
   organizarTransaccionesPorDiaSemana() {
     
@@ -342,5 +360,143 @@ export class CrudTransaccionesService {
 
     console.log(totalesPorDiaSemana);
   }
+
+  //
+
+  obtenerMontoTotalPorDia(tipoTransaccion:any) {
+
+    const montoPorDia: { [key: string]: number } = {};
+
+    this.transacciones.forEach((transaccion) => {
+
+      if(transaccion.tipo_transaccion == tipoTransaccion){
+
+        
+        const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+        const dia = fecha.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+        
+        if (!montoPorDia[dia]) {
+          montoPorDia[dia] = 0;
+        }
+        montoPorDia[dia] += transaccion.monto;
+      }
+        
+    });
+
+    return montoPorDia;
+  }
+
+  obtenerMontoTotalPorSemana( tipoTransaccion:any) {
+      const montosPorSemana: { [key: string]: number } = {};
+
+      this.transacciones.forEach((transaccion) => {
+
+        if(transaccion.tipo_transaccion == tipoTransaccion){
+
+          const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+          const semana = `${this.getWeekNumber(fecha)}/${fecha.getFullYear()}`;
+
+          if (!montosPorSemana[semana]) {
+              montosPorSemana[semana] = 0;
+          }
+          montosPorSemana[semana] += transaccion.monto;
+        }
+
+      });
+
+      return montosPorSemana;
+  }
+
+  obtenerMontoTotalPorMes(tipoTransaccion:any) {
+      const montosPorMes: { [key: string]: number } = {};
+
+      this.transacciones.forEach((transaccion) => {
+
+        if(transaccion.tipo_transaccion == tipoTransaccion){
+
+          const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+          const mes = fecha.toISOString().slice(0, 7); // Formato YYYY-MM
+
+          if (!montosPorMes[mes]) {
+              montosPorMes[mes] = 0;
+          }
+          montosPorMes[mes] += transaccion.monto;
+
+        }
+          
+      });
+
+      return montosPorMes;
+  }
+
+  obtenerMontoTotalPorAnio(tipoTransaccion:any) {
+      const montosPorAnio: { [key: string]: number } = {};
+
+      this.transacciones.forEach((transaccion) => {
+
+        if(transaccion.tipo_transaccion == tipoTransaccion){
+
+          const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+          const anio = fecha.getFullYear().toString();
+
+          if (!montosPorAnio[anio]) {
+              montosPorAnio[anio] = 0;
+          }
+          montosPorAnio[anio] += transaccion.monto;
+
+        }
+          
+      });
+
+      return montosPorAnio;
+  }
+
+  getWeekNumber(date: Date) {
+      const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+      const dayNum = d.getUTCDay() || 7;
+      d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+      const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+      return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+  }
+
+  parsearFechaConFormatoEspecifico(fechaString: string): Date {
+    const meses = [
+        "enero", "febrero", "marzo", "abril", "mayo", "junio",
+        "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+    ];
+
+    const partes = fechaString.split(", "); // Separar la cadena por la coma y el espacio
+    const fechaArray = partes[1].split(" de "); // Separar la segunda parte por el "de"
+
+    const dia = parseInt(fechaArray[0], 10); // Obtener el día como número
+    const mes = meses.indexOf(fechaArray[1]); // Obtener el mes como índice del array
+    const anio = parseInt(fechaArray[2], 10); // Obtener el año como número
+
+    return new Date(anio, mes, dia);
+  }
+
+  obtenerMontoProductosVendidosPorDia(fecha: Date): number {
+    const montoTotalDia = this.transacciones
+    .filter(transaccion => this.parsearFechaConFormatoEspecifico(transaccion.fecha).toISOString() === new Date(fecha).toISOString())
+    .reduce((total, transaccion) => {
+      const productosVendidos = transaccion.producto;
+      console.log('Fecha hoy service: '+this.parsearFechaConFormatoEspecifico(transaccion.fecha).toISOString())
+      // Verificar si productosVendidos es un arreglo válido y tiene elementos
+      if (productosVendidos && productosVendidos.length > 0) {
+        const montoProductos = productosVendidos.reduce((subtotal, producto) => subtotal + producto.precio, 0);
+        return total + montoProductos;
+      } else {
+        return total; // Devolver el total sin sumar nada si no hay productos
+      }
+    }, 0);
+
+  return montoTotalDia;
+  }
+
+
+
+
+
+
 
 }

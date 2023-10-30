@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="tertiary"  >
+  <ion-toolbar color="primary"  >
     <ion-label style="font-size: 18px; ">
       <b style="color:white"> Agregar Venta</b>
       
@@ -9,7 +9,7 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button (click)="scan()"><fa-icon slot="start" [icon]=faBarcode class="fa-xl"></fa-icon></ion-button>
+      <ion-button (click)="scan()"><fa-icon style="color: white;" slot="start" [icon]=faBarcode class="fa-xl"></fa-icon></ion-button>
       
     
     </ion-buttons>
@@ -97,7 +97,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button style="background-color: #295E91;" expand="block" fill="outline" color="tertiary " (click)="setOpenCategoria(true)">
+  <ion-button style="background-color: #1C2833;" expand="block" fill="outline" color="primary" (click)="setOpenCategoria(true)">
     
     <ion-label style="margin-right: 20px; color: white;  "  >Insumos:{{CantidadTotal}}</ion-label>
      
@@ -107,15 +107,11 @@
 
   <ion-modal [isOpen]="isModalOpenCategoria">
     <ng-template>
-      <ion-header>
-        <ion-toolbar>
+      <ion-header >
+        <ion-toolbar color="primary">
     
           <ion-buttons slot="start">
-            <ion-button (click)="setOpenCategoria(false)">Close</ion-button>
-          </ion-buttons>
-
-          <ion-buttons slot="end">
-            <ion-button (click)="setOpenCategoria(false)">Save</ion-button>
+            <ion-button (click)="setOpenCategoria(false)"><ion-icon style="color: white;" name="chevron-back-outline"></ion-icon></ion-button>
           </ion-buttons>
 
         </ion-toolbar>
@@ -123,13 +119,13 @@
       <ion-content >
 
         <ion-grid *ngFor="let productoId of productosAgrupados | keys" >
-          <ion-row style="border: 0.5px solid grey;" >
+          <ion-row style="border: 0.5px solid grey; border-radius: 15px;" >
 
             <ion-col size="1" style="display:flex; justify-content: center; align-items: center;">
               <b style="font-size: 20px;">X{{ productosAgrupados[productoId].cantidad }}</b>
             </ion-col>
 
-            <ion-col size="4">
+            <ion-col size="3">
 
               <ion-row >
                 <p>{{ productosAgrupados[productoId].nombre }}</p>
@@ -147,14 +143,14 @@
 
 
             
-            <ion-col size="3" style="display:flex; justify-content: center; align-items: center;">
+            <ion-col size="4" style="display:flex; justify-content: center; align-items: center;">
 
-              <button style="margin-right: 5px;" (click)="ModificarCantidad('aumentar',productosAgrupados[productoId])" color="disabled"  mat-mini-fab aria-label="Example icon button with a menu icon">
-                <ion-icon name="add-circle-outline"></ion-icon>
+              <button style="margin-right: 5px; background-color: #1C2833;" (click)="ModificarCantidad('disminuir',productosAgrupados[productoId])"   mat-mini-fab aria-label="Example icon button with a menu icon">
+                <ion-icon style="color: white;" name="remove-circle-outline"></ion-icon>
               </button>
 
-              <button style="margin-left: 5px;" (click)="ModificarCantidad('disminuir',productosAgrupados[productoId])" color="disabled" mat-mini-fab aria-label="Example icon button with a menu icon">
-                <ion-icon name="remove-circle-outline"></ion-icon>
+              <button style="margin-left: 5px; background-color: #1C2833;" (click)="ModificarCantidad('aumentar',productosAgrupados[productoId])"   mat-mini-fab aria-label="Example icon button with a menu icon">
+                <ion-icon style="color: white;" name="add-circle-outline"></ion-icon>
               </button>
 
             </ion-col>
@@ -168,106 +164,107 @@
 
         <ion-row>
 
-          <ion-col size="4">
-            <ion-button style="background-color: #295E91; " expand="block" fill="outline" color="tertiary"> <ion-label style="color: white;"> Opciones </ion-label> </ion-button>
-          </ion-col>
+          
+          <ion-button  style="background-color: #1C2833; width: 100%;" expand="block" fill="outline" color="primary" (click)="showModal()">
+              
+            <ion-item color="primary" style="width: 100%;">
+              <ion-label slot="start" style="color: white;" >Insumos:{{CantidadTotal}}</ion-label>
+               
+              <ion-label  style="color: white; " >Total: {{totalVenta | currency:'USD':'symbol':'1.2-2'}} </ion-label>
+            </ion-item>
+              
+               
+          </ion-button>
 
-          <ion-col size="8">
-            <ion-button  style="background-color: #295E91;" expand="block" fill="outline" color="tertiary" (click)="showModal()">
-    
-              <ion-label style="margin-right: 20px; color: white;" >Insumos:{{CantidadTotal}}</ion-label>
-               
-              <ion-label style="margin-left: 20px; color: white; " >Total: {{totalVenta | currency:'USD':'symbol':'1.2-2'}} </ion-label>
-               
-            </ion-button>
-          </ion-col>
         </ion-row>
 
-        <nz-modal [nzOkLoading]="isOkButtonEnabled" [(nzVisible)]="isVisible" nzTitle="Pago" nzCancelText="Salir" nzOkText="Ok" (nzOnCancel)="handleCancel()" (nzOnOk)="realizarVenta()" >
-          <ng-container *nzModalContent>
-            
-            <ion-grid>
-              <ion-row style="height: 100px; display:flex; justify-content: center; align-items: center;">
-
-                <h1 style="font-size: 40px;">{{totalVenta | currency:'USD':'symbol':'1.2-2'}} </h1>
-
-              </ion-row>
-
-              <ion-row>
-                <ion-col  size="4" [class.selected]="isSelectedEfectivo" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Efectivo')" >
-                  
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <fa-icon  [icon]="faMoneyBill" class="fa-2xl"></fa-icon>
-                  </ion-row>
-
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <ion-label  >Efectivo</ion-label>
-                  </ion-row>
-              
-                </ion-col>
-
-                <ion-col size="4" [class.selected]="isSelectedDebito" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Debito')">
-
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <fa-icon [icon]="faCreditCard" class="fa-2xl"></fa-icon>
-                  </ion-row>
-
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <ion-label >Debito</ion-label>
-                  </ion-row>
-
-                </ion-col>
-
-                <ion-col size="4" [class.selected]="isSelectedCredito" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Credito')">
-
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <fa-icon [icon]="faCreditCard" class="fa-2xl"></fa-icon>
-                  </ion-row>
-
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <ion-label>Credito</ion-label>
-                  </ion-row>
-
-                </ion-col>
-              </ion-row>
-
-              <ion-row>
-
-                <ion-col size="4" [class.selected]="isSelectedCheque" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Cheque')">
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <fa-icon [icon]="faMoneyCheck" class="fa-2xl"></fa-icon>
-                  </ion-row>
-
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <ion-label [class.selected]="isSelectedCheque">Cheque</ion-label>
-                  </ion-row>
-                </ion-col>
-
-                <ion-col size="4" [class.selected]="isSelectedOtros" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Otros')">
-                  
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <fa-icon [icon]="faMoneyCheckDollar" class="fa-2xl"></fa-icon>
-                  </ion-row>
-
-                  <ion-row style="display:flex; justify-content: center; align-items: center;">
-                    <ion-label>Otros</ion-label>
-                  </ion-row>
-
-                </ion-col>
-
-                <ion-col size="4">
-                  
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-
-          </ng-container>
-        </nz-modal>
+        
 
       </ion-footer>
 
     </ng-template>
   </ion-modal>
+
+  <nz-modal [nzOkLoading]="isOkButtonEnabled" [(nzVisible)]="isVisible" nzTitle="Pago" nzCancelText="Salir" nzOkText="Ok" (nzOnCancel)="handleCancel()" (nzOnOk)="realizarVenta()" >
+    <ng-container *nzModalContent>
+      
+      <ion-grid>
+        <ion-row style="height: 100px; display:flex; justify-content: center; align-items: center;">
+
+          <h1 style="font-size: 40px;">{{totalVenta | currency:'USD':'symbol':'1.2-2'}} </h1>
+
+        </ion-row>
+
+        <ion-row>
+          <ion-col  size="4" [class.selected]="isSelectedEfectivo" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Efectivo')" >
+            
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <fa-icon  [icon]="faMoneyBill" class="fa-2xl"></fa-icon>
+            </ion-row>
+
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <ion-label  >Efectivo</ion-label>
+            </ion-row>
+        
+          </ion-col>
+
+          <ion-col size="4" [class.selected]="isSelectedDebito" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Debito')">
+
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <fa-icon [icon]="faCreditCard" class="fa-2xl"></fa-icon>
+            </ion-row>
+
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <ion-label >Debito</ion-label>
+            </ion-row>
+
+          </ion-col>
+
+          <ion-col size="4" [class.selected]="isSelectedCredito" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Credito')">
+
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <fa-icon [icon]="faCreditCard" class="fa-2xl"></fa-icon>
+            </ion-row>
+
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <ion-label>Credito</ion-label>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+
+          <ion-col size="4" [class.selected]="isSelectedCheque" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Cheque')">
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <fa-icon [icon]="faMoneyCheck" class="fa-2xl"></fa-icon>
+            </ion-row>
+
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <ion-label [class.selected]="isSelectedCheque">Cheque</ion-label>
+            </ion-row>
+          </ion-col>
+
+          <ion-col size="4" [class.selected]="isSelectedOtros" style="border: 0.5px solid grey;" #button (click)="seleccionarMetodoDePago('Otros')">
+            
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <fa-icon [icon]="faMoneyCheckDollar" class="fa-2xl"></fa-icon>
+            </ion-row>
+
+            <ion-row style="display:flex; justify-content: center; align-items: center;">
+              <ion-label>Otros</ion-label>
+            </ion-row>
+
+          </ion-col>
+
+          <ion-col size="4">
+            
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ng-container>
+  </nz-modal>
 
   <ion-modal [isOpen]="isModalVentaRealizada">
     <ng-template>
@@ -283,11 +280,11 @@
 
       <ion-footer>
         <ion-row>
-          <button mat-stroked-button style="width: 100%; background-color: #295E91; color: white; "  (click)="setOpenTicket(true)">Ver ticket</button>
+          <button mat-stroked-button style="width: 100%; background-color: #1C2833; color: white; "  (click)="setOpenTicket(true)">Ver ticket</button>
         </ion-row>
         <br>
         <ion-row>
-          <button mat-flat-button style="width: 100%; background-color: #295E91; color:white" (click)="nuevaVenta()">Nueva venta</button>
+          <button mat-flat-button style="width: 100%; background-color: #1C2833; color:white" (click)="nuevaVenta()">Nueva venta</button>
         </ion-row>
         <br>
       </ion-footer>

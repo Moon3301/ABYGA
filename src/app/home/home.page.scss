@@ -85,3 +85,29 @@
   align-items: center; /* Centra horizontalmente */
   
 }
+
+@media screen and (max-width: 400px) {
+  .textResposive {
+    font-size: 14px; /* Ajuste para dispositivos más pequeños */
+  }
+
+  .textTitleResposive {
+    font-size: 25px; /* Ajuste para dispositivos más pequeños */
+  }
+
+  .imgResponsive {
+
+    width: 67px;
+    height: 67px;
+    margin: 0 auto;
+  }
+
+  .centered-container{
+
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    
+  }
+}

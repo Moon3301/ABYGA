@@ -8,12 +8,18 @@ import { ReportesPageRoutingModule } from './reportes-routing.module';
 
 import { ReportesPage } from './reportes.page';
 
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReportesPageRoutingModule
+    ReportesPageRoutingModule,
+    NzProgressModule,
+    MatButtonModule
   ],
   declarations: [ReportesPage]
 })
