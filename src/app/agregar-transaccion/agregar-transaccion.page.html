@@ -140,6 +140,7 @@
                 </ion-header>
 
                 <ion-content class="ion-padding">
+
         
                   <ion-grid *ngIf="TipoTrans == 'Egresos'">
                     <ion-list *ngFor="let item of ArrayCategoriasGastos">
@@ -163,9 +164,14 @@
                             
                         </ion-col>
                       </ion-row>
+                      
+                      
+
             
                     </ion-list>
+                    
                   </ion-grid>
+                  
       
                   <ion-grid *ngIf="TipoTrans == 'Ingresos'">
                     <ion-list *ngFor="let item of ArrayCategoriasIngresos">
@@ -197,6 +203,20 @@
               </ng-template>
             </ion-modal>
             <br>
+          <!-- Recordatorios -->
+            <ion-row>
+              <ion-col size="1"  style="display:flex; justify-content: center; align-items: center;" >
+                <fa-icon [icon]="iconRecordatorios" class="fa-2xl"></fa-icon>
+              </ion-col >
+              <ion-col size="4" >
+
+              </ion-col>
+              <ion-col size="7"  >
+                 <mat-slide-toggle (click)="changeicon()" [(ngModel)]="validarRecordatorios">Recordatorios </mat-slide-toggle>
+
+              </ion-col>
+              
+            </ion-row>
 
             <mat-slide-toggle>Slide me!</mat-slide-toggle>
 
