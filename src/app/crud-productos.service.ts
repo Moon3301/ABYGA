@@ -30,8 +30,6 @@ export class CrudProductosService {
     'Deporte' : {valorTotal:1},
     'Accesorios varios' : {valorTotal:1},
 
-
-
   };
 
   

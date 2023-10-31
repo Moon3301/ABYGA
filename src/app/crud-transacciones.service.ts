@@ -122,6 +122,7 @@ export class CrudTransaccionesService {
 
     if(tipo_transaccion == 'Ingresos'){
       this.totalNetoDia[fechaTrans].totalIngresos += monto
+      
     }
 
     if(tipo_transaccion == 'Egresos'){
@@ -217,6 +218,19 @@ export class CrudTransaccionesService {
       throw new Error(`No se encontró una transacción con ID ${id}`);
     }
 
+    // Eliminar la transaccion de la lista del grafico
+    const fechaTrans = fecha.slice(0, 3);
+    console.log('monto registrado: '+this.transacciones[index].monto)
+
+    if(this.transacciones[index].tipo_transaccion == 'Ingresos'){
+      this.totalNetoDia[fechaTrans].totalIngresos -= this.transacciones[index].monto
+    }
+
+    if(this.transacciones[index].tipo_transaccion == 'Egresos'){
+      this.totalNetoDia[fechaTrans].totalEgresos -= this.transacciones[index].monto
+    }
+
+    // Modificar las transaccion con los nuevo datos
     this.transacciones[index].nombre = nombre;
     this.transacciones[index].monto = monto;
     this.transacciones[index].estado = estado;
@@ -226,11 +240,24 @@ export class CrudTransaccionesService {
     this.transacciones[index].tipo_pago = tipo_pago;
     this.transacciones[index].categoria = categoria;
 
+    // Agregar el nuevo monto
+    console.log('Nuevo monto: '+monto)
+    if(this.transacciones[index].tipo_transaccion == 'Ingresos'){
+      this.totalNetoDia[fechaTrans].totalIngresos += monto
+    }
+
+    if(this.transacciones[index].tipo_transaccion == 'Egresos'){
+      this.totalNetoDia[fechaTrans].totalEgresos += monto
+    }
+
+    // Guardar registro en Storage
     this.guardarListasEnStorage();
 
+    // Toast alert
     this.message = 'Transaccion modificada!'
     this.setOpenToast(true);
 
+    // Agrupar las transacciones por dia
     this.agruparTransacciones(id);
 
   }
@@ -298,6 +325,18 @@ export class CrudTransaccionesService {
     const transaccionAgrupadaIndex = this.transaccionesAgrupadas[fechaTransaccion].findIndex(t => t.id === id);
     if (transaccionAgrupadaIndex !== -1) {
         this.transaccionesAgrupadas[fechaTransaccion].splice(transaccionAgrupadaIndex, 1);
+    }
+
+    // Actualizar total por dia (Datos grafico: Descontar total por transacciones)
+    const fechaTrans = fechaTransaccion.slice(0, 3);
+
+    if(this.transacciones[index].tipo_transaccion == 'Ingresos'){
+      this.totalNetoDia[fechaTrans].totalIngresos -= this.transacciones[index].monto
+      
+    }
+
+    if(this.transacciones[index].tipo_transaccion == 'Egresos'){
+      this.totalNetoDia[fechaTrans].totalEgresos -= this.transacciones[index].monto
     }
 
     // Elimina la transacción de la lista principal

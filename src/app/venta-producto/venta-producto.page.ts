@@ -296,7 +296,7 @@ export class VentaProductoPage implements OnInit {
   realizarVenta(){
 
     this.setOpenCategoria(false);
-    this.handleOk();
+    
 
     for (const key in this.productosAgrupados) {
       if (this.productosAgrupados.hasOwnProperty(key)) {
@@ -314,19 +314,24 @@ export class VentaProductoPage implements OnInit {
 
         }
 
-        const categoria = productoInventario.categoria[0].nombre;
+        const categoria = productoInventario.categoria && productoInventario.categoria[0] ? productoInventario.categoria[0].nombre : 'Categoría no definida';
+        console.log('Categoria producto en venta: '+categoria)
+        try{
+          if(this.crudP.totalNetoCategorias[categoria]){
 
-        if (!this.crudP.totalNetoCategorias[categoria]) {
-          // Si la categoría no existe, crea una nueva categoría y establece el valorTotal en 0 antes de sumar el total
-          this.crudP.totalNetoCategorias[categoria] = {
-            valorTotal: 1
-          };
+            console.log('total neto por categoria: '+this.crudP.totalNetoCategorias[categoria])
+             
+            const total = producto.cantidad * producto.valorUnitario;
+    
+            this.crudP.totalNetoCategorias[categoria].valorTotal += total;
+            
+            console.log('valor Total: '+this.crudP.totalNetoCategorias[categoria].valorTotal)
+            }
+        }catch(error){
+          console.log('Error en categoria:'+error);
         }
         
-        // Luego suma el valor del producto al valor total de la categoría
-        const total = producto.cantidad * producto.valorUnitario;
-        this.crudP.totalNetoCategorias[categoria].valorTotal += total;
-
+        
       }
       
     }
