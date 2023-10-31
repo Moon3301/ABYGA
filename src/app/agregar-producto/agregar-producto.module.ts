@@ -18,6 +18,8 @@ import {MatInputModule} from '@angular/material/input';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     MatSelectModule,
     MatInputModule,
     NzButtonModule,
+    MatSlideToggleModule
 
   ],
   declarations: [AgregarProductoPage]

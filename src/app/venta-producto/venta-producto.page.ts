@@ -331,7 +331,6 @@ export class VentaProductoPage implements OnInit {
           console.log('Error en categoria:'+error);
         }
         
-        
       }
       
     }

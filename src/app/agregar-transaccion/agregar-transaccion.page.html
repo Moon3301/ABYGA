@@ -8,7 +8,7 @@
     <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
-                                                                                                                                                                        
+
       <ion-buttons slot="end">
         <div *ngIf="crud.ActiveModificarTransaccion == true">
           <ion-button id="present-alert" ><fa-icon style="color:white" [icon]=faTrashCan class="fa-2xl"></fa-icon></ion-button>
@@ -197,6 +197,9 @@
               </ng-template>
             </ion-modal>
             <br>
+
+            <mat-slide-toggle>Slide me!</mat-slide-toggle>
+
           <!-- Descripcion -->
           
             <form class="example-form">
