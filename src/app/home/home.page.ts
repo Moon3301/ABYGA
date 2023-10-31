@@ -346,18 +346,7 @@ public pieChartOptions: ChartOptions<'pie'> = {
     
   }
 
-  onTabChange(event: MatTabChangeEvent): void {
-    const tabLabel = event.tab.textLabel; // Obtén el texto de la etiqueta de la pestaña seleccionada
-    this.matTab = event.tab.textLabel;
-    console.log(`Pestaña seleccionada: ${tabLabel}`);
-    
-    // Aquí puedes realizar acciones específicas basadas en la pestaña seleccionada
-    if (tabLabel === 'PRINCIPAL') {
-      // Acciones para la pestaña PRINCIPAL
-    } else if (tabLabel === 'TRANSACCIONES') {
-      // Acciones para la pestaña TRANSACCIONES
-    }
-  }
+
 
   onSlideChange(event:any){
 
@@ -380,6 +369,9 @@ public pieChartOptions: ChartOptions<'pie'> = {
    
 
     }
+    if(indexSwiper == 3){
+
+     }
 
   }
 
@@ -401,6 +393,9 @@ public pieChartOptions: ChartOptions<'pie'> = {
           break;
         case 'inventario':
           slideIndex = 2;
+          break;
+        case 'recordatorios':
+          slideIndex = 3;
           break;
         // Añade más casos si tienes más diapositivas
       }

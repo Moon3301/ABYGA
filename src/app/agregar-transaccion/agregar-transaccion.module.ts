@@ -28,6 +28,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import { KeysPipe } from './agregar-transaccion.page';
 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -42,7 +44,9 @@ import { KeysPipe } from './agregar-transaccion.page';
     CalendarModule,
     ButtonModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSlideToggleModule,
+    
     
   ],
   declarations: [AgregarTransaccionPage, KeysPipe]

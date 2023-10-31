@@ -8,7 +8,7 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave, 
-  faWandMagic, faCashRegister, faTrashCan} from '@fortawesome/free-solid-svg-icons';
+  faWandMagic, faCashRegister, faTrashCan, faBell, faBellSlash  } from '@fortawesome/free-solid-svg-icons';
   
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
@@ -64,10 +64,16 @@ export class AgregarTransaccionPage implements OnInit {
   faImage = faImage;
   faMagnifyingGlass = faMagnifyingGlass;
   faCalculator = faCalculator;
-  faMoneyBill1Wave = faMoneyBill1Wave
-  faWandMagic = faWandMagic
-  faCashRegister = faCashRegister
-  faTrashCan = faTrashCan
+  faMoneyBill1Wave = faMoneyBill1Wave;
+  faWandMagic = faWandMagic;
+  faCashRegister = faCashRegister;
+  faTrashCan = faTrashCan;
+  faBell = faBell;
+  faBellSlash = faBellSlash;
+
+
+  //Icono de Recordatorios
+  iconRecordatorios: any = faBellSlash;
 
   // Camera
 
@@ -94,6 +100,9 @@ export class AgregarTransaccionPage implements OnInit {
   // tab
   tab1Selected: boolean = true;
   tab2Selected: boolean = true;
+
+  //validarRecordatorios
+  validarRecordatorios: any;
 
   // SelectOption Tipo transaccion
 
@@ -461,12 +470,22 @@ export class AgregarTransaccionPage implements OnInit {
 
       }
 
+
     }
 
 
 
     
 
+  }
+  changeicon (){
+    if(this.validarRecordatorios){
+      this.iconRecordatorios=faBell;
+    }else{
+      this.iconRecordatorios=faBellSlash;
+    }
+
+    
   }
 
 
