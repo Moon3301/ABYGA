@@ -15,6 +15,8 @@ export class CrudTransaccionesService {
   totalGastosPorFecha: { [fecha: string]: number } = {};
 
   totalNetoPorFecha: { [fecha: string]: number } = {};
+  
+  listaNotificaciones: any[] = [];
 
   public totalNetoDia: { [fecha: string]: { totalIngresos: number, totalEgresos: number  } } = {
 
@@ -98,12 +100,12 @@ export class CrudTransaccionesService {
 
   //
 
-  async AgregarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any, producto:any, tipo_movimiento:any){
+  async AgregarTransaccion(id:number,nombre:string,monto:number,notificacion:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any, producto:any, tipo_movimiento:any){
 
     if (this.transacciones.find(x => x.id === id)) {return};
 
     // Local
-    this.transacciones.push({id,nombre,monto,estado,notas,fecha,tipo_transaccion,tipo_pago,categoria,producto, tipo_movimiento})
+    this.transacciones.push({id,nombre,monto,notificacion,notas,fecha,tipo_transaccion,tipo_pago,categoria,producto, tipo_movimiento})
     
     this.guardarListasEnStorage();
 
@@ -202,7 +204,7 @@ export class CrudTransaccionesService {
       .reduce((total, transaccion) => total + transaccion.monto, 0);
   }
 
-  async ModificarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any, tipo_movimiento:any){
+  async ModificarTransaccion(id:number,nombre:string,monto:number,notificacion:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any, tipo_movimiento:any){
 
     const index = this.transacciones.findIndex(x => x.id === id);
 
@@ -225,7 +227,7 @@ export class CrudTransaccionesService {
     // Modificar las transaccion con los nuevo datos
     this.transacciones[index].nombre = nombre;
     this.transacciones[index].monto = monto;
-    this.transacciones[index].estado = estado;
+    this.transacciones[index].notificacion = notificacion;
     this.transacciones[index].fecha = fecha;
     this.transacciones[index].notas = notas;
     this.transacciones[index].tipo_transaccion = tipo_transaccion;
@@ -841,6 +843,21 @@ export class CrudTransaccionesService {
 
     return GastosVariablesTotales;
 
+  }
+
+  obtenerNotificaciones(){
+    for(let transaccion of this.transacciones){
+      if(transaccion.notificacion == true){
+
+        const index = this.listaNotificaciones.findIndex(x => x.id === transaccion.id);
+
+        if(index == -1){
+          this.listaNotificaciones.push(transaccion)
+          console.log("transaccion agregada")
+        }
+        
+      }
+    }
   }
 
   obtenerCantidadProductoVendidos(tipo_frecuencia:any){

@@ -206,6 +206,7 @@ export class AgregarTransaccionPage implements OnInit {
 
   ngOnInit() {
     
+    
     // Se definen los valores que tendran por defecto los parametros de agregar transaccion. (Gasto)
     if(this.crud.ActiveModificarTransaccion == true){
 
@@ -266,6 +267,7 @@ export class AgregarTransaccionPage implements OnInit {
 
   ionViewWillEnter(){
     
+    
 
   }
 
@@ -283,7 +285,7 @@ export class AgregarTransaccionPage implements OnInit {
       if(this.crud.ActiveModificarTransaccion == false){
 
         this.crud.AgregarTransaccion(this.crud.transacciones.length+1,this.NameTransaccion,this.MontoTransaccion,
-        'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}],producto, this.TipoMovimiento)
+        this.validarRecordatorios,this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}],producto, this.TipoMovimiento)
           
       }else{
         console.log('Modificar Transaccion activado ! ')
@@ -292,6 +294,7 @@ export class AgregarTransaccionPage implements OnInit {
   
       this.GoHome();
     }
+
     
   }
 
@@ -382,6 +385,8 @@ export class AgregarTransaccionPage implements OnInit {
     this.selectedOptionTipoTran = null
     // Clear Frecuencia
     this.selectedOptionFrecuencia = null
+    //Clear Notificacion
+    this.validarRecordatorios = false
 
    
 
