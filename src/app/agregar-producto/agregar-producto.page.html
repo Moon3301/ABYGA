@@ -29,7 +29,7 @@
 
 <ion-content [fullscreen]="true">
   
-  <ion-card>
+  <ion-grid>
     <ion-list>
       <!-- Codigo   -->
       <ion-row>
@@ -51,19 +51,23 @@
             <ion-input [(ngModel)]="nombreProducto"  label="Nombre" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
           </ion-col>
         </ion-row>
-      
+        
+
       <!-- Precio y Costo  -->
 
-        <ion-row>
-          <ion-col size="6">
-            <ion-input [(ngModel)]="precioProducto" type="number"  label="Precio" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
-          </ion-col >
-
-          <ion-col size="6">
-            <ion-input [(ngModel)]="costoProducto" type="number" label="Costo" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
-          </ion-col>
-        </ion-row>
-
+      <ion-row>
+        
+        <ion-col size="6">
+         
+          <ion-input [(ngModel)]="precioProducto" type="number"  label="Precio" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
+        
+        </ion-col >
+      
+        <ion-col size="6">
+          <ion-input [(ngModel)]="costoProducto" type="number" label="Costo" labelPlacement="floating" placeholder="Enter text" fill="outline"></ion-input>
+        </ion-col>
+      </ion-row>
+      
       <!-- Stock y Unidad de medida  -->
 
         <ion-row>
@@ -130,10 +134,15 @@
       </ion-card>
       
       <br>
-
-      <ion-card style="height: 80px; border: 1px dashed white; display: flex; justify-content: center; align-items: center;">
-        <button (click)="GetPhoto()" style="margin-right: 10px;" nz-button nzType="default" nzSize="large" nzShape="circle"><fa-icon slot="start" [icon]=faImage class="fa-xl"></fa-icon></button>
+      
+      <ion-card style="height: 80px; border: 1px dashed white;">
+        <ion-label style="font-size: 12px; text-align: center; display: flex; justify-content: center; align-items: center; padding-bottom: 5px;">Selecciona una imagen o toma una foto de tu producto</ion-label>
+        
+        <div style=" display: flex; justify-content: center; align-items: center;">
+          <button (click)="GetPhoto()" style="margin-right: 10px;" nz-button nzType="default" nzSize="large" nzShape="circle"><fa-icon slot="start" [icon]=faImage class="fa-xl"></fa-icon></button>
         <button (click)="NewPhoto()" style="margin-left: 10px;" nz-button nzType="default" nzSize="large" nzShape="circle"><fa-icon slot="start" [icon]=faCamera class="fa-xl"></fa-icon></button>
+        </div>
+        
       </ion-card>
 
       <br>
@@ -162,7 +171,7 @@
       </ion-card>
 
     </ion-list>
-  </ion-card>
+  </ion-grid>
 
   <ion-toast
     [isOpen]="isToastOpenValidarInput"

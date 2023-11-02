@@ -42,13 +42,13 @@ const routes: Routes = [
     loadChildren: () => import('./reportes/reportes.module').then( m => m.ReportesPageModule)
   },
   {
+    path: 'documentos',
+    loadChildren: () => import('./documentos/documentos.module').then( m => m.DocumentosPageModule)
+  },
+  {
     path: ':id',
     loadChildren: () => import('./agregar-transaccion/agregar-transaccion.module').then( m => m.AgregarTransaccionPageModule)
   },
-  
-
-  
-
 
 ];
 

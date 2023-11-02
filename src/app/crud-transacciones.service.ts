@@ -757,6 +757,7 @@ export class CrudTransaccionesService {
           }
         }
       }
+
     });
 
     console.log('Ganancias Anuales: '+ gananciasAnuales)
@@ -840,6 +841,53 @@ export class CrudTransaccionesService {
 
     return GastosVariablesTotales;
 
+  }
+
+  obtenerCantidadProductoVendidos(tipo_frecuencia:any){
+
+    const totalProductosVendidos: { [key: string]: number } = {};
+
+    let tipoFecha = ''
+
+    this.transacciones.forEach(transaccion => {
+
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+
+      if(tipo_frecuencia == 'Diario'){
+        tipoFecha = fecha.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+      }
+      if(tipo_frecuencia == 'Semanal'){
+        tipoFecha = `${this.getWeekNumber(fecha)}/${fecha.getFullYear()}`; // Formato YYYY-MM-DD
+      }
+      if(tipo_frecuencia == 'Mensual'){
+        tipoFecha = fecha.toISOString().slice(0, 7); // Formato YYYY-MM-DD
+      }
+      if(tipo_frecuencia == 'Anual'){
+        tipoFecha = fecha.getFullYear().toString(); // Formato YYYY-MM-DD
+      }
+
+      if (!totalProductosVendidos[tipoFecha]) {
+        totalProductosVendidos[tipoFecha] = 0;
+      }
+
+      if (transaccion.producto) {
+        for (const key in transaccion.producto) {
+          if (transaccion.producto.hasOwnProperty(key)) {
+            const producto = transaccion.producto[key];
+            console.log('Ganancia por producto: ',producto.ganancia)
+            if(producto.cantidad){
+              
+              totalProductosVendidos[tipoFecha] += producto.cantidad
+
+            }
+          }
+        }
+      }
+
+    });
+
+    return totalProductosVendidos;
+    
   }
 
 }

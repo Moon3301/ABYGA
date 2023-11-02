@@ -20,6 +20,10 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+
+import { NzCardModule } from 'ng-zorro-antd/card';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -31,7 +35,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatSelectModule,
     MatInputModule,
     NzButtonModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NzBadgeModule,
+    NzCardModule
 
   ],
   declarations: [AgregarProductoPage]

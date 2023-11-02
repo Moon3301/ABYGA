@@ -211,7 +211,7 @@
             <ion-label>
               <ion-label style="font-size: 13px;"><b>Productos vendidos</b></ion-label>
               <p></p>
-              <ion-label> 16</ion-label>
+              <ion-label> {{totalProductosVendidos}}</ion-label>
             </ion-label>
             
           </ion-item>
@@ -226,7 +226,7 @@
             <ion-label>
               <ion-label style="font-size: 13px;"><b>Ventas faltantes</b></ion-label>
               <p></p>
-              <ion-label>$ 5.600</ion-label>
+              <ion-label>{{totalVentasFaltantes | currency:'USD':'symbol':'1.2-2'}}</ion-label>
             </ion-label>
             
           </ion-item>
@@ -234,28 +234,14 @@
         </ion-card>
       </ion-col>
 
-      <ion-col size="6">
+      <ion-col size="12">
         <ion-card>
           <ion-item>
 
             <ion-label>
-              <ion-label style="font-size: 13px;"><b>sacsacs</b></ion-label>
+              <ion-label style="font-size: 13px; text-align: center;"><b>Producto mas vendido</b></ion-label>
               <p></p>
-              <ion-label>$ 5.600</ion-label>
-            </ion-label>
-            
-          </ion-item>
-          
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6">
-        <ion-card>
-          <ion-item>
-
-            <ion-label>
-              <ion-label style="font-size: 13px;"><b>acacscs</b></ion-label>
-              <p></p>
+              
               <ion-label>$ 5.600</ion-label>
             </ion-label>
             

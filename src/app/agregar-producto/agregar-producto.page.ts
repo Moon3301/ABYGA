@@ -350,7 +350,7 @@ export class AgregarProductoPage implements OnInit {
   GoHome(){
     
     // Retroceder a page 'Home'
-    this.router.navigate(['home'])
+    this.router.navigate(['home']);
     this.crudP.ActiveModificarProducto = false;
     this.ResetData();
 

@@ -21,6 +21,9 @@ export class ReportesPage implements OnInit {
   totalGastosVariables:any = 0
   totalGastosTotales:any = 0
 
+  totalProductosVendidos:any = 0
+  totalVentasFaltantes:any = 0;
+
   constructor(public router:Router, public crudP:CrudProductosService, public crudT:CrudTransaccionesService) { }
 
   ngOnInit() {
@@ -38,6 +41,17 @@ export class ReportesPage implements OnInit {
     if (this.percent < 0) {
       this.percent = 0;
     }
+  }
+
+  calcularPuntoEquilibrio(){
+
+    // Porcentaje ventas faltantes
+    const percent = (this.totalIngresos * 100) / this.totalEgresos
+
+    this.percent = +percent.toFixed(1);
+
+    // total ventas faltantes
+    this.totalVentasFaltantes = this.totalEgresos - this.totalIngresos
   }
 
   GoHome(){
@@ -64,7 +78,9 @@ export class ReportesPage implements OnInit {
 
     const totalGastosVariables = this.crudT.obtenerGastosVariables('Diario');
 
-    
+    // Productos vendidos
+
+    const totalProductosVendidos = this.crudT.obtenerCantidadProductoVendidos('Diario');
 
     // Obtener fechan de hoy
     const now = new Date();
@@ -91,12 +107,17 @@ export class ReportesPage implements OnInit {
 
     const gastosVariablesHoy = totalGastosVariables[fechaHoy] || 0;
 
+    // Productos vendidos
+
+    const productosVendidosHoy = totalProductosVendidos[fechaHoy] || 0;
+
     console.log('Ingresos de hoy:', ingresoHoy);
     console.log('Egresos de hoy:', egresoHoy);
     console.log('Ventas de hoy: ', ventaHoy);
     console.log('Ganancias de hoy', gananciasHoy);
     console.log('Gastos Fijos de hoy', gastosFijosHoy)
     console.log('Gastos variables de hoy', gastosVariablesHoy)
+    console.log('Productos Vendidos de hoy', productosVendidosHoy)
     
     // Total Ingresos y egresos
     this.totalIngresos = ingresoHoy;
@@ -115,6 +136,14 @@ export class ReportesPage implements OnInit {
 
     this.totalGastosVariables = gastosVariablesHoy;
 
+    //
+
+    this.calcularPuntoEquilibrio();
+
+    // Total productos vendidos
+
+    this.totalProductosVendidos = productosVendidosHoy
+
   }
 
   reporteMontoSemanal(){
@@ -127,6 +156,8 @@ export class ReportesPage implements OnInit {
     const totalGastosFijosDiarios = this.crudT.obtenerGastosFijos('Semanal');
     const totalGatosVariablesDiarios = this.crudT.obtenerGastosVariables('Semanal');
 
+    const totalProductosVendidos = this.crudT.obtenerCantidadProductoVendidos('Semanal');
+
     const now = new Date();
     const week = this.getWeekNumber(now);
     const year = now.getFullYear();
@@ -138,6 +169,7 @@ export class ReportesPage implements OnInit {
     const gananciaSemanal = gananciaTotalSemanal[semanaActual] || 0;
     const gastosFijosSemanal = totalGastosFijosDiarios[semanaActual] || 0;
     const gastosVariablesSemanal = totalGatosVariablesDiarios[semanaActual] || 0;
+    const productosVendidosSemanal = totalProductosVendidos[semanaActual] || 0;
 
     console.log('Ingresos de la semana:', ingresoSemana);
     console.log('Egresos de la semana:', egresoSemana);
@@ -145,6 +177,8 @@ export class ReportesPage implements OnInit {
     console.log('Ganancias de la semana:', gananciaSemanal);
     console.log('Gastos fijos de la semana:', gastosFijosSemanal);
     console.log('Gastos Variables de la semana:', gastosVariablesSemanal);
+    console.log('Productos vendidos:', productosVendidosSemanal)
+
 
     this.totalIngresos = ingresoSemana;
     this.totalEgresos = egresoSemana;
@@ -152,7 +186,9 @@ export class ReportesPage implements OnInit {
     this.totalGanancias = gananciaSemanal;
     this.totalGastoFijos = gastosFijosSemanal;
     this.totalGastosVariables = gastosVariablesSemanal;
+    this.totalProductosVendidos = productosVendidosSemanal;
 
+    this.calcularPuntoEquilibrio();
   }
 
   reporteMontoMensual(){
@@ -164,6 +200,8 @@ export class ReportesPage implements OnInit {
 
     const gastoFijosMensual = this.crudT.obtenerGastosFijos('Mensual');
     const gastoVariablesMensual = this.crudT.obtenerGastosVariables('Mensual');
+
+    const totalProductosVendidos = this.crudT.obtenerCantidadProductoVendidos('Mensual');
 
     const now = new Date();
     const year = now.getFullYear();
@@ -178,12 +216,15 @@ export class ReportesPage implements OnInit {
     const gastoFijoMes = gastoFijosMensual[mesActual] || 0;
     const gastoVariableMes = gastoVariablesMensual[mesActual] || 0;
 
+    const productosVendidosMes = totalProductosVendidos[mesActual] || 0;
+
     console.log('Ingresos del mes:', ingresoMes);
     console.log('Egresos del mes:', egresoMes);
     console.log('Venta del mes:', ventaMes);
     console.log('Ganancia del mes:', gananciaMes);
     console.log('Gasto fijo mes', gastoFijoMes)
     console.log('Gasto variable mes', gastoVariableMes)
+    console.log('Productos vendidos:', productosVendidosMes)
 
     this.totalIngresos = ingresoMes;
     this.totalEgresos = egresoMes;
@@ -191,7 +232,9 @@ export class ReportesPage implements OnInit {
     this.totalGanancias = gananciaMes;
     this.totalGastoFijos = gastoFijoMes;
     this.totalGastosVariables = gastoVariableMes;
+    this.totalProductosVendidos = productosVendidosMes
 
+    this.calcularPuntoEquilibrio();
   }
 
   reporteMontoAnual(){
@@ -204,6 +247,8 @@ export class ReportesPage implements OnInit {
     const gastoFijoTotalAnual = this.crudT.obtenerGastosFijos('Anual');
     const gastoVariableTotalAnual = this.crudT.obtenerGastosVariables('Anual');
 
+    const totalProductosVendidos = this.crudT.obtenerCantidadProductoVendidos('Anual');
+
     const now = new Date();
     const anioActual = now.getFullYear().toString();
 
@@ -213,6 +258,7 @@ export class ReportesPage implements OnInit {
     const gananciaAnual = gananciaTotalAnual[anioActual] || 0;
     const gastoFijoAnual = gastoFijoTotalAnual[anioActual] || 0;
     const gastoVariableAnual = gastoVariableTotalAnual[anioActual] || 0;
+    const productosVendidosAnual = totalProductosVendidos[anioActual] || 0;
 
     console.log('Ingresos del año:', ingresoAnual);
     console.log('Egresos del año:', egresoAnual);
@@ -220,6 +266,7 @@ export class ReportesPage implements OnInit {
     console.log('Ganancia del año:', gananciaAnual);
     console.log('Gasto fijo del año:', gastoFijoAnual);
     console.log('Gasto variable del ano: ', gastoVariableAnual)
+    console.log('Productos vendidos del ano:',productosVendidosAnual)
 
     this.totalIngresos = ingresoAnual;
     this.totalEgresos = egresoAnual;
@@ -227,7 +274,9 @@ export class ReportesPage implements OnInit {
     this.totalGanancias = gananciaAnual;
     this.totalGastoFijos = gastoFijoAnual;
     this.totalGastosVariables = gastoVariableAnual;
+    this.totalProductosVendidos = productosVendidosAnual;
 
+    this.calcularPuntoEquilibrio();
   }
 
   getWeekNumber(date: Date) {
