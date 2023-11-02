@@ -8,7 +8,7 @@ export interface Transaccion {
     id: number
     nombre: string
     monto: number
-    estado: string
+    notificacion: boolean
     notas: string
     fecha: any
     tipo_transaccion: string

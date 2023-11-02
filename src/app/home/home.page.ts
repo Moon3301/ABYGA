@@ -211,6 +211,8 @@ public pieChartOptions: ChartOptions<'pie'> = {
   }
 
   ngOnInit(){
+    this.crud.obtenerNotificaciones();
+    console.log(this.crud.listaNotificaciones)
 
   
     
@@ -234,6 +236,9 @@ public pieChartOptions: ChartOptions<'pie'> = {
   }
 
   ionViewWillEnter(){
+
+    this.crud.obtenerNotificaciones();
+    console.log(this.crud.listaNotificaciones)
 
     this.updateDataPieChart();
 
@@ -371,6 +376,8 @@ public pieChartOptions: ChartOptions<'pie'> = {
     }
     if(indexSwiper == 3){
 
+      this.crud.obtenerNotificaciones();
+
      }
 
   }
@@ -394,7 +401,7 @@ public pieChartOptions: ChartOptions<'pie'> = {
         case 'inventario':
           slideIndex = 2;
           break;
-        case 'recordatorios':
+        case 'notificaciones':
           slideIndex = 3;
           break;
         // Añade más casos si tienes más diapositivas
