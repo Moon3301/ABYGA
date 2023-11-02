@@ -98,7 +98,7 @@
               <ion-label>
                 <ion-label style="font-size: 18px;"><b>Ventas</b></ion-label>
                 <p></p>
-                <ion-label>$ 5.600</ion-label>
+                <ion-label>{{totalVentas | currency:'USD':'symbol':'1.2-2'}}</ion-label>
               </ion-label>
               
             </ion-item>
@@ -112,7 +112,7 @@
               <ion-label>
                 <ion-label style="font-size: 18px;"><b>Ganancias</b></ion-label>
                 <p></p>
-                <ion-label>$ 5.600</ion-label>
+                <ion-label>{{totalGanancias | currency:'USD':'symbol':'1.2-2'}}</ion-label>
               </ion-label>
               
             </ion-item>
@@ -145,7 +145,7 @@
             <ion-label>
               <ion-label><b style="font-size: 15px;">Gastos Fijos</b></ion-label>
                 <br>    
-              <ion-label style="font-size: 13px;">$ 5600</ion-label>
+              <ion-label style="font-size: 13px;">{{totalGastoFijos | currency:'USD':'symbol':'1.2-2'}}</ion-label>
             </ion-label>
               
           </ion-col>
@@ -159,7 +159,7 @@
             <ion-label>
               <ion-label><b style="font-size: 15px;">Gastos Variables</b></ion-label>
               <br>
-              <ion-label style="font-size: 13px;">$ 5600</ion-label>
+              <ion-label style="font-size: 13px;">{{totalGastosVariables | currency:'USD':'symbol':'1.2-2'}}</ion-label>
             </ion-label>
             
           </ion-col>
@@ -173,7 +173,7 @@
             <ion-label>
               <ion-label><b style="font-size: 15px;">Gastos Totales</b></ion-label>
               <br>
-              <ion-label style="font-size: 13px;">$ 5600</ion-label>
+              <ion-label style="font-size: 13px;">{{totalEgresos | currency:'USD':'symbol':'1.2-2'}}</ion-label>
             </ion-label>
             
           </ion-col>
@@ -187,7 +187,7 @@
             <ion-label>
               <ion-label><b style="font-size: 15px;">Ingresos Totales</b></ion-label>
               <br>
-              <ion-label style="font-size: 13px;">$ 5600</ion-label>
+              <ion-label style="font-size: 13px;">{{totalIngresos | currency:'USD':'symbol':'1.2-2'}}</ion-label>
             </ion-label>
             
           </ion-col>

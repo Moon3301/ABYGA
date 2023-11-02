@@ -129,40 +129,44 @@
     <swiper-container  #swiper (slidechange)="onSlideChange($event)" >
 
       <swiper-slide id="principal">
-        <ion-card  style="border-radius: 20px;">
-          <br>
-          <ion-card>
-             
-            <canvas baseChart 
-              [type]="'pie'"
-              [datasets]="pieChartDatasets"
-              [labels]="pieChartLabels"
-              [options]="pieChartOptions"
-              [plugins]="pieChartPlugins"
-              [legend]="pieChartLegend">
-            </canvas>
-  
-          </ion-card>
-          <br>
 
-          <ion-card>
+        <br>
 
-            <canvas baseChart
-            [data]="barChartData"
-            [options]="barChartOptions"
-            [plugins]="barChartPlugins"
-            [legend]="barChartLegend"
-            [type]="'bar'">
-            </canvas>
+        <ion-item  color="primary" style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
 
-          </ion-card>
-          <br>
-          <ion-row>
-            
-          </ion-row>
+          <ion-label slot="start" style="margin-top: 4px; color: white;"> Historial de transacciones</ion-label>
+
+        </ion-item>
+
+        <br>
           
-        </ion-card>
-        
+          <canvas baseChart
+          [data]="barChartData"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [type]="'bar'">
+          </canvas>
+  
+        <br>
+
+        <ion-item  color="primary" style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
+
+          <ion-label  style="margin-top: 4px; color: white;">Historial de ventas por categorias</ion-label>
+
+        </ion-item>
+
+          <canvas baseChart 
+          [type]="'pie'"
+          [datasets]="pieChartDatasets"
+          [labels]="pieChartLabels"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [legend]="pieChartLegend">
+          </canvas>
+
+          <br>
+          
       </swiper-slide>
 
       <swiper-slide id="transacciones">
@@ -170,12 +174,15 @@
         <ion-card  style="border-radius: 20px;"  >
           <div *ngFor="let fecha of crud.getFechasAgrupadas()">
           <ion-card color="primary" >
-            <ion-item  color="primary" style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
-              <ion-label slot="start" style="margin-top: 4px; color: white;">{{ fecha }}</ion-label>
-             <!-- <ion-label slot="end" style="margin-top: 4px;">MONTO ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Ingresos') | currency:'USD':'symbol':'1.2-2' }}
-                / ${{ crud.calcularMontoTotal(crud.transaccionesAgrupadas[fecha], 'Gastos') | currency:'USD':'symbol':'1.2-2' }}</ion-label> -->
-                <ion-label slot="end" style="margin-top: 4px; color: white;">Monto: <b style="font-size: 13px;">{{crud.totalNetoPorFecha[fecha] | currency:'USD':'symbol':'1.2-2'}}</b></ion-label>
-            </ion-item>
+            <ion-row style="border-radius: 20px; font-size: 10px; height: 25px;  background-color: #1C2833;">
+              <ion-col size="7">
+                <ion-label  style="margin-top: 4px; color: white;">{{ fecha }}</ion-label>
+              </ion-col>
+
+              <ion-col size="5">
+                <ion-label  style="margin-top: 4px; color: white;">Total: <b style="font-size: 12px;">{{crud.totalNetoPorFecha[fecha] | currency:'USD':'symbol':'1.2-2'}}</b></ion-label>
+              </ion-col>
+            </ion-row>
           </ion-card>
   
             <div *ngFor="let transaccion of crud.transaccionesAgrupadas[fecha]">
@@ -226,7 +233,7 @@
                   <ion-card color="primary" style="height: 150px; width: 90%; margin: 0 auto; position: relative;" #button [routerLink]="['/agregar-producto']" (click)="GetProducto(producto.id)">
 
                     <ion-row>
-                      <ion-label style="font-size: 12px; margin-left: 3px; color: white;">SKU:<b> {{producto.id}}</b></ion-label>
+                      <ion-label style="font-size: 10px; margin-left: 3px; color: white;">SKU:<b> {{producto.id}}</b></ion-label>
                     </ion-row>
                     
                     <ion-card-content>
@@ -235,10 +242,10 @@
                       </div>
                     </ion-card-content>
                     <ion-row>
-                      <ion-label  style=" margin-left: 3px;font-size: 12px; color: white; position: absolute; bottom: 5px;">Precio: <b>{{producto.precio}}</b></ion-label>
+                      <ion-label  style=" margin-left: 3px;font-size: 10px; color: white; position: absolute; bottom: 5px;">Precio: <b>{{producto.precio}}</b></ion-label>
                     </ion-row>
                     <ion-row>
-                      <ion-label style="margin-left: 3px; font-size: 12px; color: white; position: absolute; bottom: 20px;">Stock: <b>{{producto.stock}}</b></ion-label>
+                      <ion-label style="margin-left: 3px; font-size: 10px; color: white; position: absolute; bottom: 20px;">Stock: <b>{{producto.stock}}</b></ion-label>
                     </ion-row>
                     <ion-row>
                       <ion-label style="color: white; position: absolute; top: 5px; right: 5px;"><fa-icon [icon]=categoria.icon class="fa-xl" ></fa-icon></ion-label>
@@ -269,9 +276,9 @@
     <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
       <ng-template >
         <ion-header>
-          <ion-toolbar>
+          <ion-toolbar color="primary">
             <ion-buttons slot="start">
-              <ion-button (click)="cancel()"><ion-icon name="chevron-back-outline"></ion-icon>
+              <ion-button (click)="cancel()"><ion-icon style="color: white;" name="chevron-back-outline"></ion-icon>
               </ion-button>
             </ion-buttons>
             <ion-title style="text-align: center; margin: 0 auto; "></ion-title>
@@ -285,6 +292,7 @@
               <ion-card  style="border-radius: 15px; border: 2px solid #141E30;" #button [routerLink]="['/','Ingresos']" (click)="confirm()"  mat-stroked-button>
 
                 <ion-row>
+                  
                   <ion-col size="8" >
                     <ion-card-header >
                       <ion-card-title style="color: #141E30">Ingresos</ion-card-title>

@@ -14,6 +14,7 @@ export interface Transaccion {
     tipo_transaccion: string
     tipo_pago: TipoPago
     categoria: CategoriasTransacciones[]
-    producto: Producto[]
+    producto: any
+    tipo_movimiento: string
     
 }

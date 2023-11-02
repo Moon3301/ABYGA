@@ -153,6 +153,10 @@ export class AgregarTransaccionPage implements OnInit {
   // Indica el tipo de transaccion ej: Ingresos o Gastos
   TipoTrans: any
 
+  // Tipo movimiento
+
+  TipoMovimiento:any
+
   // Alert
   isToastOpenEliminar = false;
   isToastOpenValidarInput = false;
@@ -238,6 +242,10 @@ export class AgregarTransaccionPage implements OnInit {
     // Formatea y asigna la fecha en el formato ISO 8601
     this.selectedDate = currentDate.toISOString().slice(0, 19);
 
+    // Define el tipo de movimiento inicial
+
+    
+
     this.activatedRouter.paramMap.subscribe(paramMap =>{
       const id = paramMap.get('id');
       this.TipoTrans = id;
@@ -247,9 +255,11 @@ export class AgregarTransaccionPage implements OnInit {
 
     if(this.TipoTrans == 'Ingresos'){
       this.OptionIngreso();
+      this.TipoMovimiento = 'Ingresos Variables'
     }
     if(this.TipoTrans == 'Egresos'){
       this.OptionGasto();
+      this.TipoMovimiento = 'Egresos Variables'
     }
 
   }
@@ -273,18 +283,16 @@ export class AgregarTransaccionPage implements OnInit {
       if(this.crud.ActiveModificarTransaccion == false){
 
         this.crud.AgregarTransaccion(this.crud.transacciones.length+1,this.NameTransaccion,this.MontoTransaccion,
-        'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}],producto)
+        'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}],producto, this.TipoMovimiento)
           
       }else{
         console.log('Modificar Transaccion activado ! ')
-        this.crud.ModificarTransaccion(this.GetData.id,this.NameTransaccion,this.MontoTransaccion,'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}])
+        this.crud.ModificarTransaccion(this.GetData.id,this.NameTransaccion,this.MontoTransaccion,'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}], this.TipoMovimiento)
       }
   
       this.GoHome();
     }
     
-    
-
   }
 
   // Convierte la fecha a formato : 
@@ -299,7 +307,7 @@ export class AgregarTransaccionPage implements OnInit {
   onTabChange(ev:any){
 
     console.log(ev.tab.textLabel);
-
+    this.TipoMovimiento = ev.tab.textLabel
   }
 
 
@@ -321,6 +329,7 @@ export class AgregarTransaccionPage implements OnInit {
   ChangeTransaccion(ev:any){
 
     console.log(ev.detail)
+    
     
   }
 
@@ -349,7 +358,8 @@ export class AgregarTransaccionPage implements OnInit {
   OptionGasto(){
 
     this.IconTransaccion = faCircleMinus;
-    this.colorToolbar = '#292E49'
+    this.colorToolbar = '#292E49';
+    this.TipoMovimiento = ''
   }
 
   OptionIngreso(){

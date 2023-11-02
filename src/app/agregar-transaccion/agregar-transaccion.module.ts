@@ -47,7 +47,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDialogModule,
     MatSlideToggleModule,
     
-    
   ],
   declarations: [AgregarTransaccionPage, KeysPipe]
 })

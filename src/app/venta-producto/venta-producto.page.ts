@@ -97,7 +97,7 @@ export class VentaProductoPage implements OnInit {
 
   isOkButtonEnabled = true
 
-  productosAgrupados: { [id: string]: { nombre: string; cantidad: number; stock:number; valorUnitario: number; total: number, img:any } } = {};
+  productosAgrupados: { [id: string]: { nombre: string; cantidad: number; stock:number; valorUnitario: number; ganancia:number; total: number; img:any } } = {};
 
   // modal ng-zorro
   isVisible = false;
@@ -211,6 +211,7 @@ export class VentaProductoPage implements OnInit {
           cantidad: 1,
           stock: producto.stock,
           valorUnitario: producto.precio,
+          ganancia: 0,
           total: producto.precio,
           img: producto.imagen
         };
@@ -330,12 +331,25 @@ export class VentaProductoPage implements OnInit {
         }catch(error){
           console.log('Error en categoria:'+error);
         }
+
+        // Obtener ganancia
+
+        const precio = productoInventario.precio * producto.cantidad;
+        console.log('Precio total producto:', precio)
+
+        const costo = productoInventario.costo * producto.cantidad;
+        console.log('Costo total producto:', costo)
+
+        const ganancias = precio - costo;
+        console.log('Ganancia total producto:', ganancias)
+        this.productosAgrupados[key].ganancia = ganancias
         
       }
       
     }
 
-    this.crudT.AgregarTransaccion(this.crudT.transacciones.length+1,'',this.totalVenta,'',this.fechaActual,'','Ingresos','',[{id:2,nombre:'Ventas',subCategoria:[{id:1,nombre:'Productos', icon:faCashRegister}]}], this.productosAgrupados)
+    // Se agrega una transaccion con los datos de los productos vendidos.
+    this.crudT.AgregarTransaccion(this.crudT.transacciones.length+1,'',this.totalVenta,'',this.fechaActual,'','Ingresos','',[{id:2,nombre:'Ventas',subCategoria:[{id:1,nombre:'Productos', icon:faCashRegister}]}], this.productosAgrupados, 'Ingresos Variables')
 
     this.setOpenVentaRealizada(true);
 

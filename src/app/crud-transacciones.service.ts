@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Transaccion } from './transaccion';
 import { Storage } from '@ionic/storage-angular';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -28,8 +26,6 @@ export class CrudTransaccionesService {
     'sáb': { totalIngresos: 0, totalEgresos:0 },
     'dom': { totalIngresos: 0, totalEgresos:0 },
   };
-
-
 
   ActiveModificarTransaccion:any = false;
   DataTransaccion:any
@@ -102,12 +98,12 @@ export class CrudTransaccionesService {
 
   //
 
-  async AgregarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any, producto:any){
+  async AgregarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any, producto:any, tipo_movimiento:any){
 
     if (this.transacciones.find(x => x.id === id)) {return};
 
     // Local
-    this.transacciones.push({id,nombre,monto,estado,notas,fecha,tipo_transaccion,tipo_pago,categoria,producto})
+    this.transacciones.push({id,nombre,monto,estado,notas,fecha,tipo_transaccion,tipo_pago,categoria,producto, tipo_movimiento})
     
     this.guardarListasEnStorage();
 
@@ -161,7 +157,6 @@ export class CrudTransaccionesService {
       
       const fechaFormateada = fecha.toString().split('T')[0]; // Formatear la fecha como "yyyy-mm-dd"
       
-
       this.totalIngresosPorFecha[fecha] = this.calcularMontoTotal(this.transaccionesAgrupadas[fecha], 'Ingresos')
       this.totalGastosPorFecha[fecha] = this.calcularMontoTotal(this.transaccionesAgrupadas[fecha], 'Egresos')
     }
@@ -188,9 +183,6 @@ export class CrudTransaccionesService {
       this.totalNetoPorFecha[fechaFormateada] = (this.totalIngresosPorFecha[fechaFormateada] || 0) - (this.totalGastosPorFecha[fechaFormateada] || 0);
     });
 
-
-
-
     this.guardarListasEnStorage();
 
   }
@@ -210,7 +202,7 @@ export class CrudTransaccionesService {
       .reduce((total, transaccion) => total + transaccion.monto, 0);
   }
 
-  async ModificarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any){
+  async ModificarTransaccion(id:number,nombre:string,monto:number,estado:any,fecha:any, notas:string,tipo_transaccion:any,tipo_pago:any, categoria:any, tipo_movimiento:any){
 
     const index = this.transacciones.findIndex(x => x.id === id);
 
@@ -239,6 +231,7 @@ export class CrudTransaccionesService {
     this.transacciones[index].tipo_transaccion = tipo_transaccion;
     this.transacciones[index].tipo_pago = tipo_pago;
     this.transacciones[index].categoria = categoria;
+    this.transacciones[index].tipo_movimiento = tipo_movimiento;
 
     // Agregar el nuevo monto
     console.log('Nuevo monto: '+monto)
@@ -401,27 +394,27 @@ export class CrudTransaccionesService {
   }
 
   //
-
   obtenerMontoTotalPorDia(tipoTransaccion:any) {
 
     const montoPorDia: { [key: string]: number } = {};
 
     this.transacciones.forEach((transaccion) => {
 
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+      const dia = fecha.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+
+      //Obtener monto de transacciones por dia
       if(transaccion.tipo_transaccion == tipoTransaccion){
 
-        
-        const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
-        const dia = fecha.toISOString().slice(0, 10); // Formato YYYY-MM-DD
-        
         if (!montoPorDia[dia]) {
           montoPorDia[dia] = 0;
         }
         montoPorDia[dia] += transaccion.monto;
+
       }
         
     });
-
+    
     return montoPorDia;
   }
 
@@ -514,28 +507,339 @@ export class CrudTransaccionesService {
     return new Date(anio, mes, dia);
   }
 
-  obtenerMontoProductosVendidosPorDia(fecha: Date): number {
-    const montoTotalDia = this.transacciones
-    .filter(transaccion => this.parsearFechaConFormatoEspecifico(transaccion.fecha).toISOString() === new Date(fecha).toISOString())
-    .reduce((total, transaccion) => {
-      const productosVendidos = transaccion.producto;
-      console.log('Fecha hoy service: '+this.parsearFechaConFormatoEspecifico(transaccion.fecha).toISOString())
-      // Verificar si productosVendidos es un arreglo válido y tiene elementos
-      if (productosVendidos && productosVendidos.length > 0) {
-        const montoProductos = productosVendidos.reduce((subtotal, producto) => subtotal + producto.precio, 0);
-        return total + montoProductos;
-      } else {
-        return total; // Devolver el total sin sumar nada si no hay productos
-      }
-    }, 0);
+  obtenerMontoTotalVentasProductosPorDia() {
+    const ventasPorDia: { [key: string]: number } = {};
 
-  return montoTotalDia;
+    this.transacciones.forEach(transaccion => {
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+      const dia = fecha.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+
+      if (!ventasPorDia[dia]) {
+        ventasPorDia[dia] = 0;
+      }
+
+      if (transaccion.producto) {
+        for (const key in transaccion.producto) {
+          if (transaccion.producto.hasOwnProperty(key)) {
+            const producto = transaccion.producto[key];
+              
+            if (producto.total) {
+              ventasPorDia[dia] += producto.total;
+            }
+
+            console.log(producto)
+          }
+        }
+      }
+    });
+
+    console.log('Monto total por día de ventas de productos: ' + JSON.stringify(ventasPorDia));
+    return ventasPorDia;
   }
 
+  obtenerMontoTotalVentasProductosPorSemana() {
 
+    const ventasPorSemana: { [key: string]: number } = {};
 
+    this.transacciones.forEach(transaccion => {
 
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+      const semana = `${this.getWeekNumber(fecha)}/${fecha.getFullYear()}`;
 
+      if (!ventasPorSemana[semana]) {
+        ventasPorSemana[semana] = 0;
+      }
 
+      if (transaccion.producto) {
+        for (const key in transaccion.producto) {
+          if (transaccion.producto.hasOwnProperty(key)) {
+            const producto = transaccion.producto[key];
+                
+            if (producto.total) {
+              ventasPorSemana[semana] += producto.total;
+            }
+
+            console.log(producto)
+          }
+        }
+      }
+
+    });
+
+    console.log('Monto total por semana de ventas de productos: ' + JSON.stringify(ventasPorSemana));
+    return ventasPorSemana;
+        
+  }
+
+  obtenerMontoTotalVentasProductosPorMes() {
+
+    const ventasPorMes: { [key: string]: number } = {};
+
+    this.transacciones.forEach(transaccion => {
+
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+      const mes = fecha.toISOString().slice(0, 7); // Formato YYYY-MM
+
+      if (!ventasPorMes[mes]) {
+        ventasPorMes[mes] = 0;
+      }
+
+      if (transaccion.producto) {
+        for (const key in transaccion.producto) {
+          if (transaccion.producto.hasOwnProperty(key)) {
+            const producto = transaccion.producto[key];
+                
+            if (producto.total) {
+              ventasPorMes[mes] += producto.total;
+            }
+
+            console.log(producto)
+          }
+        }
+      }
+
+    });
+
+    console.log('Monto total por mes de ventas de productos: ' + JSON.stringify(ventasPorMes));
+    return ventasPorMes;
+        
+  }
+
+  obtenerMontoTotalVentasProductosPorAnio() {
+
+    const ventasPorAnio: { [key: string]: number } = {};
+
+    this.transacciones.forEach(transaccion => {
+
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+      const anio = fecha.getFullYear().toString();
+
+      if (!ventasPorAnio[anio]) {
+        ventasPorAnio[anio] = 0;
+      }
+
+      if (transaccion.producto) {
+        for (const key in transaccion.producto) {
+          if (transaccion.producto.hasOwnProperty(key)) {
+            const producto = transaccion.producto[key];
+                
+            if (producto.total) {
+              ventasPorAnio[anio] += producto.total;
+            }
+
+            console.log(producto)
+          }
+        }
+      }
+
+    });
+
+    console.log('Monto total por mes de ventas de productos: ' + JSON.stringify(ventasPorAnio));
+    return ventasPorAnio;
+        
+  }
+
+  obtenerGananciasDiarias(){
+
+    const gananciasDiarias: { [key: string]: number } = {};
+
+    this.transacciones.forEach(transaccion => {
+
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+
+      const dia = fecha.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+
+      if (!gananciasDiarias[dia]) {
+        gananciasDiarias[dia] = 0;
+      }
+
+      if (transaccion.producto) {
+        for (const key in transaccion.producto) {
+          if (transaccion.producto.hasOwnProperty(key)) {
+            const producto = transaccion.producto[key];
+            console.log('Ganancia por producto: ',producto.ganancia)
+            if(producto.ganancia){
+              gananciasDiarias[dia] += producto.ganancia;
+            }
+          }
+        }
+      }
+    });
+
+    console.log('Ganancias diarias: '+ gananciasDiarias)
+    return gananciasDiarias;
+  }
+
+  obtenerGananciasSemanales(){
+
+    const gananciasSemanales: { [key: string]: number } = {};
+
+    this.transacciones.forEach(transaccion => {
+
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+      const semana = `${this.getWeekNumber(fecha)}/${fecha.getFullYear()}`;
+
+      if (!gananciasSemanales[semana]) {
+        gananciasSemanales[semana] = 0;
+      }
+
+      if (transaccion.producto) {
+        for (const key in transaccion.producto) {
+          if (transaccion.producto.hasOwnProperty(key)) {
+            const producto = transaccion.producto[key];
+            console.log('Ganancia por producto: ',producto.ganancia)
+            if(producto.ganancia){
+              gananciasSemanales[semana] += producto.ganancia;
+            }
+          }
+        }
+      }
+    });
+
+    console.log('Ganancias semanales: '+ gananciasSemanales)
+    return gananciasSemanales;
+
+  }
+
+  obtenerGananciasMensuales(){
+
+    const gananciasMensuales: { [key: string]: number } = {};
+
+    this.transacciones.forEach(transaccion => {
+
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+      const mes = fecha.toISOString().slice(0, 7); // Formato YYYY-MM
+
+      if (!gananciasMensuales[mes]) {
+        gananciasMensuales[mes] = 0;
+      }
+
+      if (transaccion.producto) {
+        for (const key in transaccion.producto) {
+          if (transaccion.producto.hasOwnProperty(key)) {
+            const producto = transaccion.producto[key];
+            console.log('Ganancia por producto: ',producto.ganancia)
+            if(producto.ganancia){
+              gananciasMensuales[mes] += producto.ganancia;
+            }
+
+          }
+        }
+      }
+    });
+
+    console.log('Ganancias mensuales: '+ gananciasMensuales)
+    return gananciasMensuales;
+
+  }
+
+  obtenerGananciasAnuales(){
+
+    const gananciasAnuales: { [key: string]: number } = {};
+
+    this.transacciones.forEach(transaccion => {
+
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+      const anio = fecha.getFullYear().toString();
+
+      if (!gananciasAnuales[anio]) {
+        gananciasAnuales[anio] = 0;
+      }
+
+      if (transaccion.producto) {
+        for (const key in transaccion.producto) {
+          if (transaccion.producto.hasOwnProperty(key)) {
+            const producto = transaccion.producto[key];
+            console.log('Ganancia por producto: ',producto.ganancia)
+            if(producto.ganancia){
+              gananciasAnuales[anio] += producto.ganancia;
+            }
+          }
+        }
+      }
+    });
+
+    console.log('Ganancias Anuales: '+ gananciasAnuales)
+    return gananciasAnuales;
+
+  }
+
+  obtenerGastosFijos(tipo_frecuencia:any){
+
+    const GastosFijosTotales: { [key: string]: number } = {};
+
+    let tipoFecha = ''
+
+    this.transacciones.forEach(transaccion => {
+
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+
+      if(tipo_frecuencia == 'Diario'){
+        tipoFecha = fecha.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+      }
+      if(tipo_frecuencia == 'Semanal'){
+        tipoFecha = `${this.getWeekNumber(fecha)}/${fecha.getFullYear()}`; // Formato YYYY-MM-DD
+      }
+      if(tipo_frecuencia == 'Mensual'){
+        tipoFecha = fecha.toISOString().slice(0, 7); // Formato YYYY-MM-DD
+      }
+      if(tipo_frecuencia == 'Anual'){
+        tipoFecha = fecha.getFullYear().toString(); // Formato YYYY-MM-DD
+      }
+
+      if (!GastosFijosTotales[tipoFecha]) {
+        GastosFijosTotales[tipoFecha] = 0;
+      }
+
+      if(transaccion.tipo_transaccion == 'Egresos' && transaccion.tipo_movimiento === 'Egresos Fijos'){
+
+        GastosFijosTotales[tipoFecha] += transaccion.monto;
+        
+      }
+
+    });
+
+    return GastosFijosTotales;
+
+  }
+
+  obtenerGastosVariables(tipo_frecuencia:any){
+
+    const GastosVariablesTotales: { [key: string]: number } = {};
+
+    let tipoFecha = ''
+
+    this.transacciones.forEach(transaccion => {
+
+      const fecha = this.parsearFechaConFormatoEspecifico(transaccion.fecha);
+
+      if(tipo_frecuencia == 'Diario'){
+        tipoFecha = fecha.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+      }
+      if(tipo_frecuencia == 'Semanal'){
+        tipoFecha = `${this.getWeekNumber(fecha)}/${fecha.getFullYear()}`; // Formato YYYY-MM-DD
+      }
+      if(tipo_frecuencia == 'Mensual'){
+        tipoFecha = fecha.toISOString().slice(0, 7); // Formato YYYY-MM-DD
+      }
+      if(tipo_frecuencia == 'Anual'){
+        tipoFecha = fecha.getFullYear().toString(); // Formato YYYY-MM-DD
+      }
+
+      if (!GastosVariablesTotales[tipoFecha]) {
+        GastosVariablesTotales[tipoFecha] = 0;
+      }
+
+      if(transaccion.tipo_transaccion == 'Egresos' && transaccion.tipo_movimiento === 'Egresos Variables'){
+
+        GastosVariablesTotales[tipoFecha] += transaccion.monto;
+        
+      }
+
+    });
+
+    return GastosVariablesTotales;
+
+  }
 
 }
