@@ -265,32 +265,31 @@
       </swiper-slide> 
       <swiper-slide id="notificaciones"  >
         <ion-grid >
-          <ion-list *ngFor="let notificacion of crud.listaNotificaciones"  >
-            <ion-card>
-              <ion-row>
-                <ion-label>
-                  {{notificacion.monto}}
-                  
-                </ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-label>
-                  {{notificacion.fecha}}
-                  
-                </ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-label>
-                  {{notificacion.notas}}
-                  
-                </ion-label>
-              </ion-row>
-            </ion-card>
+          <ion-list *ngFor="let notificacion of crud.listaNotificaciones" class="centered-container" >
+            
 
+            
+            <nz-card style="width:300px;" nzTitle="{{notificacion.tipo_transaccion}} {{notificacion.categoria[0].nombre}}" [nzExtra]="extraTemplate">
+              <p  > <b> Monto Transaccion :  {{notificacion.monto | currency:'USD':'symbol':'1.2-2'}}</b>  </p>
+              
+            </nz-card>
+            <ng-template #extraTemplate>
+              <a (click)="showModal()"> Más info...</a>
+            </ng-template>
+            
+            <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle=" {{notificacion.fecha}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+              <ng-container *nzModalContent>
+                <p> {{notificacion.notas}} </p>
+                <p>  </p>
+                <mat-slide-toggle  [(ngModel)]="notificacion.notificacion">Recordatorios </mat-slide-toggle>
 
+              </ng-container>
+            </nz-modal>
+          
           </ion-list>
 
         </ion-grid>
+        
 
       </swiper-slide>
       

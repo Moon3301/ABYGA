@@ -21,6 +21,12 @@ import { register } from 'swiper/element/bundle';
 
 import {MatIconModule} from '@angular/material/icon';
 
+import { NzCardModule } from 'ng-zorro-antd/card';
+
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 register();
 
 @NgModule({
@@ -34,7 +40,11 @@ register();
     NgChartsModule,
     NzButtonModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    NzCardModule,
+    NzModalModule,
+    MatSlideToggleModule
+
 
   ],
   declarations: [HomePage],

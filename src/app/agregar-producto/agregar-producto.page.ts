@@ -7,7 +7,8 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave,
-  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faTrashCan} from '@fortawesome/free-solid-svg-icons';
+  faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faTrashCan, faPaw, faHeadphones, faPenRuler,faTshirt,
+  faFutbol, faCarrot, faHammer, faDumbbell, faGlasses } from '@fortawesome/free-solid-svg-icons';
   
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
@@ -62,6 +63,15 @@ export class AgregarProductoPage implements OnInit {
   faBreadSlice = faBreadSlice
   faPumpSoap = faPumpSoap
   faTrashCan = faTrashCan
+  faPaw = faPaw;
+  faHeadphones = faHeadphones;
+  faPenRuler = faPenRuler;
+  faTshirt = faTshirt;
+  faFutbol = faFutbol;
+  faCarrot = faCarrot;
+  faHammer = faHammer;
+  faDumbbell = faDumbbell;
+  faGlasses = faGlasses;
 
   // Almacenamiento Camera
 
@@ -95,15 +105,15 @@ export class AgregarProductoPage implements OnInit {
     {id:2, nombre:'Productos limpieza',icon:faBroom},
     {id:3, nombre:'Panaderia y pasteleria',icon:faBreadSlice},
     {id:4, nombre:'Higiene personal',icon: faPumpSoap},
-    {id:5, nombre:'Comida para mascotas',icon: faPumpSoap},
-    {id:6, nombre:'Tecnologia y accesorios',icon: faPumpSoap},
-    {id:7, nombre:'Articulos escolares',icon: faPumpSoap},
-    {id:8, nombre:'Ropa y moda',icon: faPumpSoap},
-    {id:9, nombre:'Jugueteria y entretenimiento',icon: faPumpSoap},
-    {id:10, nombre:'Frutas y verduras',icon: faPumpSoap},
-    {id:11, nombre:'Materiales de construccion',icon: faPumpSoap},
-    {id:12, nombre:'Deporte',icon: faPumpSoap},
-    {id:13, nombre:'Accesorios varios',icon: faPumpSoap},
+    {id:5, nombre:'Comida para mascotas',icon: faPaw},
+    {id:6, nombre:'Tecnologia y accesorios',icon: faHeadphones},
+    {id:7, nombre:'Articulos escolares',icon: faPenRuler},
+    {id:8, nombre:'Ropa y moda',icon: faTshirt},
+    {id:9, nombre:'Jugueteria y entretenimiento',icon: faFutbol},
+    {id:10, nombre:'Frutas y verduras',icon: faCarrot},
+    {id:11, nombre:'Materiales de construccion',icon: faHammer},
+    {id:12, nombre:'Deporte',icon: faDumbbell},
+    {id:13, nombre:'Accesorios varios',icon: faGlasses},
 
 
     //COMPLETAR...

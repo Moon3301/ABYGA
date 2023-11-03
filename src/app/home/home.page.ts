@@ -32,6 +32,8 @@ import { CrudUsuariosService } from '../crud-usuarios.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  isVisible = false;
+  validarRecordatorios : any
 
   public alertButtons = ['OK'];
   customColors: string[] = ['#FF0D0D', '#0DCFFF', '#B58958', '#FE8AEA', '#733E25','#000000', '#FFE402','#AB1C9A','#003BFF','#3DB033','#89898C','#8ED1BA','#F6880D'];
@@ -226,6 +228,22 @@ public pieChartOptions: ChartOptions<'pie'> = {
       */
   
   }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
+  
 
   ionViewWillEnter(){
 
