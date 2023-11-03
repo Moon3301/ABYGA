@@ -146,8 +146,6 @@ public pieChartOptions: ChartOptions<'pie'> = {
             this.crudP.totalNetoCategorias['Deporte'].valorTotal,
             this.crudP.totalNetoCategorias['Accesorios varios'].valorTotal,
 
-
-
           ]
     
   }
@@ -212,13 +210,7 @@ public pieChartOptions: ChartOptions<'pie'> = {
 
   ngOnInit(){
     this.crud.obtenerNotificaciones();
-    console.log(this.crud.listaNotificaciones)
-
-  
-    
-
-    console.log(this.crud.totalNetoPorFecha)
-
+ 
     this.nombreUsuario = this.crudU.nombreUsuario;
     
     /*
@@ -238,13 +230,10 @@ public pieChartOptions: ChartOptions<'pie'> = {
   ionViewWillEnter(){
 
     this.crud.obtenerNotificaciones();
-    console.log(this.crud.listaNotificaciones)
 
     this.updateDataPieChart();
 
     this.updateDataLineChart();
-
-    console.log('Egresos Sabado: ' +this.crud.totalNetoDia['sáb'].totalEgresos)
 
     this.nombreUsuario = this.crudU.nombreUsuario;
     
@@ -401,7 +390,7 @@ public pieChartOptions: ChartOptions<'pie'> = {
         case 'inventario':
           slideIndex = 2;
           break;
-        case 'notificaciones':
+        case 'recordatorios':
           slideIndex = 3;
           break;
         // Añade más casos si tienes más diapositivas
