@@ -7,6 +7,8 @@ export interface Usuario {
     correo:any
     clave:any
     telefono:any
-    foto:any
+    nombreNegocio:any
+    direccionNegocio:any
+    login:boolean
     
 }

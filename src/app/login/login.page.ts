@@ -1,21 +1,42 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, Validators, FormsModule, ReactiveFormsModule,FormBuilder, FormGroup, AbstractControl} from '@angular/forms';
 import { Usuario } from '../usuario';
 import { ApirestService } from '../apirest.service';
 import { VideoBackgroundComponent } from '../video-background/video-background.component';
 import { CrudUsuariosService } from '../crud-usuarios.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {showError: true},
+    },
+  ],
 })
 export class LoginPage implements OnInit {
 
   @ViewChild(VideoBackgroundComponent)
   videoComponent: VideoBackgroundComponent = new VideoBackgroundComponent;
+
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+    validacionDuplicado: ['', Validators.required]
+
+  });
+
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+
+  submitted:boolean = false;
+
 
   //modal
   isModalOpenLogin = false;
@@ -28,36 +49,38 @@ export class LoginPage implements OnInit {
   hide = true;
 
   //
-
+  idUsuario:any
   nombreUsuario:any
-  apellidoUsuario:any
-
   correo:any
-  
   contrasena:any
   Repcontrasena:any
-  fotoUsuario:any = ''
   telefono:any
+
   nombreNegocio:any
-  fotoNegocio:any
-  idUsuario:any
-
-  //
-
-  users:any
+  direccionNegocio:any
 
   //
 
   public UsuarioLogin: string = ''
   claveLogin: string = ''
 
-  isSpinning = false;
-
-
-  constructor(public api:ApirestService, public crudU:CrudUsuariosService, public router:Router, public navController: NavController) { }
+  constructor(public api:ApirestService, public crudU:CrudUsuariosService, public router:Router, public navController: NavController, private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
     
+  }
+
+  validarUsuarioDuplicado(){
+
+    this.submitted = true;
+
+    this.nombreUsuario = this.firstFormGroup.get('validacionDuplicado')?.value;
+    console.log(this.nombreUsuario)
+
+    const usuarioDuplicado = this.crudU.validarUsuarioDuplicado(this.nombreUsuario);
+    
+    return usuarioDuplicado
+
   }
 
   GoHome(){
@@ -122,12 +145,15 @@ export class LoginPage implements OnInit {
     const correo =  this.correo;
     const clave = this.contrasena;
     const telefono = this.telefono;
-    const foto = this.fotoUsuario;
-    
-    this.crudU.agregarUsuario(id,nombreUsuario,correo,clave,telefono,foto)
+    const nombreNegocio = this.nombreNegocio;
+    const direccionNegocio = this.direccionNegocio;
 
+    const login = false;
+
+    this.crudU.agregarUsuario(id,nombreUsuario,correo,clave,telefono,nombreNegocio,direccionNegocio, login);
 
     this.setOpenRegistro(false);
+    this.ResetData();
     console.log('Usuario creado con exito')
     
     /*
@@ -162,6 +188,22 @@ export class LoginPage implements OnInit {
     this.navController.navigateRoot('/home');
   }
 
+  ResetData(){
+
+    this.nombreUsuario = ''
+    this.correo = ''
+    this.contrasena = ''
+    this.Repcontrasena = ''
+    this.telefono = ''
+  
+    this.nombreNegocio = ''
+    this.direccionNegocio = ''
+
+  }
+
+
+ 
+
   validacionCorrecta(){
 
     // Cerrar el modal
@@ -169,6 +211,7 @@ export class LoginPage implements OnInit {
     this.setOpenLogin(false);
 
     this.GoHomeNav();
+    this.crudU.iniciarSesionUsuario(this.UsuarioLogin);
 
     console.log('Se abre funcion GoHome')
     

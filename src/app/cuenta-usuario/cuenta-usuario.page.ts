@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../usuario';
 import { ActivatedRoute,Router } from '@angular/router';
 import { ApirestService } from '../apirest.service';
+import { CrudUsuariosService } from '../crud-usuarios.service';
 
 @Component({
   selector: 'app-cuenta-usuario',
@@ -116,6 +117,12 @@ export class CuentaUsuarioPage implements OnInit {
 
   }
 
+  cerrarSesion(){
+
+    
+
+  }
+
   setOpenSuscripciones(isOpen: boolean) {
     this.isModalOpenSuscripciones = isOpen;
   }
@@ -136,6 +143,8 @@ export class CuentaUsuarioPage implements OnInit {
     this.router.navigate(['home'])
     
   }
+
+
 
   onSlideChange(event:any){
 

@@ -348,6 +348,9 @@ export class VentaProductoPage implements OnInit {
       
     }
 
+
+   
+
     // Se agrega una transaccion con los datos de los productos vendidos.
     this.crudT.AgregarTransaccion(this.crudT.transacciones.length+1,'',this.totalVenta,false,this.fechaActual,'','Ingresos','',[{id:2,nombre:'Ventas',subCategoria:[{id:1,nombre:'Productos', icon:faCashRegister}]}], this.productosAgrupados, 'Ingresos Variables')
 

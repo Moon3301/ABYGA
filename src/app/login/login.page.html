@@ -192,76 +192,90 @@
           </ion-toolbar>
         </ion-header>
         <ion-content >
-          <br>
-          <h2 style="text-align: center;">Registro de usuario</h2>
-
+        
           <ion-grid>
 
-            <ion-card>
-              <ion-row>
-  
-                <ion-col size="12" >
-                  <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-stepper #stepper orientation="vertical">
+              <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+
+                <form [formGroup]="firstFormGroup">
+
+                  <ng-template matStepLabel>Registro de usuario</ng-template>
+                  <br>
+                  
+                  <mat-form-field appearance="outline" class="centered-container">
                     <mat-label>Nombre de usuario</mat-label>
-                    <input [(ngModel)]="nombreUsuario" matInput placeholder="Ej: Diego1996">
-            
+                    <input matInput placeholder="ej: Diego1996" [(ngModel)]="nombreUsuario" formControlName="validacionDuplicado" required>
+                    <div *ngIf="submitted && validarUsuarioDuplicado()" style="color: red;">
+                      El usuario ya existe
+                    </div>
                   </mat-form-field>
-                </ion-col>
-  
-  
-              </ion-row>
+                  
+                  
 
-              <ion-row>
-  
-                <ion-col size="12" >
-                  <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-form-field appearance="outline" class="centered-container">
                     <mat-label>Correo electronico</mat-label>
-                    <input [(ngModel)]="correo" matInput placeholder="Opcional">
-            
+                    <input matInput placeholder="example@gmail.com" [(ngModel)]="correo" formControlName="firstCtrl" required>
                   </mat-form-field>
-                </ion-col>
-  
-              </ion-row>
 
-              <ion-row>
-  
-                <ion-col size="12" >
-                  <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-form-field appearance="outline" class="centered-container">
                     <mat-label>Telefono</mat-label>
-                    <input [(ngModel)]="telefono" matInput placeholder="Opcional">
-            
+                    <input matInput placeholder="99999999" [(ngModel)]="telefono" formControlName="firstCtrl">
                   </mat-form-field>
-                </ion-col>
-  
-              </ion-row>
-  
-              <ion-row>
-  
-                <ion-col size="12" >
-                  <mat-form-field appearance="outline" style="width: 100%;">
+
+                  <mat-form-field appearance="outline" class="centered-container">
                     <mat-label>Contrasena</mat-label>
-                    <input [(ngModel)]="contrasena" matInput placeholder="Minimo 4 caracteres">
-            
+                    <input matInput placeholder="99999999" [(ngModel)]="contrasena" formControlName="firstCtrl" required>
                   </mat-form-field>
-                </ion-col>
-  
-  
-              </ion-row>
-  
-              <ion-row>
-  
-                <ion-col size="12" >
-                  <mat-form-field appearance="outline" style="width: 100%;">
-                    <mat-label>Repita Contrasena</mat-label>
-                    <input [(ngModel)]="Repcontrasena" matInput placeholder="Minimo 4 caracteres">
-            
+
+                  <mat-form-field appearance="outline" class="centered-container">
+                    <mat-label>Repita contrasena</mat-label>
+                    <input matInput placeholder="99999999" [(ngModel)]="Repcontrasena" formControlName="firstCtrl" required>
                   </mat-form-field>
-                </ion-col>
-  
-              </ion-row>
-  
-              
-            </ion-card>
+                    
+                  <div>
+                    <button (click)="validarUsuarioDuplicado()" matStepperNext color="primary" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label>Siguiente</ion-label></button>
+                  </div>
+
+                </form>
+
+              </mat-step>
+
+              <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+                
+                <form [formGroup]="secondFormGroup">
+                  <ng-template matStepLabel>Creacion de negocio</ng-template>
+                  <br>
+                  <mat-form-field appearance="outline" class="centered-container">
+                    <mat-label>Nombre de tu negocio</mat-label>
+                    <input matInput placeholder="Ej: Almacen R&Y" formControlName="secondCtrl" required>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="centered-container">
+                    <mat-label>Direccion fisica</mat-label>
+                    <input matInput placeholder="Ej: Av. Vicuna Mackena 2043, Santiago" formControlName="secondCtrl" required>
+                  </mat-form-field>
+
+                  <div>
+                    
+                    <button matStepperPrevious color="primary" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label>Atras</ion-label></button>
+                    <p></p>
+                    <button matStepperNext color="primary" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label>Siguiente</ion-label></button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Listo</ng-template>
+                <p style="text-align: center;">Registro de usuario completo.</p>
+                <div>
+                  <button matStepperPrevious color="primary" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label>Atras</ion-label></button>
+                  <p></p>
+                  <button (click)="stepper.reset()" color="primary" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label>Reiniciar registro</ion-label></button>
+                  <p></p>
+                  <button (click)="agregarUsuario()" color="primary" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label>Siguiente</ion-label></button>
+                </div>
+              </mat-step>
+            </mat-stepper>
 
           </ion-grid>
           

@@ -22,6 +22,9 @@ import { VideoBackgroundComponent } from '../video-background/video-background.c
 
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
+import {MatStepperModule} from '@angular/material/stepper';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,7 +36,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    NzSpinModule
+    NzSpinModule,
+    MatStepperModule
     
   ],
   declarations: [LoginPage, VideoBackgroundComponent]

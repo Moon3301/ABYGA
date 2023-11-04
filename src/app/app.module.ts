@@ -16,16 +16,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgChartsModule } from 'ng2-charts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { IonicStorageModule } from '@ionic/storage-angular';
+
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule, FontAwesomeModule, NgChartsModule, HttpClientModule,IonicStorageModule.forRoot()],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }] ,
+  imports: [BrowserModule, IonicModule.forRoot(),MatStepperModule,AppRoutingModule, BrowserAnimationsModule, FontAwesomeModule, NgChartsModule, HttpClientModule,IonicStorageModule.forRoot()],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, }] ,
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

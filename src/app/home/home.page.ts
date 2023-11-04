@@ -32,13 +32,12 @@ import { CrudUsuariosService } from '../crud-usuarios.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  isVisible = false;
+isVisible = false;
   validarRecordatorios : any
 
   public alertButtons = ['OK'];
   customColors: string[] = ['#FF0D0D', '#0DCFFF', '#B58958', '#FE8AEA', '#733E25','#000000', '#FFE402','#AB1C9A','#003BFF','#3DB033','#89898C','#8ED1BA','#F6880D'];
 
-  
   nombreUsuario:any="Gabriela";
 
   @ViewChild(IonModal)
@@ -46,7 +45,6 @@ export class HomePage implements OnInit {
 
   @ViewChild('swiper')
   swiperRef: ElementRef | undefined;
-
 
   //Icons font-awesome
   faGasPump = faGasPump;
@@ -105,7 +103,6 @@ export class HomePage implements OnInit {
   unidadDeFomento: number=0;
   ipc: number=0;
 
-
   // Data Grafico Pie
 
 // Pie
@@ -127,7 +124,6 @@ public pieChartOptions: ChartOptions<'pie'> = {
   },
 
 };
-
 
   public pieChartLabels = [ [ 'Alimentos y bebidas' ], [ 'Limpieza' ], ['Panaderia'],['Higiene Personal'],['Comida para mascotas'] ,[ 'Tecnologia y accesorios' ],
   [ 'Articulos escolares' ],[ 'Ropa y moda' ],[ 'Jugueteria y entretenimiento' ],[ 'Frutas y verduras' ],[ 'Materiales de construccion' ],[ 'Deporte' ],[ 'Accesorios varios' ], ];
@@ -243,7 +239,7 @@ public pieChartOptions: ChartOptions<'pie'> = {
     this.isVisible = false;
   }
 
-  
+
 
   ionViewWillEnter(){
 

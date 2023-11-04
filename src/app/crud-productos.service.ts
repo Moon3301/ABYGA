@@ -3,6 +3,7 @@ import { Producto } from './producto';
 import { Storage } from '@ionic/storage-angular';
 import { Transaccion } from './transaccion';
 import { CrudTransaccionesService } from './crud-transacciones.service';
+import { Venta } from './venta';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class CrudProductosService {
   isToastOpen:any
 
   message:any
+
+  public ventaProductos: Venta[] = [];
 
   public productos: Producto[] = [];
 
@@ -31,8 +34,6 @@ export class CrudProductosService {
     'Accesorios varios' : {valorTotal:1},
 
   };
-
-  
 
   ActiveModificarProducto:any = false;
 
@@ -201,6 +202,16 @@ export class CrudProductosService {
     const fecha = new Date(date);
     return fecha.toLocaleDateString('es',{ weekday:'short',day:'2-digit', month:'long', year:'numeric'})
     
+  }
+
+  agregarVenta(fecha:any, usuario:any, productosAgrupados:any ){
+
+    const ticket = this.ventaProductos.length + 1;
+
+    if (this.ventaProductos.find(x => x.ticket === ticket)) {return};
+
+    this.ventaProductos.push({ticket, fecha, usuario, productosAgrupados})
+
   }
 
   

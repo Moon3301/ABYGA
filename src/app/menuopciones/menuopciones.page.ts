@@ -17,8 +17,6 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
   
 })
 
-
-
 export class MenuopcionesPage implements OnInit {
   
   faImage = faImage;
@@ -196,6 +194,10 @@ export class MenuopcionesPage implements OnInit {
     // Retroceder a page 'Home'
     this.router.navigate(['home'])
 
+  }
+
+  cerrarSesion(){
+    
   }
 
 

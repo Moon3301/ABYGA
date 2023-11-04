@@ -49,17 +49,17 @@ export class CrudUsuariosService {
 
   }
 
-  agregarUsuario(id:any, nombreUsuario:any, correo:any, clave:any, telefono:any,foto:any ){
+  agregarUsuario(id:any, nombreUsuario:any, correo:any, clave:any, telefono:any, nombreNegocio:any, direccionNegocio:any, login:any ){
 
     if (this.usuarios.find(x => x.id === id)) {return};
 
-    this.usuarios.push({id,nombreUsuario,correo,clave,telefono,foto})
+    this.usuarios.push({id, nombreUsuario, correo, clave, telefono, nombreNegocio, direccionNegocio, login});
 
     this.guardarListasEnStorage();
 
   }
 
-  modificarUsuario(id:any, nombreUsuario:any, correo:any, clave:any, telefono:any,foto:any){
+  modificarUsuario(id:any, nombreUsuario:any, correo:any, clave:any, telefono:any,nombreNegocio:any, direccionNegocio:any){
 
     const index = this.usuarios.findIndex(x => x.id === id);
 
@@ -72,7 +72,8 @@ export class CrudUsuariosService {
     this.usuarios[index].correo = correo
     this.usuarios[index].clave = clave
     this.usuarios[index].telefono = telefono
-    this.usuarios[index].foto = foto
+    this.usuarios[index].nombreNegocio = nombreNegocio
+    this.usuarios[index].direccionNegocio = direccionNegocio
 
     this.guardarListasEnStorage();
 
@@ -125,9 +126,6 @@ export class CrudUsuariosService {
   
         // Si el usuario es correcto y la clave es correcta, resolvemos la promesa con true
 
-        
-
-
         if (usuarioEncontrado && claveCorrecta) {
           this.nombreUsuario = user;
           resolve(true); // Usuario y clave correctos
@@ -160,9 +158,6 @@ export class CrudUsuariosService {
 
   }
   
-
-  
-
   listarUsuarios(){
 
     if (this.usuarios.length === 0) {
@@ -174,6 +169,46 @@ export class CrudUsuariosService {
     this.usuarios.forEach(usuarios => {
         console.log(usuarios);
     });
+
+  }
+
+  validarUsuarioDuplicado(user:any){
+
+    for(let users of this.usuarios){
+
+      if(users.nombreUsuario === user){
+        console.log('Usuario ya existe')
+        return true;
+      }
+
+    }
+
+    return false;
+  }
+
+  iniciarSesionUsuario(user:any){
+
+    for(let users of this.usuarios){
+
+      if(user === users.nombreUsuario){
+
+        users.login = true;
+
+      }else{
+        users.login = false;
+      }
+
+    }
+
+  }
+
+  cerrarSesionUsuario(){
+
+    for(let users of this.usuarios){
+
+      users.login = false;
+      
+    }
 
   }
 
