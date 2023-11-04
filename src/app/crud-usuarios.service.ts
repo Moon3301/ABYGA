@@ -190,15 +190,16 @@ export class CrudUsuariosService {
 
     for(let users of this.usuarios){
 
-      if(user === users.nombreUsuario){
+      if(users.nombreUsuario === user){
 
         users.login = true;
 
-      }else{
-        users.login = false;
       }
 
     }
+
+    this.guardarListasEnStorage();
+    console.log('Lista de usuarios: ',this.usuarios)
 
   }
 
@@ -209,6 +210,22 @@ export class CrudUsuariosService {
       users.login = false;
       
     }
+    console.log('Lista de usuarios: ',this.usuarios)
+    this.guardarListasEnStorage();
+
+  }
+
+  buscarUsuarioActivo(login:any){
+
+    const usuarioEncontrado = this.usuarios.find(x => x.login === login);
+
+    if (!usuarioEncontrado) {
+      
+      throw new Error(`No se encontró una transacción con ID ${login}`);
+    
+    }
+
+    return usuarioEncontrado;
 
   }
 

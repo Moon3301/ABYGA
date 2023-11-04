@@ -56,7 +56,8 @@ export class CrudProductosService {
 
     const listasParaGuardar = {
       productos: this.productos,
-      totalNetoCategorias: this.totalNetoCategorias
+      totalNetoCategorias: this.totalNetoCategorias,
+      ventas: this.ventaProductos
     }
 
     await this.storage.set('listaProductos', listasParaGuardar);
@@ -71,6 +72,7 @@ export class CrudProductosService {
 
       this.productos = listasGuardadas.productos;
       this.totalNetoCategorias = listasGuardadas.totalNetoCategorias;
+      this.ventaProductos = listasGuardadas.ventas;
 
     }
 

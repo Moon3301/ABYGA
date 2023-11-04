@@ -10,6 +10,7 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
 
 import { Producto } from '../producto';
 import { Pipe, PipeTransform } from '@angular/core';
+import { CrudUsuariosService } from '../crud-usuarios.service';
 
 @Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
@@ -107,7 +108,7 @@ export class VentaProductoPage implements OnInit {
   //Badge
   hidden = false;
 
-  constructor(private router:Router, public crudP:CrudProductosService, public crudT:CrudTransaccionesService) { }
+  constructor(private router:Router, public crudP:CrudProductosService, public crudT:CrudTransaccionesService, public crudU:CrudUsuariosService) { }
 
   ngOnInit() {
 
@@ -348,9 +349,13 @@ export class VentaProductoPage implements OnInit {
       
     }
 
+    // Agregar venta a la lista
 
+    // busca el usuario actualmente activo
+    const usuario = this.crudU.buscarUsuarioActivo(true);
+
+    this.crudP.agregarVenta(this.fechaActual, usuario, this.productosAgrupados);
    
-
     // Se agrega una transaccion con los datos de los productos vendidos.
     this.crudT.AgregarTransaccion(this.crudT.transacciones.length+1,'',this.totalVenta,false,this.fechaActual,'','Ingresos','',[{id:2,nombre:'Ventas',subCategoria:[{id:1,nombre:'Productos', icon:faCashRegister}]}], this.productosAgrupados, 'Ingresos Variables')
 

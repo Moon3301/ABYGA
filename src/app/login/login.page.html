@@ -248,12 +248,12 @@
                   <br>
                   <mat-form-field appearance="outline" class="centered-container">
                     <mat-label>Nombre de tu negocio</mat-label>
-                    <input matInput placeholder="Ej: Almacen R&Y" formControlName="secondCtrl" required>
+                    <input matInput placeholder="Ej: Almacen R&Y" [(ngModel)]="nombreNegocio" formControlName="secondCtrl" required>
                   </mat-form-field>
 
                   <mat-form-field appearance="outline" class="centered-container">
                     <mat-label>Direccion fisica</mat-label>
-                    <input matInput placeholder="Ej: Av. Vicuna Mackena 2043, Santiago" formControlName="secondCtrl" required>
+                    <input matInput placeholder="Ej: Av. Vicuna Mackena 2043, Santiago" [(ngModel)]="direccionNegocio" formControlName="secondCtrl" required>
                   </mat-form-field>
 
                   <div>
