@@ -60,7 +60,7 @@ export class CuentaUsuarioPage implements OnInit {
 
   tipoSuscripcion:any
 
-  constructor(private router:Router, private api:ApirestService, private route: ActivatedRoute) {
+  constructor(private router:Router, private api:ApirestService, private route: ActivatedRoute, public crudU:CrudUsuariosService) {
 
     this.route.queryParams.subscribe(params => {
       const token_ws = params['token_ws'];
@@ -119,8 +119,8 @@ export class CuentaUsuarioPage implements OnInit {
 
   cerrarSesion(){
 
+    this.crudU.cerrarSesionUsuario();
     
-
   }
 
   setOpenSuscripciones(isOpen: boolean) {
