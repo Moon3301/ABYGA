@@ -10,6 +10,7 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
 
 import { Producto } from '../producto';
 import { Pipe, PipeTransform } from '@angular/core';
+import { CrudUsuariosService } from '../crud-usuarios.service';
 
 @Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
@@ -99,6 +100,8 @@ export class VentaProductoPage implements OnInit {
 
   productosAgrupados: { [id: string]: { nombre: string; cantidad: number; stock:number; valorUnitario: number; ganancia:number; total: number; img:any } } = {};
 
+  usuario:any
+
   // modal ng-zorro
   isVisible = false;
 
@@ -107,7 +110,7 @@ export class VentaProductoPage implements OnInit {
   //Badge
   hidden = false;
 
-  constructor(private router:Router, public crudP:CrudProductosService, public crudT:CrudTransaccionesService) { }
+  constructor(private router:Router, public crudP:CrudProductosService, public crudT:CrudTransaccionesService, public crudU:CrudUsuariosService) { }
 
   ngOnInit() {
 
@@ -115,6 +118,12 @@ export class VentaProductoPage implements OnInit {
     this.fechaActual = new Date();
     this.fechaActual = this.ConvertirFecha(this.fechaActual);
     
+    
+  }
+
+  // En tu componente de Angular
+  getNumeroDeProductos(): number {
+    return Object.keys(this.productosAgrupados).length;
   }
 
   setOpenToast(isOpen: boolean) {
@@ -297,7 +306,8 @@ export class VentaProductoPage implements OnInit {
   realizarVenta(){
 
     this.setOpenCategoria(false);
-    
+
+    this.usuario = this.crudU.buscarUsuarioActivo(true);
 
     for (const key in this.productosAgrupados) {
       if (this.productosAgrupados.hasOwnProperty(key)) {
@@ -348,15 +358,27 @@ export class VentaProductoPage implements OnInit {
       
     }
 
+    // Agregar venta a la lista
 
-   
+    // busca el usuario actualmente activo
+    
+    console.log('Usuario Activo: ',this.usuario)
 
+    if(this.crudP.ventaProductos && this.crudP.ventaProductos.length > 0){
+      this.crudP.agregarVenta(
+        this.crudP.ventaProductos.length+1,
+        this.fechaActual,
+        this.usuario,
+        this.productosAgrupados
+      );
+    }else{
+      this.crudP.agregarVenta(1, this.fechaActual, this.usuario, this.productosAgrupados);
+    }
+  
     // Se agrega una transaccion con los datos de los productos vendidos.
     this.crudT.AgregarTransaccion(this.crudT.transacciones.length+1,'',this.totalVenta,false,this.fechaActual,'','Ingresos','',[{id:2,nombre:'Ventas',subCategoria:[{id:1,nombre:'Productos', icon:faCashRegister}]}], this.productosAgrupados, 'Ingresos Variables')
 
     this.setOpenVentaRealizada(true);
-
-    this.crudP.guardarListasEnStorage();
 
   }
 

@@ -68,6 +68,8 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     
+    this.crudU.cerrarSesionUsuario();
+
   }
 
   validarUsuarioDuplicado(){
@@ -89,11 +91,11 @@ export class LoginPage implements OnInit {
 
     this.router.navigate(['/home'])
     console.log('GoHome ejecutado...')
-
+    
   }
 
   ionViewDidEnter(){
-    
+    this.crudU.cerrarSesionUsuario();
     this.reproducirVideo();
   }
 
@@ -201,19 +203,12 @@ export class LoginPage implements OnInit {
 
   }
 
-
- 
-
   validacionCorrecta(){
 
-    // Cerrar el modal
-    console.log('Se abre funcion cerrar modal')
     this.setOpenLogin(false);
 
     this.GoHomeNav();
     this.crudU.iniciarSesionUsuario(this.UsuarioLogin);
-
-    console.log('Se abre funcion GoHome')
     
   }
 
@@ -239,25 +234,6 @@ export class LoginPage implements OnInit {
     } catch (error) {
       console.error('Error al validar el usuario:', error);
     }
-  }
-
-  validarUsuarioV2(): void {
-    const usuarioValido = this.crudU.validarUsuarioV2(this.UsuarioLogin, this.claveLogin);
-
-    console.log('usuarioValido: '+usuarioValido);
-    if (usuarioValido) {
-      // Usuario válido, aquí puedes realizar la navegación a la página de inicio, por ejemplo.
-      console.log('Usuario correcto');
-      this.validacionCorrecta();
-    } else {
-      // Usuario o contraseña incorrectos, puedes mostrar un mensaje de error.
-      console.log('Usuario o contraseña incorrecta');
-    }
-  }
-
-  validarUsuarioV3(){
-    this.crudU.validarUsuarioV3(this.UsuarioLogin, this.claveLogin);
-    this.validacionCorrecta();
   }
 
 }
