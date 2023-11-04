@@ -57,7 +57,7 @@ export class CrudProductosService {
     const listasParaGuardar = {
       productos: this.productos,
       totalNetoCategorias: this.totalNetoCategorias,
-      ventas: this.ventaProductos
+      ventas: this.ventaProductos,
     }
 
     await this.storage.set('listaProductos', listasParaGuardar);
@@ -206,22 +206,14 @@ export class CrudProductosService {
     
   }
 
-  agregarVenta(fecha:any, usuario:any, productosAgrupados:any ){
-
-    const ticket = this.ventaProductos.length + 1;
+  agregarVenta(ticket:any, fecha:any, usuario:any, productosAgrupados:any ){
 
     if (this.ventaProductos.find(x => x.ticket === ticket)) {return};
-
+    
     this.ventaProductos.push({ticket, fecha, usuario, productosAgrupados})
 
+    this.guardarListasEnStorage();
+
   }
-
-  
-
-
-
-
-
-
 
 }
