@@ -269,20 +269,25 @@
             
 
             
-            <nz-card style="width:300px;" nzTitle="{{notificacion.tipo_transaccion}} {{notificacion.categoria[0].nombre}}" [nzExtra]="extraTemplate">
-              <p  > <b> Monto Transaccion :  {{notificacion.monto | currency:'USD':'symbol':'1.2-2'}}</b>  </p>
+            <nz-card style="width:300px;  background-color: #c2cbdc58 ; color: black; border-radius: 15px; border: 1px solid #a2a3a4; " nzTitle="{{notificacion.tipo_transaccion}} {{notificacion.categoria[0].subCategoria[0].nombre }}  " [nzExtra]="extraTemplate ">
+              <p  >  Monto Transaccion : <b> {{notificacion.monto | currency:'USD':'symbol':'1.2-2'}} </b> </p>
               
             </nz-card>
-            <ng-template #extraTemplate>
-              <a (click)="showModal()"> Más info...</a>
+            <ng-template style="color: white;" #extraTemplate>
+              <a style="color: #3aa0ff ;" (click)="showModal()"> Más info...</a>
             </ng-template>
             
-            <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle=" {{notificacion.fecha}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-              <ng-container *nzModalContent>
-                <p> {{notificacion.notas}} </p>
+            <nz-modal  nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle=" {{notificacion.fecha}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+              <ng-container  *nzModalContent> 
+                <ion-card style="width: 100%; height: 130px; background-color: #c2cbdc58; color: black; " >
+                  
+                <p></p>
+                <mat-slide-toggle style="padding-left: 20px;"  [(ngModel)]="notificacion.notificacion">Recordatorios </mat-slide-toggle>
                 <p>  </p>
-                <mat-slide-toggle  [(ngModel)]="notificacion.notificacion">Recordatorios </mat-slide-toggle>
+                <p style="padding-left: 20px;"> Notas : {{notificacion.notas}} </p>
 
+                </ion-card>
+                
               </ng-container>
             </nz-modal>
           
