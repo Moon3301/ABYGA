@@ -367,12 +367,14 @@ export class VentaProductoPage implements OnInit {
     if(this.crudP.ventaProductos && this.crudP.ventaProductos.length > 0){
       this.crudP.agregarVenta(
         this.crudP.ventaProductos.length+1,
+        this.totalVenta,
+        this.CantidadTotal,
         this.fechaActual,
         this.usuario,
         this.productosAgrupados
       );
     }else{
-      this.crudP.agregarVenta(1, this.fechaActual, this.usuario, this.productosAgrupados);
+      this.crudP.agregarVenta(1,this.totalVenta,this.CantidadTotal,this.fechaActual, this.usuario, this.productosAgrupados);
     }
   
     // Se agrega una transaccion con los datos de los productos vendidos.

@@ -206,11 +206,11 @@ export class CrudProductosService {
     
   }
 
-  agregarVenta(ticket:any, fecha:any, usuario:any, productosAgrupados:any ){
+  agregarVenta(ticket:any, totalVenta:number, totalCantidad:number , fecha:any, usuario:any, productosAgrupados:any ){
 
     if (this.ventaProductos.find(x => x.ticket === ticket)) {return};
     
-    this.ventaProductos.push({ticket, fecha, usuario, productosAgrupados})
+    this.ventaProductos.push({ticket ,totalVenta ,totalCantidad ,fecha, usuario, productosAgrupados})
 
     this.guardarListasEnStorage();
 
