@@ -263,28 +263,26 @@
         </ion-card>
         
       </swiper-slide> 
-      <swiper-slide id="notificaciones"  >
+      <swiper-slide id="recordatorios"  >
         <ion-grid >
           <ion-list *ngFor="let notificacion of crud.listaNotificaciones" class="centered-container" >
             
-
-            
             <nz-card style="width:300px;  background-color: #c2cbdc58 ; color: black; border-radius: 15px; border: 1px solid #a2a3a4; " nzTitle="{{notificacion.tipo_transaccion}} {{notificacion.categoria[0].subCategoria[0].nombre }}  " [nzExtra]="extraTemplate ">
-              <p  >  Monto Transaccion : <b> {{notificacion.monto | currency:'USD':'symbol':'1.2-2'}} </b> </p>
+              <p>Monto Transaccion : <b> {{notificacion.monto | currency:'USD':'symbol':'1.2-2'}} </b> </p>
               
             </nz-card>
             <ng-template style="color: white;" #extraTemplate>
-              <a style="color: #3aa0ff ;" (click)="showModal()"> Más info...</a>
+              <a style="color: #3aa0ff ;" (click)="showModal(notificacion.id -1)"> Más info...</a>
             </ng-template>
             
-            <nz-modal  nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle=" {{notificacion.fecha}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+            <nz-modal  nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisible" nzTitle=" {{fechaRecordatorio}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
               <ng-container  *nzModalContent> 
                 <ion-card style="width: 100%; height: 130px; background-color: #c2cbdc58; color: black; " >
                   
                 <p></p>
-                <mat-slide-toggle style="padding-left: 20px;"  [(ngModel)]="notificacion.notificacion">Recordatorios </mat-slide-toggle>
+                <mat-slide-toggle style="padding-left: 20px;"  [(ngModel)]="estadoRecordatorio">Recordatorios </mat-slide-toggle>
                 <p>  </p>
-                <p style="padding-left: 20px;"> Notas : {{notificacion.notas}} </p>
+                <p style="padding-left: 20px;"> Notas : {{notasRecordatorios}} </p>
 
                 </ion-card>
                 

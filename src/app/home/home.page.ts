@@ -32,7 +32,16 @@ import { CrudUsuariosService } from '../crud-usuarios.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-isVisible = false;
+
+  // Recordatorios
+
+  idRecordatorio:any
+  fechaRecordatorio:any
+  notasRecordatorios:any
+  estadoRecordatorio:any
+
+
+  isVisible = false;
   validarRecordatorios : any
 
   public alertButtons = ['OK'];
@@ -225,13 +234,22 @@ public pieChartOptions: ChartOptions<'pie'> = {
   
   }
 
-  showModal(): void {
+  showModal(index:any): void {
     this.isVisible = true;
+
+    console.log(this.crud.listaNotificaciones[index])
+    
+    this.fechaRecordatorio = this.crud.listaNotificaciones[index].fecha;
+    this.estadoRecordatorio = this.crud.listaNotificaciones[index].notificacion;
+    this.notasRecordatorios = this.crud.listaNotificaciones[index].notas;
+    this.idRecordatorio = this.crud.listaNotificaciones[index].id;
+    
   }
 
   handleOk(): void {
     console.log('Button ok clicked!');
     this.isVisible = false;
+    this.ChangeEstadoRecordatorio(this.idRecordatorio)
   }
 
   handleCancel(): void {
@@ -239,6 +257,13 @@ public pieChartOptions: ChartOptions<'pie'> = {
     this.isVisible = false;
   }
 
+  ChangeEstadoRecordatorio(index:any){
+
+    const estado = this.estadoRecordatorio;
+
+    this.crud.changeEstadoRecordatorio(index, estado);
+
+  }
 
 
   ionViewWillEnter(){
@@ -361,27 +386,29 @@ public pieChartOptions: ChartOptions<'pie'> = {
     const indexSwiper = event.detail[0].activeIndex;
 
     if(indexSwiper == 0){
-      console.log(event.detail)
-   
 
+      console.log(event.detail)
+      this.matTab = 'principal';
     }
 
     if(indexSwiper == 1){
 
-   
+      this.matTab = 'transacciones';
 
     }
 
     if(indexSwiper == 2){
 
-   
+      this.matTab = 'inventario';
 
     }
-    if(indexSwiper == 3){
 
+    if(indexSwiper == 3){
+      
+      this.matTab = 'recordatorios';
       this.crud.obtenerNotificaciones();
 
-     }
+    }
 
   }
 

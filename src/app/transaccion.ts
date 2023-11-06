@@ -12,7 +12,7 @@ export interface Transaccion {
     notas: string
     fecha: any
     tipo_transaccion: string
-    tipo_pago: TipoPago
+    tipo_pago: string
     categoria: CategoriasTransacciones[]
     producto: any
     tipo_movimiento: string

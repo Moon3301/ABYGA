@@ -202,17 +202,16 @@
                 </ion-content>
               </ng-template>
             </ion-modal>
+
             <br>
           <!-- Recordatorios -->
             <ion-row>
               <ion-col size="1"  style="display:flex; justify-content: center; align-items: center;" >
                 <fa-icon [icon]="iconRecordatorios" class="fa-2xl"></fa-icon>
               </ion-col >
-              <ion-col size="4" >
-
-              </ion-col>
-              <ion-col size="7"  >
-                 <mat-slide-toggle (click)="changeicon()" [(ngModel)]="validarRecordatorios">Recordatorios </mat-slide-toggle>
+              
+              <ion-col style="border: 0.5px solid grey;" size="11" class="centered-container" >
+                <mat-slide-toggle (click)="changeicon()" [(ngModel)]="validarRecordatorios">Recordatorios </mat-slide-toggle>
 
               </ion-col>
               
@@ -222,7 +221,7 @@
             
 
           <!-- Descripcion -->
-          
+          <div *ngIf="validarRecordatorios">
             <form class="example-form">
           
               <mat-form-field class="example-full-width" style="width: 100%;">
@@ -230,9 +229,54 @@
                 <textarea name="MatAbonos" [(ngModel)]="descripcion" matInput placeholder="Ex. It makes me feel..."></textarea>
               </mat-form-field>
             </form>
+          </div>
+            
         
         </ion-list>
 
+        <!-- Opcionales -->
+
+        
+          <mat-expansion-panel hideToggle style="border: 0.3px solid grey;">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <ion-item style="width: 100%;">
+                  <ion-label slot="start">Opcionales</ion-label>
+                  <ion-label slot="end"> 
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_down"></mat-icon>
+                  </ion-label>
+                </ion-item>
+               
+              </mat-panel-title>
+           
+            </mat-expansion-panel-header>
+
+            <ion-grid>
+
+              <ion-row>
+                <ion-input [disabled]="isDisabledInput" [(ngModel)]="NameTransaccion" label="Nombre"  labelPlacement="floating" placeholder="Nombre transaccion" fill="outline"></ion-input>
+              </ion-row>
+              <br>
+              <ion-row>
+
+                <mat-form-field style="width: 100%;">
+                  <mat-label>Tipo de pago</mat-label>
+                  <mat-select (selectionChange)="onSelectionChange($event)">
+                    
+                    <mat-option *ngFor="let tipo_pago of ArrayTipoPago" [value]="tipo_pago.value">
+                      {{tipo_pago.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </ion-row>
+
+            </ion-grid>
+            
+            
+          </mat-expansion-panel>
+        
+        
         <!-- Productos -->
 
         <div *ngIf="this.ArrayCategoriasIngresos[1].id == 2">
@@ -441,22 +485,6 @@
             </ion-modal>
             <br>
 
-            <!-- Recordatorios -->
-            <ion-row>
-              <ion-col size="1"  style="display:flex; justify-content: center; align-items: center;" >
-                <fa-icon [icon]="iconRecordatorios" class="fa-2xl"></fa-icon>
-              </ion-col >
-              <ion-col size="4" >
-
-              </ion-col>
-              <ion-col size="7"  >
-                 <mat-slide-toggle (click)="changeicon()" [(ngModel)]="validarRecordatorios">Recordatorios </mat-slide-toggle>
-
-              </ion-col>
-              
-            </ion-row>
-            <br>
-          
           <!-- Frecuencia -->
 
           <ion-row>
@@ -477,8 +505,25 @@
             </ion-col>
 
           </ion-row>
+          
+          <!-- Recordatorios -->
+          <ion-row>
+            <ion-col size="1"  style="display:flex; justify-content: center; align-items: center;" >
+              <fa-icon [icon]="iconRecordatorios" class="fa-2xl"></fa-icon>
+            </ion-col >
+            <ion-col size="4" >
+
+            </ion-col>
+            <ion-col size="7"  >
+               <mat-slide-toggle (click)="changeicon()" [(ngModel)]="validarRecordatorios">Recordatorios </mat-slide-toggle>
+
+            </ion-col>
+            
+          </ion-row>
           <br>
-          <!-- Comentarios -->
+
+          <div *ngIf="validarRecordatorios">
+            <!-- Comentarios -->
             <ion-card>
               <form class="example-form">
             
@@ -488,6 +533,42 @@
                 </mat-form-field>
               </form>
             </ion-card>
+          </div>
+          
+
+          <!-- Opcionales -->
+
+           <mat-expansion-panel hideToggle style="border: 0.3px solid grey;">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Opcionales
+              </mat-panel-title>
+           
+            </mat-expansion-panel-header>
+
+            <ion-grid>
+
+              <ion-row>
+                <ion-input [disabled]="isDisabledInput" [(ngModel)]="NameTransaccion" label="Nombre"  labelPlacement="floating" placeholder="Nombre transaccion" fill="outline"></ion-input>
+              </ion-row>
+              <br>
+              <ion-row>
+
+                <mat-form-field style="width: 100%;">
+                  <mat-label>Tipo de pago</mat-label>
+                  <mat-select>
+                    <mat-option *ngFor="let tipo_pago of ArrayTipoPago" [value]="tipo_pago.value">
+                      {{tipo_pago.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </ion-row>
+
+            </ion-grid>
+            
+          </mat-expansion-panel>
+
 
           <!-- Productos -->
 

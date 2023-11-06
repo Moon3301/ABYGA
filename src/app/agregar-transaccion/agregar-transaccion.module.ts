@@ -30,7 +30,11 @@ import { KeysPipe } from './agregar-transaccion.page';
 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
+import {MatExpansionModule} from '@angular/material/expansion';
 
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -48,7 +52,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatButtonModule,
     MatDialogModule,
     MatSlideToggleModule,
-    
+    MatExpansionModule,
+    NzSelectModule,
+    MatIconModule
     
   ],
   declarations: [AgregarTransaccionPage, KeysPipe]

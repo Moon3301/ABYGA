@@ -846,6 +846,9 @@ export class CrudTransaccionesService {
   }
 
   obtenerNotificaciones(){
+
+    this.listaNotificaciones = [];
+
     for(let transaccion of this.transacciones){
       if(transaccion.notificacion == true){
 
@@ -858,6 +861,19 @@ export class CrudTransaccionesService {
         
       }
     }
+  }
+
+  changeEstadoRecordatorio(index:any, estado:any){
+
+    for(let x of this.transacciones){
+
+      if(x.id == index){
+        x.notificacion = estado;
+      }
+    }
+
+    this.obtenerNotificaciones();
+
   }
 
   obtenerCantidadProductoVendidos(tipo_frecuencia:any){

@@ -20,7 +20,16 @@ export class KeysPipe implements PipeTransform {
 export class DocumentosPage implements OnInit {
 
   isModalTicket = false;
+
   cantidadProductos:any
+  nombreNegocio:any
+  ticket:any
+  nombreUsuario:any
+  totalCantidad:any
+  productosAgrupados:any
+  totalVenta:any
+  fecha:any
+
 
   constructor(public router:Router, public crudP:CrudProductosService, public crudU:CrudUsuariosService, public crudT:CrudTransaccionesService) { }
 
@@ -41,9 +50,15 @@ export class DocumentosPage implements OnInit {
   }
 
   getNumeroDeProductos(index :any){
-    
-    this.cantidadProductos = Object.keys(this.crudP.ventaProductos[index].productosAgrupados).length;
 
+    this.nombreNegocio = this.crudP.ventaProductos[index].usuario.nombreNegocio;
+    this.ticket = this.crudP.ventaProductos[index].ticket;
+    this.nombreUsuario = this.crudP.ventaProductos[index].usuario.nombreUsuario;
+    this.totalCantidad = this.crudP.ventaProductos[index].totalCantidad;
+    this.productosAgrupados = this.crudP.ventaProductos[index].productosAgrupados;
+    this.totalVenta = this.crudP.ventaProductos[index].totalVenta;
+    this.cantidadProductos = Object.keys(this.crudP.ventaProductos[index].productosAgrupados).length;
+    this.fecha = this.crudP.ventaProductos[index].fecha;
   }
 
 }

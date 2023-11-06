@@ -91,6 +91,10 @@ export class AgregarTransaccionPage implements OnInit {
 
   // Monto Transaccion
   MontoTransaccion:any
+
+  // Tipo Pago
+
+  tipoPago:any
   
   //
   selectedDate:any;
@@ -197,10 +201,13 @@ export class AgregarTransaccionPage implements OnInit {
 
   ]
 
-  ArrayTipoTrans:any = [] = [
+  ArrayTipoPago:any = [] = [
 
     {value: 'Efectivo', viewValue: 'Efectivo'},
-    {value: 'Tarjeta', viewValue: 'Tarjeta'},
+    {value: 'Debito', viewValue: 'Debito'},
+    {value: 'Credito', viewValue: 'Credito'},
+    {value: 'Cheque', viewValue: 'Cheque'},
+    {value: 'Otros', viewValue: 'Otros'},
    
   ]
 
@@ -220,6 +227,8 @@ export class AgregarTransaccionPage implements OnInit {
       this.TipoTrans = this.GetData.tipo_transaccion;
       this.NombreCat = this.GetData.categoria[0].nombre;
       this.NombreSubCat = this.GetData.categoria[0].subCategoria[0].nombre;
+      this.tipoPago = this.GetData.tipoPago;
+      this.validarRecordatorios = this.GetData.notificacion;
 
       this.productosTransaccion();
       console.log(this.GetData)
@@ -284,12 +293,35 @@ export class AgregarTransaccionPage implements OnInit {
 
       if(this.crud.ActiveModificarTransaccion == false){
 
-        this.crud.AgregarTransaccion(this.crud.transacciones.length+1,this.NameTransaccion,this.MontoTransaccion,
-        this.validarRecordatorios,this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}],producto, this.TipoMovimiento)
+        this.crud.AgregarTransaccion(
+
+          this.crud.transacciones.length+1,
+          this.NameTransaccion,
+          this.MontoTransaccion,
+          this.validarRecordatorios,
+          this.ConvertirFecha(this.selectedDate),
+          this.descripcion,
+          this.TipoTrans,
+          this.tipoPago,
+          [{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}],
+          producto, 
+          this.TipoMovimiento)
           
       }else{
+
         console.log('Modificar Transaccion activado ! ')
-        this.crud.ModificarTransaccion(this.GetData.id,this.NameTransaccion,this.MontoTransaccion,'Pendiente',this.ConvertirFecha(this.selectedDate),this.descripcion,this.TipoTrans,[{id:1,nombre:this.selectedOptionTipoTran}],[{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}], this.TipoMovimiento)
+        
+        this.crud.ModificarTransaccion(
+          this.GetData.id,
+          this.NameTransaccion,
+          this.MontoTransaccion,
+          this.validarRecordatorios,
+          this.ConvertirFecha(this.selectedDate),
+          this.descripcion,
+          this.TipoTrans,
+          this.tipoPago,
+          [{id:this.IdCat,nombre:this.NombreCat,subCategoria:[{id:this.IdSubCat,nombre:this.NombreSubCat, icon:this.IconCat}]}],
+          this.TipoMovimiento)
       }
   
       this.GoHome();
@@ -388,7 +420,7 @@ export class AgregarTransaccionPage implements OnInit {
     //Clear Notificacion
     this.validarRecordatorios = false
 
-   
+    this.tipoPago = ''
 
   }
 
@@ -480,19 +512,21 @@ export class AgregarTransaccionPage implements OnInit {
       if(this.GetData.id == transaccion.id){
         console.log(transaccion.producto)
 
-       
-
-
       }
-
 
     }
 
+  }
 
+  onSelectionChange(event:any){
 
-    
+    console.log('Evento de llamada',event.value)
+    this.tipoPago = event.value;
+    console.log('Variable tipo pago',this.tipoPago)
 
   }
+
+
   changeicon (){
     if(this.validarRecordatorios){
       this.iconRecordatorios=faBell;
