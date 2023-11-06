@@ -27,6 +27,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+
 register();
 
 @NgModule({
@@ -43,7 +45,9 @@ register();
     MatIconModule,
     NzCardModule,
     NzModalModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatBottomSheetModule,
+    
 
 
   ],

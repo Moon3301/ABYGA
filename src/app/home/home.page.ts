@@ -26,6 +26,16 @@ import { Swiper } from 'swiper';
 
 import { CrudUsuariosService } from '../crud-usuarios.service';
 
+import {MatListModule} from '@angular/material/list';
+
+import {MatButtonModule} from '@angular/material/button';
+
+import {
+  MatBottomSheet,
+  MatBottomSheetModule,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -210,7 +220,7 @@ public pieChartOptions: ChartOptions<'pie'> = {
     aspectRatio: 1.2, // Puedes ajustar este valor para cambiar el tamaño del gráfico
   };
 
-  constructor(public router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService, public crudU:CrudUsuariosService) {
+  constructor( private _bottomSheet: MatBottomSheet ,public router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService, public crudU:CrudUsuariosService) {
     
 
   }

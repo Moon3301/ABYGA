@@ -9,41 +9,7 @@
 <ion-content class="ion-padding">
   <ion-list>
 
-    <ion-item #button (click)="showModalNegocio()">
-
-      <mat-icon style="margin-right: 5px ; color: #1C2833;">storefront</mat-icon>
-      <ion-label style="margin-left: 5px; ;" >Informacion del Negocio</ion-label>
-
-      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleNegocio" nzTitle="The first Modal" (nzOnCancel)="handleOkNegocio()" (nzOnOk)="handleCancelNegocio()">
-        <ng-container *nzModalContent>
-          <p>Ingresa Información de tu negocio </p>
-          <ion-row>
-            <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label  > Nombre de Negocio</mat-label>
-              <input  matInput placeholder="Placeholder">
-
-            </mat-form-field>
-          </ion-row>
-
-          <ion-row>
-            <div style="height: 100px; border: 0.5px solid gray ; width: 100%; display: flex; justify-content: center; align-items: center;">
-              <button nz-button nzType="primary" nzSize="large" nzShape="circle"><fa-icon [icon]=faImage class="fa-xl"></fa-icon></button>
-              
-            </div>
-
-          </ion-row>
-          <br>
-          <ion-row>
-            <div style="height: 80px; border: 0.5px solid gray ; width: 100%; display: flex; justify-content: center; align-items: center;">
-              
-            </div>
-
-          </ion-row>
-        </ng-container>
-      </nz-modal>
-        
-    </ion-item>
-
+    
     <ion-item #button (click)="ModalNotificaciones()" >
       
       <mat-icon  style="margin-right: 5px ;color: #1C2833; ">notifications</mat-icon>
@@ -60,30 +26,48 @@
       
     </ion-item>
 
-    <ion-item #button (click)="ModalMiticket()" >
-      
-      <mat-icon style="margin-right: 5px ; color: #1C2833; ">receipt_long</mat-icon>
-      <ion-label style="margin-left: 5px;" >Mi Ticket</ion-label>
-
-      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleMiticket" nzTitle="The first Modal" (nzOnCancel)="handleCancelMiticket()" (nzOnOk)=" handleOkMiticket()">
-        <ng-container *nzModalContent>
-          <p>ticket  </p>
-          <p>Content two</p>
-          <p>Content three</p>
-        </ng-container>
-      </nz-modal>
-      
-    </ion-item>
+    
 
     <ion-item #button (click)="ModalPersonalizacion()">
       <mat-icon style="margin-right: 5px ; color: #1C2833 ; ">brush</mat-icon>
       <ion-label style="margin-left: 5px;" >Personalizacion</ion-label>
 
-      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisiblePersonalizacion" nzTitle="The first Modal" (nzOnCancel)="handleCancelPersonalizacion()" (nzOnOk)="handleOkPersonalizacion()">
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisiblePersonalizacion" nzTitle="Selecciona el color del sistema" (nzOnCancel)="handleCancelPersonalizacion()" (nzOnOk)="handleOkPersonalizacion()">
         <ng-container *nzModalContent>
-          <p>Personalizacion </p>
-          <p>Content two</p>
-          <p>Content three</p>
+
+          <ion-row>
+            <ion-col size="4" style=" height: 70px;"  >
+              <button (click)="SeleccionPersonalizacionColor('basico')" mat-stroked-button style="width: 90%; height: 90%; background-color: #1C2833; color:white" >Basico</button>
+              
+            </ion-col>
+
+            <ion-col size="4" style=" height: 70px;"  >
+              <button (click)="SeleccionPersonalizacionColor('azul')"  mat-stroked-button style="width: 90%; height: 90%; background-color: blue; color:white" >Azul</button>
+              
+            </ion-col>
+
+            <ion-col size="4" style=" height: 70px;">
+              <button (click)="SeleccionPersonalizacionColor('violeta')" mat-stroked-button style="width: 90%; height: 90%; background-color: blueviolet; color:white" >Violeta</button>
+              
+            </ion-col>
+
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="4" style="height: 70px; " >
+              <button (click)="SeleccionPersonalizacionColor('rojo')" mat-stroked-button style="width: 90%; height: 90%; background-color: darkred; color:white" >Rojo</button>
+              
+            </ion-col>
+
+            <ion-col size="4" style="height: 70px;" >
+              <button (click)="SeleccionPersonalizacionColor('naranjo')" mat-stroked-button style="width: 90%; height: 90%; background-color: orange; color:white " >Naranjo</button>
+            </ion-col>
+
+            <ion-col size="4" style="height: 70px;" >
+              <button (click)="SeleccionPersonalizacionColor('purpura')" mat-stroked-button style="width: 90%; height: 90%; background-color: #800080;color:white " >Purpura</button>
+            </ion-col>
+
+          </ion-row>
         </ng-container>
       </nz-modal>
       

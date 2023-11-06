@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
@@ -18,7 +18,7 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 })
 
 export class MenuopcionesPage implements OnInit {
-  
+  colorSistema:any
   faImage = faImage;
 
   isVisibleNegocio = false;
@@ -43,7 +43,7 @@ export class MenuopcionesPage implements OnInit {
   
 
 
-  constructor(public router:Router, public crudP: CrudProductosService, public crudT:CrudTransaccionesService) { }
+  constructor(public router:Router, public crudP: CrudProductosService, public crudT:CrudTransaccionesService, private renderer: Renderer2) { }
 
   ngOnInit() {
   }
@@ -200,5 +200,42 @@ export class MenuopcionesPage implements OnInit {
     
   }
 
+  SeleccionPersonalizacionColor(boton:any){
+    console.log("abrir funcion")
+
+    if (boton == 'basico' ){
+      console.log("presiona basico")
+      this.colorSistema="#1C2833"
+      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+    }
+
+    if (boton == 'azul' ){
+      console.log("presiona azul")
+      this.colorSistema="#0000ff"
+      this.renderer.setStyle(document.documentElement, `--secondary-color`, this.colorSistema);
+    }
+
+    if (boton == 'violeta' ){
+      this.colorSistema="#8a2be2"
+      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+    }
+
+    if (boton == 'Rojo' ){
+      this.colorSistema="#8b0000"
+      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+    }
+
+    if (boton == 'naranjo' ){
+      this.colorSistema="#ffa500"
+      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+    }
+
+    if (boton == 'purpura' ){
+      this.colorSistema="#800080"
+      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+    }
+
+
+  }
 
 }
