@@ -5,7 +5,7 @@
   
   <ion-header style="border: 2px solid  white;" >
     <ion-toolbar>
-      <ion-item color="primary">
+      <ion-item [style.--background]="crudU.colorSistema">
         <ion-avatar aria-hidden="true" slot="start">
           <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
         </ion-avatar>
@@ -76,14 +76,14 @@
 
 <div class="ion-page" id="main-content" >
   <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar [style.--background]="crudU.colorSistema">
 
       <ion-buttons slot="start">
         <ion-menu-button style="color: white;"></ion-menu-button>
       </ion-buttons>
 
       <div *ngIf="matTab == 'inventario'">
-        <ion-item color="primary"  slot="end">
+        <ion-item [style.--background]="crudU.colorSistema"  slot="end">
           
             <ion-buttons slot="end" [routerLink]="['/venta-producto']">
               
@@ -132,7 +132,7 @@
 
         <br>
 
-        <ion-item  color="primary" style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
+        <ion-item  [style.--background]="crudU.colorSistema" style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
 
           <ion-label slot="start" style="margin-top: 4px; color: white;"> Historial de transacciones</ion-label>
 
@@ -150,7 +150,7 @@
   
         <br>
 
-        <ion-item  color="primary" style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
+        <ion-item  [style.--background]="crudU.colorSistema" style="border-radius: 15px; font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
 
           <ion-label  style="margin-top: 4px; color: white;">Historial de ventas por categorias</ion-label>
 
@@ -173,8 +173,8 @@
 
         <ion-card  style="border-radius: 20px;"  >
           <div *ngFor="let fecha of crud.getFechasAgrupadas()">
-          <ion-card color="primary" >
-            <ion-row style="border-radius: 20px; font-size: 10px; height: 25px;  background-color: #1C2833;">
+          <ion-card [style.--background]="crudU.colorSistema" >
+            <ion-row style="border-radius: 20px; font-size: 10px; height: 25px;" [style.--background]="crudU.colorSistema">
               <ion-col size="7">
                 <ion-label  style="margin-top: 4px; color: white;">{{ fecha }}</ion-label>
               </ion-col>
@@ -200,10 +200,10 @@
         
                       <ion-list slot="end">
                         <div *ngIf="transaccion.tipo_transaccion == 'Egresos'">
-                          <ion-label  style="font-size: 18px;" color="danger"  > <b> {{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b></ion-label>
+                          <ion-label  style="font-size: 18px; color: red;" > <b> {{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b></ion-label>
                         </div>
                         <div *ngIf="transaccion.tipo_transaccion == 'Ingresos'">
-                          <ion-label style="font-size: 18px;" color="success" > <b>{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b> </ion-label>
+                          <ion-label style="font-size: 18px; color: green;"> <b>{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b> </ion-label>
                         </div>
                         
                       </ion-list>
@@ -230,7 +230,7 @@
               <ion-col size="6" *ngFor="let producto of crudP.productos">
                 <div *ngFor="let categoria of producto.categoria">
 
-                  <ion-card color="primary" style="height: 150px; width: 90%; margin: 0 auto; position: relative;" #button [routerLink]="['/agregar-producto']" (click)="GetProducto(producto.id)">
+                  <ion-card [style.--background]="crudU.colorSistema" style="height: 150px; width: 90%; margin: 0 auto; position: relative;" #button [routerLink]="['/agregar-producto']" (click)="GetProducto(producto.id)">
 
                     <ion-row>
                       <ion-label style="font-size: 10px; margin-left: 3px; color: white;">SKU:<b> {{producto.id}}</b></ion-label>
@@ -300,7 +300,7 @@
 
 
     <ion-fab style="size: 80px;" slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button color="danger" id="open-modal">
+      <ion-fab-button [style.--background]="crudU.colorSistema" id="open-modal">
         <ion-icon style="color: white;" name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
@@ -310,7 +310,7 @@
     <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
       <ng-template >
         <ion-header>
-          <ion-toolbar color="primary">
+          <ion-toolbar [style.--background]="crudU.colorSistema">
             <ion-buttons slot="start">
               <ion-button (click)="cancel()"><ion-icon style="color: white;" name="chevron-back-outline"></ion-icon>
               </ion-button>

@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
 import { CrudTransaccionesService } from '../crud-transacciones.service';
 
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
@@ -9,12 +7,9 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faCircleMinus, faCirclePlus, faCalendarDays, faFileSignature, faMoneyBillTrendUp, faMoneyBill, 
   faEllipsis, faClock, faList,faBarcode, faImage, faMagnifyingGlass, faCalculator, faMoneyBill1Wave, 
   faWandMagic, faCashRegister, faTrashCan, faBell, faBellSlash  } from '@fortawesome/free-solid-svg-icons';
-  
-import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
 import { CrudProductosService } from '../crud-productos.service';
-import { KeyValuePipe } from '@angular/common';
-
+import { CrudUsuariosService } from '../crud-usuarios.service';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'keys' })
@@ -137,7 +132,7 @@ export class AgregarTransaccionPage implements OnInit {
 
   productosAgrupados: { [id: string]: any } = {}
 
-  constructor(private router:Router, public crud:CrudTransaccionesService,private activatedRouter: ActivatedRoute, public crudP:CrudProductosService ) { }
+  constructor(private router:Router, public crud:CrudTransaccionesService,private activatedRouter: ActivatedRoute, public crudP:CrudProductosService, public crudU:CrudUsuariosService ) { }
 
   // Variables dinamicas para categoria
 

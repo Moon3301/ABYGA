@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
-import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { AlertController } from '@ionic/angular';
 
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
@@ -15,6 +14,8 @@ import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera
 import { Barcode, BarcodeFormat, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 
 import { CrudProductosService } from '../crud-productos.service';
+
+import { CrudUsuariosService } from '../crud-usuarios.service';
 
 @Component({
   selector: 'app-agregar-producto',
@@ -148,7 +149,7 @@ export class AgregarProductoPage implements OnInit {
   messageToast = ''
 
 
-  constructor(private router:Router, public crudP:CrudProductosService,private activatedRouter: ActivatedRoute,private alertController: AlertController  ) { }
+  constructor(private router:Router, public crudP:CrudProductosService,private activatedRouter: ActivatedRoute,private alertController: AlertController, public crudU:CrudUsuariosService  ) { }
 
   ngOnInit() {
 

@@ -10,6 +10,8 @@ export class CrudUsuariosService {
 
   public usuarios: Usuario[] = [];
 
+  public colorSistema: string = '#1C2833';
+
   public nombreUsuario:any
 
   constructor(private storage: Storage, public router:Router) {

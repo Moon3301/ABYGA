@@ -8,7 +8,7 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
 
 import { CrudProductosService } from '../crud-productos.service';
 import { CrudTransaccionesService } from '../crud-transacciones.service';
-
+import { CrudUsuariosService } from '../crud-usuarios.service';
 
 @Component({
   selector: 'app-menuopciones',
@@ -18,7 +18,7 @@ import { CrudTransaccionesService } from '../crud-transacciones.service';
 })
 
 export class MenuopcionesPage implements OnInit {
-  colorSistema:any
+
   faImage = faImage;
 
   isVisibleNegocio = false;
@@ -43,7 +43,7 @@ export class MenuopcionesPage implements OnInit {
   
 
 
-  constructor(public router:Router, public crudP: CrudProductosService, public crudT:CrudTransaccionesService, private renderer: Renderer2) { }
+  constructor(public router:Router, public crudP: CrudProductosService, public crudT:CrudTransaccionesService, public crudU:CrudUsuariosService) { }
 
   ngOnInit() {
   }
@@ -201,38 +201,38 @@ export class MenuopcionesPage implements OnInit {
   }
 
   SeleccionPersonalizacionColor(boton:any){
-    console.log("abrir funcion")
+    
 
     if (boton == 'basico' ){
       console.log("presiona basico")
-      this.colorSistema="#1C2833"
-      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+      this.crudU.colorSistema='#1C2833'
+      
     }
 
     if (boton == 'azul' ){
       console.log("presiona azul")
-      this.colorSistema="#0000ff"
-      this.renderer.setStyle(document.documentElement, `--secondary-color`, this.colorSistema);
+      this.crudU.colorSistema='#0000ff'
+      
     }
 
     if (boton == 'violeta' ){
-      this.colorSistema="#8a2be2"
-      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+      this.crudU.colorSistema="#8a2be2"
+      
     }
 
-    if (boton == 'Rojo' ){
-      this.colorSistema="#8b0000"
-      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+    if (boton == 'rojo' ){
+      this.crudU.colorSistema="#8b0000"
+      
     }
 
     if (boton == 'naranjo' ){
-      this.colorSistema="#ffa500"
-      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+      this.crudU.colorSistema="#ffa500"
+      
     }
 
     if (boton == 'purpura' ){
-      this.colorSistema="#800080"
-      this.renderer.setStyle(document.documentElement, `--primary-color`, this.colorSistema);
+      this.crudU.colorSistema="#800080"
+      
     }
 
 

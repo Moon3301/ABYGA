@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">  
+  <ion-toolbar [style.--background]="crudU.colorSistema">  
 
     <ion-label style="font-size: 18px;">
       <b style="color:#ffffff"> Agregar Producto</b>
@@ -147,7 +147,7 @@
 
       <br>
 
-      <ion-card color="primary" style="height: 150px; width: 70%; margin: 0 auto; position: relative;">
+      <ion-card [style.--background]="crudU.colorSistema" style="height: 150px; width: 70%; margin: 0 auto; position: relative;">
 
         <ion-row>
           <ion-label style="font-size: 10px; margin-left: 3px; color: white;">SKU: {{code}}</ion-label>
