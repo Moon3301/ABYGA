@@ -16,17 +16,37 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgChartsModule } from 'ng2-charts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { IonicStorageModule } from '@ionic/storage-angular';
 
 import {MatStepperModule} from '@angular/material/stepper';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatListModule } from '@angular/material/list';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(),MatStepperModule,AppRoutingModule, BrowserAnimationsModule, FontAwesomeModule, NgChartsModule, HttpClientModule,IonicStorageModule.forRoot()],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(),
+    MatStepperModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    NgChartsModule, 
+    HttpClientModule,
+    IonicStorageModule.forRoot(),
+    MatButtonModule,
+    MatBottomSheetModule,
+    MatListModule,
+    
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, }] ,
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

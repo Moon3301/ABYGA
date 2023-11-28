@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Usuario } from './usuario';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
+import { Negocio } from './negocio';
+import { Producto } from './producto';
+import { Venta } from './venta';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +12,16 @@ import { Router } from '@angular/router';
 export class CrudUsuariosService {
 
   public usuarios: Usuario[] = [];
+
+  public negocios: Negocio[] = [];
+
+  public idUsuario:any
+  public idNegocio:any
+  public usuarioActivo: any;
+  public correoUsuario: string = '';
+  public direccionNegocio:string = '';
+  public nombreNegocio:string = '';
+  
 
   public colorSistema: string = '#1C2833';
 
@@ -55,7 +68,15 @@ export class CrudUsuariosService {
 
     if (this.usuarios.find(x => x.id === id)) {return};
 
-    this.usuarios.push({id, nombreUsuario, correo, clave, telefono, nombreNegocio, direccionNegocio, login});
+    // Agregar lista vacia de productos
+    
+    const idNegocio = this.negocios.length+1;
+
+    this.negocios.push({idNegocio,nombreNegocio,direccionNegocio})
+    
+    let negocio = {idNegocio,nombreNegocio,direccionNegocio }
+    
+    this.usuarios.push({id, nombreUsuario, correo, clave, telefono, login, negocio});
 
     this.guardarListasEnStorage();
 
@@ -69,13 +90,15 @@ export class CrudUsuariosService {
       throw new Error(`No se encontró una transacción con ID ${id}`);
     }
 
+    const idNegocio = this.negocios.length+1;
+    let negocio = {idNegocio,nombreNegocio,direccionNegocio }
+
     this.usuarios[index].id = id
     this.usuarios[index].nombreUsuario = nombreUsuario
     this.usuarios[index].correo = correo
     this.usuarios[index].clave = clave
     this.usuarios[index].telefono = telefono
-    this.usuarios[index].nombreNegocio = nombreNegocio
-    this.usuarios[index].direccionNegocio = direccionNegocio
+    this.usuarios[index].negocio = negocio
 
     this.guardarListasEnStorage();
 
@@ -217,15 +240,41 @@ export class CrudUsuariosService {
 
   }
 
-  buscarUsuarioActivo(login:any){
+  validarUsuarioActivo(){
 
-    const usuarioEncontrado = this.usuarios.find(x => x.login === login);
+    const validarActivo = this.usuarios.findIndex(x => x.login === true);
+
+    return validarActivo;
+
+  }
+
+  dataUsuarioActivo(){
+
+    const usuarioEncontrado = this.usuarios.find(x => x.login === true);
 
     if (!usuarioEncontrado) {
       
-      throw new Error(`No se encontró una transacción con ID ${login}`);
+      throw new Error(`No se encontró un usuario activo`);
     
     }
+
+    this.usuarioActivo = usuarioEncontrado;
+
+  }
+
+  buscarUsuarioActivo(){
+
+    const usuarioEncontrado = this.usuarios.find(x => x.login === true);
+
+    if (!usuarioEncontrado) {
+      
+      throw new Error(`No se encontró un usuario activo`);
+    
+    }
+
+    this.nombreUsuario = usuarioEncontrado.nombreUsuario;
+    this.direccionNegocio = usuarioEncontrado.negocio.direccionNegocio;
+    this.nombreNegocio = usuarioEncontrado.negocio.nombreNegocio;
 
     return usuarioEncontrado;
 

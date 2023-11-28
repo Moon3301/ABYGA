@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { Router } from '@angular/router';
+import { CrudUsuariosService } from '../crud-usuarios.service';
 
 @Component({
   selector: 'app-historial-transacciones',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HistorialTransaccionesPage implements OnInit {
 
-  constructor( public crud:CrudTransaccionesService, public router:Router) { }
+  constructor( public crud:CrudTransaccionesService, public router:Router, public crudU:CrudUsuariosService) { }
 
   ngOnInit() {
   }

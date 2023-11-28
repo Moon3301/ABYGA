@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>cuentaUsuario</ion-title>
+    <ion-title style="color: white; text-align: center;">Cuenta de usuario</ion-title>
 
     <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
@@ -17,18 +17,14 @@
       <p></p>
       <ion-avatar style="margin: 0 auto;"><img src="assets/icon/favicon.png"></ion-avatar>
       <p></p>
-      <ion-label>Nombre Usuario</ion-label>
+      <ion-label>{{nombreUsuario}}</ion-label>
       <br>
-      <ion-label>Correo usuario</ion-label>
+      <ion-label>{{correousuario}}</ion-label>
     </div>
 
     <br>
 
-      <ion-card class="centered-card" >
-        <br>
-        <button color="warn" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button>
-          <ion-label>Informacion del negocio</ion-label>
-        </button>
+      <ion-card class="centered-card">
         <br>
         <button color="warn" (click)="setOpenSuscripciones(true)" style="margin: 0 auto; width: 60%; border-radius: 20px" mat-stroked-button>
           <ion-label>Plan actual: </ion-label>
@@ -47,25 +43,31 @@
             <ion-toolbar>
         
               <ion-buttons slot="start">
-                <ion-button (click)="setOpenValidacionSuscripcion(false)">Close</ion-button>
+                <ion-button (click)="setOpenValidacionSuscripcion(false)">Cerrar</ion-button>
               </ion-buttons>
-    
-              <ion-buttons slot="end">
-                <ion-button (click)="setOpenValidacionSuscripcion(false)">Save</ion-button>
-              </ion-buttons>
-    
+  
             </ion-toolbar>
           </ion-header>
 
           <ion-content>
-
-            <h1 style="text-align: center;">{{messageValidacion}}</h1>
-
-            <div class="centered-container">
-              <img [src]="iconValidacion" width="150px" height="150px">
+            <p></p>
+            <div>
+              <h1 style="text-align: center;">{{messageValidacion}}</h1>
+              <div *ngIf="messageValidacion == 'Transaccion realizada con exito'">
+                <p></p>
+                <p style="text-align: center;">Ahora puedes usar todos los servicios de la aplicacion de forma ilimitada !</p>
+                <p></p>
+              </div>
+              <div>
+                <p style="text-align: center;">
+                  <img [src]="iconValidacion" width="120px" height="120px">
+                </p>
+                
+              </div>
             </div>
             
           </ion-content>
+
         </ng-template>
 
       </ion-modal>
@@ -76,11 +78,7 @@
             <ion-toolbar>
         
               <ion-buttons slot="start">
-                <ion-button (click)="setOpenSuscripciones(false)">Close</ion-button>
-              </ion-buttons>
-    
-              <ion-buttons slot="end">
-                <ion-button (click)="setOpenSuscripciones(false)">Save</ion-button>
+                <ion-button (click)="setOpenSuscripciones(false)">Atras</ion-button>
               </ion-buttons>
     
             </ion-toolbar>
@@ -98,20 +96,30 @@
                 
                     <div style="text-align: center;">
     
-                      <ion-label style="font-size: 20px;"><b>Plus </b></ion-label>
+                      <ion-label style="font-size: 20px;"><b>Gratis </b></ion-label>
                       <p></p>
                       <ion-label style="font-size: 10px;"> Para negocios en crecimiento </ion-label>
                       <p></p>
-                      <ion-label  style="font-size: 30px; color: #1C2833; "><b>$15.900 </b></ion-label>
-                      <ion-label style="font-size: 15px;"> al ano</ion-label>
+                      <ion-label style="font-size: 10px;"> El plan incluye: </ion-label>
                       <p></p>
-                      <ion-label>Funciones adicionales:</ion-label>
+                      <ion-label style="font-size: 12px;">
+                        <ion-label>
+                          * Agregar hasta 30 productos.
+                        </ion-label>
+                        <br>
+                        <ion-label>
+                          * Realizar hasta 20 ventas al dia.
+                        </ion-label>
+                        <br>
+                        <ion-label>
+                          * Registrar hasta 50 transacciones.
+                        </ion-label>
+                      
+                      </ion-label>
                       <p></p>
-                      <ion-label>* cjnkcsjnkjknsc </ion-label>
-                      <br>
-                      <ion-label>* cjnkcsjnkjknsc </ion-label>
-                      <br>
-                      <ion-label>* cjnkcsjnkjknsc </ion-label>
+                      <ion-label style="font-size: 30px; color: #1C2833;"><b>$0 </b></ion-label>
+                      <ion-label style="font-size: 15px;"> al año</ion-label>
+                      <p></p>
     
                     </div>
                     
@@ -128,17 +136,28 @@
                       <p></p>
                       <ion-label style="font-size: 10px;"> Para negocios en crecimiento </ion-label>
                       <p></p>
+                      <ion-label style="font-size: 10px;"> El plan incluye: </ion-label>
+                      <p></p>
+                      <ion-label style="font-size: 12px;">
+
+                        <ion-label>
+                          * Agregar productos sin limites.
+                        </ion-label>
+                        <br>
+                        <ion-label>
+                          * Sin limites de ventas.
+                        </ion-label>
+                        <br>
+                        <ion-label>
+                          * Sin limite de registro de transacciones.
+                        </ion-label>
+                        
+                      </ion-label>
+                      <p></p>
                       <ion-label style="font-size: 30px; color: #1C2833;"><b>$22.900 </b></ion-label>
-                      <ion-label style="font-size: 15px;"> al ano</ion-label>
+                      <ion-label style="font-size: 15px;"> al año</ion-label>
                       <p></p>
-                      <ion-label>Funciones adicionales:</ion-label>
-                      <p></p>
-                      <ion-label>* cjnkcsjnkjknsc </ion-label>
-                      <br>
-                      <ion-label>* cjnkcsjnkjknsc </ion-label>
-                      <br>
-                      <ion-label>* cjnkcsjnkjknsc </ion-label>
-    
+        
                     </div>
                     
                   </ion-card>
@@ -154,26 +173,10 @@
           <ion-footer>
             <ion-row>
 
-              <ion-col size="6">
-                <ion-card style="text-align: center;" #button [class.selected]="SusPlus" (click)="SeleccionSuscripcion('mes')">
-                  <ion-label> ${{precioMensualSuscripcion}}/mes</ion-label>
-                  <br>
-                  <ion-label>Mas popular</ion-label>
-                </ion-card>
-              </ion-col>
-
-              <ion-col size="6">
-                <ion-card style="text-align: center;" #button [class.selected]="SusPremium" (click)="SeleccionSuscripcion('anio')">
-                  <ion-label>${{precioAnualSuscripcion}}/ano</ion-label>
-                  <br>
-                  <ion-label>Ahorra 2 meses</ion-label>
-                </ion-card>
-              </ion-col>
-
               <ion-col size="12">
 
                 <button (click)="setOpenPago(true)" style="margin: 0 auto; width: 100%; background-color: #1C2833; color: white;" mat-stroked-button>
-                  <ion-label >Suscribirme al plan {{tipoSuscripcion}}</ion-label>
+                  <ion-label >Suscribirme al plan Premium</ion-label>
                 </button>
 
                 <ion-modal [isOpen]="isModalOpenPago">
@@ -196,11 +199,6 @@
                       <ion-card class="centered-card">
                         <H1> Continua la transaccion con: </H1>
                         <p></p>
-                        <ion-row>
-                          <button (click)="setOpenPago(false)"  style="margin: 0 auto; width: 100%; background-color: #1C2833; color: white;" mat-stroked-button>
-                            Google Pay
-                          </button>
-                        </ion-row>
                         
                         <p></p>
                           <form action="{{url}}" method="POST">
@@ -215,7 +213,6 @@
                          <p></p>
                       </ion-card>
                       
-
                     </ion-content>
                       
                   </ng-template>
@@ -229,22 +226,6 @@
         </ng-template>
       </ion-modal>
 
-
-
-
-
-
-    
-
-
-
-
   </ion-grid>
-
-
-
-
-
-
 
 </ion-content>

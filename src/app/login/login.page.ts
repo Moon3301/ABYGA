@@ -1,13 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {FormControl, Validators, FormsModule, ReactiveFormsModule,FormBuilder, FormGroup, AbstractControl} from '@angular/forms';
-import { Usuario } from '../usuario';
 import { ApirestService } from '../apirest.service';
 import { VideoBackgroundComponent } from '../video-background/video-background.component';
 import { CrudUsuariosService } from '../crud-usuarios.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Observable } from 'rxjs';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { CrudTransaccionesService } from '../crud-transacciones.service';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +36,6 @@ export class LoginPage implements OnInit {
 
   submitted:boolean = false;
 
-
   //modal
   isModalOpenLogin = false;
 
@@ -58,17 +56,29 @@ export class LoginPage implements OnInit {
 
   nombreNegocio:any
   direccionNegocio:any
-
   //
 
   public UsuarioLogin: string = ''
   claveLogin: string = ''
 
-  constructor(public api:ApirestService, public crudU:CrudUsuariosService, public router:Router, public navController: NavController, private _formBuilder: FormBuilder) { }
+  constructor(public api:ApirestService, public crudU:CrudUsuariosService, public router:Router, public navController: NavController, private _formBuilder: FormBuilder, public crudT:CrudTransaccionesService) { }
 
   ngOnInit() {
     
     this.crudU.cerrarSesionUsuario();
+
+  }
+
+  iniciarSesionInvitado(){
+
+    for(let usuarios of this.crudU.usuarios){
+
+      if(usuarios.nombreUsuario == 'Invitado'){
+        usuarios.login = true;
+        this.GoHome();
+        
+      }
+    }
 
   }
 
@@ -88,7 +98,6 @@ export class LoginPage implements OnInit {
   GoHome(){
     
     // Retroceder a page 'Home'
-
     this.router.navigate(['/home'])
     console.log('GoHome ejecutado...')
     
@@ -123,7 +132,6 @@ export class LoginPage implements OnInit {
     this.isModalOpenUsuarios = isOpen;
   }
 
-  
   listarUsuarios(){
     
     this.setOpenUsuarios(true);

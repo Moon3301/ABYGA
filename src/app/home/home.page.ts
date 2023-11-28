@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Transaccion } from '../transaccion';
-import {MatTabsModule} from '@angular/material/tabs';
 import { ActivatedRoute,Router } from '@angular/router';
-import { ChartConfiguration, ChartOptions, ChartType, elements } from 'chart.js';
+import { ChartConfiguration, ChartOptions} from 'chart.js';
 import { CrudTransaccionesService } from '../crud-transacciones.service';
 import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, faStore, faFilm, faGamepad, faUtensils,
   faCartShopping, faBicycle, faPlaneDeparture, faBookOpen, faDroplet, faLightbulb, faWifi, faFireFlameSimple,
@@ -10,8 +8,6 @@ import { faGasPump, faCarOn, faSchool, faBuildingColumns, faCapsules, faShirt, f
   faEllipsis, faClock, faList, faDollar, faScaleBalanced, faChartLine, faMagnifyingGlassChart, faCalculator, faMoneyBill1Wave,
   faWandMagic, faCamera, faCubesStacked, faBroom, faBreadSlice, faPumpSoap, faCashRegister, faBoxes, faArrowRightArrowLeft, faFileCircleCheck,
   faChartColumn, faGear,faStoreAlt } from '@fortawesome/free-solid-svg-icons';
-
-import { MatTabChangeEvent } from '@angular/material/tabs';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -22,25 +18,21 @@ import { CrudProductosService } from '../crud-productos.service';
 
 import { ApirestService } from '../apirest.service';
 
-import { Swiper } from 'swiper';
-
 import { CrudUsuariosService } from '../crud-usuarios.service';
 
-import {MatListModule} from '@angular/material/list';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
-import {MatButtonModule} from '@angular/material/button';
+import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 
-import {
-  MatBottomSheet,
-  MatBottomSheetModule,
-  MatBottomSheetRef,
-} from '@angular/material/bottom-sheet';
+import { PopoverIAComponent } from '../popover-ia/popover-ia.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  
 })
+
 export class HomePage implements OnInit {
 
   // Recordatorios
@@ -49,7 +41,7 @@ export class HomePage implements OnInit {
   fechaRecordatorio:any
   notasRecordatorios:any
   estadoRecordatorio:any
-
+  visiblePopover: boolean = false;
 
   isVisible = false;
   validarRecordatorios : any
@@ -57,7 +49,7 @@ export class HomePage implements OnInit {
   public alertButtons = ['OK'];
   customColors: string[] = ['#FF0D0D', '#0DCFFF', '#B58958', '#FE8AEA', '#733E25','#000000', '#FFE402','#AB1C9A','#003BFF','#3DB033','#89898C','#8ED1BA','#F6880D'];
 
-  nombreUsuario:any="Gabriela";
+  nombreUsuario:any="any";
 
   @ViewChild(IonModal)
   modal!: IonModal;
@@ -220,15 +212,19 @@ public pieChartOptions: ChartOptions<'pie'> = {
     aspectRatio: 1.2, // Puedes ajustar este valor para cambiar el tamaño del gráfico
   };
 
-  constructor( private _bottomSheet: MatBottomSheet ,public router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService, public crudU:CrudUsuariosService) {
+  constructor(private _bottomSheet: MatBottomSheet ,public router:Router, public crud:CrudTransaccionesService, public http: HttpClient, public crudP:CrudProductosService, public api:ApirestService, public crudU:CrudUsuariosService ) {
     
 
   }
 
+  openBottomSheet(): void {
+    this._bottomSheet.open(BottomSheetComponent);
+  }
+
   ngOnInit(){
+
+    this.crud.cargarListasDesdeStorage();
     this.crud.obtenerNotificaciones();
- 
-    this.nombreUsuario = this.crudU.nombreUsuario;
     
     /*
     this.api.getUsers().subscribe(
@@ -241,7 +237,22 @@ public pieChartOptions: ChartOptions<'pie'> = {
 
     )
       */
+
+    this.updateDataPieChart();
+
+    this.updateDataLineChart();
+
+    this.crudU.dataUsuarioActivo();
+    this.nombreUsuario = this.crudU.nombreUsuario;
   
+  }
+
+  clickMe(): void {
+    this.visiblePopover = false;
+  }
+
+  change(value: boolean): void {
+    console.log(value);
   }
 
   showModal(index:any): void {
@@ -278,16 +289,17 @@ public pieChartOptions: ChartOptions<'pie'> = {
 
   ionViewWillEnter(){
 
+    this.crud.cargarListasDesdeStorage();
+
     this.crud.obtenerNotificaciones();
 
     this.updateDataPieChart();
 
     this.updateDataLineChart();
 
+    this.crudU.dataUsuarioActivo();
     this.nombreUsuario = this.crudU.nombreUsuario;
     
-
-
   }
 
   updateDataPieChart(){
@@ -332,10 +344,6 @@ public pieChartOptions: ChartOptions<'pie'> = {
     }
     
   }
-
-  
-  
-  
 
   // 
 

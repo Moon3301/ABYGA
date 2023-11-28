@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Transaccion } from './transaccion';
 import { Storage } from '@ionic/storage-angular';
+import { CrudUsuariosService } from './crud-usuarios.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class CrudTransaccionesService {
   isToastOpen:any = false;
   message:any
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, public crudU:CrudUsuariosService) {
 
     this.initStorage();
 
@@ -51,6 +52,7 @@ export class CrudTransaccionesService {
 
   // Storage
   async guardarListasEnStorage() {
+
     const listasParaGuardar = {
       transacciones: this.transacciones,
       transaccionesAgrupadas: this.transaccionesAgrupadas,
@@ -60,25 +62,46 @@ export class CrudTransaccionesService {
       totalNetoDia: this.totalNetoDia
     };
 
-    await this.storage.set('listaTransacciones', listasParaGuardar);
+    const validar = this.crudU.validarUsuarioActivo();
+
+    if(validar != -1){
+
+      const usuario = this.crudU.buscarUsuarioActivo();
+
+      await this.storage.set(`listaTransacciones_${usuario.nombreUsuario}`, listasParaGuardar);
+      
+    }
+    
   }
 
   async cargarListasDesdeStorage() {
-    const listasGuardadas = await this.storage.get('listaTransacciones');
 
-    if (listasGuardadas) {
-      this.transacciones = listasGuardadas.transacciones;
-      this.transaccionesAgrupadas = listasGuardadas.transaccionesAgrupadas;
-      this.totalIngresosPorFecha = listasGuardadas.totalIngresosPorFecha;
-      this.totalGastosPorFecha = listasGuardadas.totalGastosPorFecha;
-      this.totalNetoPorFecha = listasGuardadas.totalNetoPorFecha;
-      this.totalNetoDia = listasGuardadas.totalNetoDia
+    const validar = this.crudU.validarUsuarioActivo();
+
+    if(validar != -1){
+
+      const usuario = this.crudU.buscarUsuarioActivo();
+
+      const listasGuardadas = await this.storage.get(`listaTransacciones_${usuario.nombreUsuario}`);
+
+      if(listasGuardadas){
+        this.transacciones = listasGuardadas.transacciones;
+        this.transaccionesAgrupadas = listasGuardadas.transaccionesAgrupadas;
+        this.totalIngresosPorFecha = listasGuardadas.totalIngresosPorFecha;
+        this.totalGastosPorFecha = listasGuardadas.totalGastosPorFecha;
+        this.totalNetoPorFecha = listasGuardadas.totalNetoPorFecha;
+        this.totalNetoDia = listasGuardadas.totalNetoDia;
+      }
+
     }
+
   }
 
   async eliminarListasEnStorage() {
 
-    await this.storage.remove('listaTransacciones');
+    const usuario = this.crudU.buscarUsuarioActivo();
+
+    await this.storage.remove(`listaTransacciones_${usuario.nombreUsuario}`);
 
     this.transacciones = []
     this.transaccionesAgrupadas = {}
@@ -104,8 +127,10 @@ export class CrudTransaccionesService {
 
     if (this.transacciones.find(x => x.id === id)) {return};
 
+    const usuario = this.crudU.buscarUsuarioActivo();
+
     // Local
-    this.transacciones.push({id,nombre,monto,notificacion,notas,fecha,tipo_transaccion,tipo_pago,categoria,producto, tipo_movimiento})
+    this.transacciones.push({id,nombre,monto,notificacion,notas,fecha,tipo_transaccion,tipo_pago,categoria,producto, tipo_movimiento,usuario})
     
     this.guardarListasEnStorage();
 
@@ -130,8 +155,6 @@ export class CrudTransaccionesService {
     console.log(this.totalNetoDia)
 
   }
-
-  
 
   // local
   agruparTransacciones(id:any) {

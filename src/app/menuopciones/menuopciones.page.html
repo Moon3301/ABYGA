@@ -1,5 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar [style.--background]="crudU.colorSistema" >
+
+    <ion-label style="font-size: 18px;">
+      <b style="color:#ffffff"> Opciones</b>
+    </ion-label>
+
     <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
@@ -8,25 +13,6 @@
 
 <ion-content class="ion-padding">
   <ion-list>
-
-    
-    <ion-item #button (click)="ModalNotificaciones()" >
-      
-      <mat-icon  style="margin-right: 5px ;color: #1C2833; ">notifications</mat-icon>
-      <ion-label style="margin-left: 5px;" >Notificaciones</ion-label>
-
-      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleNotificacion" nzTitle="The first Modal" (nzOnCancel)="handleCancelNotificacion()" (nzOnOk)="handleOkNotificacion()">
-        
-        <ng-container *nzModalContent>
-          <p>notifications  </p>
-          <p>Content two</p>
-          <p>Content three</p>
-        </ng-container>
-      </nz-modal>
-      
-    </ion-item>
-
-    
 
     <ion-item #button (click)="ModalPersonalizacion()">
       <mat-icon style="margin-right: 5px ; color: #1C2833 ; ">brush</mat-icon>
@@ -75,7 +61,7 @@
 
     <ion-item #button (click)="ModalRespaldo()">
       <mat-icon style="margin-right: 5px ; color: #1C2833 ;">cloud_upload</mat-icon>
-      <ion-label style="margin-left: 5px;" >Respaldo y Restauracion</ion-label>
+      <ion-label style="margin-left: 5px;" >Borrar todos los datos</ion-label>
 
       <nz-modal [nzOkLoading]="isOkButtonEnabled" nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleRespaldo" nzTitle="Respaldo y restauracion" (nzOnCancel)="handleCancelRespaldo()" (nzOnOk)="borrarRegistros()">
         <ng-container *nzModalContent>
@@ -92,7 +78,6 @@
               </ion-col>
   
             </ion-row>
-  
             <br>
             <ion-row >
   
@@ -117,11 +102,10 @@
       <mat-icon style="margin-right: 5px ; color: #1C2833 ; ">update</mat-icon>
       <ion-label style="margin-left: 5px;" >Version de la Aplicación</ion-label>
 
-      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleVersionApp" nzTitle="The first Modal" (nzOnCancel)="handleCancelVersionApp()" (nzOnOk)="handleOkVersionApp()">
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleVersionApp" nzTitle="Version de la app" (nzOnCancel)="handleCancelVersionApp()" (nzOnOk)="handleOkVersionApp()">
         <ng-container *nzModalContent>
-          <p>Version </p>
-          <p>Content two</p>
-          <p>Content three</p>
+          <p>Version: 2.3.1 </p>
+         
         </ng-container>
       </nz-modal>
       
@@ -131,11 +115,26 @@
       <mat-icon style="margin-right: 5px ; color: #1C2833 ;">info</mat-icon>
       <ion-label style="margin-left: 5px;" >Acerca de Nosotros</ion-label>
 
-      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleInfo" nzTitle="The first Modal" (nzOnCancel)="handleCancelInfo()" (nzOnOk)="handleOkInfo()">
+      <nz-modal nzCancelText="Salir" nzOkText="Ok" [(nzVisible)]="isVisibleInfo" nzTitle="Nuestros objetivos" (nzOnCancel)="handleCancelInfo()" (nzOnOk)="handleOkInfo()">
         <ng-container *nzModalContent>
-          <p>info  </p>
-          <p>Content two</p>
-          <p>Content three</p>
+
+          <p>Nuestra aplicacion surge de una problematica actual en las personas que estan iniciando 
+            su microempresa ya que muchos no tienen las herramientas necesarias para manejar
+            sus transascciones, inventario y ganancias generales. </p>
+          <p>Mision y vision:</p>
+          <p>
+            Nuestra misión es proporcionar herramientas personalizadas y efectivas que permitan a las PYMES
+            administrar sus finanzas de manera inteligente, alcanzar sus metas financieras y mejorar su
+            conocimiento en temas financieros. Buscamos ser el aliado estratégico que guía a las PYMES
+            hacia el éxito financiero y el crecimiento sostenible.
+          </p>
+          <p>
+            Nuestra vision es ser la principal plataforma móvil de gestión financiera para PYMES, reconocida por su innovación,
+            confiabilidad y contribución significativa al fortalecimiento económico de las empresas.
+            Nos esforzamos por ser líderes en la provisión de soluciones financieras personalizadas
+            que impulsan la toma de decisiones informadas, facilitan la planificación estratégica y
+            fomentan la prosperidad financiera de nuestras PYMES asociadas.
+          </p>
         </ng-container>
       </nz-modal>
       

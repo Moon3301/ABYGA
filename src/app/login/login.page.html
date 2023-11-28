@@ -57,24 +57,12 @@
             
             <ion-grid>
               <ion-row>
-                <ion-col size="12">
-                  <button color="warn" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label>Login con Gmail</ion-label></button>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-  
-          </div>
-          <br>
-          <div style="border-radius: 15px; border: 0.5px solid grey;">
-            
-            <ion-grid>
-              <ion-row>
                 <ion-col size="6">
-                  <button  color="warn" (click)="setOpenRegistro(true)" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label> Crear cuenta</ion-label></button>
+                  <button color="warn" (click)="setOpenRegistro(true)" style="margin: 0 auto; width: 100%; border-radius: 20px;" mat-stroked-button><ion-label> Crear cuenta</ion-label></button>
                 </ion-col>
         
                 <ion-col size="6">
-                  <button color="warn" (click)="GoHome()"  style="margin: 0 auto; width: 100%; border-radius: 20px;  " mat-stroked-button><ion-label>Omitir registro</ion-label></button>
+                  <button color="warn" (click)="iniciarSesionInvitado()"  style="margin: 0 auto; width: 100%; border-radius: 20px;  " mat-stroked-button><ion-label>Omitir registro</ion-label></button>
                 </ion-col>
   
               </ion-row>
@@ -87,8 +75,6 @@
       </ion-card>
 
     </div>
-
-    
 
     <ion-modal [isOpen]="isModalOpenLogin" >
       <ng-template>
@@ -151,19 +137,7 @@
             </div>
             <br>
 
-            <div style="border-radius: 15px; border: 0.5px solid grey;">
-              
-              <br>
-              <ion-row>
-                <button color="warn" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Login con Gmail</ion-label></button>
-              </ion-row>
-              <br>
-              <ion-row>
-                <button color="primary" style="margin: 0 auto; width: 60%; border-radius: 20px;" mat-stroked-button><ion-label>Login con Facebook</ion-label></button>
-              </ion-row>
-
-              <br>
-            </div>
+          
 
           </ion-grid>
           

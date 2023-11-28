@@ -72,15 +72,18 @@
   </ion-content>
 </ion-menu>
 
-<!-- ######### Pagina principal ######### -->
+<!-- ######### PAGINA PRINCIPAL ######### -->
 
 <div class="ion-page" id="main-content" >
+
   <ion-header>
     <ion-toolbar [style.--background]="crudU.colorSistema">
 
       <ion-buttons slot="start">
         <ion-menu-button style="color: white;"></ion-menu-button>
       </ion-buttons>
+
+      <app-popover-ia slot="end"></app-popover-ia>
 
       <div *ngIf="matTab == 'inventario'">
         <ion-item [style.--background]="crudU.colorSistema"  slot="end">
@@ -298,186 +301,12 @@
       
     </swiper-container>
 
-
     <ion-fab style="size: 80px;" slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button [style.--background]="crudU.colorSistema" id="open-modal">
+      <ion-fab-button [style.--background]="crudU.colorSistema" (click)="openBottomSheet()">
         <ion-icon style="color: white;" name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
 
-    
-
-    <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-      <ng-template >
-        <ion-header>
-          <ion-toolbar [style.--background]="crudU.colorSistema">
-            <ion-buttons slot="start">
-              <ion-button (click)="cancel()"><ion-icon style="color: white;" name="chevron-back-outline"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-            <ion-title style="text-align: center; margin: 0 auto; "></ion-title>
-            
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">
-
-          <ion-row>
-            
-            <ion-col size="6" >
-              <ion-card  style="border-radius: 15px; border: 2px solid #141E30;" #button [routerLink]="['/','Ingresos']" (click)="confirm()"  mat-stroked-button>
-
-                <ion-row  class="centered-container">
-                  <ion-card-header >
-                    <ion-card-title > <b style="color: #141E30; text-align: center; font-size: 23px;"  > Ingresos</b></ion-card-title>
-               
-                  </ion-card-header>
-                 
-                  
-                </ion-row>
-                <ion-row>
-                  <ion-col size="1" >
-
-                  </ion-col>
-                  <ion-col size="6" >
-                    <p style="color:#141E30">Registra tus Ingresos</p>
-
-              
-                  </ion-col>
-                  <ion-col size="4" >
-                    <div class="centered-container" ><img  width="80px" height="60x" src="assets/icon/lucro.png" alt="imagen ingreso no disponible"> </div>
-    
-                  </ion-col>
-                  <ion-col size="1" >
-
-                  </ion-col>
-                </ion-row>
-     
-              </ion-card>
-              
-            </ion-col  >
-
-
-            <ion-col size="6" >
-              <ion-card style="border-radius: 15px; border: 2px solid #F64A4A;" [routerLink]="['/','Egresos']" (click)="confirm()">
-
-                <ion-row  class="centered-container">
-                  <ion-card-header >
-                    <ion-card-title > <b style="color: #F64A4A ; text-align: center; font-size: 23px;"  > Egresos</b></ion-card-title>
-               
-                  </ion-card-header>
-                 
-                  
-                </ion-row>
-                <ion-row>
-                  <ion-col size="1" >
-
-                  </ion-col>
-                  <ion-col size="6" >
-                    <p style="color:#F64A4A">Registra tus Gastos</p>
-
-              
-                  </ion-col>
-                  <ion-col size="4" >
-                    <div class="centered-container" ><img  width="75px" height="60x" src="assets/icon/gastos.png" alt="imagen egreso no disponible"> </div>
-    
-                  </ion-col>
-                  <ion-col size="1" >
-
-                  </ion-col>
-                </ion-row>
-                
-              </ion-card>
-              
-            </ion-col>
-
-
-            <ion-col size="6" >
-              <ion-card style="border-radius: 15px; border: 2px solid #141E30;" [routerLink]="['/agregar-producto']" (click)="confirm()">
-                <ion-row  class="centered-container">
-                  <ion-card-header  >
-                    <ion-card-title > <b style="color: #141E30; text-align: center; font-size: 23px;"  > Insumos</b></ion-card-title>
-               
-                  </ion-card-header>
-                 
-                  
-                </ion-row>
-                <ion-row>
-                  <ion-col size="1" >
-
-                  </ion-col>
-                  <ion-col size="6" >
-                    <p style="color:#141E30">Registra tus Insumos</p>
-
-              
-                  </ion-col>
-                  <ion-col size="4" >
-                    <div class="centered-container" ><img  width="100%" height="60px" src="assets/icon/organico.png" alt="imagen insumos no disponible"> </div>
-    
-                  </ion-col>
-                  <ion-col size="1" >
-
-                  </ion-col>
-                </ion-row>
-    
-              </ion-card>
-              
-            </ion-col>
-
-
-            <ion-col size="6" >
-              <ion-card style="border-radius: 15px; border: 2px solid #F64A4A;" [routerLink]="['/venta-producto']" (click)="confirm()">
-
-                <ion-row class="centered-container">
-                  <ion-card-header >
-                    <ion-card-title > <b style="color: #F64A4A; text-align: center; font-size: 23px;"  > Ventas</b></ion-card-title>
-               
-                  </ion-card-header>
-                 
-                  
-                </ion-row>
-                <ion-row>
-                  <ion-col size="1" >
-
-                  </ion-col>
-                  <ion-col size="6" >
-                    <p style="color:#F64A4A">Registra tus ventas</p>
-
-              
-                  </ion-col>
-                  <ion-col size="4" >
-                    <div class="centered-container" ><img  width="100px" height="65x" src="assets/icon/ventas.png" alt="imagen ventano disponible"> </div>
-    
-                  </ion-col>
-                  <ion-col size="1" >
-
-                  </ion-col>
-                </ion-row>
-                
-              </ion-card>
-              
-            </ion-col>
-          </ion-row>
-          
-          
-
-          <p></p>
-
-          
-
-          <p></p>
-
-          
-
-          <p></p>
-
-          
-
-        </ion-content>
-      </ng-template>
-    </ion-modal>
-
   </ion-content>
-
-  
 
 </div>

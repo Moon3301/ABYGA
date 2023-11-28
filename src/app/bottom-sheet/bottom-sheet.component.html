@@ -1,0 +1,32 @@
+
+<mat-nav-list [style.background]="crudU.colorSistema" style=" border-radius: 20px;">
+
+  <a  href="https://keep.google.com/" mat-list-item (click)="openLink($event)" (click)="goIngresos()">
+    <span matListItemTitle style="color: white">Ingresos
+      <img src="assets/icon/lucro.png" width="40px" height="40px" style="margin-left: 200px; margin-top: 12px; position: absolute; ">
+    </span>
+    <span  style="color: white" matLine>Registra tus ingresos</span>
+    
+  </a>
+  
+  <a  href="https://docs.google.com/" mat-list-item (click)="openLink($event)" (click)="goEgresos()">
+    <span style="color: white" matListItemTitle>Egresos
+      <img src="assets/icon/gastos.png" width="40px" height="40px" style="margin-left: 205px; margin-top: 12px; position: absolute; ">
+    </span>
+    <span style="color: white" matLine>Registra tus gastos</span>
+  </a>
+  
+  <a  href="https://plus.google.com/" mat-list-item (click)="openLink($event)" (click)="goInsumos()">
+    <span style="color: white" matListItemTitle>Insumos
+      <img src="assets/icon/organico.png" width="40px" height="40px" style="margin-left: 200px; margin-top: 12px; position: absolute; ">
+    </span>
+    <span style="color: white" matLine>Registra tus productos</span>
+  </a>
+  
+  <a  href="https://hangouts.google.com/" mat-list-item (click)="openLink($event)" (click)="goVentas()">
+    <span style="color: white" matListItemTitle>Ventas
+      <img src="assets/icon/ventas.png" width="40px" height="40px" style="margin-left: 213px; margin-top: 12px; position: absolute; ">
+    </span>
+    <span style="color: white" matLine>Registra tus ventas</span>
+  </a>
+</mat-nav-list>

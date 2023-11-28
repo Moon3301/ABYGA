@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>historialTransacciones</ion-title>
+  <ion-toolbar [style.--background]="crudU.colorSistema">
+    <ion-title style="color: white;">Registro de transacciones</ion-title>
 
     <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
@@ -13,8 +13,8 @@
   
   <ion-card  style="border-radius: 20px;"  >
     <div *ngFor="let fecha of crud.getFechasAgrupadas()">
-    <ion-card color="primary" >
-      <ion-row style="border-radius: 20px; font-size: 10px; height: 25px;  background-color: #1C2833;">
+    <ion-card [style.--background]="crudU.colorSistema" >
+      <ion-row style="border-radius: 20px; font-size: 10px; height: 25px;" [style.--background]="crudU.colorSistema">
         <ion-col size="7">
           <ion-label  style="margin-top: 4px; color: white;">{{ fecha }}</ion-label>
         </ion-col>
@@ -40,10 +40,10 @@
   
                 <ion-list slot="end">
                   <div *ngIf="transaccion.tipo_transaccion == 'Egresos'">
-                    <ion-label  style="font-size: 18px;" color="danger"  > <b> {{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b></ion-label>
+                    <ion-label  style="font-size: 18px; color: red;"  > <b> {{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b></ion-label>
                   </div>
                   <div *ngIf="transaccion.tipo_transaccion == 'Ingresos'">
-                    <ion-label style="font-size: 18px;" color="success" > <b>{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b> </ion-label>
+                    <ion-label style="font-size: 18px; color: green;" > <b>{{transaccion.monto | currency:'USD':'symbol':'1.2-2'}}</b> </ion-label>
                   </div>
                   
                 </ion-list>

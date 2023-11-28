@@ -4,6 +4,9 @@ import { Storage } from '@ionic/storage-angular';
 import { Transaccion } from './transaccion';
 import { CrudTransaccionesService } from './crud-transacciones.service';
 import { Venta } from './venta';
+import { Negocio } from './negocio';
+import { Usuario } from './usuario';
+import { CrudUsuariosService } from './crud-usuarios.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +42,7 @@ export class CrudProductosService {
 
   DataProducto:any
 
-  constructor(private storage: Storage, public crudT:CrudTransaccionesService) {
+  constructor(private storage: Storage, public crudT:CrudTransaccionesService, public crudU:CrudUsuariosService) {
 
     this.initStorage();
     this.cargarListasDesdeStorage();
@@ -108,13 +111,18 @@ export class CrudProductosService {
     this.ConvertirFecha(fechaCreacion);
     this.ConvertirFecha(fechaModificacion);
 
-    this.productos.push({id,nombre,precio,costo,stock,unidadMedida,fechaCreacion:this.ConvertirFecha(fechaCreacion),fechaModificacion:this.ConvertirFecha(fechaModificacion),imagen,estado,descripcion,categoria})
+    const usuarioActivo = this.crudU.buscarUsuarioActivo();
+    const negocio = usuarioActivo.negocio
+
+    this.productos.push({id,nombre,precio,costo,stock,unidadMedida,fechaCreacion:this.ConvertirFecha(fechaCreacion),fechaModificacion:this.ConvertirFecha(fechaModificacion),imagen,estado,descripcion,categoria,negocio})
 
     this.guardarListasEnStorage();
 
     this.message = 'Producto creado con exito !'
     this.setOpenToast(true);
   }
+
+
 
   modificarProducto(id:any,nombre:any,precio:any,costo:any,stock:any,unidadMedida:any,fechaCreacion:any,fechaModificacion:any,imagen:any,estado:any,descripcion:any,categoria:any){
 

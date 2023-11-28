@@ -1,0 +1,64 @@
+<button slot="end" nz-button nzType="default" nzSize="large" nzShape="circle" (click)="presentPopover($event)"><img width="35px" height="20px" src="assets/icon/AsistenteX.png"></button>
+
+<ion-popover #popover [isOpen]="isOpenPrincipal" (didDismiss)="isOpenPrincipal = false">
+  <ng-template>
+    <ion-content class="ion-padding">
+
+      <div *ngIf="openPrincipal">
+        <ion-button (click)="isOpenTransaccion()" expand="full" style="color: white; font-size: 12px; border-radius: 20px;">Transacciones</ion-button>
+        <ion-button (click)="isOpenInventario()" expand="full" style="color: white; font-size: 12px;">Inventario</ion-button>
+        <ion-button (click)="isOpenVentas()" expand="full" style="color: white; font-size: 12px;">Ventas</ion-button>
+        <ion-button (click)="isOpenDocumentos()" expand="full" style="color: white; font-size: 12px;">Documentos</ion-button>
+        <ion-button (click)="isOpenReportes()" expand="full" style="color: white; font-size: 12px;">Reportes</ion-button>
+        <ion-button (click)="isOpenRecordatorios()" expand="full" style="color: white; font-size: 12px;">Recordatorios</ion-button>
+      </div>
+
+      <div *ngIf="openTransaccion">
+        <p>Las transacciones son todos los ingresos y egresos(gastos) de tu negocio: </p>
+        <ion-button expand="full" style="color: white; font-size: 12px;" (click)="isOpenIngresos()">Ingresos</ion-button>
+        <ion-button expand="full" style="color: white; font-size: 12px;" (click)="isOpenEgresos()">Egresos</ion-button>
+      </div>
+
+        <div *ngIf="openIngresos">
+          <p>Los ingresos corresponden a todo el dinero entrante en tu negocio. Aqui tienes un resumen de tus ingresos diarios: </p>
+          <ion-button expand="full" style="color: white; font-size: 12px;" (click)="goIngresos()">Agregar un ingreso</ion-button>
+        </div>
+
+        <div *ngIf="openEgresos">
+          <p>Los egresos o gastos corresponden a todo el dinero saliente en tu negocio que pueden ser los costos en reponer tus insumos y . Aqui tienes un resumen de tus gastos diarios: </p>
+          <ion-button expand="full" style="color: white; font-size: 12px;" (click)="goEgresos()">Agregar un gasto</ion-button>
+        </div>
+
+      <div *ngIf="openInventario">
+        <p>En el inventario puedes agregar todos los productos de tu negocio y definir el stock y precio a cada insumo.</p>
+        <ion-button expand="full" style="color: white; font-size: 12px;" (click)="goInsumos()">Agregar un producto</ion-button>
+      </div>
+
+      <div *ngIf="openVentas">
+        <p>En el modulo de ventas puedes realizar todas las transacciones de tu negocio, manteniendo el stock actualizado y </p>
+        <ion-button expand="full" style="color: white; font-size: 12px;" (click)="goVentas()">Agregar una venta</ion-button>
+      </div>
+
+      <div *ngIf="openDocumentos">
+        <p>El modulo de documentos contiene todas tus ventas y sus respectivos registros de productos vendidos, ordenados por fecha.
+          <ion-button expand="full" style="color: white; font-size: 12px;" (click)="goDocumentos()">Ir a documentos</ion-button>
+        </p>
+      </div>
+
+      <div *ngIf="openReportes">
+        <p>El modulo de reportes te permite visualizar tus registros de ventas y transacciones realizadas por periodo, ademas puedes obtener el flujo de caja por periodo.
+          <ion-button expand="full" style="color: white; font-size: 12px;" (click)="goReportes()">Ir a Reportes</ion-button>
+        </p>
+      </div>
+
+      <div *ngIf="openRecordatorios">
+        <p>El modulo de recordatorios te permite registrar notas y marcarla como recordatorio. 
+          Para marcar una transaccion como recordatorio debes ir agregar una transaccion y habilitar 
+          la opcion 'Recordatorios', luego el recordatorio aparecera en la pantalla principal, 
+          en el icono de alertas.</p>
+      </div>
+
+    
+    </ion-content>
+  </ng-template>
+</ion-popover>

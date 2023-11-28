@@ -46,12 +46,11 @@ export class DocumentosPage implements OnInit {
 
     this.isModalTicket = isOpen;
     
-
   }
 
   getNumeroDeProductos(index :any){
 
-    this.nombreNegocio = this.crudP.ventaProductos[index].usuario.nombreNegocio;
+    this.nombreNegocio = this.crudP.ventaProductos[index].usuario.negocio.nombreNegocio;
     this.ticket = this.crudP.ventaProductos[index].ticket;
     this.nombreUsuario = this.crudP.ventaProductos[index].usuario.nombreUsuario;
     this.totalCantidad = this.crudP.ventaProductos[index].totalCantidad;

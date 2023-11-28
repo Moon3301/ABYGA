@@ -1,4 +1,5 @@
 import { CategoriasProductos } from "./categorias-productos"
+import { Negocio } from "./negocio"
 
 export interface Producto {
 
@@ -14,5 +15,6 @@ export interface Producto {
     estado: Boolean
     descripcion:string
     categoria: CategoriasProductos[]
+    negocio:Negocio
 
 }

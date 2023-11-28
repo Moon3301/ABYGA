@@ -40,9 +40,6 @@ export class MenuopcionesPage implements OnInit {
   isChekedDeleteProductos = false;
   isChekedDeleteTransacciones = false;
 
-  
-
-
   constructor(public router:Router, public crudP: CrudProductosService, public crudT:CrudTransaccionesService, public crudU:CrudUsuariosService) { }
 
   ngOnInit() {

@@ -47,6 +47,8 @@ export class CuentaUsuarioPage implements OnInit {
   isModalValidacionSuscripcion = false;
 
   previousSlideIndex: number = 0;
+  nombreUsuario:any = 'Invitado'
+  correousuario:any = '@'
 
   // Datos WebPay
 
@@ -104,6 +106,10 @@ export class CuentaUsuarioPage implements OnInit {
 
   ngOnInit() {
     
+    const usuario = this.crudU.buscarUsuarioActivo();
+
+    this.nombreUsuario = usuario.nombreUsuario;
+    this.correousuario = usuario.correo;
 
     this.precioMensualSuscripcion = this.SuscripcionPlus.precioMensual;
     this.precioAnualSuscripcion = this.SuscripcionPlus.precioAnual;
@@ -113,7 +119,10 @@ export class CuentaUsuarioPage implements OnInit {
 
   ionViewWillEnter(){
 
-   
+    const usuario = this.crudU.buscarUsuarioActivo();
+
+    this.nombreUsuario = usuario.nombreUsuario;
+    this.correousuario = usuario.correo;
 
   }
 
@@ -156,7 +165,7 @@ export class CuentaUsuarioPage implements OnInit {
 
       this.precioAnualSuscripcion = this.SuscripcionPlus.precioAnual;
 
-      this.tipoSuscripcion = 'Plus'
+      this.tipoSuscripcion = 'Gratis'
 
     }
 
@@ -229,12 +238,10 @@ export class CuentaUsuarioPage implements OnInit {
 
     }
     
-
-
     const data = {
       buyOrder: 'O-12345W10398',
       sessionId: 'S-6789045666778',
-      amount: 56000,
+      amount: 22990,
       returnUrl: 'http://localhost:8100/cuenta-usuario'
     };
   

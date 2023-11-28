@@ -110,6 +110,11 @@ export class VentaProductoPage implements OnInit {
   //Badge
   hidden = false;
 
+  // Usuario
+  nombreUsuario:any
+  idUsuario:any
+  nombreNegocio:any
+
   constructor(private router:Router, public crudP:CrudProductosService, public crudT:CrudTransaccionesService, public crudU:CrudUsuariosService) { }
 
   ngOnInit() {
@@ -117,8 +122,9 @@ export class VentaProductoPage implements OnInit {
     // agregar transaccion 
     this.fechaActual = new Date();
     this.fechaActual = this.ConvertirFecha(this.fechaActual);
-    
-    
+
+    this.usuario = this.crudU.buscarUsuarioActivo();
+
   }
 
   // En tu componente de Angular
@@ -153,10 +159,6 @@ export class VentaProductoPage implements OnInit {
     // Retroceder a page 'Home'
     this.router.navigate(['home'])
     
-  }
-
-  scan(){
-
   }
 
   seleccionarMetodoDePago(data:any){
@@ -306,8 +308,6 @@ export class VentaProductoPage implements OnInit {
   realizarVenta(){
 
     this.setOpenCategoria(false);
-
-    this.usuario = this.crudU.buscarUsuarioActivo(true);
 
     for (const key in this.productosAgrupados) {
       if (this.productosAgrupados.hasOwnProperty(key)) {

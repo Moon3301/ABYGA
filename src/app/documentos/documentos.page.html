@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>documentos</ion-title>
+  <ion-toolbar [style.--background]="crudU.colorSistema">
+    <ion-title style="color: white;">documentos</ion-title>
 
     <ion-buttons slot="start">
       <ion-button (click)="GoHome()"><ion-icon style="color: white;" name="arrow-back-outline"></ion-icon></ion-button>
@@ -14,23 +14,21 @@
   <ion-grid>
     <ion-list *ngFor="let doc of crudP.ventaProductos">
 
-      <ion-card style="border-radius: 20px;" class="centered-container">
-        <ion-row>
-          <h3 style="text-align: center;">{{doc.fecha}}</h3>
+      <ion-card [style.--background]="crudU.colorSistema" >
+        <ion-row style="border-radius: 20px; font-size: 7px; height: 25px; text-align: center;" [style.--background]="crudU.colorSistema">
+          <h3 style="text-align: center; color: white; margin-left: 5px;">{{doc.fecha}}</h3>
         </ion-row>
-        
       </ion-card>
-      
-      
-      <ion-card #button (click)="setOpenTicket(true)"  (click)="getNumeroDeProductos(doc.ticket-1)">
+
+      <ion-card style="background-color: grey;" #button (click)="setOpenTicket(true)"  (click)="getNumeroDeProductos(doc.ticket-1)">
         <ion-row>
 
           <ion-col size="7">
-            <p>N ticket: {{doc.ticket}}</p>
+            <p style="color: white;">N ticket: {{doc.ticket}}</p>
           </ion-col>
 
           <ion-col size="5">
-            <p> Total: {{doc.totalVenta | currency:'USD':'symbol':'1.2-2'}}</p>
+            <p style="color: white;"> Total: {{doc.totalVenta | currency:'USD':'symbol':'1.2-2'}}</p>
           </ion-col>
 
         </ion-row>
@@ -43,7 +41,6 @@
 
             <ion-grid style="width: 100%;">
 
-
               <ion-row>
 
                 <button (click)="setOpenTicket(false)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
@@ -52,7 +49,6 @@
                 
               </ion-row>
 
-              
               <ion-row>
 
                 <ion-col size="8">
@@ -116,43 +112,12 @@
               <p style="text-align: center;"><b>Gracias por su compra</b></p>
               <p style="text-align: center;">{{fecha}}</p>
 
-              
             </ion-grid>
-
 
           </ion-content>
 
-          <ion-footer>
-
-            <ion-row style="justify-content: center; align-items: center;">
-              <ion-col size="6" style="display:flex; justify-content: center; align-items: center; border: 1px solid black;">
-                
-                <ion-item class="boton-enviar">
-                  <ion-list>
-                    <mat-icon>send</mat-icon>
-                    <ion-label>Email</ion-label>
-                  </ion-list>
-                  
-                </ion-item>
-                
-              </ion-col>
-    
-              <ion-col size="6" style="display:flex; justify-content: center; align-items: center; border: 1px solid black;">
-                <ion-item class="boton-compartir">
-                  <ion-list>
-                    <mat-icon>share</mat-icon>
-                    <ion-label>Compartir</ion-label>
-                  </ion-list>
-                  
-                </ion-item>
-              </ion-col>
-            </ion-row>
-    
-          </ion-footer>
-          
         </ng-template>
       </ion-modal>
-
 
     </ion-list>
   </ion-grid>

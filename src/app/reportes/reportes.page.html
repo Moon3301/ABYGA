@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>reportes</ion-title>
+  <ion-toolbar [style.--background]="crudU.colorSistema">
+    <ion-title style="color: white;">reportes</ion-title>
 
     
     
@@ -14,7 +14,7 @@
 <ion-content [fullscreen]="true">
 
   <br>
-  <ion-item  color="primary" style=" font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
+  <ion-item  [style.--background]="crudU.colorSistema" style=" font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
 
     <ion-label slot="start" style="margin-top: 4px; color: white;"> Historial de movimientos</ion-label>
     
@@ -124,7 +124,7 @@
 
     </ion-grid>
 
-  <ion-item  color="primary" style=" font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
+  <ion-item  [style.--background]="crudU.colorSistema" style=" font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
 
     <ion-label slot="start" style="margin-top: 4px; color: white;"> Registros estadisticos</ion-label>
    
@@ -240,7 +240,8 @@
 
   </ion-grid>
 
-  <ion-item  color="primary" style=" font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
+  <!-- Stock y Unidad de medida  
+  <ion-item  [style.--background]="crudU.colorSistema" style=" font-size: 10px; height: 25px; display: flex; flex-direction: column; align-items: flex-start;">
 
     <ion-label slot="start" style="margin-top: 4px; color: white;"> Registros de ventas</ion-label>
     
@@ -265,8 +266,8 @@
         </ion-card>
       </ion-col>
     </ion-row>
-
+    
 
   </ion-grid>
-
+  -->
 </ion-content>

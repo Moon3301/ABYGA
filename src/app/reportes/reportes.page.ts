@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CrudProductosService } from '../crud-productos.service';
 import { CrudTransaccionesService } from '../crud-transacciones.service';
+import { CrudUsuariosService } from '../crud-usuarios.service';
 
 @Component({
   selector: 'app-reportes',
@@ -24,7 +25,7 @@ export class ReportesPage implements OnInit {
   totalProductosVendidos:any = 0
   totalVentasFaltantes:any = 0;
 
-  constructor(public router:Router, public crudP:CrudProductosService, public crudT:CrudTransaccionesService) { }
+  constructor(public router:Router, public crudP:CrudProductosService, public crudT:CrudTransaccionesService, public crudU:CrudUsuariosService) { }
 
   ngOnInit() {
   }

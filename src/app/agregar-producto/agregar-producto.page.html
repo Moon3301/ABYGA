@@ -98,13 +98,7 @@
                 <ion-toolbar>
             
                   <ion-buttons slot="start">
-                    <ion-button (click)="setOpenCategoria(false)">Close</ion-button>
-                  </ion-buttons>
-    
-                  <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
-    
-                  <ion-buttons slot="end">
-                    <ion-button (click)="setOpenCategoria(false)">Save</ion-button>
+                    <ion-button (click)="setOpenCategoria(false)">Atras</ion-button>
                   </ion-buttons>
     
                 </ion-toolbar>
@@ -183,7 +177,7 @@
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button color="success" (click)=AddProducto()>
-    <ion-icon name="checkmark-done-outline"></ion-icon>
+  <ion-fab-button [style.--background]="crudU.colorSistema" (click)=AddProducto()>
+    <ion-icon style="color: white;" name="checkmark-done-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>

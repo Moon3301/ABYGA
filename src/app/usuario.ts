@@ -1,4 +1,4 @@
-
+import { Negocio } from "./negocio"
 
 export interface Usuario {
 
@@ -7,8 +7,7 @@ export interface Usuario {
     correo:any
     clave:any
     telefono:any
-    nombreNegocio:any
-    direccionNegocio:any
     login:boolean
+    negocio: Negocio
     
 }

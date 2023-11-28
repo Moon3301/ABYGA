@@ -29,6 +29,11 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+
+import { PopoverIAComponent } from '../popover-ia/popover-ia.component';
+
+
 register();
 
 @NgModule({
@@ -47,9 +52,9 @@ register();
     NzModalModule,
     MatSlideToggleModule,
     MatBottomSheetModule,
+    NzPopoverModule,
+    PopoverIAComponent
     
-
-
   ],
   declarations: [HomePage],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
