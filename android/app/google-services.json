@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "248399650380",
+    "project_id": "auntenticacion-abyga",
+    "storage_bucket": "auntenticacion-abyga.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248399650380:android:68b0297f35371604555ee9",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248399650380-qbuaash7rkmer0klmoheq5b5ervd348s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.ionic.starter",
+            "certificate_hash": "e0a4f9dcb8c724d42b24ce5f809b5b077d02f85f"
+          }
+        },
+        {
+          "client_id": "248399650380-fa12motvoq0buaae7oj1c6nun8c2mj80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATwDdqSZ0QbfaBEtVdqEoui9it4VG2FvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248399650380-fa12motvoq0buaae7oj1c6nun8c2mj80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
