@@ -137,21 +137,23 @@ export class CrudUsuariosService {
         const usuarioEncontrado = this.usuarios.find(x => x.nombreUsuario == user);
         console.log('Usuario encontrado: '+usuarioEncontrado)
         if (!usuarioEncontrado) {
-          throw new Error(`No se encontró un usuario con el nombre ${user}`);
+          resolve(false); // Usuario no encontrado
+          return;
         }
         
         // Validar clave
-        const claveCorrecta = this.usuarios.find(x => x.clave == pass);
+        const claveCorrecta = usuarioEncontrado.clave === pass;
         
         console.log('CLave correcta: '+claveCorrecta)
 
         if (!claveCorrecta) {
-          throw new Error('Contraseña incorrecta');
+          resolve(false); // Contraseña incorrecta
+          return;
         }
   
         // Si el usuario es correcto y la clave es correcta, resolvemos la promesa con true
 
-        if (usuarioEncontrado && claveCorrecta) {
+        if (claveCorrecta) {
           this.nombreUsuario = user;
           resolve(true); // Usuario y clave correctos
         } else {
